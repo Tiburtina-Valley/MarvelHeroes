@@ -3,13 +3,16 @@ package it.tiburtinavalley.marvelheroes;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.List;
 
-public class HeroModel implements Parcelable {
-    String id;
-    String name;
-    String description;
-    String resourceURI;
-    Thumbnail thumbnail;
+
+public class HeroModel implements Parcelable{
+    private String id;
+    private String name;
+    private String description;
+    private String resourceURI;
+    private Thumbnail thumbnail;
+    private Comics comics;
 
 
     protected HeroModel(Parcel in) {
@@ -17,6 +20,8 @@ public class HeroModel implements Parcelable {
         name = in.readString();
         description = in.readString();
         resourceURI = in.readString();
+        thumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
+        comics = in.readParcelable(Comics.class.getClassLoader());
     }
 
     public static final Creator<HeroModel> CREATOR = new Creator<HeroModel>() {
@@ -47,6 +52,10 @@ public class HeroModel implements Parcelable {
         return this.thumbnail;
     }
 
+    public Comics getComics() {
+        return comics;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -57,18 +66,8 @@ public class HeroModel implements Parcelable {
         dest.writeString(id);
         dest.writeString(name);
         dest.writeString(description);
-    }
-
-    class Thumbnail {
-        private String path;
-        private String extension;
-
-        public String getPath(){
-            return this.path;
-        }
-
-        public String getExtension(){
-            return this.extension;
-        }
+        dest.writeString(resourceURI);
+        dest.writeParcelable(thumbnail, flags);
+        dest.writeParcelable(comics, flags);
     }
 }

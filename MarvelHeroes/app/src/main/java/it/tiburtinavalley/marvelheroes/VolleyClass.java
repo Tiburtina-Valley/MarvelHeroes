@@ -32,9 +32,9 @@ public abstract class VolleyClass implements Response.ErrorListener, Response.Li
         heroesImg = new ArrayList<>();
     }
 
-    public void characterApiCall(String typeOfSearch, String parameter) {
-        String url = "http://gateway.marvel.com/v1/public/%s?%s&ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea";
-        url = String.format(url, typeOfSearch, parameter);
+    public void characterApiCall(String parameter) {
+        String url = "http://gateway.marvel.com/v1/public/%s&ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea";
+        url = String.format(url, parameter);
 
         sr = new StringRequest(Request.Method.GET,
                 url,
@@ -62,6 +62,7 @@ public abstract class VolleyClass implements Response.ErrorListener, Response.Li
                 Log.w("CA", "" + heroesList.size());
                 //db.cocktailDAO().insertAll(cnt);    // NON OBBLIGATORIO
                 fillList(heroesList);
+                System.out.println(heroesList.get(0).getComics());
             }
         } catch (JSONException e) {
             e.printStackTrace();

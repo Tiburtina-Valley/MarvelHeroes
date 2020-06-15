@@ -69,18 +69,16 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             if(v.getId() == R.id.btnSearch) {
-                String param = "nameStartsWith=" + etHeroSearch.getText().toString();
-                volleyMarvel.characterApiCall("characters", param);
+                String param = "characters?nameStartsWith=" + etHeroSearch.getText().toString();
+                volleyMarvel.characterApiCall(param);
             }
         }
     }
     private class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.Holder> implements View.OnClickListener {
         private final List<HeroModel> heroes;
-        private MainActivity.Holder hold;
         HeroAdapter(List<HeroModel> all) {
             heroes = new ArrayList<>();
             heroes.addAll(all);
-            hold = new MainActivity.Holder();
         }
 
         @NonNull
@@ -100,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             holder.tvHeroName.setText(heroes.get(position).getName());
             volleyMarvel.setHeroesImg(holder.ivHeroPic);
             if(!heroes.get(position).getThumbnail().getPath().equalsIgnoreCase("") && !heroes.get(position).getThumbnail().getExtension().equalsIgnoreCase(""))
-                volleyMarvel.imgCall(heroes.get(position).thumbnail.getPath()+"."+heroes.get(position).thumbnail.getExtension());
+                volleyMarvel.imgCall(heroes.get(position).getThumbnail().getPath()+"."+heroes.get(position).getThumbnail().getExtension());
         }
 
         @Override
@@ -115,8 +113,6 @@ public class MainActivity extends AppCompatActivity {
             HeroModel hm = heroes.get(position);
             Intent i = new Intent(getApplicationContext(), HeroDetailActivity.class);
             i.putExtra("hero", hm);
-            i.putExtra("imgUrl", heroes.get(position).getThumbnail().getPath());
-            i.putExtra("imgExt", heroes.get(position).getThumbnail().getExtension());
             startActivity(i);
         }
 

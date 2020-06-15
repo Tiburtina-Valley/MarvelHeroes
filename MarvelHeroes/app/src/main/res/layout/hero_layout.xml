@@ -6,9 +6,8 @@
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="404dp"
-        android:layout_height="110dp"
-        android:layout_margin="0dp"
+        android:layout_width="399dp"
+        android:layout_height="177dp"
         android:layout_marginHorizontal="0dp"
         android:layout_marginVertical="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -17,7 +16,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="110dp">
+            android:layout_height="170dp">
 
             <TextView
                 android:id="@+id/tvHeroName"
