@@ -13,6 +13,7 @@ public class HeroModel implements Parcelable{
     private String resourceURI;
     private Thumbnail thumbnail;
     private Comics comics;
+    private Series series;
 
 
     protected HeroModel(Parcel in) {
