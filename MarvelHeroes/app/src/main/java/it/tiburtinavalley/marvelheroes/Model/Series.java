@@ -1,4 +1,4 @@
-package it.tiburtinavalley.marvelheroes;
+package it.tiburtinavalley.marvelheroes.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

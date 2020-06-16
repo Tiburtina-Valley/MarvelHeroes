@@ -1,9 +1,7 @@
-package it.tiburtinavalley.marvelheroes;
+package it.tiburtinavalley.marvelheroes.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import java.util.List;
 
 
 public class HeroModel implements Parcelable{
@@ -14,6 +12,7 @@ public class HeroModel implements Parcelable{
     private Thumbnail thumbnail;
     private Comics comics;
     private Series series;
+    private Stories stories;
 
 
     protected HeroModel(Parcel in) {
@@ -23,6 +22,8 @@ public class HeroModel implements Parcelable{
         resourceURI = in.readString();
         thumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
         comics = in.readParcelable(Comics.class.getClassLoader());
+        stories = in.readParcelable(Stories.class.getClassLoader());
+        series = in.readParcelable(Series.class.getClassLoader());
     }
 
     public static final Creator<HeroModel> CREATOR = new Creator<HeroModel>() {
@@ -57,6 +58,14 @@ public class HeroModel implements Parcelable{
         return comics;
     }
 
+    public Series getSeries() {
+        return series;
+    }
+
+    public Stories getStories() {
+        return stories;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -70,5 +79,7 @@ public class HeroModel implements Parcelable{
         dest.writeString(resourceURI);
         dest.writeParcelable(thumbnail, flags);
         dest.writeParcelable(comics, flags);
+        dest.writeParcelable(stories, flags);
+        dest.writeParcelable(series, flags);
     }
 }

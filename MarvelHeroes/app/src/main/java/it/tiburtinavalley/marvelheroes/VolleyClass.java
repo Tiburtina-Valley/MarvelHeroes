@@ -20,6 +20,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.tiburtinavalley.marvelheroes.Model.HeroModel;
+
 public abstract class VolleyClass implements Response.ErrorListener, Response.Listener<String>{
     List<ImageView> heroesImg;
     private int pos = 0;
