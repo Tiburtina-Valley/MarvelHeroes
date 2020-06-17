@@ -7,13 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import it.tiburtinavalley.marvelheroes.Model.HeroModel;
 import it.tiburtinavalley.marvelheroes.Model.Items;
 
@@ -21,8 +24,9 @@ import it.tiburtinavalley.marvelheroes.Model.Items;
 public class HeroDetailActivity extends AppCompatActivity {
 
     private HeroModel hm;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hero_detail_layout);
         hm = getIntent().getParcelableExtra("hero");
@@ -30,17 +34,17 @@ public class HeroDetailActivity extends AppCompatActivity {
         holder.setDetails(hm);
     }
 
-    class Holder{
+    class Holder {
+        private final RecyclerView rvComics;
+        private final RecyclerView rvSeries;
+        private final RecyclerView rvStories;
         private ImageView ivHeroPhoto;
         private TextView tvHeroName;
         private TextView tvHeroId;
         private TextView tvHeroDescription;
-        private VolleyClass vMarvel;
-        final RecyclerView rvComics;
-        final RecyclerView rvSeries;
-        final RecyclerView rvStories;
+        private MarvelApiVolley vMarvel;
 
-        public Holder(){
+        public Holder() {
             rvComics = findViewById(R.id.rvComics);
             rvSeries = findViewById(R.id.rvSeries);
             rvStories = findViewById(R.id.rvStories);
@@ -48,16 +52,17 @@ public class HeroDetailActivity extends AppCompatActivity {
             tvHeroId = findViewById(R.id.tvHeroId);
             tvHeroName = findViewById(R.id.tvHeroName);
             tvHeroDescription = findViewById(R.id.tvHeroDescription);
-            vMarvel = new VolleyClass(getApplicationContext()) {
+            vMarvel = new MarvelApiVolley(getApplicationContext()) {
                 @Override
                 void fillList(List<HeroModel> heroes) {
                     Log.w("fine", "dummy log");
                 }
             };
+
             fillRecView();
         }
 
-        private void fillRecView(){
+        private void fillRecView() {
             RecyclerView.LayoutManager layoutManagerComics = new LinearLayoutManager(HeroDetailActivity.this);
             rvComics.setLayoutManager(layoutManagerComics);
             ComicsAdapter cAdapter = new ComicsAdapter(hm.getComics().getItems());
@@ -74,17 +79,20 @@ public class HeroDetailActivity extends AppCompatActivity {
             rvStories.setAdapter(stAdapter);
         }
 
-        public void setDetails(HeroModel hm){
-            this.tvHeroName.setText(hm.getName());
-            this.tvHeroId.setText(hm.getId());
-            this.tvHeroDescription.setText(hm.getDescription());
-            vMarvel.setHeroesImg(this.ivHeroPhoto);
-            vMarvel.imgCall(hm.getThumbnail().getPath()+"."+hm.getThumbnail().getExtension());
+        public void setDetails(HeroModel hero) {
+            this.tvHeroName.setText(hero.getName());
+            this.tvHeroId.setText(hero.getId());
+            this.tvHeroDescription.setText(hero.getDescription());
+            vMarvel.addHeroImg(this.ivHeroPhoto);
+            vMarvel.getImageFromUrl(hero.getThumbnail().getPath()
+                    + "." + hero.getThumbnail().getExtension());
+            // TODO: fill comics, series and stories
         }
     }
 
     private class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsHolder> implements View.OnClickListener {
         private final List<Items> items;
+
         ComicsAdapter(List<Items> all) {
             items = new ArrayList<>();
             items.addAll(all);
@@ -133,6 +141,7 @@ public class HeroDetailActivity extends AppCompatActivity {
 
     private class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHolder> implements View.OnClickListener {
         private final List<Items> items;
+
         SeriesAdapter(List<Items> all) {
             items = new ArrayList<>();
             items.addAll(all);
@@ -181,6 +190,7 @@ public class HeroDetailActivity extends AppCompatActivity {
 
     private class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.StoriesHolder> implements View.OnClickListener {
         private final List<Items> items;
+
         StoriesAdapter(List<Items> all) {
             items = new ArrayList<>();
             items.addAll(all);
