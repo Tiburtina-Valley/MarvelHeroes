@@ -22,33 +22,38 @@ import java.util.List;
 import it.tiburtinavalley.marvelheroes.Model.HeroModel;
 
 public class MainActivity extends AppCompatActivity {
-    VolleyClass volleyMarvel;
+    MarvelApiVolley volleyMarvel;
+    private Holder holder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Holder holder = new Holder();
+        holder = new Holder();
     }
 
-    class Holder implements View.OnClickListener{
+    class Holder implements View.OnClickListener {
         final RecyclerView rvHeroes;
         final EditText etHeroSearch;
         final Button btnSearch;
 
-        public Holder(){
+        public Holder() {
             this.rvHeroes = findViewById(R.id.rvHeroes);
-            volleyMarvel = new VolleyClass(getApplicationContext()) {
+
+            volleyMarvel = new MarvelApiVolley(getApplicationContext()) {
                 @Override
                 void fillList(List<HeroModel> heroes) {
                     fillRecView(heroes);
                 }
-                private void fillRecView(List<HeroModel> heroes){
+
+                private void fillRecView(List<HeroModel> heroes) {
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
                     rvHeroes.setLayoutManager(layoutManager);
                     HeroAdapter mAdapter = new HeroAdapter(heroes);
                     rvHeroes.setAdapter(mAdapter);
                 }
             };
+
             this.etHeroSearch = findViewById(R.id.etHeroSearch);
             this.btnSearch = findViewById(R.id.btnSearch);
             this.btnSearch.setOnClickListener(this);
@@ -56,14 +61,16 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
-            if(v.getId() == R.id.btnSearch) {
-                String param = "characters?nameStartsWith=" + etHeroSearch.getText().toString();
-                volleyMarvel.characterApiCall(param);
+            if (v.getId() == R.id.btnSearch) {
+                String nameStartsWith = etHeroSearch.getText().toString();
+                volleyMarvel.getCharactersInfo(nameStartsWith);
             }
         }
     }
+
     private class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.Holder> implements View.OnClickListener {
         private final List<HeroModel> heroes;
+
         HeroAdapter(List<HeroModel> all) {
             heroes = new ArrayList<>();
             heroes.addAll(all);
@@ -83,10 +90,14 @@ public class MainActivity extends AppCompatActivity {
         // This method sets the layout of the hero
         @Override
         public void onBindViewHolder(@NonNull Holder holder, int position) {
-            holder.tvHeroName.setText(heroes.get(position).getName());
-            volleyMarvel.setHeroesImg(holder.ivHeroPic);
-            if(!heroes.get(position).getThumbnail().getPath().equalsIgnoreCase("") && !heroes.get(position).getThumbnail().getExtension().equalsIgnoreCase(""))
-                volleyMarvel.imgCall(heroes.get(position).getThumbnail().getPath()+"."+heroes.get(position).getThumbnail().getExtension());
+            HeroModel hero = heroes.get(position);
+            holder.tvHeroName.setText(hero.getName());
+            volleyMarvel.addHeroImg(holder.ivHeroPic);
+            if (!hero.getThumbnail().getPath().equalsIgnoreCase("")
+                    && !hero.getThumbnail().getExtension().equalsIgnoreCase("")) {
+                volleyMarvel.getImageFromUrl(hero.getThumbnail().getPath()
+                        + "." + hero.getThumbnail().getExtension());
+            }
         }
 
         @Override
@@ -98,9 +109,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
-            HeroModel hm = heroes.get(position);
+            HeroModel hero = heroes.get(position);
+
             Intent i = new Intent(getApplicationContext(), HeroDetailActivity.class);
-            i.putExtra("hero", hm);
+            i.putExtra("hero", hero);
             startActivity(i);
         }
 

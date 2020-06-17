@@ -1,10 +1,12 @@
 package it.tiburtinavalley.marvelheroes;
 
 /* this class is in charge on internet queries*/
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.widget.ImageView;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -14,27 +16,35 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 import it.tiburtinavalley.marvelheroes.Model.HeroModel;
 
-public abstract class VolleyClass implements Response.ErrorListener, Response.Listener<String>{
+public abstract class MarvelApiVolley implements Response.ErrorListener, Response.Listener<String> {
     List<ImageView> heroesImg;
-    private int pos = 0;
     StringRequest sr;
+    private int pos = 0;
     private RequestQueue requestQueue;
-    abstract void fillList(List<HeroModel> heroes);
 
-    public VolleyClass(Context context){
+    public MarvelApiVolley(Context context) {
         requestQueue = Volley.newRequestQueue(context);
         heroesImg = new ArrayList<>();
     }
 
-    public void characterApiCall(String parameter) {
+    abstract void fillList(List<HeroModel> heroes);
+
+    public void getCharactersInfo(String nameStartsWith) {
+        String param = "characters?nameStartsWith=" + nameStartsWith;
+        callApi(param);
+    }
+
+    private void callApi(String parameter) {
         String url = "http://gateway.marvel.com/v1/public/%s&ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea";
         url = String.format(url, parameter);
 
@@ -70,12 +80,13 @@ public abstract class VolleyClass implements Response.ErrorListener, Response.Li
             e.printStackTrace();
         }
     }
-    public void imgCall(String url) {
+
+    public void getImageFromUrl(String url) {
         ImageRequest stringRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
             @Override
             public void onResponse(Bitmap response) {
                 heroesImg.get(pos).setImageBitmap(response);
-                pos+=1;
+                pos += 1;
             }
         }, 0, 0,
                 ImageView.ScaleType.CENTER_CROP,
@@ -83,13 +94,13 @@ public abstract class VolleyClass implements Response.ErrorListener, Response.Li
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.w("ImgFail", error.getMessage());
+                        Log.w("CouldNotLoadImage", error.getMessage());
                     }
                 });
         requestQueue.add(stringRequest);
     }
 
-    public void setHeroesImg(ImageView img){
+    public void addHeroImg(ImageView img) {
         this.heroesImg.add(img);
     }
 }
