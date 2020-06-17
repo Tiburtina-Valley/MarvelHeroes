@@ -2,6 +2,8 @@ package it.tiburtinavalley.marvelheroes;
 
 /* this class is in charge on internet queries*/
 
+/* just test for the branch*/
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
