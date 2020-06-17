@@ -8,41 +8,42 @@
 
     <TextView
         android:id="@+id/tvHeroDescription"
-        android:layout_width="384dp"
+        android:layout_width="380dp"
         android:layout_height="52dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="16dp"
         android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/ivHeroPhoto" />
 
     <ImageView
         android:id="@+id/ivHeroPhoto"
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/hero_picture_cnt_description"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvComics"
-        android:layout_width="384dp"
-        android:layout_height="154dp"
-        android:layout_marginBottom="396dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="380dp"
+        android:layout_height="149dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.407"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeroDescription" />
 
     <TextView
         android:id="@+id/tvHeroId"
         android:layout_width="214dp"
         android:layout_height="29dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivHeroPhoto"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -50,27 +51,27 @@
         android:layout_width="214dp"
         android:layout_height="29dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivHeroPhoto"
         app:layout_constraintTop_toBottomOf="@+id/tvHeroId" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSeries"
-        android:layout_width="384dp"
+        android:layout_width="380dp"
         android:layout_height="154dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="232dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvComics" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvStories"
-        android:layout_width="384dp"
+        android:layout_width="380dp"
         android:layout_height="154dp"
-        android:layout_marginBottom="64dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvSeries" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
