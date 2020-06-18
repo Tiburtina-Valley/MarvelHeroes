@@ -3,4 +3,6 @@
     <string name="btn_search">Search</string>
     <string name="hero_picture_cnt_description">Hero Picture</string>
     <string name="search_name_hint">Hero\'s name</string>
+    <string name="comics">Comics</string>
+    <string name="series">Series</string>
 </resources>

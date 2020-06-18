@@ -23,6 +23,7 @@ import it.tiburtinavalley.marvelheroes.Model.HeroModel;
 
 public class MainActivity extends AppCompatActivity {
     MarvelApiVolley volleyMarvel;
+    ImageApiVolley imgVolley;
     private Holder holder;
 
     @Override
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         holder = new Holder();
+        imgVolley = new ImageApiVolley(getApplicationContext());
     }
 
     class Holder implements View.OnClickListener {
@@ -92,10 +94,10 @@ public class MainActivity extends AppCompatActivity {
         public void onBindViewHolder(@NonNull Holder holder, int position) {
             HeroModel hero = heroes.get(position);
             holder.tvHeroName.setText(hero.getName());
-            volleyMarvel.addHeroImg(holder.ivHeroPic);
+            imgVolley.addHeroImg(holder.ivHeroPic);
             if (!hero.getThumbnail().getPath().equalsIgnoreCase("")
                     && !hero.getThumbnail().getExtension().equalsIgnoreCase("")) {
-                volleyMarvel.getImageFromUrl(hero.getThumbnail().getPath()
+                imgVolley.getImageFromUrl(hero.getThumbnail().getPath()
                         + "." + hero.getThumbnail().getExtension());
             }
         }
