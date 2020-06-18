@@ -7,9 +7,15 @@ import java.util.List;
 
 public class Series implements Parcelable {
     List<Items> items;
+        String id;
+    String title;
+    Thumbnail thumbnail;
 
     protected Series(Parcel in) {
         items = in.createTypedArrayList(Items.CREATOR);
+        id = in.readString();
+        title = in.readString();
+        thumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
     }
 
     public static final Creator<Series> CREATOR = new Creator<Series>() {
@@ -28,6 +34,18 @@ public class Series implements Parcelable {
         return items;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Thumbnail getThumbnail() {
+        return thumbnail;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -36,5 +54,8 @@ public class Series implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(items);
+        dest.writeString(id);
+        dest.writeString(title);
+        dest.writeParcelable(thumbnail, flags);
     }
 }
