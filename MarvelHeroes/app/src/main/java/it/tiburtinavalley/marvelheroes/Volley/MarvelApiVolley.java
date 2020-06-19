@@ -1,4 +1,4 @@
-package it.tiburtinavalley.marvelheroes;
+package it.tiburtinavalley.marvelheroes.Volley;
 
 /* this class is in charge on internet queries*/
 
@@ -25,15 +25,16 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
     List<ImageView> heroesImg;
     StringRequest sr;
     private RequestQueue requestQueue;
-    private String urlBase = "http://gateway.marvel.com/v1/public/%s";
+    private String urlBase = "https://gateway.marvel.com/v1/public/%s";
     private String apiKey = "ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea";
+
+    public abstract void fillList(List<HeroModel> heroes);
 
     public MarvelApiVolley(Context context) {
         requestQueue = Volley.newRequestQueue(context);
         heroesImg = new ArrayList<>();
     }
 
-    abstract void fillList(List<HeroModel> heroes);
 
     public void getCharactersInfo(String nameStartsWith) {
         String param = "characters?nameStartsWith=" + nameStartsWith+"&";

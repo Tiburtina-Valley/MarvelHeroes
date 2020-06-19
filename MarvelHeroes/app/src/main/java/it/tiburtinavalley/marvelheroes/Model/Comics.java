@@ -4,24 +4,44 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import java.util.List;
 
+/* Model per mantenere i dati relativi ai fumetti legati agli eroi*/
+
 public class Comics implements Parcelable {
     private List<Items> items;
+    private List<Images> images;
     private String id;
     private String title;
     private Thumbnail thumbnail;
+    private String description;
+    private String upc;
+    private String diamondCode;
+    private String isbn;
+    private String pageCount;
 
     protected Comics(Parcel in) {
         items = in.createTypedArrayList(Items.CREATOR);
+        images = in.createTypedArrayList(Images.CREATOR);
         id = in.readString();
         title = in.readString();
+        description = in.readString();
+        upc = in.readString();
+        diamondCode = in.readString();
+        isbn = in.readString();
+        pageCount = in.readString();
         thumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(items);
+        dest.writeTypedList(images);
         dest.writeString(id);
         dest.writeString(title);
+        dest.writeString(description);
+        dest.writeString(upc);
+        dest.writeString(isbn);
+        dest.writeString(diamondCode);
+        dest.writeString(pageCount);
         dest.writeParcelable(thumbnail, flags);
     }
 
@@ -56,5 +76,25 @@ public class Comics implements Parcelable {
 
     public Thumbnail getThumbnail() {
         return thumbnail;
+    }
+
+    public List<Images> getImages() {
+        return images;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getUpc() {
+        return upc;
+    }
+
+    public String getDiamondCode() {
+        return diamondCode;
+    }
+
+    public String getIsbn() {
+        return isbn;
     }
 }

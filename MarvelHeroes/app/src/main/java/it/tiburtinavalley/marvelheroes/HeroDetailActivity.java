@@ -7,21 +7,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import it.tiburtinavalley.marvelheroes.Model.Comics;
 import it.tiburtinavalley.marvelheroes.Model.HeroModel;
 import it.tiburtinavalley.marvelheroes.Model.Series;
-import it.tiburtinavalley.marvelheroes.Model.Stories;
+import it.tiburtinavalley.marvelheroes.Volley.ComicsVolley;
+import it.tiburtinavalley.marvelheroes.Volley.ImageApiVolley;
+import it.tiburtinavalley.marvelheroes.Volley.SeriesVolley;
 
 
 public class HeroDetailActivity extends AppCompatActivity {
@@ -66,9 +64,10 @@ public class HeroDetailActivity extends AppCompatActivity {
             layoutManagerInfos = new LinearLayoutManager(HeroDetailActivity.this);
             rvRelatedInfo.setLayoutManager(layoutManagerInfos);
             cVolley = new ComicsVolley(getApplicationContext()) {
+
                 @Override
-                void fillComics(List<Comics> comics) {
-                    cAdapter = new ComicsAdapter(comics);
+                public void fillComics(List<Comics> comicsList) {
+                    cAdapter = new ComicsAdapter(comicsList);
                     rvRelatedInfo.setAdapter(cAdapter);
                 }
             };

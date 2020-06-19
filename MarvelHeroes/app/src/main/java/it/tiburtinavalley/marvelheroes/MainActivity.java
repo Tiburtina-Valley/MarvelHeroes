@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.tiburtinavalley.marvelheroes.Model.HeroModel;
+import it.tiburtinavalley.marvelheroes.Volley.ImageApiVolley;
+import it.tiburtinavalley.marvelheroes.Volley.MarvelApiVolley;
 
 public class MainActivity extends AppCompatActivity {
     MarvelApiVolley volleyMarvel;
@@ -43,8 +45,9 @@ public class MainActivity extends AppCompatActivity {
             this.rvHeroes = findViewById(R.id.rvHeroes);
 
             volleyMarvel = new MarvelApiVolley(getApplicationContext()) {
+
                 @Override
-                void fillList(List<HeroModel> heroes) {
+                public void fillList(List<HeroModel> heroes) {
                     fillRecView(heroes);
                 }
 
