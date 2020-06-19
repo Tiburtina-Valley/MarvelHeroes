@@ -3,8 +3,9 @@ package it.tiburtinavalley.marvelheroes.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/* Model che raccoglie tutte le informazioni relative al singolo eroe */
 
-public class HeroModel implements Parcelable{
+public class HeroModel implements Parcelable {
     private String id;
     private String name;
     private String description;

@@ -6,15 +6,25 @@ import android.os.Parcelable;
 import java.util.List;
 
 public class Series implements Parcelable {
-    List<Items> items;
-        String id;
-    String title;
-    Thumbnail thumbnail;
+    private List<Items> items;
+    private String id;
+    private String title;
+    private String description;
+    private String startYear;
+    private String endYear;
+    private String rating;
+    private String type;
+    private Thumbnail thumbnail;
 
     protected Series(Parcel in) {
         items = in.createTypedArrayList(Items.CREATOR);
         id = in.readString();
         title = in.readString();
+        description = in.readString();
+        startYear = in.readString();
+        endYear = in.readString();
+        rating = in.readString();
+        type = in.readString();
         thumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
     }
 
@@ -46,6 +56,26 @@ public class Series implements Parcelable {
         return thumbnail;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public String getStartYear() {
+        return startYear;
+    }
+
+    public String getEndYear() {
+        return endYear;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public String getType() {
+        return type;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -56,6 +86,11 @@ public class Series implements Parcelable {
         dest.writeTypedList(items);
         dest.writeString(id);
         dest.writeString(title);
+        dest.writeString(type);
+        dest.writeString(description);
+        dest.writeString(startYear);
+        dest.writeString(endYear);
+        dest.writeString(rating);
         dest.writeParcelable(thumbnail, flags);
     }
 }
