@@ -7,11 +7,13 @@ public class Items implements Parcelable {
     private String resourceURI;
     private String name;
     private String type;
+    private String role; //necessario a caricare il ruolo del fumettista
 
     protected Items(Parcel in) {
         resourceURI = in.readString();
         name = in.readString();
         type = in.readString();
+        role = in.readString();
     }
 
     public static final Creator<Items> CREATOR = new Creator<Items>() {
@@ -48,5 +50,6 @@ public class Items implements Parcelable {
         dest.writeString(resourceURI);
         dest.writeString(name);
         dest.writeString(type);
+        dest.writeString(role);
     }
 }
