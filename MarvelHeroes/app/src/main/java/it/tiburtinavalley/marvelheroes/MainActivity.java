@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             imgVolley.addHeroImg(holder.ivHeroPic);
             if (!hero.getThumbnail().getPath().equalsIgnoreCase("")
                     && !hero.getThumbnail().getExtension().equalsIgnoreCase("")) {
-                imgVolley.getImageFromUrl(hero.getThumbnail().getPath()
+                imgVolley.getImageFromUrl(hero.getThumbnail().getPath().replaceFirst("http", "https")
                         + "." + hero.getThumbnail().getExtension());
             }
         }

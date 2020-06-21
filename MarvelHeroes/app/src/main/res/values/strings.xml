@@ -5,4 +5,6 @@
     <string name="search_name_hint">Hero\'s name</string>
     <string name="comics">Comics</string>
     <string name="series">Series</string>
+    <string name="hero_detail_description">Description</string>
+    <string name="hero_detail_stories">Stories</string>
 </resources>
