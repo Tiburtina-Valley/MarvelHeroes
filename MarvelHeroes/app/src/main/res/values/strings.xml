@@ -7,4 +7,5 @@
     <string name="series">Series</string>
     <string name="hero_detail_description">Description</string>
     <string name="hero_detail_stories">Stories</string>
+    <string name="urls">Urls : </string>
 </resources>
