@@ -8,13 +8,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import it.tiburtinavalley.marvelheroes.Model.Comics;
 import it.tiburtinavalley.marvelheroes.Model.HeroModel;
 import it.tiburtinavalley.marvelheroes.Model.Series;
@@ -30,7 +33,6 @@ public class HeroDetailActivity extends AppCompatActivity {
     private ComicsVolley cVolley;
     private SeriesVolley sVolley;
     private ImageApiVolley imgVolley;
-    private RecyclerView.LayoutManager layoutManagerInfos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,42 +44,43 @@ public class HeroDetailActivity extends AppCompatActivity {
         holder.setDetails(hm);
     }
 
-    class Holder implements View.OnClickListener{
-        private final RecyclerView rvRelatedInfo;
+    class Holder {
+        private final RecyclerView rvComics;
+        private final RecyclerView rvSeries;
         private ImageView ivHeroPhoto;
         private TextView tvHeroName;
         private TextView tvHeroId;
         private TextView tvHeroDescription;
-        private Button btnComics;
-        private Button btnSeries;
         private ComicsAdapter cAdapter;
         private SeriesAdapter sAdapter;
 
         public Holder() {
-            rvRelatedInfo = findViewById(R.id.rvRelatedInfo);
+            rvComics = findViewById(R.id.rvComics);
+            rvSeries = findViewById(R.id.rvSeries);
             ivHeroPhoto = findViewById(R.id.ivHeroPhoto);
             tvHeroId = findViewById(R.id.tvHeroId);
             tvHeroName = findViewById(R.id.tvHeroName);
             tvHeroDescription = findViewById(R.id.tvHeroDescription);
-            btnComics = findViewById(R.id.btnComics);
-            btnComics.setOnClickListener(this);
-            btnSeries = findViewById(R.id.btnSeries);
-            btnSeries.setOnClickListener(this);
-            layoutManagerInfos = new LinearLayoutManager(HeroDetailActivity.this);
-            rvRelatedInfo.setLayoutManager(layoutManagerInfos);
+            LinearLayoutManager layoutManagerComics = new LinearLayoutManager(
+                    HeroDetailActivity.this, RecyclerView.HORIZONTAL, false);
+            rvComics.setLayoutManager(layoutManagerComics);
+
+            LinearLayoutManager layoutManagerSeries = new LinearLayoutManager(
+                    HeroDetailActivity.this, RecyclerView.HORIZONTAL, false);
+            rvSeries.setLayoutManager(layoutManagerSeries);
             cVolley = new ComicsVolley(getApplicationContext()) {
 
                 @Override
                 public void fillComics(List<Comics> comicsList) {
                     cAdapter = new ComicsAdapter(comicsList);
-                    rvRelatedInfo.setAdapter(cAdapter);
+                    rvComics.setAdapter(cAdapter);
                 }
             };
             sVolley = new SeriesVolley(getApplicationContext()) {
                 @Override
                 public void fillSeries(List<Series> seriesList) {
                     sAdapter = new SeriesAdapter(seriesList);
-                    rvRelatedInfo.setAdapter(sAdapter);
+                    rvSeries.setAdapter(sAdapter);
                 }
             };
         }
@@ -88,19 +91,11 @@ public class HeroDetailActivity extends AppCompatActivity {
             this.tvHeroId.setText(hero.getId());
             this.tvHeroDescription.setText(hero.getDescription());
             imgVolley.addHeroImg(this.ivHeroPhoto);
-            imgVolley.getImageFromUrl(hero.getThumbnail().getPath()
+            imgVolley.getImageFromUrl(hero.getThumbnail().getPath().replaceFirst("http", "https")
                     + "." + hero.getThumbnail().getExtension());
             // TODO: fill comics, series and stories
-        }
-
-        @Override
-        public void onClick(View view) {
-            if(view.getId() == R.id.btnComics){
-                cVolley.getComicsInfo(hm.getId());
-            }
-            else if(view.getId() == R.id.btnSeries){
-                sVolley.getStoriesInfo(hm.getId());
-            }
+            cVolley.getComicsInfo(hm.getId());
+            sVolley.getStoriesInfo(hm.getId());
         }
     }
 
@@ -127,7 +122,8 @@ public class HeroDetailActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull ComicsHolder holder, int position) {
             imgVolley.addHeroImg(holder.ivComic);
-            imgVolley.getImageFromUrl(comics.get(position).getThumbnail().getPath()+"."+comics.get(position).getThumbnail().getExtension());
+            imgVolley.getImageFromUrl(comics.get(position).getThumbnail().getPath().replaceFirst("http", "https")
+                    + "." + comics.get(position).getThumbnail().getExtension());
             holder.tvComicName.setText(comics.get(position).getTitle());
         }
 
@@ -181,7 +177,8 @@ public class HeroDetailActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull SeriesHolder holder, int position) {
             imgVolley.addHeroImg(holder.ivComic);
-            imgVolley.getImageFromUrl(series.get(position).getThumbnail().getPath()+"."+series.get(position).getThumbnail().getExtension());
+            imgVolley.getImageFromUrl(series.get(position).getThumbnail().getPath().replaceFirst("http", "https")
+                    + "." + series.get(position).getThumbnail().getExtension());
             holder.tvComicName.setText(series.get(position).getTitle());
         }
 
