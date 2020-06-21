@@ -1,5 +1,6 @@
-package it.tiburtinavalley.marvelheroes;
+package it.tiburtinavalley.marvelheroes.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import java.util.List;
 import it.tiburtinavalley.marvelheroes.Model.Comics;
 import it.tiburtinavalley.marvelheroes.Model.HeroModel;
 import it.tiburtinavalley.marvelheroes.Model.Series;
+import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.Volley.ComicsVolley;
 import it.tiburtinavalley.marvelheroes.Volley.ImageApiVolley;
 import it.tiburtinavalley.marvelheroes.Volley.SeriesVolley;
@@ -130,10 +132,14 @@ public class HeroDetailActivity extends AppCompatActivity {
             return comics.size();
         }
 
-        //
         @Override
         public void onClick(View v) {
-            //TODO : display new activity based on user search
+            int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
+            Comics comic = comics.get(position);
+
+            Intent i = new Intent(getApplicationContext(), ComicsActivity.class);
+            i.putExtra("comic", comic);
+            startActivity(i);
         }
 
         class ComicsHolder extends RecyclerView.ViewHolder {
