@@ -4,11 +4,14 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import java.util.List;
 
-/* Model per mantenere i dati relativi ai fumetti legati agli eroi*/
+import it.tiburtinavalley.marvelheroes.Volley.ImageApiVolley;
+
+/* Model per mantenere i dati relativi ai fumetti legati agli eroi */
 
 public class Comics implements Parcelable {
     private List<Items> items;
     private List<Images> images;
+    private List<Urls> urls;
     private String id;
     private String title;
     private Thumbnail thumbnail;
@@ -17,10 +20,13 @@ public class Comics implements Parcelable {
     private String diamondCode;
     private String isbn;
     private String pageCount;
+    //private List<Creators> creators;
 
     protected Comics(Parcel in) {
         items = in.createTypedArrayList(Items.CREATOR);
+        urls = in.createTypedArrayList(Urls.CREATOR);
         images = in.createTypedArrayList(Images.CREATOR);
+        //creators = in.createTypedArrayList(Creators.CREATOR);
         id = in.readString();
         title = in.readString();
         description = in.readString();
@@ -34,7 +40,9 @@ public class Comics implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(items);
+        dest.writeTypedList(urls);
         dest.writeTypedList(images);
+        //dest.writeTypedList(creators);
         dest.writeString(id);
         dest.writeString(title);
         dest.writeString(description);
@@ -97,4 +105,16 @@ public class Comics implements Parcelable {
     public String getIsbn() {
         return isbn;
     }
+
+    public String getPageCount() {
+        return pageCount;
+    }
+
+    public List<Urls> getUrls() {
+        return urls;
+    }
+
+    /*public List<Creators> getCreators() {
+        return creators;
+    }*/
 }

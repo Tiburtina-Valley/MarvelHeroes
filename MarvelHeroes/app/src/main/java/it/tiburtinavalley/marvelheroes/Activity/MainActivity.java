@@ -1,4 +1,4 @@
-package it.tiburtinavalley.marvelheroes;
+package it.tiburtinavalley.marvelheroes.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.tiburtinavalley.marvelheroes.Model.HeroModel;
+import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.Volley.ImageApiVolley;
 import it.tiburtinavalley.marvelheroes.Volley.MarvelApiVolley;
 

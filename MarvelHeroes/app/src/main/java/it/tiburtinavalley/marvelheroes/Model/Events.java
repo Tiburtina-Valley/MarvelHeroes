@@ -5,6 +5,8 @@ package it.tiburtinavalley.marvelheroes.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.List;
+
 public class Events implements Parcelable {
     private String id;
     private String title;
@@ -12,6 +14,8 @@ public class Events implements Parcelable {
     private String start;
     private String end;
     private Thumbnail thumbnail;
+    private List<Urls> urls;
+    private List<Creators> creators;
 
     protected Events(Parcel in) {
         id = in.readString();
@@ -20,6 +24,8 @@ public class Events implements Parcelable {
         start = in.readString();
         end = in.readString();
         thumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
+        urls = in.createTypedArrayList(Urls.CREATOR);
+        creators = in.createTypedArrayList(Creators.CREATOR);
     }
 
     public static final Creator<Events> CREATOR = new Creator<Events>() {
@@ -47,6 +53,8 @@ public class Events implements Parcelable {
         parcel.writeString(start);
         parcel.writeString(end);
         parcel.writeParcelable(thumbnail, i);
+        parcel.writeTypedList(urls);
+        parcel.writeTypedList(creators);
     }
 
     public String getId() {
@@ -71,5 +79,13 @@ public class Events implements Parcelable {
 
     public Thumbnail getThumbnail() {
         return thumbnail;
+    }
+
+    public List<Urls> getUrls() {
+        return urls;
+    }
+
+    public List<Creators> getCreators() {
+        return creators;
     }
 }
