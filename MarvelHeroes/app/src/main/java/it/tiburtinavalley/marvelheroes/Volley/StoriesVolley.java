@@ -1,4 +1,4 @@
-package it.tiburtinavalley.marvelheroes.volley;
+package it.tiburtinavalley.marvelheroes.Volley;
 
 import android.content.Context;
 import android.util.Log;
@@ -14,33 +14,31 @@ import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.lang.reflect.Type;
 import java.util.List;
+import it.tiburtinavalley.marvelheroes.Model.Stories;
 
-import it.tiburtinavalley.marvelheroes.model.Series;
-
-public abstract class SeriesVolley implements Response.ErrorListener, Response.Listener<String>{
+public abstract class StoriesVolley implements Response.ErrorListener, Response.Listener<String>{
     private String urlBase = "https://gateway.marvel.com/v1/public/characters/%s";
     private String apiKey = "ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea";
     private RequestQueue requestQueue;
 
-    public abstract void fillSeries(List<Series> seriesList);
+    public abstract void fillStories(List<Stories> storiesList);
 
-    public SeriesVolley(Context context){
+    public StoriesVolley(Context context){
         requestQueue = Volley.newRequestQueue(context);
     }
 
     public void getStoriesInfo(String heroId){
-        String serie = heroId + "/series?";
-        seriesApiCall(serie);
+        String story = heroId + "/stories?";
+
     }
 
-    private void seriesApiCall(String storyUrl){
+    private void storiesApiCall(String storyUrl){
         String url = urlBase + apiKey;
-        url = String.format(url, storyUrl);
+        url = String.format(urlBase, storyUrl);
         StringRequest sr = new StringRequest(Request.Method.GET,
-                url,
+                urlBase,
                 this,
                 this);
         requestQueue.add(sr);
@@ -58,12 +56,12 @@ public abstract class SeriesVolley implements Response.ErrorListener, Response.L
         try {
             JSONObject jsonObject = new JSONObject(response);
             comics = jsonObject.getJSONObject("data").getJSONArray("results").toString();
-            Type listType = new TypeToken<List<Series>>() {
+            Type listType = new TypeToken<List<Stories>>() {
             }.getType();
-            List<Series> seriesList = gson.fromJson(comics, listType);
-            if (seriesList != null && seriesList.size() > 0) {
+            List<Stories> storiesList = gson.fromJson(comics, listType);
+            if (storiesList != null && storiesList.size() > 0) {
                 //db.cocktailDAO().insertAll(cnt);    // NON OBBLIGATORIO
-                fillSeries(seriesList);
+                fillStories(storiesList);
             }
         } catch (JSONException e) {
             e.printStackTrace();
