@@ -1,4 +1,4 @@
-package it.tiburtinavalley.marvelheroes.Activity;
+package it.tiburtinavalley.marvelheroes.activity;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -10,14 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import it.tiburtinavalley.marvelheroes.Model.Comics;
+import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.R;
-import it.tiburtinavalley.marvelheroes.UrlsRecyclerView;
-import it.tiburtinavalley.marvelheroes.Volley.ImageApiVolley;
+import it.tiburtinavalley.marvelheroes.recyclerviewadapters.UrlsAdapter;
+import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 
 public class ComicsActivity extends AppCompatActivity {
     private Comics comic;
-    private UrlsRecyclerView urlsAdapter;
+    private UrlsAdapter urlsAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class ComicsActivity extends AppCompatActivity {
             tvPageCount.setText(comic.getPageCount());
             layoutManagerUrls = new LinearLayoutManager(ComicsActivity.this);
             rvUrls.setLayoutManager(layoutManagerUrls);
-            urlsAdapter = new UrlsRecyclerView(comic.getUrls());
+            urlsAdapter = new UrlsAdapter(comic.getUrls());
             rvUrls.setAdapter(urlsAdapter);
         }
     }

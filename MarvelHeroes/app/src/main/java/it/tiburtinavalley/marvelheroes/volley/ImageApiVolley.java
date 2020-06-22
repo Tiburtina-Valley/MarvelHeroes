@@ -1,4 +1,4 @@
-package it.tiburtinavalley.marvelheroes.Volley;
+package it.tiburtinavalley.marvelheroes.volley;
 
 import android.content.Context;
 import android.graphics.Bitmap;
