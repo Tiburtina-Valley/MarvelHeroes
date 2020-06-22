@@ -23,7 +23,7 @@
                 android:id="@+id/ivHeroPic"
                 android:layout_width="106dp"
                 android:layout_height="97dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:contentDescription="@string/hero_picture_cnt_description"
@@ -36,16 +36,17 @@
                 android:id="@+id/tvHeroName"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
                 android:textAlignment="textStart"
-                android:textSize="30sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivHeroPic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivHeroPic"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/ivHeroPic" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
