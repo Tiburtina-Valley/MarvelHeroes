@@ -1,10 +1,8 @@
-package it.tiburtinavalley.marvelheroes.Model;
+package it.tiburtinavalley.marvelheroes.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 import java.util.List;
-
-import it.tiburtinavalley.marvelheroes.Volley.ImageApiVolley;
 
 /* Model per mantenere i dati relativi ai fumetti legati agli eroi */
 

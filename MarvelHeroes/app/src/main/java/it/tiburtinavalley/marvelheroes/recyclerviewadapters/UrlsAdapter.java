@@ -1,4 +1,4 @@
-package it.tiburtinavalley.marvelheroes;
+package it.tiburtinavalley.marvelheroes.recyclerviewadapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,20 +9,21 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
-import it.tiburtinavalley.marvelheroes.Model.Urls;
+import it.tiburtinavalley.marvelheroes.R;
+import it.tiburtinavalley.marvelheroes.model.Urls;
 
 /* RecyclerView che mostra gli url legati ad un elemento, che può essere un fumetto, una serie o un evento*/
 
-public class UrlsRecyclerView extends RecyclerView.Adapter<UrlsRecyclerView.Holder> {
+public class UrlsAdapter extends RecyclerView.Adapter<UrlsAdapter.Holder> {
     private List<Urls> urls;
 
-    public UrlsRecyclerView(List<Urls> urlsList){
+    public UrlsAdapter(List<Urls> urlsList){
         urls = urlsList;
     }
 
     @NonNull
     @Override
-    public UrlsRecyclerView.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public UrlsAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ConstraintLayout cl;
         cl = (ConstraintLayout) LayoutInflater
                 .from(parent.getContext())
@@ -50,6 +51,4 @@ public class UrlsRecyclerView extends RecyclerView.Adapter<UrlsRecyclerView.Hold
             tvType = itemView.findViewById(R.id.tvType);
         }
     }
-
-
 }

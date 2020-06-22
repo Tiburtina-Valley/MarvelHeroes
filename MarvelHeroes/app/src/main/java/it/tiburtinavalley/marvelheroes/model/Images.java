@@ -1,4 +1,4 @@
-package it.tiburtinavalley.marvelheroes.Model;
+package it.tiburtinavalley.marvelheroes.model;
 
 /* model che mantiene le informazioni relative all'immagine di un fumetto*/
 
