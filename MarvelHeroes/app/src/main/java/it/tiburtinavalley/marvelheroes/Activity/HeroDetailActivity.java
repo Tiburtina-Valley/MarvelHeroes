@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -122,8 +124,9 @@ public class HeroDetailActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull ComicsHolder holder, int position) {
             imgVolley.addHeroImg(holder.ivComic);
-            imgVolley.getImageFromUrl(comics.get(position).getThumbnail().getPath().replaceFirst("http", "https")
-                    + "." + comics.get(position).getThumbnail().getExtension());
+            String urlThumbnail = comics.get(position).getThumbnail().getPath().replaceFirst("http", "https")
+                    + "." + comics.get(position).getThumbnail().getExtension();
+            Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivComic);
             holder.tvComicName.setText(comics.get(position).getTitle());
         }
 
@@ -177,9 +180,9 @@ public class HeroDetailActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull SeriesHolder holder, int position) {
             imgVolley.addHeroImg(holder.ivComic);
-            imgVolley.getImageFromUrl(series.get(position).getThumbnail().getPath().replaceFirst("http", "https")
-                    + "." + series.get(position).getThumbnail().getExtension());
-            holder.tvComicName.setText(series.get(position).getTitle());
+            String urlThumbnail = series.get(position).getThumbnail().getPath().replaceFirst("http", "https")
+                    + "." + series.get(position).getThumbnail().getExtension();
+            Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivComic);
         }
 
         @Override

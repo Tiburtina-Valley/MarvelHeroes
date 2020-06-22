@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,9 +46,9 @@ public class ComicsActivity extends AppCompatActivity {
             ImageApiVolley imgVolley = new ImageApiVolley(getApplicationContext());
             imgVolley.addHeroImg(ivComicImage);
             if (comic.getImages().size() > 0) {
-                imgVolley.getImageFromUrl(
-                        comic.getImages().get(0).getPath().replaceFirst("http", "https")
-                                + "." + comic.getImages().get(0).getExtension());
+                String urlThumbnail = comic.getImages().get(0).getPath().replaceFirst("http", "https")
+                        + "." + comic.getImages().get(0).getExtension();
+                Glide.with(getApplicationContext()).load(urlThumbnail).into(this.ivComicImage);
             }
             tvComicName.setText(comic.getTitle());
             tvPageCount.setText(comic.getPageCount());

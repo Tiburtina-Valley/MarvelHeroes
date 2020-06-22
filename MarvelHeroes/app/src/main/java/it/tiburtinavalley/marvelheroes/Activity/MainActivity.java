@@ -19,6 +19,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,8 +117,9 @@ public class MainActivity extends AppCompatActivity {
             imgVolley.addHeroImg(holder.ivHeroPic);
             if (!hero.getThumbnail().getPath().equalsIgnoreCase("")
                     && !hero.getThumbnail().getExtension().equalsIgnoreCase("")) {
-                imgVolley.getImageFromUrl(hero.getThumbnail().getPath().replaceFirst("http", "https")
-                        + "." + hero.getThumbnail().getExtension());
+                String urlThumbnail = hero.getThumbnail().getPath().replaceFirst("http", "https")
+                        + "." + hero.getThumbnail().getExtension();
+                Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivHeroPic);
             }
         }
 
