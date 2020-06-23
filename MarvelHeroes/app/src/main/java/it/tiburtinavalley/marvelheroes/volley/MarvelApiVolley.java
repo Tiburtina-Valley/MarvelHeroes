@@ -1,4 +1,4 @@
-package it.tiburtinavalley.marvelheroes.Volley;
+package it.tiburtinavalley.marvelheroes.volley;
 
 /* this class is in charge on internet queries*/
 
@@ -19,7 +19,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.tiburtinavalley.marvelheroes.Model.HeroModel;
+import it.tiburtinavalley.marvelheroes.model.HeroModel;
 
 public abstract class MarvelApiVolley implements Response.ErrorListener, Response.Listener<String> {
     List<ImageView> heroesImg;

@@ -1,21 +1,15 @@
-package it.tiburtinavalley.marvelheroes.Model;
+package it.tiburtinavalley.marvelheroes.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 import java.util.List;
 
-import it.tiburtinavalley.marvelheroes.Volley.ImageApiVolley;
-
 /* Model per mantenere i dati relativi ai fumetti legati agli eroi */
 
-public class Comics implements Parcelable {
+public class Comics extends Element {
     private List<Items> items;
     private List<Images> images;
-    private List<Urls> urls;
-    private String id;
     private String title;
-    private Thumbnail thumbnail;
-    private String description;
     private String upc;
     private String diamondCode;
     private String isbn;
@@ -74,24 +68,12 @@ public class Comics implements Parcelable {
         return items;
     }
 
-    public String getId() {
-        return id;
-    }
-
     public String getTitle() {
         return title;
     }
 
-    public Thumbnail getThumbnail() {
-        return thumbnail;
-    }
-
     public List<Images> getImages() {
         return images;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public String getUpc() {
@@ -108,10 +90,6 @@ public class Comics implements Parcelable {
 
     public String getPageCount() {
         return pageCount;
-    }
-
-    public List<Urls> getUrls() {
-        return urls;
     }
 
     /*public List<Creators> getCreators() {

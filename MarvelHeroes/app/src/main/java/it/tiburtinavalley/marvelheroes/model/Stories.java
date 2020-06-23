@@ -1,10 +1,10 @@
-package it.tiburtinavalley.marvelheroes.Model;
+package it.tiburtinavalley.marvelheroes.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import java.util.List;
 
+//TODO : Capire a che cazzo servono ste storie
 public class Stories implements Parcelable {
     List<Items> items;
 

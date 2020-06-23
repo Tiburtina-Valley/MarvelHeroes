@@ -1,16 +1,13 @@
-package it.tiburtinavalley.marvelheroes.Model;
+package it.tiburtinavalley.marvelheroes.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 /* Model che raccoglie tutte le informazioni relative al singolo eroe */
 
-public class HeroModel implements Parcelable {
-    private String id;
+public class HeroModel extends Element {
     private String name;
-    private String description;
     private String resourceURI;
-    private Thumbnail thumbnail;
     private Comics comics;
     private Series series;
     private Stories stories;
@@ -25,6 +22,7 @@ public class HeroModel implements Parcelable {
         comics = in.readParcelable(Comics.class.getClassLoader());
         stories = in.readParcelable(Stories.class.getClassLoader());
         series = in.readParcelable(Series.class.getClassLoader());
+        urls = in.createTypedArrayList(Urls.CREATOR);
     }
 
     public static final Creator<HeroModel> CREATOR = new Creator<HeroModel>() {
@@ -39,20 +37,8 @@ public class HeroModel implements Parcelable {
         }
     };
 
-    public String getId(){
-        return this.id;
-    }
-
     public String getName(){
         return this.name;
-    }
-
-    public String getDescription(){
-        return this.description;
-    }
-
-    public Thumbnail getThumbnail(){
-        return this.thumbnail;
     }
 
     public Comics getComics() {
@@ -82,5 +68,6 @@ public class HeroModel implements Parcelable {
         dest.writeParcelable(comics, flags);
         dest.writeParcelable(stories, flags);
         dest.writeParcelable(series, flags);
+        dest.writeTypedList(urls);
     }
 }

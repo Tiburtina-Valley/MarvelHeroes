@@ -1,4 +1,4 @@
-package it.tiburtinavalley.marvelheroes.Model;
+package it.tiburtinavalley.marvelheroes.model;
 
 /* Model che mantiene le informazioni relative ad un evento per un particolare eroe */
 
@@ -7,14 +7,10 @@ import android.os.Parcelable;
 
 import java.util.List;
 
-public class Events implements Parcelable {
-    private String id;
+public class Events extends Element {
     private String title;
-    private String description;
     private String start;
     private String end;
-    private Thumbnail thumbnail;
-    private List<Urls> urls;
     private List<Creators> creators;
 
     protected Events(Parcel in) {
@@ -57,16 +53,8 @@ public class Events implements Parcelable {
         parcel.writeTypedList(creators);
     }
 
-    public String getId() {
-        return id;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public String getStart() {
@@ -75,14 +63,6 @@ public class Events implements Parcelable {
 
     public String getEnd() {
         return end;
-    }
-
-    public Thumbnail getThumbnail() {
-        return thumbnail;
-    }
-
-    public List<Urls> getUrls() {
-        return urls;
     }
 
     public List<Creators> getCreators() {

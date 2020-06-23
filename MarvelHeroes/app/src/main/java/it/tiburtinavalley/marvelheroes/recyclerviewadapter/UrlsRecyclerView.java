@@ -1,4 +1,4 @@
-package it.tiburtinavalley.marvelheroes;
+package it.tiburtinavalley.marvelheroes.recyclerviewadapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
-import it.tiburtinavalley.marvelheroes.Model.Urls;
+import it.tiburtinavalley.marvelheroes.R;
+import it.tiburtinavalley.marvelheroes.model.Urls;
 
 /* RecyclerView che mostra gli url legati ad un elemento, che può essere un fumetto, una serie o un evento*/
 

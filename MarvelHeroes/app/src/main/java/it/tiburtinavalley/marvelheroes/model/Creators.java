@@ -1,4 +1,4 @@
-package it.tiburtinavalley.marvelheroes.Model;
+package it.tiburtinavalley.marvelheroes.model;
 
 /* Questa Model mantiene informazioni sui creators di un fumetto*/
 
@@ -7,11 +7,9 @@ import android.os.Parcelable;
 
 import java.util.List;
 
-public class Creators implements Parcelable {
+public class Creators extends BasicElement {
     private List<Items> items;
-    private String id; // può servire per fare delle query relative all'autore
     private String fullName;
-    private Thumbnail thumbnail;
 
     protected Creators(Parcel in) {
         items = in.createTypedArrayList(Items.CREATOR);
@@ -49,15 +47,7 @@ public class Creators implements Parcelable {
         return items;
     }
 
-    public String getId() {
-        return id;
-    }
-
     public String getFullName() {
         return fullName;
-    }
-
-    public Thumbnail getThumbnail() {
-        return thumbnail;
     }
 }
