@@ -1,4 +1,4 @@
-package it.tiburtinavalley.marvelheroes.Activity;
+package it.tiburtinavalley.marvelheroes.activity;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -10,10 +10,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import it.tiburtinavalley.marvelheroes.Model.Comics;
+import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.R;
-import it.tiburtinavalley.marvelheroes.UrlsRecyclerView;
-import it.tiburtinavalley.marvelheroes.Volley.ImageApiVolley;
+import it.tiburtinavalley.marvelheroes.recyclerviewadapter.UrlsRecyclerView;
+import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 
 public class ComicsActivity extends AppCompatActivity {
     private Comics comic;
