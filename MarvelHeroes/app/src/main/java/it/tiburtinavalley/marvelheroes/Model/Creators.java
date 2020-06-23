@@ -1,4 +1,4 @@
-package it.tiburtinavalley.marvelheroes.model;
+package it.tiburtinavalley.marvelheroes.Model;
 
 /* Questa Model mantiene informazioni sui creators di un fumetto*/
 

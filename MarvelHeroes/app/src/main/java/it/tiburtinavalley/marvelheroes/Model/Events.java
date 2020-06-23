@@ -1,4 +1,4 @@
-package it.tiburtinavalley.marvelheroes.model;
+package it.tiburtinavalley.marvelheroes.Model;
 
 /* Model che mantiene le informazioni relative ad un evento per un particolare eroe */
 
