@@ -66,6 +66,7 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsHold
         Comics comic = comics.get(position);
 
         Intent i = new Intent(appContext, ComicsActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.putExtra("comic", comic);
         appContext.startActivity(i);
     }
@@ -77,7 +78,7 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsHold
         ComicsHolder(@NonNull View itemView) {
             super(itemView);
             ivComic = itemView.findViewById(R.id.ivComic);
-            tvComicName = itemView.findViewById(R.id.tvComicName);
+            tvComicName = itemView.findViewById(R.id.tvStoriesName);
         }
     }
 }

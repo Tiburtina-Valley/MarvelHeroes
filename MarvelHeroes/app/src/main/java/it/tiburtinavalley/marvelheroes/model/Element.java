@@ -1,9 +1,14 @@
 package it.tiburtinavalley.marvelheroes.model;
 
-public abstract class Element extends BasicElement{
+import java.util.Collection;
+
+public abstract class Element extends BasicElement {
     protected String description;
 
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
+
+    ;
 }
+

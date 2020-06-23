@@ -35,8 +35,8 @@ public class ComicsActivity extends AppCompatActivity {
         private RecyclerView.LayoutManager layoutManagerUrls;
 
         public Holder() {
-            ivComicImage = findViewById(R.id.ivComicImg);
-            tvComicName = findViewById(R.id.tvComicName);
+            ivComicImage = findViewById(R.id.ivStoriesmg);
+            tvComicName = findViewById(R.id.tvStoriesName);
             tvPageCount = findViewById(R.id.tvPageCount);
             rvUrls = findViewById(R.id.rvUrls);
             setData();

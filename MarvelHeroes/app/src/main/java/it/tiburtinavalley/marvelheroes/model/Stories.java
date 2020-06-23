@@ -5,12 +5,17 @@ import android.os.Parcelable;
 import java.util.List;
 
 //TODO : Capire a che cazzo servono ste storie
-public class Stories implements Parcelable {
+public class Stories extends Element implements Parcelable {
     List<Items> items;
+    private List<Images> images;
+    private String pageCount;
 
     protected Stories(Parcel in) {
+
         items = in.createTypedArrayList(Items.CREATOR);
-    }
+
+    pageCount = in.readString();
+    images = in.createTypedArrayList(Images.CREATOR);}
 
     public static final Creator<Stories> CREATOR = new Creator<Stories>() {
         @Override
@@ -36,5 +41,20 @@ public class Stories implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeTypedList(items);
+    }
+
+    public Thumbnail getThumbnail() {
+        return null;
+    }
+
+    public String getTitle() {
+        return null;
+    }
+    public List<Images> getImages() {
+        return images;
+    }
+
+    public String getPageCount() {
+        return pageCount;
     }
 }

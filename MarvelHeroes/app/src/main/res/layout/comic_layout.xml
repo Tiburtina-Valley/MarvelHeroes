@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/ivComicImg"
+        android:id="@+id/ivStoriesmg"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_marginStart="8dp"
@@ -24,15 +24,15 @@
         android:text="@string/urls"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivComicImg" />
+        app:layout_constraintTop_toBottomOf="@+id/ivStoriesmg" />
 
     <TextView
-        android:id="@+id/tvComicName"
+        android:id="@+id/tvStoriesName"
         android:layout_width="212dp"
         android:layout_height="33dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toEndOf="@+id/ivComicImg"
+        app:layout_constraintStart_toEndOf="@+id/ivStoriesmg"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -42,9 +42,9 @@
         android:layout_marginBottom="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivComicImg"
-        app:layout_constraintStart_toEndOf="@+id/ivComicImg"
-        app:layout_constraintTop_toBottomOf="@+id/tvComicName" />
+        app:layout_constraintBottom_toBottomOf="@+id/ivStoriesmg"
+        app:layout_constraintStart_toEndOf="@+id/ivStoriesmg"
+        app:layout_constraintTop_toBottomOf="@+id/tvStoriesName" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvUrls"

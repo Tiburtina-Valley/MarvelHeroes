@@ -11,9 +11,13 @@ public class Events extends Element {
     private String title;
     private String start;
     private String end;
-    private List<Creators> creators;
+    //private List<Creators> creators;
+    private List<Images> images;
+    private String pageCount;
 
     protected Events(Parcel in) {
+        pageCount = in.readString();
+        images = in.createTypedArrayList(Images.CREATOR);
         id = in.readString();
         title = in.readString();
         description = in.readString();
@@ -21,7 +25,7 @@ public class Events extends Element {
         end = in.readString();
         thumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
         urls = in.createTypedArrayList(Urls.CREATOR);
-        creators = in.createTypedArrayList(Creators.CREATOR);
+        //creators = in.createTypedArrayList(Creators.CREATOR);
     }
 
     public static final Creator<Events> CREATOR = new Creator<Events>() {
@@ -50,7 +54,10 @@ public class Events extends Element {
         parcel.writeString(end);
         parcel.writeParcelable(thumbnail, i);
         parcel.writeTypedList(urls);
-        parcel.writeTypedList(creators);
+        //parcel.writeTypedList(creators);
+        parcel.writeString(pageCount);
+        parcel.writeTypedList(images);
+
     }
 
     public String getTitle() {
@@ -65,7 +72,15 @@ public class Events extends Element {
         return end;
     }
 
-    public List<Creators> getCreators() {
-        return creators;
+   // public List<Creators> getCreators() {
+     //   return creators;
+   // }
+
+    public List<Images> getImages() {
+        return images;
+    }
+
+    public String getPageCount() {
+        return pageCount;
     }
 }

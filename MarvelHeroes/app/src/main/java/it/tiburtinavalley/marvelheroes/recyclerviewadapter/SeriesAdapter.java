@@ -1,7 +1,7 @@
 package it.tiburtinavalley.marvelheroes.recyclerviewadapter;
 
 import android.content.Context;
-import android.media.Image;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 import it.tiburtinavalley.marvelheroes.R;
+import it.tiburtinavalley.marvelheroes.activity.SeriesActivity;
 import it.tiburtinavalley.marvelheroes.model.Series;
 import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 
@@ -43,10 +44,10 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
     // This method sets the layout of the hero
     @Override
     public void onBindViewHolder(@NonNull SeriesHolder holder, int position) {
-        imgVolley.addHeroImg(holder.ivComic);
+        imgVolley.addHeroImg(holder.ivSeries);
         String urlThumbnail = series.get(position).getThumbnail().getPath().replaceFirst("http", "https")
                 + "." + series.get(position).getThumbnail().getExtension();
-        Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivComic);
+        Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivSeries);
     }
 
     @Override
@@ -57,17 +58,23 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
     //
     @Override
     public void onClick(View v) {
-        //TODO : display new activity based on user search
+        int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
+        Series serie  = series.get(position);
+
+        Intent i = new Intent(appContext, SeriesActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.putExtra("series",  serie);
+        appContext.startActivity(i);
     }
 
     class SeriesHolder extends RecyclerView.ViewHolder {
-        final ImageView ivComic;
-        final TextView tvComicName;
+        final ImageView ivSeries;
+        final TextView tvSeriesName;
 
         SeriesHolder(@NonNull View itemView) {
             super(itemView);
-            ivComic = itemView.findViewById(R.id.ivComic);
-            tvComicName = itemView.findViewById(R.id.tvComicName);
+            ivSeries = itemView.findViewById(R.id.ivComic);
+            tvSeriesName = itemView.findViewById(R.id.tvStoriesName);
         }
     }
 }

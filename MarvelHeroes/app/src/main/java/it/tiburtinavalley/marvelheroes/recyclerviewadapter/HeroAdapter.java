@@ -71,7 +71,9 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.Holder> implem
         HeroModel hero = heroes.get(position);
 
         Intent i = new Intent(appContext, HeroDetailActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.putExtra("hero", hero);
+
         appContext.startActivity(i);
     }
 

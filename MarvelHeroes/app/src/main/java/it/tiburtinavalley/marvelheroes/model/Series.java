@@ -12,8 +12,12 @@ public class Series extends Element {
     private String endYear;
     private String rating;
     private String type;
+    private List<Images> images;
+    private String pageCount;
 
     protected Series(Parcel in) {
+        pageCount = in.readString();
+        images = in.createTypedArrayList(Images.CREATOR);
         items = in.createTypedArrayList(Items.CREATOR);
         id = in.readString();
         title = in.readString();
@@ -59,6 +63,14 @@ public class Series extends Element {
 
     public String getType() {
         return type;
+    }
+
+    public List<Images> getImages() {
+        return images;
+    }
+
+    public String getPageCount() {
+        return pageCount;
     }
 
     @Override
