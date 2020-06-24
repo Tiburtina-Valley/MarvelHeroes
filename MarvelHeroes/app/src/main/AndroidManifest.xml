@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".activity.StoriesActivity" />
-
+        <activity android:name=".activity.AboutActivity" />
         <activity android:name=".activity.EventsActivity" />
         <activity android:name=".activity.HeroDetailActivity" />
         <activity android:name=".activity.MainActivity">

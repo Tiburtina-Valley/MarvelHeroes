@@ -7,10 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
@@ -41,7 +44,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         holder = new Holder();
         imgVolley = new ImageApiVolley(getApplicationContext());
+
     }
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true; }
+
+    @Override public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.AboutBtn) {
+            Context appContext=getApplicationContext();
+            Intent i = new Intent(appContext, AboutActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            appContext.startActivity(i); }
+        else {
+            return super.onContextItemSelected(item); }
+        return true; }
 
     class Holder {
         final RecyclerView rvHeroes;
@@ -89,5 +106,6 @@ public class MainActivity extends AppCompatActivity {
             InputMethodManager imm = (InputMethodManager)activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
         }
+
     }
 }

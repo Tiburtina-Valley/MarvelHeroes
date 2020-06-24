@@ -8,4 +8,22 @@
     <string name="hero_detail_description">Description</string>
     <string name="hero_detail_stories">Stories</string>
     <string name="urls">Links: </string>
+    <string name="AboutBtn">About us </string>
+    <string name="about_us_description">\"our team\"</string>
+    <string name="FRONTEND_HOST">\"myWebsite\"</string>
+    <string name="FACEBOOK_ID">\"facebook\"</string>
+    <string name="TWITTER_ID">\"twitter\"</string>
+    <string name="YOUTUBE_ID">\"youtube\"</string>
+    <string name="developers">\"developers\"</string>
+    <string name="share">\"share\"</string>
+    <string name="third_party_licenses">\"license\"</string>
+    <string name="githubPage">Tiburtina-Valley</string>
+    <string name="instagramPage">TiburtinaValleyDev</string>
+    <string name="playStore">it.tiburtinavalley.marvelheroes</string>
+    <string name="youTubePage">iHsgkpP0aUY</string>
+    <string name="twitterPage">baobabexp</string>
+    <string name="facebookPage">stazioneromatiburtina</string>
+    <string name="website">https://github.com/piercirocaliandro/MarvelHero</string>
+    <string name="mail">tiburtinaMail.com</string>
+    <string name="version">Version 1.0</string>
 </resources>
