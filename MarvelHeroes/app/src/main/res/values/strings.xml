@@ -26,4 +26,5 @@
     <string name="website">https://github.com/piercirocaliandro/MarvelHero</string>
     <string name="mail">tiburtinaMail.com</string>
     <string name="version">Version 1.0</string>
+    <string name="events">Events</string>
 </resources>

@@ -45,16 +45,16 @@ public class SeriesActivity extends AppCompatActivity {
         private void setData() {
             ImageApiVolley imgVolley = new ImageApiVolley(getApplicationContext());
             imgVolley.addHeroImg(ivSeriesImage);
-            if (series.getImages().size() > 0) {
+           /* if (series.getImages().size() > 0) {
                 String urlThumbnail = series.getImages().get(0).getPath().replaceFirst("http", "https")
                         + "." + series.getImages().get(0).getExtension();
                 Glide.with(getApplicationContext()).load(urlThumbnail).into(this.ivSeriesImage);
-            }
-            tvSeriesName.setText(series.getTitle());
-            tvPageCount.setText(series.getPageCount());
+            }*/
+           // tvSeriesName.setText(series.getTitle());
+          //  tvPageCount.setText(series.getPageCount());
             layoutManagerUrls = new LinearLayoutManager(SeriesActivity.this);
             rvUrls.setLayoutManager(layoutManagerUrls);
-            urlsAdapter = new UrlsRecyclerView(series.getUrls());
+           // urlsAdapter = new UrlsRecyclerView(series.getUrls());
             rvUrls.setAdapter(urlsAdapter);
         }
     }
