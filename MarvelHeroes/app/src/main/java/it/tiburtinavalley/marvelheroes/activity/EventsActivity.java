@@ -51,7 +51,7 @@ public class EventsActivity extends AppCompatActivity {
                 Glide.with(getApplicationContext()).load(urlThumbnail).into(this.ivEventImage);
             }*/
             tvEventName.setText(event.getTitle());
-            tvPageCount.setText(event.getPageCount());
+            tvPageCount.setText(event.getDescription());
             layoutManagerUrls = new LinearLayoutManager(EventsActivity.this);
             rvUrls.setLayoutManager(layoutManagerUrls);
             urlsAdapter = new UrlsRecyclerView(event.getUrls());

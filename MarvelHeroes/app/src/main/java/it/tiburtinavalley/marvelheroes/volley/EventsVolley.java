@@ -20,7 +20,7 @@ import it.tiburtinavalley.marvelheroes.model.Events;
 
 
 public abstract class EventsVolley implements Response.ErrorListener, Response.Listener<String>{
-    private String urlBase = "https://gateway.marvel.com/v1/public/characters/%s";
+    private String urlBase = "https://gateway.marvel.com/v1/public/%s";
     private String apiKey = "ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea";
     private RequestQueue requestQueue;
 
@@ -31,13 +31,18 @@ public abstract class EventsVolley implements Response.ErrorListener, Response.L
     }
 
     public void getEventInfo(String heroId){
-        String event= heroId + "/events?";
+        String event = "characters/"+heroId + "/events?";
         eventsApiCall(event);
     }
 
-    private void eventsApiCall(String comicUrl){
+    public void getEventsFromComics(String comicId){
+        String param = "comics/"+comicId+"/events?";
+        eventsApiCall(param);
+    }
+
+    private void eventsApiCall(String eventUrl){
         String url = urlBase + apiKey; // usiamo una stringa di appoggio così da poter ripetere la chiamata
-        url = String.format(url, comicUrl);
+        url = String.format(url, eventUrl);
         StringRequest sr = new StringRequest(Request.Method.GET,
                 url,
                 this,
@@ -61,7 +66,7 @@ public abstract class EventsVolley implements Response.ErrorListener, Response.L
             }.getType();
             List<Events> eventsList = gson.fromJson(event, listType);
             if (eventsList != null && eventsList.size() > 0) {
-                Log.w("CA", "" + eventsList.size());
+                Log.w("Events", "" + eventsList.size());
                 //db.cocktailDAO().insertAll(cnt);    // NON OBBLIGATORIO
                 fillEvents(eventsList);
             }
