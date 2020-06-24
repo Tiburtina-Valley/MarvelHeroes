@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="marginStartRv">8dp</dimen>
+    <dimen name="marginTopRv">8dp</dimen>
+    <dimen name="marginEndRv">8dp</dimen>
+    <dimen name="rvWidth">326dp</dimen>
+    <dimen name="rvHeight">60dp</dimen>
+    <dimen name="rvTitleStart">8dp</dimen>
+    <dimen name="rvTitleTop">14dp</dimen>
+</resources>
