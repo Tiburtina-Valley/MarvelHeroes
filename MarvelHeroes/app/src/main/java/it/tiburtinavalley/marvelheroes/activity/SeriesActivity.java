@@ -1,5 +1,6 @@
 package it.tiburtinavalley.marvelheroes.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,10 +11,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
+import it.tiburtinavalley.marvelheroes.model.HeroModel;
 import it.tiburtinavalley.marvelheroes.model.Series;
 import it.tiburtinavalley.marvelheroes.R;
+import it.tiburtinavalley.marvelheroes.recyclerviewadapter.HeroAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.UrlsRecyclerView;
 import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
+import it.tiburtinavalley.marvelheroes.volley.MarvelApiVolley;
 
 public class SeriesActivity extends AppCompatActivity {
     private Series series;
@@ -32,14 +38,37 @@ public class SeriesActivity extends AppCompatActivity {
         private ImageView ivSeriesImage;
         private TextView tvSeriesName;
         private TextView tvPageCount;
+        private TextView tvDescription;
+        private RecyclerView rvCharacters;
         private RecyclerView rvUrls;
-        private RecyclerView.LayoutManager layoutManagerUrls;
+        private HeroAdapter heroAdapter;
+        private MarvelApiVolley heroVolley;
 
         public Holder() {
             ivSeriesImage = findViewById(R.id.ivStoriesmg);
             tvSeriesName = findViewById(R.id.tvStoriesName);
             tvPageCount = findViewById(R.id.tvPageCount);
             rvUrls = findViewById(R.id.rvUrls);
+            tvDescription = findViewById(R.id.tvDescription);
+            rvCharacters = findViewById(R.id.rvUrls);
+            final Context appContext = getApplicationContext();
+
+            heroVolley = new MarvelApiVolley(appContext) {
+                @Override
+                public void fillList(List<HeroModel> heroes) {
+                    heroAdapter = new HeroAdapter(heroes, appContext);
+                    rvCharacters.setAdapter(heroAdapter);
+                }
+            };
+        }
+
+        private void setRecyclerViews(){
+            LinearLayoutManager layoutManagerHeroes = new LinearLayoutManager(
+                    SeriesActivity.this, RecyclerView.HORIZONTAL, false);
+            rvCharacters.setLayoutManager(layoutManagerHeroes);
+
+            RecyclerView.LayoutManager layoutManagerUrls = new LinearLayoutManager(SeriesActivity.this);
+            rvUrls.setLayoutManager(layoutManagerUrls);
         }
 
         private void setData() {
@@ -52,9 +81,15 @@ public class SeriesActivity extends AppCompatActivity {
             }
             tvSeriesName.setText(series.getTitle());
             tvPageCount.setText(series.getPageCount());
-            layoutManagerUrls = new LinearLayoutManager(SeriesActivity.this);
-            urlsAdapter = new UrlsRecyclerView(series.getUrls());
-            rvUrls.setAdapter(urlsAdapter);
+            if (series.getDescription() != null) {
+                tvDescription.setText(series.getDescription());
+            }
+
+            String id = series.getId();
+            heroVolley.getHeroesFromComics(id);
+            setRecyclerViews();
+            /*urlsAdapter = new UrlsRecyclerView(series.getUrls());
+            rvUrls.setAdapter(urlsAdapter);*/
         }
     }
 }
