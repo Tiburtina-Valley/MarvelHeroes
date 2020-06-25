@@ -25,6 +25,7 @@ public class SeriesActivity extends AppCompatActivity {
         setContentView(R.layout.series_layout);
         series = getIntent().getParcelableExtra("comic");
         Holder holder = new Holder();
+        holder.setData();
     }
 
     class Holder {
@@ -39,22 +40,21 @@ public class SeriesActivity extends AppCompatActivity {
             tvSeriesName = findViewById(R.id.tvStoriesName);
             tvPageCount = findViewById(R.id.tvPageCount);
             rvUrls = findViewById(R.id.rvUrls);
-            setData();
         }
 
         private void setData() {
             ImageApiVolley imgVolley = new ImageApiVolley(getApplicationContext());
             imgVolley.addHeroImg(ivSeriesImage);
-           /* if (series.getImages().size() > 0) {
+            if (series.getImages().size() > 0) {
                 String urlThumbnail = series.getImages().get(0).getPath().replaceFirst("http", "https")
                         + "." + series.getImages().get(0).getExtension();
                 Glide.with(getApplicationContext()).load(urlThumbnail).into(this.ivSeriesImage);
-            }*/
-           // tvSeriesName.setText(series.getTitle());
-          //  tvPageCount.setText(series.getPageCount());
+            }
+            tvSeriesName.setText(series.getTitle());
+            tvPageCount.setText(series.getPageCount());
             layoutManagerUrls = new LinearLayoutManager(SeriesActivity.this);
             rvUrls.setLayoutManager(layoutManagerUrls);
-           // urlsAdapter = new UrlsRecyclerView(series.getUrls());
+            urlsAdapter = new UrlsRecyclerView(series.getUrls());
             rvUrls.setAdapter(urlsAdapter);
         }
     }
