@@ -41,6 +41,8 @@ public class SeriesActivity extends AppCompatActivity {
         private TextView tvStartYear;
         private TextView tvEndYear;
         private TextView tvDescription;
+        private TextView tvType;
+        private TextView tvRating;
         private RecyclerView rvCharacters;
         private RecyclerView rvUrls;
         private HeroAdapter heroAdapter;
@@ -54,6 +56,8 @@ public class SeriesActivity extends AppCompatActivity {
             rvUrls = findViewById(R.id.rvUrls);
             tvDescription = findViewById(R.id.tvDescription);
             rvCharacters = findViewById(R.id.rvCharacters);
+            tvType = findViewById(R.id.tvType);
+            tvRating = findViewById(R.id.tvRating);
             final Context appContext = getApplicationContext();
 
             heroVolley = new MarvelApiVolley(appContext) {
@@ -85,6 +89,10 @@ public class SeriesActivity extends AppCompatActivity {
             tvSeriesName.setText(series.getTitle());
             tvStartYear.setText(getString(R.string.series_start_date) + " " + series.getStartYear());
             tvEndYear.setText(getString(R.string.series_end_date) + " " + series.getEndYear());
+            if (!series.getType().equals(""))
+                tvType.setText(getString(R.string.type) + " " + series.getType());
+            if (!series.getRating().equals(""))
+                tvRating.setText(getString(R.string.rating) + " " + series.getRating());
 
             if (series.getDescription() != null) {
                 tvDescription.setText(series.getDescription());
