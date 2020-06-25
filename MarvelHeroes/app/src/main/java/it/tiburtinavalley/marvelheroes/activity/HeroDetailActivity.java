@@ -2,6 +2,7 @@ package it.tiburtinavalley.marvelheroes.activity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +27,7 @@ import it.tiburtinavalley.marvelheroes.volley.SeriesVolley;
 import it.tiburtinavalley.marvelheroes.volley.StoriesVolley;
 
 
-public class HeroDetailActivity extends AppCompatActivity {
+public class HeroDetailActivity extends AppCompatActivity{
 
     private HeroModel hm;
     private ComicsVolley cVolley;
@@ -45,7 +46,7 @@ public class HeroDetailActivity extends AppCompatActivity {
         holder.setDetails(hm);
     }
 
-    class Holder {
+    class Holder  { //implements View.OnClickListener {
         private final RecyclerView rvComics;
         private final RecyclerView rvSeries;
         private final RecyclerView rvEvents;
@@ -58,6 +59,7 @@ public class HeroDetailActivity extends AppCompatActivity {
         private SeriesAdapter sAdapter;
         private StoriesAdapter stAdapter;
         private EventsAdapter eAdapter;
+        private ImageView ivStar;
 
         public Holder() {
             rvEvents=findViewById(R.id.rvEvents);
@@ -67,6 +69,8 @@ public class HeroDetailActivity extends AppCompatActivity {
             ivHeroPhoto = findViewById(R.id.ivHeroPhoto);
             tvHeroId = findViewById(R.id.tvHeroId);
             tvHeroName = findViewById(R.id.tvHeroName);
+            //ivStar = findViewById(R.id.ivStar);
+            //ivStar.setOnClickListener(this);
             tvHeroDescription = findViewById(R.id.tvHeroDescription);
             LinearLayoutManager layoutManagerComics = new LinearLayoutManager(
                     HeroDetailActivity.this, RecyclerView.HORIZONTAL, false);
@@ -131,5 +135,17 @@ public class HeroDetailActivity extends AppCompatActivity {
             stVolley.getStoriesInfo(hm.getId());
             eVolley.getEventInfo(hm.getId());
         }
+
+        /*@Override
+        public void onClick(View v) {
+            if (v.getId() == R.id.ivStar) {
+                if (ivStar.getImageAlpha() == android.R.drawable.btn_star_big_on) {
+                    ivStar.setImageResource(android.R.drawable.btn_star_big_off);
+                }
+                else {
+                    ivStar.setImageResource(android.R.drawable.btn_star_big_on);
+                }
+            }
+        }*/
     }
 }
