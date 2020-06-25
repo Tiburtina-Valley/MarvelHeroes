@@ -40,7 +40,7 @@ public class UrlsRecyclerView extends RecyclerView.Adapter<UrlsRecyclerView.Hold
 
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
-        holder.tvType.setText("Type : "+urls.get(position).getType());
+        holder.tvType.setText(urls.get(position).getType()+":");
         holder.tvUrl.setText(urls.get(position).getUrl());
     }
 
