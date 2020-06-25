@@ -27,4 +27,7 @@
     <string name="mail">tiburtinaMail.com</string>
     <string name="version">Version 1.0</string>
     <string name="events">Events</string>
+    <string name="heroes">Related heroes :</string>
+    <string name="series_comics">Related series :</string>
+    <string name="events_comics">Related events :</string>
 </resources>

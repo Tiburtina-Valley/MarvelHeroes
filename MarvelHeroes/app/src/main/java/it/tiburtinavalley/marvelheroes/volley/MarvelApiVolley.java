@@ -41,6 +41,12 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
         callApi(param);
     }
 
+    // metodo che esegue una query in base all'ID di un fumetto, per trovare gli eroi correlati
+    public void getHeroesFromComics(String comicId){
+        String param = "comics/"+comicId+"/characters?";
+        callApi(param);
+    }
+
     private void callApi(String parameter) {
         String url = urlBase + apiKey;
         url = String.format(url, parameter);

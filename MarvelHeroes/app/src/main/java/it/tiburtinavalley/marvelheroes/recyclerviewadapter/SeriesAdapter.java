@@ -45,9 +45,11 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
     @Override
     public void onBindViewHolder(@NonNull SeriesHolder holder, int position) {
         imgVolley.addHeroImg(holder.ivSeries);
-        String urlThumbnail = series.get(position).getThumbnail().getPath().replaceFirst("http", "https")
-                + "." + series.get(position).getThumbnail().getExtension();
-        Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivSeries);
+        if(series.get(position).getThumbnail() != null) {
+            String urlThumbnail = series.get(position).getThumbnail().getPath().replaceFirst("http", "https")
+                    + "." + series.get(position).getThumbnail().getExtension();
+            Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivSeries);
+        }
     }
 
     @Override

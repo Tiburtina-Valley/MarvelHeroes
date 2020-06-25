@@ -21,7 +21,7 @@ import java.util.List;
 import it.tiburtinavalley.marvelheroes.model.Series;
 
 public abstract class SeriesVolley implements Response.ErrorListener, Response.Listener<String>{
-    private String urlBase = "https://gateway.marvel.com/v1/public/characters/%s";
+    private String urlBase = "https://gateway.marvel.com/v1/public/%s";
     private String apiKey = "ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea";
     private RequestQueue requestQueue;
 
@@ -32,8 +32,14 @@ public abstract class SeriesVolley implements Response.ErrorListener, Response.L
     }
 
     public void getStoriesInfo(String heroId){
-        String serie = heroId + "/series?";
+        String serie = "characters/" + heroId + "/series?";
         seriesApiCall(serie);
+    }
+
+    //metodo per cercare le storie collegate ad un fumetto
+    public void getSeriesByComics(String comicId){
+        String param = "comics/"+comicId+"/series?";
+        seriesApiCall(param);
     }
 
     private void seriesApiCall(String storyUrl){
