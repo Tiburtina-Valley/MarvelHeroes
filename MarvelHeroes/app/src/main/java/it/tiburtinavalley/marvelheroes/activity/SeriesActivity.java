@@ -85,6 +85,9 @@ public class SeriesActivity extends AppCompatActivity {
             if (series.getDescription() != null) {
                 tvDescription.setText(series.getDescription());
             }
+            else {
+                tvDescription.setText("No description available");
+            }
             urlsAdapter = new UrlsRecyclerView(series.getUrls());
             rvUrls.setAdapter(urlsAdapter);
 

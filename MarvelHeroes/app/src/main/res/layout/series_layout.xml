@@ -10,11 +10,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="8dp"
         android:text="Characters:"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvUrls" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
 
     <ImageView
         android:id="@+id/ivStoriesmg"
@@ -88,10 +88,12 @@
         android:layout_marginStart="@dimen/marginStartRv"
         android:layout_marginTop="@dimen/marginTopRv"
         android:layout_marginEnd="@dimen/marginEndRv"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCharacters" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCharacters"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvUrls"
