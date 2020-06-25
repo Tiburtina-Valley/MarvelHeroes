@@ -12,7 +12,7 @@ public class Series extends Element {
     private String endYear;
     private String rating;
     private String type;
-    private List<Images> images;
+    //private List<Images> images;
     private String pageCount;
 
     protected Series(Parcel in) {
@@ -26,7 +26,7 @@ public class Series extends Element {
         rating = in.readString();
         thumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
         pageCount = in.readString();
-        images = in.createTypedArrayList(Images.CREATOR);
+        //images = in.createTypedArrayList(Images.CREATOR);
     }
 
     public static final Creator<Series> CREATOR = new Creator<Series>() {
@@ -65,10 +65,6 @@ public class Series extends Element {
         return type;
     }
 
-    public List<Images> getImages() {
-        return images;
-    }
-
     public String getPageCount() {
         return pageCount;
     }
@@ -90,6 +86,6 @@ public class Series extends Element {
         dest.writeString(rating);
         dest.writeParcelable(thumbnail, flags);
         dest.writeString(pageCount);
-        dest.writeTypedList(images);
+        //dest.writeTypedList(images);
     }
 }
