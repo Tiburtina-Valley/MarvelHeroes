@@ -7,10 +7,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvUrlsEvent"
-        android:layout_width="390dp"
-        android:layout_height="293dp"
+        android:layout_width="392dp"
+        android:layout_height="331dp"
         android:layout_marginStart="@dimen/marginStartRv"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="@dimen/marginEndRv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -57,8 +56,6 @@
         android:id="@+id/tvEventLinks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
         android:text="@string/urls"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -114,26 +111,10 @@
         app:layout_constraintStart_toEndOf="@+id/tvStart"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:layout_width="408dp"
-        android:layout_height="75dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/tvEventLinks"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
-
     <TextView
         android:id="@+id/tvEventDescription"
-        android:layout_width="395dp"
-        android:layout_height="82dp"
+        android:layout_width="397dp"
+        android:layout_height="78dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="43dp"
         android:layout_marginEnd="8dp"
