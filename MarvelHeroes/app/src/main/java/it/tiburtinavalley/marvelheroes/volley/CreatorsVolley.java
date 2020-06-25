@@ -17,7 +17,7 @@ import java.util.List;
 import it.tiburtinavalley.marvelheroes.model.Creators;
 
 public abstract class CreatorsVolley implements Response.ErrorListener, Response.Listener<String>{
-    private String urlBase = "https://gateway.marvel.com/v1/public/comics/%d";
+    private String urlBase = "https://gateway.marvel.com/v1/public/comics/%s";
     private String apiKey = "ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea";
     private RequestQueue requestQueue;
 

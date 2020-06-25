@@ -84,7 +84,7 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.Holder> implem
         Holder(@NonNull View itemView) {
             super(itemView);
             tvHeroName = itemView.findViewById(R.id.tvHeroName);
-            ivHeroPic = itemView.findViewById(R.id.ivHeroPic);
+            ivHeroPic = itemView.findViewById(R.id.ivHeroPhoto);
         }
     }
 }
