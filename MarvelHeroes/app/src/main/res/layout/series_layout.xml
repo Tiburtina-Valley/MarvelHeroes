@@ -22,6 +22,7 @@
         android:layout_height="110dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:contentDescription="@string/hero"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
@@ -80,19 +81,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCharacters" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCharacters"
+        tools:itemCount="5"
+        tools:layoutManager="GridLayoutManager"
+        tools:listitem="@layout/recycler_view_item"
+        tools:spanCount="5" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvUrls"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/marginStartRv"
         android:layout_marginTop="@dimen/marginTopRv"
         android:layout_marginEnd="@dimen/marginEndRv"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvLinks" />
+        app:layout_constraintTop_toBottomOf="@id/tvLinks"
+        tools:itemCount="3" />
 
     <TextView
         android:id="@+id/tvCreators"
@@ -114,7 +120,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCreators" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCreators"
+        app:layout_constraintVertical_bias="0.0"
+        tools:itemCount="5"
+        tools:layoutManager="GridLayoutManager"
+        tools:listitem="@layout/recycler_view_item_1"
+        tools:spanCount="5" />
 
     <TextView
         android:id="@+id/tvEndYear"
@@ -122,7 +133,6 @@
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="13dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/ivStoriesmg"
@@ -134,7 +144,6 @@
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/ivStoriesmg"
         app:layout_constraintTop_toBottomOf="@+id/tvStoriesName" />
 
