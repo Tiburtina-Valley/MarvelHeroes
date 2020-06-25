@@ -38,7 +38,8 @@ public class SeriesActivity extends AppCompatActivity {
     class Holder {
         private ImageView ivSeriesImage;
         private TextView tvSeriesName;
-        private TextView tvPageCount;
+        private TextView tvStartYear;
+        private TextView tvEndYear;
         private TextView tvDescription;
         private RecyclerView rvCharacters;
         private RecyclerView rvUrls;
@@ -48,7 +49,8 @@ public class SeriesActivity extends AppCompatActivity {
         public Holder() {
             ivSeriesImage = findViewById(R.id.ivStoriesmg);
             tvSeriesName = findViewById(R.id.tvStoriesName);
-            tvPageCount = findViewById(R.id.tvPageCount);
+            tvStartYear = findViewById(R.id.tvStartYear);
+            tvEndYear = findViewById(R.id.tvEndYear);
             rvUrls = findViewById(R.id.rvUrls);
             tvDescription = findViewById(R.id.tvDescription);
             rvCharacters = findViewById(R.id.rvCharacters);
@@ -81,7 +83,9 @@ public class SeriesActivity extends AppCompatActivity {
                 Glide.with(getApplicationContext()).load(urlThumbnail).into(this.ivSeriesImage);
             }
             tvSeriesName.setText(series.getTitle());
-            tvPageCount.setText(series.getPageCount());
+            tvStartYear.setText(getString(R.string.series_start_date) + " " + series.getStartYear());
+            tvEndYear.setText(getString(R.string.series_end_date) + " " + series.getEndYear());
+
             if (series.getDescription() != null) {
                 tvDescription.setText(series.getDescription());
             }

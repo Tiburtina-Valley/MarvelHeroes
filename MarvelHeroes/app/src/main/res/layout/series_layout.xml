@@ -9,9 +9,9 @@
         android:id="@+id/tvCharacters"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Characters:"
+        android:layout_marginStart="@dimen/marginStartRv"
+        android:layout_marginTop="@dimen/marginTopRv"
+        android:text="@string/heroes"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
@@ -41,9 +41,9 @@
         android:id="@+id/tvDescr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:text="Description:"
+        android:layout_marginStart="@dimen/marginStartRv"
+        android:layout_marginTop="@dimen/marginTopRv"
+        android:text="@string/hero_detail_description"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvUrls" />
@@ -52,9 +52,9 @@
         android:id="@+id/tvDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="@dimen/marginStartRv"
+        android:layout_marginTop="@dimen/marginTopRv"
+        android:layout_marginEnd="@dimen/marginEndRv"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -70,17 +70,6 @@
         app:layout_constraintStart_toEndOf="@+id/ivStoriesmg"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvPageCount"
-        android:layout_width="212dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivStoriesmg"
-        app:layout_constraintStart_toEndOf="@+id/ivStoriesmg"
-        app:layout_constraintTop_toBottomOf="@+id/tvStoriesName" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCharacters"
         android:layout_width="0dp"
@@ -88,12 +77,10 @@
         android:layout_marginStart="@dimen/marginStartRv"
         android:layout_marginTop="@dimen/marginTopRv"
         android:layout_marginEnd="@dimen/marginEndRv"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCharacters"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCharacters" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvUrls"
@@ -106,4 +93,47 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvLinks" />
+
+    <TextView
+        android:id="@+id/tvCreators"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStartRv"
+        android:layout_marginTop="@dimen/marginTopRv"
+        android:text="@string/creators_comics"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvCharacters" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/marginStartRv"
+        android:layout_marginTop="@dimen/marginTopRv"
+        android:layout_marginEnd="@dimen/marginEndRv"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCreators" />
+
+    <TextView
+        android:id="@+id/tvEndYear"
+        android:layout_width="212dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="13dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/ivStoriesmg"
+        app:layout_constraintTop_toBottomOf="@+id/tvStartYear" />
+
+    <TextView
+        android:id="@+id/tvStartYear"
+        android:layout_width="212dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/ivStoriesmg"
+        app:layout_constraintTop_toBottomOf="@+id/tvStoriesName" />
 </androidx.constraintlayout.widget.ConstraintLayout>
