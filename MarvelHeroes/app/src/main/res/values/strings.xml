@@ -43,4 +43,5 @@
     <string name="created_comics">Comics drawn :</string>
     <string name="event_s_heroes">Event\'s heroes:</string>
     <string name="event_s_creators">Event\'s creators:</string>
+    <string name="noDescription">No description available</string>
 </resources>

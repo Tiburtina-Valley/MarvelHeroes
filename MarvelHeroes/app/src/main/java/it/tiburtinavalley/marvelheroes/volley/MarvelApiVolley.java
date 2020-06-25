@@ -26,7 +26,7 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
     StringRequest sr;
     private RequestQueue requestQueue;
     private String urlBase = "https://gateway.marvel.com/v1/public/%s";
-    private String apiKey = "ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea";
+    private String apiKey = "ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea&limit=100";
 
     public abstract void fillList(List<HeroModel> heroes);
 
@@ -49,6 +49,11 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
 
     public void getHeroesFromEvents(String eventId){
         String param = "events/"+eventId+"/characters?";
+        callApi(param);
+    }
+
+    public void getHeroesFromSeries(String seriesId){
+        String param = "series/"+seriesId+"/characters?";
         callApi(param);
     }
 
