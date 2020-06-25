@@ -12,7 +12,6 @@ public class Series extends Element {
     private String endYear;
     private String rating;
     private String type;
-    private String pageCount;
 
     protected Series(Parcel in) {
         items = in.createTypedArrayList(Items.CREATOR);
@@ -25,7 +24,6 @@ public class Series extends Element {
         endYear = in.readString();
         rating = in.readString();
         thumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
-        pageCount = in.readString();
     }
 
     public static final Creator<Series> CREATOR = new Creator<Series>() {
@@ -64,10 +62,6 @@ public class Series extends Element {
         return type;
     }
 
-    public String getPageCount() {
-        return pageCount;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -85,6 +79,5 @@ public class Series extends Element {
         dest.writeString(endYear);
         dest.writeString(rating);
         dest.writeParcelable(thumbnail, flags);
-        dest.writeString(pageCount);
     }
 }
