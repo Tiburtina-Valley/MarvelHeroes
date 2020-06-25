@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <activity android:name=".activity.CreatorsActivity" />
         <activity android:name=".activity.StoriesActivity" />
         <activity android:name=".activity.AboutActivity" />
         <activity android:name=".activity.EventsActivity" />

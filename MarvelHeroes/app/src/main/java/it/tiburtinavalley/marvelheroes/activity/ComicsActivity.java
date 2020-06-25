@@ -58,7 +58,7 @@ public class ComicsActivity extends AppCompatActivity {
             rvUrls = findViewById(R.id.rvUrls);
             rvHeroesComics = findViewById(R.id.rvHeroComics);
             rvEventsComics = findViewById(R.id.rvEventsComics);
-            rvCreatorsComics = findViewById(R.id.rvCreatorsComics);
+            rvCreatorsComics = findViewById(R.id.rvCreatorComics);
             final Context appContext = getApplicationContext();
 
             heroVolley = new MarvelApiVolley(appContext) {
@@ -80,7 +80,7 @@ public class ComicsActivity extends AppCompatActivity {
             creatorsVolley = new CreatorsVolley(getApplicationContext()) {
                 @Override
                 public void fillCreatorsInfo(List<Creators> creatorsList) {
-                    creatorsAdapter = new CreatorsAdapter(creatorsList);
+                    creatorsAdapter = new CreatorsAdapter(creatorsList, getApplicationContext());
                     rvCreatorsComics.setAdapter(creatorsAdapter);
                 }
             };

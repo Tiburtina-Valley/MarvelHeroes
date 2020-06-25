@@ -1,33 +1,46 @@
 package it.tiburtinavalley.marvelheroes.recyclerviewadapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
-
 import java.util.List;
 import it.tiburtinavalley.marvelheroes.R;
+import it.tiburtinavalley.marvelheroes.activity.ComicsActivity;
+import it.tiburtinavalley.marvelheroes.activity.CreatorsActivity;
 import it.tiburtinavalley.marvelheroes.model.Creators;
 import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 
 public class CreatorsAdapter extends RecyclerView.Adapter<CreatorsAdapter.CreatorsHolder> implements View.OnClickListener{
     private List<Creators> creators;
     private ImageApiVolley imgVolley;
+    private Context appContext;
 
-    public CreatorsAdapter(List<Creators> creatorsList){
+    public CreatorsAdapter(List<Creators> creatorsList, Context appContext){
         this.creators = creatorsList;
+        this.appContext = appContext;
     }
 
     @Override
     public void onClick(View v) {
-        //TODO Open creator description
+        RecyclerView rv = (RecyclerView) v.getParent();
+        //Fa si che la recyclerView sia clickabile solo dall'activity ComicsDetail
+        if(rv.getId() == R.id.rvCreatorComics) {
+            int position = rv.getChildAdapterPosition(v);
+            Creators creator = creators.get(position);
+
+            Intent i = new Intent(appContext, CreatorsActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.putExtra("creator", creator);
+            appContext.startActivity(i);
+        }
     }
 
     @NonNull

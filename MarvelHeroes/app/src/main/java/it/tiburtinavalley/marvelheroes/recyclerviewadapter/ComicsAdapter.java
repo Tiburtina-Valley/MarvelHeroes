@@ -59,13 +59,16 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsHold
 
     @Override
     public void onClick(View v) {
-        int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
-        Comics comic = comics.get(position);
+        RecyclerView rv = (RecyclerView) v.getParent();
+        if(rv.getId() == R.id.rvComics) {
+            int position = rv.getChildAdapterPosition(v);
+            Comics comic = comics.get(position);
 
-        Intent i = new Intent(appContext, ComicsActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.putExtra("comic", comic);
-        appContext.startActivity(i);
+            Intent i = new Intent(appContext, ComicsActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.putExtra("comic", comic);
+            appContext.startActivity(i);
+        }
     }
 
     class ComicsHolder extends RecyclerView.ViewHolder {
