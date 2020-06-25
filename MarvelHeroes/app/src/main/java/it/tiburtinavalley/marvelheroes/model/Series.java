@@ -16,6 +16,7 @@ public class Series extends Element {
 
     protected Series(Parcel in) {
         items = in.createTypedArrayList(Items.CREATOR);
+        urls = in.createTypedArrayList(Urls.CREATOR);
         id = in.readString();
         title = in.readString();
         type = in.readString();
@@ -75,6 +76,7 @@ public class Series extends Element {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(items);
+        dest.writeTypedList(urls);
         dest.writeString(id);
         dest.writeString(title);
         dest.writeString(type);

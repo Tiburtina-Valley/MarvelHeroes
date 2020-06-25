@@ -64,7 +64,7 @@ public class SeriesActivity extends AppCompatActivity {
         }
 
         private void setRecyclerViews(){
-            LinearLayoutManager layoutManagerUrls = new LinearLayoutManager(SeriesActivity.this);
+            LinearLayoutManager layoutManagerUrls = new LinearLayoutManager(SeriesActivity.this, RecyclerView.VERTICAL, false);
             rvUrls.setLayoutManager(layoutManagerUrls);
 
             LinearLayoutManager layoutManagerHeroes = new LinearLayoutManager(
