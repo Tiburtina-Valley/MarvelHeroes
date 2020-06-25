@@ -57,7 +57,6 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
         return series.size();
     }
 
-    //
     @Override
     public void onClick(View v) {
         int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
