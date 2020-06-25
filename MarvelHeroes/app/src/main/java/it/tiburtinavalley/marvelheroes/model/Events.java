@@ -5,19 +5,20 @@ package it.tiburtinavalley.marvelheroes.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class Events extends Element {
     private String title;
     private String start;
     private String end;
+    //private String description;
     //private List<Creators> creators;
     private List<Images> images;
     private String pageCount;
 
     protected Events(Parcel in) {
-        pageCount = in.readString();
-        images = in.createTypedArrayList(Images.CREATOR);
         id = in.readString();
         title = in.readString();
         description = in.readString();
@@ -55,8 +56,6 @@ public class Events extends Element {
         parcel.writeParcelable(thumbnail, i);
         parcel.writeTypedList(urls);
         //parcel.writeTypedList(creators);
-        parcel.writeString(pageCount);
-        parcel.writeTypedList(images);
 
     }
 
@@ -68,9 +67,7 @@ public class Events extends Element {
         return start;
     }
 
-    public String getEnd() {
-        return end;
-    }
+    public String getEnd() { return end; }
 
    // public List<Creators> getCreators() {
      //   return creators;
