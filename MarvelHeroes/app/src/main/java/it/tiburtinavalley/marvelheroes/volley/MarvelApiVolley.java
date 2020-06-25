@@ -47,6 +47,11 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
         callApi(param);
     }
 
+    public void getHeroesFromEvents(String eventId){
+        String param = "events/"+eventId+"/characters?";
+        callApi(param);
+    }
+
     private void callApi(String parameter) {
         String url = urlBase + apiKey;
         url = String.format(url, parameter);

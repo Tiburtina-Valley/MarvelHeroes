@@ -111,8 +111,8 @@ public class ComicsActivity extends AppCompatActivity {
             ImageApiVolley imgVolley = new ImageApiVolley(getApplicationContext());
             imgVolley.addHeroImg(ivComicImage);
             if (comic.getImages() != null || comic.getImages().size() > 0) {
-                String urlThumbnail = comic.getImages().get(0).getPath().replaceFirst("http", "https")
-                        + "." + comic.getImages().get(0).getExtension();
+                String urlThumbnail = comic.getThumbnail().getPath().replaceFirst("http", "https")
+                        + "." + comic.getThumbnail().getExtension();
                 Glide.with(getApplicationContext()).load(urlThumbnail).into(this.ivComicImage);
             }
             tvComicName.setText(comic.getTitle());
