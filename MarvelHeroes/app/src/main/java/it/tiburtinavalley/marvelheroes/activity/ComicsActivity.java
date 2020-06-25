@@ -8,14 +8,11 @@ import com.bumptech.glide.Glide;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
-
 import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.model.Events;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
-import it.tiburtinavalley.marvelheroes.model.Series;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.EventsAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.HeroAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.SeriesAdapter;
@@ -23,7 +20,7 @@ import it.tiburtinavalley.marvelheroes.recyclerviewadapter.UrlsRecyclerView;
 import it.tiburtinavalley.marvelheroes.volley.EventsVolley;
 import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 import it.tiburtinavalley.marvelheroes.volley.MarvelApiVolley;
-import it.tiburtinavalley.marvelheroes.volley.SeriesVolley;
+
 
 public class ComicsActivity extends AppCompatActivity {
     private Comics comic;

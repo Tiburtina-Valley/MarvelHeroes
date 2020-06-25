@@ -36,6 +36,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -47,6 +48,28 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="300dp">
+
+            <TextView
+                android:id="@+id/tvCreatorsComics"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/creators_comics"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvEventsComics" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/rvHeight"
+                android:layout_marginStart="@dimen/marginStartRv"
+                android:layout_marginTop="@dimen/marginTopRv"
+                android:layout_marginEnd="@dimen/marginEndRv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvCreatorsComics" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvEventsComics"
