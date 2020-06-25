@@ -27,8 +27,12 @@
     <string name="mail">tiburtinaMail.com</string>
     <string name="version">Version 1.0</string>
     <string name="events">Events</string>
-    <string name="heroes">Related heroes :</string>
+    <string name="event_end_date">event ends:</string>
+    <string name="event_title">Event title</string>
+    <string name="event_start_date">event starts:</string>
+    <string name="event_description">Description</string>
     <string name="series_comics">Related series :</string>
     <string name="events_comics">Related events :</string>
     <string name="creators_comics">Related creators :</string>
+    <string name="heroes">Related heroes :</string>
 </resources>
