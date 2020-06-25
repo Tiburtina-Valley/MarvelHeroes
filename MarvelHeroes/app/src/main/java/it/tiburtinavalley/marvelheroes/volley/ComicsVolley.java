@@ -20,7 +20,7 @@ import it.tiburtinavalley.marvelheroes.model.Comics;
    relative a Storie, Fumetti e Serie collegate agli eroi*/
 
 public abstract class ComicsVolley implements Response.ErrorListener, Response.Listener<String>{
-    private String urlBase = "https://gateway.marvel.com/v1/public/characters/%s";
+    private String urlBase = "https://gateway.marvel.com/v1/public/%s";
     private String apiKey = "ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea";
     private RequestQueue requestQueue;
 
@@ -31,8 +31,13 @@ public abstract class ComicsVolley implements Response.ErrorListener, Response.L
     }
 
     public void getComicsInfo(String heroId){
-        String comic = heroId + "/comics?";
+        String comic = "characters/"+ heroId + "/comics?";
         comicApiCall(comic);
+    }
+
+    public void getComicsByCreators(String creatorId){
+        String creator = "creators/" + creatorId + "/comics?";
+        comicApiCall(creator);
     }
 
     private void comicApiCall(String comicUrl){
