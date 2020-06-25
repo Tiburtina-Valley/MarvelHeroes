@@ -40,4 +40,7 @@
     <string name="heroes">Related heroes :</string>
     <string name="rating">Rating:</string>
     <string name="type">Type:</string>
+    <string name="created_comics">Comics drawn :</string>
+    <string name="event_s_heroes">Event\'s heroes:</string>
+    <string name="event_s_creators">Event\'s creators:</string>
 </resources>

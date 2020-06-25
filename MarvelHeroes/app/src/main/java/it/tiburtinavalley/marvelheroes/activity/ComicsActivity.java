@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.R;
+import it.tiburtinavalley.marvelheroes.model.Creators;
 import it.tiburtinavalley.marvelheroes.model.Events;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
+import it.tiburtinavalley.marvelheroes.recyclerviewadapter.CreatorsAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.EventsAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.HeroAdapter;
-import it.tiburtinavalley.marvelheroes.recyclerviewadapter.SeriesAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.UrlsRecyclerView;
+import it.tiburtinavalley.marvelheroes.volley.CreatorsVolley;
 import it.tiburtinavalley.marvelheroes.volley.EventsVolley;
 import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 import it.tiburtinavalley.marvelheroes.volley.MarvelApiVolley;
@@ -41,11 +43,13 @@ public class ComicsActivity extends AppCompatActivity {
         private RecyclerView rvUrls;
         private RecyclerView rvHeroesComics;
         private RecyclerView rvEventsComics;
+        private RecyclerView rvCreatorsComics;
         private HeroAdapter heroAdapter;
-        private SeriesAdapter seriesAdapter;
         private EventsAdapter eventsAdapter;
+        private CreatorsAdapter creatorsAdapter;
         private MarvelApiVolley heroVolley;
         private EventsVolley eventsVolley;
+        private CreatorsVolley creatorsVolley;
 
         public Holder() {
             ivComicImage = findViewById(R.id.ivStoriesmg);
@@ -54,6 +58,7 @@ public class ComicsActivity extends AppCompatActivity {
             rvUrls = findViewById(R.id.rvUrls);
             rvHeroesComics = findViewById(R.id.rvHeroComics);
             rvEventsComics = findViewById(R.id.rvEventsComics);
+            rvCreatorsComics = findViewById(R.id.rvCreatorComics);
             final Context appContext = getApplicationContext();
 
             heroVolley = new MarvelApiVolley(appContext) {
@@ -69,6 +74,14 @@ public class ComicsActivity extends AppCompatActivity {
                 public void fillEvents(List<Events> eventsList) {
                     eventsAdapter = new EventsAdapter(eventsList, appContext);
                     rvEventsComics.setAdapter(eventsAdapter);
+                }
+            };
+
+            creatorsVolley = new CreatorsVolley(getApplicationContext()) {
+                @Override
+                public void fillCreatorsInfo(List<Creators> creatorsList) {
+                    creatorsAdapter = new CreatorsAdapter(creatorsList, getApplicationContext());
+                    rvCreatorsComics.setAdapter(creatorsAdapter);
                 }
             };
 
@@ -88,14 +101,18 @@ public class ComicsActivity extends AppCompatActivity {
             LinearLayoutManager layoutManagerEvents = new LinearLayoutManager(
                     ComicsActivity.this, RecyclerView.HORIZONTAL, false);
             rvEventsComics.setLayoutManager(layoutManagerEvents);
+
+            LinearLayoutManager layoutManagerCreators = new LinearLayoutManager(
+                    ComicsActivity.this, RecyclerView.HORIZONTAL, false);
+            rvCreatorsComics.setLayoutManager(layoutManagerCreators);
         }
 
         private void setData() {
             ImageApiVolley imgVolley = new ImageApiVolley(getApplicationContext());
             imgVolley.addHeroImg(ivComicImage);
             if (comic.getImages() != null || comic.getImages().size() > 0) {
-                String urlThumbnail = comic.getImages().get(0).getPath().replaceFirst("http", "https")
-                        + "." + comic.getImages().get(0).getExtension();
+                String urlThumbnail = comic.getThumbnail().getPath().replaceFirst("http", "https")
+                        + "." + comic.getThumbnail().getExtension();
                 Glide.with(getApplicationContext()).load(urlThumbnail).into(this.ivComicImage);
             }
             tvComicName.setText(comic.getTitle());
@@ -107,6 +124,7 @@ public class ComicsActivity extends AppCompatActivity {
             String id = comic.getId();
             heroVolley.getHeroesFromComics(id);
             eventsVolley.getEventsFromComics(id);
+            creatorsVolley.getCreatorsByComics(id);
         }
     }
 }

@@ -61,7 +61,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/rvEventsComics" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+                android:id="@+id/rvCreatorComics"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/rvHeight"
                 android:layout_marginStart="@dimen/marginStartRv"

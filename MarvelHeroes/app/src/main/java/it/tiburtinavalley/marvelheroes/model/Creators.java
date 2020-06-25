@@ -16,6 +16,7 @@ public class Creators extends BasicElement {
         id = in.readString();
         fullName = in.readString();
         thumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
+        urls = in.readArrayList(Urls.class.getClassLoader());
     }
 
     @Override
@@ -24,6 +25,7 @@ public class Creators extends BasicElement {
         dest.writeString(id);
         dest.writeString(fullName);
         dest.writeParcelable(thumbnail, flags);
+        dest.writeTypedList(urls);
     }
 
     @Override

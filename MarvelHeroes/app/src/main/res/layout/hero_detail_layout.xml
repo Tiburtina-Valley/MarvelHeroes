@@ -89,28 +89,32 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tvHeroDescription"
-                android:layout_width="@dimen/rvWidth"
-                android:layout_height="@dimen/rvHeight"
-                android:layout_marginStart="@dimen/marginStartRv"
-                android:layout_marginTop="@dimen/marginTopRv"
-                android:layout_marginEnd="@dimen/marginEndRv"
-                android:textSize="12sp"
+            <ScrollView
+                android:id="@+id/scrollView4"
+                android:layout_width="404dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.428"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/textView">
+
+                <TextView
+                    android:id="@+id/tvHeroDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:textSize="12sp" />
+            </ScrollView>
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/rvTitleStart"
-                android:layout_marginTop="@dimen/rvTitleTop"
+                android:layout_marginTop="16dp"
                 android:text="@string/comics"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvHeroDescription" />
+                app:layout_constraintTop_toBottomOf="@+id/scrollView4" />
 
             <TextView
                 android:id="@+id/textView3"
