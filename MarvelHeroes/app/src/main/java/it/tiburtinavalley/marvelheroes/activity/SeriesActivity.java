@@ -31,6 +31,7 @@ public class SeriesActivity extends AppCompatActivity {
         setContentView(R.layout.series_layout);
         series = getIntent().getParcelableExtra("series");
         Holder holder = new Holder();
+        holder.setRecyclerViews();
         holder.setData();
     }
 
@@ -50,7 +51,7 @@ public class SeriesActivity extends AppCompatActivity {
             tvPageCount = findViewById(R.id.tvPageCount);
             rvUrls = findViewById(R.id.rvUrls);
             tvDescription = findViewById(R.id.tvDescription);
-            rvCharacters = findViewById(R.id.rvUrls);
+            rvCharacters = findViewById(R.id.rvCharacters);
             final Context appContext = getApplicationContext();
 
             heroVolley = new MarvelApiVolley(appContext) {
@@ -63,12 +64,12 @@ public class SeriesActivity extends AppCompatActivity {
         }
 
         private void setRecyclerViews(){
+            LinearLayoutManager layoutManagerUrls = new LinearLayoutManager(SeriesActivity.this);
+            rvUrls.setLayoutManager(layoutManagerUrls);
+
             LinearLayoutManager layoutManagerHeroes = new LinearLayoutManager(
                     SeriesActivity.this, RecyclerView.HORIZONTAL, false);
             rvCharacters.setLayoutManager(layoutManagerHeroes);
-
-            RecyclerView.LayoutManager layoutManagerUrls = new LinearLayoutManager(SeriesActivity.this);
-            rvUrls.setLayoutManager(layoutManagerUrls);
         }
 
         private void setData() {
@@ -84,12 +85,11 @@ public class SeriesActivity extends AppCompatActivity {
             if (series.getDescription() != null) {
                 tvDescription.setText(series.getDescription());
             }
+            urlsAdapter = new UrlsRecyclerView(series.getUrls());
+            rvUrls.setAdapter(urlsAdapter);
 
             String id = series.getId();
             heroVolley.getHeroesFromComics(id);
-            setRecyclerViews();
-            /*urlsAdapter = new UrlsRecyclerView(series.getUrls());
-            rvUrls.setAdapter(urlsAdapter);*/
         }
     }
 }
