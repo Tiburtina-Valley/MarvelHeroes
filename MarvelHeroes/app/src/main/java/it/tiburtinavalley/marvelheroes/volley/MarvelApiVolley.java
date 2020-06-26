@@ -5,6 +5,8 @@ package it.tiburtinavalley.marvelheroes.volley;
 import android.content.Context;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -19,19 +21,22 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.tiburtinavalley.marvelheroes.activity.MainActivity;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
 
 public abstract class MarvelApiVolley implements Response.ErrorListener, Response.Listener<String> {
     List<ImageView> heroesImg;
     StringRequest sr;
     private RequestQueue requestQueue;
+    private Context context;
     private String urlBase = "https://gateway.marvel.com/v1/public/%s";
     private String apiKey = "ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea";
 
     public abstract void fillList(List<HeroModel> heroes);
 
     public MarvelApiVolley(Context context) {
-        requestQueue = Volley.newRequestQueue(context);
+        this.context = context;
+        requestQueue = Volley.newRequestQueue(this.context);
         heroesImg = new ArrayList<>();
     }
 
@@ -64,6 +69,7 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
 
     @Override
     public void onErrorResponse(VolleyError error) {
+        showToast("No results has to been showed");
         Log.w("QueryFail", error.getMessage());
     }
 
@@ -86,5 +92,11 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public void showToast(CharSequence text) {
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(this.context, text, duration);
+        toast.show();
     }
 }
