@@ -119,6 +119,11 @@ public class SeriesActivity extends AppCompatActivity {
                 }
             };
 
+            String id = series.getId();
+            heroVolley.getHeroesFromSeries(id);
+            creatorsVolley.getCreatorsBySeries(id);
+            comicsVolley.getComicsBySeries(id);
+            eventsVolley.getEventsBySeries(id);
         }
 
         private void setRecyclerViews(){
@@ -141,7 +146,6 @@ public class SeriesActivity extends AppCompatActivity {
             LinearLayoutManager layoutManagerEvents = new LinearLayoutManager(
                     SeriesActivity.this, RecyclerView.HORIZONTAL, false);
             rvEvents.setLayoutManager(layoutManagerEvents);
-
         }
 
         private void setData() {
@@ -152,6 +156,7 @@ public class SeriesActivity extends AppCompatActivity {
                         + "." + series.getThumbnail().getExtension();
                 Glide.with(getApplicationContext()).load(urlThumbnail).into(this.ivSeriesImage);
             }
+
             tvSeriesName.setText(series.getTitle());
             tvStartYear.setText(getString(R.string.series_start_date) + " " + series.getStartYear());
             tvEndYear.setText(getString(R.string.series_end_date) + " " + series.getEndYear());
@@ -168,12 +173,6 @@ public class SeriesActivity extends AppCompatActivity {
             }
             urlsAdapter = new UrlsRecyclerView(series.getUrls());
             rvUrls.setAdapter(urlsAdapter);
-
-            String id = series.getId();
-            heroVolley.getHeroesFromSeries(id);
-            creatorsVolley.getCreatorsBySeries(id);
-            comicsVolley.getComicsBySeries(id);
-            eventsVolley.getEventsBySeries(id);
         }
     }
 }

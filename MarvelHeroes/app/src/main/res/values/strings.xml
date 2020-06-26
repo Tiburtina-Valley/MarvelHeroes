@@ -37,6 +37,7 @@
     <string name="series_comics">Related series :</string>
     <string name="events_comics">Related events :</string>
     <string name="creators_comics">Related creators :</string>
+    <string name="related_comics">Related comics :</string>
     <string name="heroes">Related heroes :</string>
     <string name="rating">Rating:</string>
     <string name="type">Type:</string>
