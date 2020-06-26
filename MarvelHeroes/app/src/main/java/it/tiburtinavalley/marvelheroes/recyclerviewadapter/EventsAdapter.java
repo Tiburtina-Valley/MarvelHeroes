@@ -55,7 +55,6 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
                 + "." + events.get(position).getThumbnail().getExtension();
         Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivEvent);
         holder.tvEventName.setText(events.get(position).getTitle());
-
     }
 
 
