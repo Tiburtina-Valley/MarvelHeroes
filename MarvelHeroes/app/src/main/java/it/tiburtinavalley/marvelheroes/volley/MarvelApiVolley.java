@@ -69,7 +69,6 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        showToast("No results has to been showed");
         Log.w("QueryFail", error.getMessage());
     }
 
@@ -88,6 +87,9 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
                 //db.cocktailDAO().insertAll(cnt);    // NON OBBLIGATORIO
                 fillList(heroesList);
                 System.out.println(heroesList.get(0).getComics());
+            }
+            else {
+                showToast("No results has to been showed");
             }
         } catch (JSONException e) {
             e.printStackTrace();
