@@ -91,7 +91,6 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
                 Log.w("CA", "" + heroesList.size());
                 //db.cocktailDAO().insertAll(cnt);    // NON OBBLIGATORIO
                 fillList(heroesList);
-                System.out.println(heroesList.get(0).getComics());
             }
             else {
                 showToast("No results has to been showed");
