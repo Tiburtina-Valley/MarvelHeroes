@@ -7,5 +7,4 @@
     <dimen name="rvHeight">60dp</dimen>
     <dimen name="rvTitleStart">8dp</dimen>
     <dimen name="rvTitleTop">14dp</dimen>
-    <dimen name="rvComics">80dp</dimen>
 </resources>

@@ -21,7 +21,7 @@ import it.tiburtinavalley.marvelheroes.model.Events;
 
 public abstract class EventsVolley implements Response.ErrorListener, Response.Listener<String>{
     private String urlBase = "https://gateway.marvel.com/v1/public/%s";
-    private String apiKey = "ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea";
+    private String apiKey = "ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea&limit=100";
     private RequestQueue requestQueue;
 
     public abstract void fillEvents(List<Events> eventsList);
@@ -39,12 +39,6 @@ public abstract class EventsVolley implements Response.ErrorListener, Response.L
         String param = "comics/"+comicId+"/events?";
         eventsApiCall(param);
     }
-
-    public void getEventsBySeries(String seriesId){
-        String param = "series/"+seriesId+"/events?";
-        eventsApiCall(param);
-    }
-
 
     private void eventsApiCall(String eventUrl){
         String url = urlBase + apiKey; // usiamo una stringa di appoggio così da poter ripetere la chiamata

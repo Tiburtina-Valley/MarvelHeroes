@@ -40,9 +40,9 @@ public abstract class ComicsVolley implements Response.ErrorListener, Response.L
         comicApiCall(creator);
     }
 
-    public void getComicsBySeries(String seriesId){
-        String creator = "series/" + seriesId + "/comics?";
-        comicApiCall(creator);
+    public void getComicsByEvent(String eventId){
+        String comics = "events/" + eventId + "/comics?";
+        comicApiCall(comics);
     }
 
     private void comicApiCall(String comicUrl){
