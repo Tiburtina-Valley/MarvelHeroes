@@ -5,45 +5,91 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvPageCount"
-        android:layout_width="212dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/ivStoriesmg"
+    <ScrollView
+        android:id="@+id/scrollView7"
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivStoriesmg"
-        app:layout_constraintTop_toBottomOf="@+id/tvStoriesName" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvUpcCode">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvDescription"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/tvUpcCode"
+                android:layout_width="0dp"
+                android:layout_height="23dp"
+                android:layout_marginTop="@dimen/tvMarginTopComics"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPageCount" />
+
+            <TextView
+                android:id="@+id/tvStoriesName"
+                android:layout_width="212dp"
+                android:layout_height="43dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvPageCount"
+                android:layout_width="212dp"
+                android:layout_height="23dp"
+                android:layout_marginTop="@dimen/tvMarginTopComics"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvStoriesName" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
     <ImageView
         android:id="@+id/ivStoriesmg"
-        android:layout_width="110dp"
-        android:layout_height="110dp"
+        android:layout_width="150dp"
+        android:layout_height="225dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-    <TextView
-        android:id="@+id/tvStoriesName"
-        android:layout_width="212dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toEndOf="@+id/ivStoriesmg"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ScrollView
         android:id="@+id/scrollView3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivStoriesmg">
+        app:layout_constraintTop_toBottomOf="@+id/ivStoriesmg"
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout"
@@ -55,11 +101,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/tvMarginTop"
                 android:text="@string/creators_comics"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rvEventsComics" />
+                app:layout_constraintTop_toBottomOf="@+id/rvHeroComics" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCreatorComics"
@@ -71,28 +117,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvCreatorsComics" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvEventsComics"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/rvComics"
-                android:layout_marginStart="@dimen/marginStartRv"
-                android:layout_marginTop="@dimen/marginTopRv"
-                android:layout_marginEnd="@dimen/marginEndRv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvComicsSeries2" />
-
-            <TextView
-                android:id="@+id/tvComicsSeries2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/events_comics"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rvHeroComics" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvHeroComics"
@@ -111,7 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/tvMarginTop"
                 android:text="@string/heroes"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -121,8 +145,11 @@
                 android:id="@+id/rvUrls"
                 android:layout_width="384dp"
                 android:layout_height="@dimen/rvComics"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="@dimen/marginStartRv"
+                android:layout_marginTop="@dimen/marginTopRv"
+                android:layout_marginEnd="@dimen/marginEndRv"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.272"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvLinks" />
 
@@ -131,6 +158,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
                 android:text="@string/urls"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
