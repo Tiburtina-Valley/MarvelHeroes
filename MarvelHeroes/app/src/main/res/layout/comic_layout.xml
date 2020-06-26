@@ -37,11 +37,9 @@
 
     <ScrollView
         android:id="@+id/scrollView3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivStoriesmg">
@@ -49,7 +47,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="320dp">
+            android:layout_height="300dp">
 
             <TextView
                 android:id="@+id/tvCreatorsComics"
@@ -65,7 +63,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCreatorComics"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/rvComics"
+                android:layout_height="@dimen/rvHeight"
                 android:layout_marginStart="@dimen/marginStartRv"
                 android:layout_marginTop="@dimen/marginTopRv"
                 android:layout_marginEnd="@dimen/marginEndRv"
@@ -76,7 +74,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvEventsComics"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/rvComics"
+                android:layout_height="@dimen/rvHeight"
                 android:layout_marginStart="@dimen/marginStartRv"
                 android:layout_marginTop="@dimen/marginTopRv"
                 android:layout_marginEnd="@dimen/marginEndRv"
@@ -98,7 +96,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvHeroComics"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/rvComics"
+                android:layout_height="@dimen/rvHeight"
                 android:layout_marginStart="@dimen/marginStartRv"
                 android:layout_marginTop="@dimen/marginTopRv"
                 android:layout_marginEnd="@dimen/marginEndRv"
@@ -121,7 +119,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvUrls"
                 android:layout_width="384dp"
-                android:layout_height="@dimen/rvComics"
+                android:layout_height="@dimen/rvHeight"
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

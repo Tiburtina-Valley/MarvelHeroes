@@ -3,24 +3,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:layout_height="match_parent">
 
     <ScrollView
-        android:layout_width="399dp"
-        android:layout_height="398dp"
+        android:layout_width="483dp"
+        android:layout_height="557dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView5">
+        app:layout_constraintTop_toBottomOf="@+id/scrollView5"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvEventSeries"
+                android:layout_width="403dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.464"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="368dp"
+                android:text="Event's series"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvEventComics" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvEventComics"
+                android:layout_width="412dp"
+                android:layout_height="14dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.525"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvUrlsEvent"
-                android:layout_width="389dp"
-                android:layout_height="138dp"
+                android:layout_width="474dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -32,21 +69,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="28dp"
                 android:layout_marginEnd="8dp"
                 android:text="Links"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.042"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rvEventCreators" />
+                app:layout_constraintTop_toBottomOf="@+id/rvEventSeries" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvEventCreators"
-                android:layout_width="380dp"
-                android:layout_height="60dp"
+                android:layout_width="429dp"
+                android:layout_height="19dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.444"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
@@ -65,13 +104,13 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvEventHeroes"
-                android:layout_width="380dp"
-                android:layout_height="60dp"
+                android:layout_width="448dp"
+                android:layout_height="17dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.14"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -87,6 +126,19 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="329dp"
+                android:text="Event's comics"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvEventCreators" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

@@ -127,9 +127,4 @@ public class ComicsActivity extends AppCompatActivity {
             creatorsVolley.getCreatorsByComics(id);
         }
     }
-
-    @Override
-    public void onBackPressed() {
-        finish();
-    }
 }

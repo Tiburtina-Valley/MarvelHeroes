@@ -14,16 +14,22 @@ import com.google.gson.internal.$Gson$Preconditions;
 
 import java.util.List;
 
+import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.model.Creators;
 import it.tiburtinavalley.marvelheroes.model.Events;
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
+import it.tiburtinavalley.marvelheroes.model.Series;
+import it.tiburtinavalley.marvelheroes.recyclerviewadapter.ComicsAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.CreatorsAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.HeroAdapter;
+import it.tiburtinavalley.marvelheroes.recyclerviewadapter.SeriesAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.UrlsRecyclerView;
+import it.tiburtinavalley.marvelheroes.volley.ComicsVolley;
 import it.tiburtinavalley.marvelheroes.volley.CreatorsVolley;
 import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 import it.tiburtinavalley.marvelheroes.volley.MarvelApiVolley;
+import it.tiburtinavalley.marvelheroes.volley.SeriesVolley;
 
 public class EventsActivity extends AppCompatActivity {
     private Events event;
@@ -47,9 +53,15 @@ public class EventsActivity extends AppCompatActivity {
         private RecyclerView rvUrls;
         private RecyclerView rvCreators;
         private RecyclerView rvHeroes;
+        private RecyclerView rvComics;
+        private RecyclerView rvSeries;
         private MarvelApiVolley heroVolley;
         private CreatorsVolley creatorsVolley;
+        private ComicsVolley comicsVolley;
+        private SeriesVolley seriesVolley;
         private HeroAdapter heroAdapter;
+        private ComicsAdapter comicsAdapter;
+        private SeriesAdapter seriesAdapter;
         private CreatorsAdapter creatorsAdapter;
         private UrlsRecyclerView urlsAdapter;
 
@@ -63,6 +75,9 @@ public class EventsActivity extends AppCompatActivity {
             rvUrls = findViewById(R.id.rvUrlsEvent);
             rvCreators=findViewById(R.id.rvEventCreators);
             rvHeroes=findViewById(R.id.rvEventHeroes);
+            rvComics=findViewById(R.id.rvEventComics);
+            rvSeries=findViewById(R.id.rvEventSeries);
+
             setRecyclerViews();
 
             heroVolley = new MarvelApiVolley(getApplicationContext()) {
@@ -81,6 +96,23 @@ public class EventsActivity extends AppCompatActivity {
                 }
             };
 
+            comicsVolley = new ComicsVolley(getApplicationContext()) {
+                @Override
+                public void fillComics(List<Comics> comicsList) {
+                    comicsAdapter = new ComicsAdapter(comicsList, getApplicationContext());
+                    rvComics.setAdapter(comicsAdapter);
+                }};
+
+            seriesVolley=new SeriesVolley(getApplicationContext()) {
+                @Override
+                public void fillSeries(List<Series> seriesList) {
+                    seriesAdapter=new SeriesAdapter(seriesList,getApplicationContext());
+                    rvSeries.setAdapter(seriesAdapter);
+                }
+            };
+
+
+
             setData();
         }
     private void setRecyclerViews(){
@@ -95,7 +127,17 @@ public class EventsActivity extends AppCompatActivity {
         LinearLayoutManager layoutManagerCreators = new LinearLayoutManager(
                 EventsActivity.this, RecyclerView.HORIZONTAL, false);
         rvCreators.setLayoutManager(layoutManagerCreators);
+
+        LinearLayoutManager layoutManagerComics = new LinearLayoutManager(
+                EventsActivity.this, RecyclerView.HORIZONTAL, false);
+        rvComics.setLayoutManager(layoutManagerComics);
+
+        LinearLayoutManager layoutManagerSeries = new LinearLayoutManager(
+                EventsActivity.this, RecyclerView.HORIZONTAL, false);
+        rvSeries.setLayoutManager(layoutManagerSeries);
     }
+
+
 
         private void setData() {
 
@@ -103,7 +145,13 @@ public class EventsActivity extends AppCompatActivity {
              tvEventName.setText(event.getTitle());
              startDate.setText(event.getStart());
              endDate.setText(event.getEnd());
-             description.setText(event.getDescription());
+            if (event.getDescription() != null) {
+                description.setText(event.getDescription());
+            }
+            else {
+                description.setText(R.string.noDescription);
+            }
+
 
              ImageApiVolley imgVolley;
              imgVolley = new ImageApiVolley(getApplicationContext());
@@ -118,6 +166,9 @@ public class EventsActivity extends AppCompatActivity {
             Log.w("1",id);
              heroVolley.getHeroesFromEvents(id);
              creatorsVolley.getCreatorsByEvents(id);
+             seriesVolley.getSeriesByEvent(id);
+             comicsVolley.getComicsByEvent(id);
+
 
             urlsAdapter = new UrlsRecyclerView(event.getUrls());
             rvUrls.setAdapter(urlsAdapter);
