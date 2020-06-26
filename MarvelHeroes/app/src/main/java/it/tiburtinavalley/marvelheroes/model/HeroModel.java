@@ -3,15 +3,15 @@ package it.tiburtinavalley.marvelheroes.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /* Model che raccoglie tutte le informazioni relative al singolo eroe */
 
 public class HeroModel extends Element {
     private String name;
     private String resourceURI;
-    private Comics comics;
-    private Series series;
-    private Stories stories;
-
+    private List<Comics> comicsList; //utile per salvataggio su db
 
     protected HeroModel(Parcel in) {
         id = in.readString();
@@ -19,9 +19,6 @@ public class HeroModel extends Element {
         description = in.readString();
         resourceURI = in.readString();
         thumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
-        comics = in.readParcelable(Comics.class.getClassLoader());
-        stories = in.readParcelable(Stories.class.getClassLoader());
-        series = in.readParcelable(Series.class.getClassLoader());
         urls = in.createTypedArrayList(Urls.CREATOR);
     }
 
@@ -41,18 +38,6 @@ public class HeroModel extends Element {
         return this.name;
     }
 
-    public Comics getComics() {
-        return comics;
-    }
-
-    public Series getSeries() {
-        return series;
-    }
-
-    public Stories getStories() {
-        return stories;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -65,9 +50,6 @@ public class HeroModel extends Element {
         dest.writeString(description);
         dest.writeString(resourceURI);
         dest.writeParcelable(thumbnail, flags);
-        dest.writeParcelable(comics, flags);
-        dest.writeParcelable(stories, flags);
-        dest.writeParcelable(series, flags);
         dest.writeTypedList(urls);
     }
 }
