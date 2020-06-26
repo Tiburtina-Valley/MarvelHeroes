@@ -40,6 +40,11 @@ public abstract class EventsVolley implements Response.ErrorListener, Response.L
         eventsApiCall(param);
     }
 
+    public void getEventsBySeries(String seriesId){
+        String param = "series/"+seriesId+"/events?";
+        eventsApiCall(param);
+    }
+
     private void eventsApiCall(String eventUrl){
         String url = urlBase + apiKey; // usiamo una stringa di appoggio così da poter ripetere la chiamata
         url = String.format(url, eventUrl);

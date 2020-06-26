@@ -45,6 +45,11 @@ public abstract class ComicsVolley implements Response.ErrorListener, Response.L
         comicApiCall(comics);
     }
 
+    public void getComicsBySeries(String seriesId) {
+        String comics = "series/" + seriesId + "/comics?";
+        comicApiCall(comics);
+    }
+
     private void comicApiCall(String comicUrl){
         String url = urlBase + apiKey; // usiamo una stringa di appoggio così da poter ripetere la chiamata
         url = String.format(url, comicUrl);
