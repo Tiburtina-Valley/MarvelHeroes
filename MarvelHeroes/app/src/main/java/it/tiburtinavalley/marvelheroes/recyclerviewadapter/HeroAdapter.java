@@ -66,17 +66,13 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.Holder> implem
 
     @Override
     public void onClick(View v) {
-        RecyclerView rv = (RecyclerView) v.getParent();
-        // Fa si che non sia possibile clickare un elemento in un'altra Activity al di fuori della HeroDetailActivtiy
-        if(rv.getId() == R.id.rvHeroes) {
-            int position = rv.getChildAdapterPosition(v);
-            HeroModel hero = heroes.get(position);
-            Intent i = new Intent(appContext, HeroDetailActivity.class);
+        int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
+        HeroModel hero = heroes.get(position);
+        Intent i = new Intent(appContext, HeroDetailActivity.class);
 
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            i.putExtra("hero", hero);
-            appContext.startActivity(i);
-        }
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.putExtra("hero", hero);
+        appContext.startActivity(i);
     }
 
     class Holder extends RecyclerView.ViewHolder {
