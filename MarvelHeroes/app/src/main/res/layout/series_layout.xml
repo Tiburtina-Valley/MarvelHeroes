@@ -73,7 +73,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvDescr" />
 
             <TextView
-                android:id="@+id/tvStoriesName"
+                android:id="@+id/tvCreatorName"
                 android:layout_width="212dp"
                 android:layout_height="33dp"
                 android:layout_marginStart="16dp"
@@ -156,7 +156,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintStart_toEndOf="@+id/ivStoriesmg"
-                app:layout_constraintTop_toBottomOf="@+id/tvStoriesName" />
+                app:layout_constraintTop_toBottomOf="@+id/tvCreatorName" />
 
             <TextView
                 android:id="@+id/tvType"

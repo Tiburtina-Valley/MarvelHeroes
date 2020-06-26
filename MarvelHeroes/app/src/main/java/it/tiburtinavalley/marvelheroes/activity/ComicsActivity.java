@@ -53,7 +53,7 @@ public class ComicsActivity extends AppCompatActivity {
 
         public Holder() {
             ivComicImage = findViewById(R.id.ivStoriesmg);
-            tvComicName = findViewById(R.id.tvStoriesName);
+            tvComicName = findViewById(R.id.tvCreatorName);
             tvPageCount = findViewById(R.id.tvPageCount);
             rvUrls = findViewById(R.id.rvUrls);
             rvHeroesComics = findViewById(R.id.rvHeroComics);

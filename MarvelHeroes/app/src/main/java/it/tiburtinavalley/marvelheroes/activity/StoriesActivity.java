@@ -36,7 +36,7 @@ public class StoriesActivity extends AppCompatActivity {
 
         public Holder() {
             ivStoryImage = findViewById(R.id.ivStoriesmg);
-            tvStoryName = findViewById(R.id.tvStoriesName);
+            tvStoryName = findViewById(R.id.tvCreatorName);
             tvPageCount = findViewById(R.id.tvPageCount);
             rvUrls = findViewById(R.id.rvUrls);
             setData();

@@ -74,8 +74,8 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsHold
 
         ComicsHolder(@NonNull View itemView) {
             super(itemView);
-            ivComic = itemView.findViewById(R.id.ivComic);
-            tvComicName = itemView.findViewById(R.id.tvStoriesName);
+            ivComic = itemView.findViewById(R.id.ivCreator);
+            tvComicName = itemView.findViewById(R.id.tvCreatorName);
         }
     }
 }

@@ -23,6 +23,7 @@ import it.tiburtinavalley.marvelheroes.recyclerviewadapter.ComicsAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.CreatorsAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.EventsAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.HeroAdapter;
+import it.tiburtinavalley.marvelheroes.recyclerviewadapter.HeroDetailAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.UrlsRecyclerView;
 import it.tiburtinavalley.marvelheroes.volley.ComicsVolley;
 import it.tiburtinavalley.marvelheroes.volley.CreatorsVolley;
@@ -54,7 +55,7 @@ public class SeriesActivity extends AppCompatActivity {
         private TextView tvRating;
         private RecyclerView rvCharacters;
         private RecyclerView rvUrls;
-        private HeroAdapter heroAdapter;
+        private HeroDetailAdapter heroAdapter;
         private MarvelApiVolley heroVolley;
         private RecyclerView rvCreators;
         private CreatorsVolley creatorsVolley;
@@ -70,7 +71,7 @@ public class SeriesActivity extends AppCompatActivity {
 
         public Holder() {
             ivSeriesImage = findViewById(R.id.ivStoriesmg);
-            tvSeriesName = findViewById(R.id.tvStoriesName);
+            tvSeriesName = findViewById(R.id.tvCreatorName);
             tvStartYear = findViewById(R.id.tvStartYear);
             tvEndYear = findViewById(R.id.tvEndYear);
             rvUrls = findViewById(R.id.rvUrls);
@@ -89,7 +90,7 @@ public class SeriesActivity extends AppCompatActivity {
             heroVolley = new MarvelApiVolley(appContext) {
                 @Override
                 public void fillList(List<HeroModel> heroes) {
-                    heroAdapter = new HeroAdapter(heroes, appContext);
+                    heroAdapter = new HeroDetailAdapter(heroes, appContext);
                     rvCharacters.setAdapter(heroAdapter);
                 }
             };
