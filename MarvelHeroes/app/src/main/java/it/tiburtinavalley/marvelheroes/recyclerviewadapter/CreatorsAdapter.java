@@ -30,17 +30,13 @@ public class CreatorsAdapter extends RecyclerView.Adapter<CreatorsAdapter.Creato
 
     @Override
     public void onClick(View v) {
-        RecyclerView rv = (RecyclerView) v.getParent();
-        //Fa si che la recyclerView sia clickabile solo dall'activity ComicsDetail
-        if(rv.getId() == R.id.rvCreatorComics) {
-            int position = rv.getChildAdapterPosition(v);
-            Creators creator = creators.get(position);
+        int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
+        Creators creator = creators.get(position);
 
-            Intent i = new Intent(appContext, CreatorsActivity.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            i.putExtra("creator", creator);
-            appContext.startActivity(i);
-        }
+        Intent i = new Intent(appContext, CreatorsActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.putExtra("creator", creator);
+        appContext.startActivity(i);
     }
 
     @NonNull
