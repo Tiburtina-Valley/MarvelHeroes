@@ -78,4 +78,8 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsHold
             tvComicName = itemView.findViewById(R.id.tvCreatorName);
         }
     }
+
+    public void addComic(Comics comics){
+        this.comics.add(comics);
+    }
 }

@@ -4,7 +4,10 @@
     <dimen name="marginTopRv">8dp</dimen>
     <dimen name="marginEndRv">8dp</dimen>
     <dimen name="rvWidth">326dp</dimen>
-    <dimen name="rvHeight">60dp</dimen>
+    <dimen name="rvHeight">105dp</dimen>
     <dimen name="rvTitleStart">8dp</dimen>
     <dimen name="rvTitleTop">14dp</dimen>
+    <dimen name="rvComics">100dp</dimen>
+    <dimen name="tvMarginTop">16dp</dimen>
+    <dimen name="tvMarginTopComics">6dp</dimen>
 </resources>

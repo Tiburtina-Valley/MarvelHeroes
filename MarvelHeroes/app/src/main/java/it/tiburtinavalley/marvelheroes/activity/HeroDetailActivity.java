@@ -125,13 +125,12 @@ public class HeroDetailActivity extends AppCompatActivity{
         public void setDetails(HeroModel hero) {
             this.tvHeroName.setText(hero.getName());
             this.tvHeroId.setText(hero.getId());
-            if (hero.getDescription() != null) {
-                tvHeroDescription.setText(hero.getDescription());
+            if(hero.getDescription() != null && !hero.getDescription().equalsIgnoreCase("")) {
+                this.tvHeroDescription.setText(hero.getDescription());
             }
-            else {
+            else{
                 tvHeroDescription.setText(R.string.noDescription);
             }
-
             imgVolley.addHeroImg(this.ivHeroPhoto);
             imgVolley.getImageFromUrl(hero.getThumbnail().getPath().replaceFirst("http", "https")
                     + "." + hero.getThumbnail().getExtension());

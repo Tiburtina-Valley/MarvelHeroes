@@ -22,7 +22,7 @@ import it.tiburtinavalley.marvelheroes.model.Series;
 
 public abstract class SeriesVolley implements Response.ErrorListener, Response.Listener<String>{
     private String urlBase = "https://gateway.marvel.com/v1/public/%s";
-    private String apiKey = "ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea";
+    private String apiKey = "ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea&limit=100";
     private RequestQueue requestQueue;
 
     public abstract void fillSeries(List<Series> seriesList);
@@ -59,7 +59,7 @@ public abstract class SeriesVolley implements Response.ErrorListener, Response.L
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        Log.w("QueryFail", error.getMessage());
+        Log.w("QueryFail", error.getCause());
     }
 
     @Override

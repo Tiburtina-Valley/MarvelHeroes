@@ -44,4 +44,7 @@
     <string name="event_s_heroes">Event\'s heroes:</string>
     <string name="event_s_creators">Event\'s creators:</string>
     <string name="noDescription">No description available</string>
+    <string name="comics_series">Related comics :</string>
+    <string name="noPageCount">No page count available</string>
+    <string name="noUPC">No Upc code available</string>
 </resources>

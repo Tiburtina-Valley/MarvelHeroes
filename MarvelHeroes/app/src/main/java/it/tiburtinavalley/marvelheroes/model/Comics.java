@@ -7,20 +7,18 @@ import java.util.List;
 /* Model per mantenere i dati relativi ai fumetti legati agli eroi */
 
 public class Comics extends Element {
-    private List<Items> items;
+    private List<Items> variants; //oder comics related to the main one
     private List<Images> images;
     private String title;
     private String upc;
     private String diamondCode;
     private String isbn;
     private String pageCount;
-    //private List<Creators> creators;
 
     protected Comics(Parcel in) {
-        items = in.createTypedArrayList(Items.CREATOR);
+        variants = in.createTypedArrayList(Items.CREATOR);
         urls = in.createTypedArrayList(Urls.CREATOR);
         images = in.createTypedArrayList(Images.CREATOR);
-        //creators = in.createTypedArrayList(Creators.CREATOR);
         id = in.readString();
         title = in.readString();
         description = in.readString();
@@ -33,10 +31,9 @@ public class Comics extends Element {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeTypedList(items);
+        dest.writeTypedList(variants);
         dest.writeTypedList(urls);
         dest.writeTypedList(images);
-        //dest.writeTypedList(creators);
         dest.writeString(id);
         dest.writeString(title);
         dest.writeString(description);
@@ -65,7 +62,7 @@ public class Comics extends Element {
     };
 
     public List<Items> getItems() {
-        return items;
+        return variants;
     }
 
     public String getTitle() {
@@ -92,7 +89,4 @@ public class Comics extends Element {
         return pageCount;
     }
 
-    /*public List<Creators> getCreators() {
-        return creators;
-    }*/
 }
