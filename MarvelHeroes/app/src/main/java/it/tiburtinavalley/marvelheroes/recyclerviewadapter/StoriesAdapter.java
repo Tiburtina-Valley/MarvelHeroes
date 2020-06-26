@@ -80,8 +80,8 @@ public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.StoriesH
 
         StoriesHolder(@NonNull View itemView) {
             super(itemView);
-            ivStories = itemView.findViewById(R.id.ivComic);
-            tvStoriesName = itemView.findViewById(R.id.tvStoriesName);
+            ivStories = itemView.findViewById(R.id.ivCreator);
+            tvStoriesName = itemView.findViewById(R.id.tvCreatorName);
         }
     }
 }

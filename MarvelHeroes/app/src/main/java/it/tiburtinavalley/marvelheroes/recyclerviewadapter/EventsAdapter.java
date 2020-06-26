@@ -2,7 +2,6 @@ package it.tiburtinavalley.marvelheroes.recyclerviewadapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,8 +80,8 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
 
         EventsHolder(@NonNull View itemView) {
             super(itemView);
-            ivEvent = itemView.findViewById(R.id.ivComic);
-            tvEventName = itemView.findViewById(R.id.tvStoriesName);
+            ivEvent = itemView.findViewById(R.id.ivCreator);
+            tvEventName = itemView.findViewById(R.id.tvCreatorName);
         }
     }
 }

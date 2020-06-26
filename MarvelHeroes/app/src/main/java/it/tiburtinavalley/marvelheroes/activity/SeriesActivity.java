@@ -13,14 +13,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.model.Creators;
+import it.tiburtinavalley.marvelheroes.model.Events;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
 import it.tiburtinavalley.marvelheroes.model.Series;
 import it.tiburtinavalley.marvelheroes.R;
+import it.tiburtinavalley.marvelheroes.recyclerviewadapter.ComicsAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.CreatorsAdapter;
+import it.tiburtinavalley.marvelheroes.recyclerviewadapter.EventsAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.HeroAdapter;
+import it.tiburtinavalley.marvelheroes.recyclerviewadapter.HeroDetailAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.UrlsRecyclerView;
+import it.tiburtinavalley.marvelheroes.volley.ComicsVolley;
 import it.tiburtinavalley.marvelheroes.volley.CreatorsVolley;
+import it.tiburtinavalley.marvelheroes.volley.EventsVolley;
 import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 import it.tiburtinavalley.marvelheroes.volley.MarvelApiVolley;
 
@@ -48,15 +55,23 @@ public class SeriesActivity extends AppCompatActivity {
         private TextView tvRating;
         private RecyclerView rvCharacters;
         private RecyclerView rvUrls;
-        private HeroAdapter heroAdapter;
+        private HeroDetailAdapter heroAdapter;
         private MarvelApiVolley heroVolley;
         private RecyclerView rvCreators;
         private CreatorsVolley creatorsVolley;
         private CreatorsAdapter creatorsAdapter;
+        private ComicsVolley comicsVolley;
+        private ComicsAdapter comicsAdapter;
+        private EventsVolley eventsVolley;
+        private EventsAdapter eventsAdapter;
+        private TextView tvComics;
+        private RecyclerView rvComics;
+        private TextView tvEvents;
+        private RecyclerView rvEvents;
 
         public Holder() {
             ivSeriesImage = findViewById(R.id.ivStoriesmg);
-            tvSeriesName = findViewById(R.id.tvStoriesName);
+            tvSeriesName = findViewById(R.id.tvCreatorName);
             tvStartYear = findViewById(R.id.tvStartYear);
             tvEndYear = findViewById(R.id.tvEndYear);
             rvUrls = findViewById(R.id.rvUrls);
@@ -65,12 +80,17 @@ public class SeriesActivity extends AppCompatActivity {
             tvType = findViewById(R.id.tvType);
             tvRating = findViewById(R.id.tvRating);
             rvCreators = findViewById(R.id.rvCreators);
+            tvComics = findViewById(R.id.tvComics);
+            rvComics = findViewById(R.id.rvComics);
+            tvEvents = findViewById(R.id.tvEvents);
+            rvEvents = findViewById(R.id.rvEvents);
+
             final Context appContext = getApplicationContext();
 
             heroVolley = new MarvelApiVolley(appContext) {
                 @Override
                 public void fillList(List<HeroModel> heroes) {
-                    heroAdapter = new HeroAdapter(heroes, appContext);
+                    heroAdapter = new HeroDetailAdapter(heroes, appContext);
                     rvCharacters.setAdapter(heroAdapter);
                 }
             };
@@ -82,6 +102,23 @@ public class SeriesActivity extends AppCompatActivity {
                     rvCreators.setAdapter(creatorsAdapter);
                 }
             };
+
+            eventsVolley = new EventsVolley(getApplicationContext()) {
+                @Override
+                public void fillEvents(List<Events> eventsList) {
+                    eventsAdapter = new EventsAdapter(eventsList, getApplicationContext());
+                    rvEvents.setAdapter(eventsAdapter);
+                }
+            };
+
+            comicsVolley = new ComicsVolley(getApplicationContext()) {
+                @Override
+                public void fillComics(List<Comics> comicsList) {
+                    comicsAdapter = new ComicsAdapter(comicsList, getApplicationContext());
+                    rvComics.setAdapter(comicsAdapter);
+                }
+            };
+
         }
 
         private void setRecyclerViews(){
@@ -96,6 +133,14 @@ public class SeriesActivity extends AppCompatActivity {
             LinearLayoutManager layoutManagerCreators = new LinearLayoutManager(
                     SeriesActivity.this, RecyclerView.HORIZONTAL, false);
             rvCreators.setLayoutManager(layoutManagerCreators);
+
+            LinearLayoutManager layoutManagerComics = new LinearLayoutManager(
+                    SeriesActivity.this, RecyclerView.HORIZONTAL, false);
+            rvComics.setLayoutManager(layoutManagerComics);
+
+            LinearLayoutManager layoutManagerEvents = new LinearLayoutManager(
+                    SeriesActivity.this, RecyclerView.HORIZONTAL, false);
+            rvEvents.setLayoutManager(layoutManagerEvents);
 
         }
 
@@ -127,6 +172,8 @@ public class SeriesActivity extends AppCompatActivity {
             String id = series.getId();
             heroVolley.getHeroesFromSeries(id);
             creatorsVolley.getCreatorsBySeries(id);
+            comicsVolley.getComicsBySeries(id);
+            eventsVolley.getEventsBySeries(id);
         }
     }
 }

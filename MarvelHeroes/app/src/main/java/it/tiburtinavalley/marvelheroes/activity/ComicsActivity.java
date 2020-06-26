@@ -48,7 +48,7 @@ public class ComicsActivity extends AppCompatActivity {
 
         public Holder() {
             ivComicImage = findViewById(R.id.ivStoriesmg);
-            tvComicName = findViewById(R.id.tvStoriesName);
+            tvComicName = findViewById(R.id.tvCreatorName);
             tvPageCount = findViewById(R.id.tvPageCount);
             tvUpcCode = findViewById(R.id.tvUpcCode);
             rvUrls = findViewById(R.id.rvUrls);
@@ -126,10 +126,5 @@ public class ComicsActivity extends AppCompatActivity {
             heroVolley.getHeroesFromComics(id);
             creatorsVolley.getCreatorsByComics(id);
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        finish();
     }
 }

@@ -50,6 +50,7 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
                     + "." + series.get(position).getThumbnail().getExtension();
             Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivSeries);
         }
+        holder.tvSeriesName.setText(series.get(position).getTitle());
     }
 
     @Override
@@ -78,8 +79,8 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
 
         SeriesHolder(@NonNull View itemView) {
             super(itemView);
-            ivSeries = itemView.findViewById(R.id.ivComic);
-            tvSeriesName = itemView.findViewById(R.id.tvStoriesName);
+            ivSeries = itemView.findViewById(R.id.ivCreator);
+            tvSeriesName = itemView.findViewById(R.id.tvCreatorName);
         }
     }
 }
