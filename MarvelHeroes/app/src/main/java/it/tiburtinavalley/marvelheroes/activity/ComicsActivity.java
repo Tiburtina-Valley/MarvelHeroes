@@ -15,6 +15,7 @@ import it.tiburtinavalley.marvelheroes.model.Creators;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.CreatorsAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.HeroAdapter;
+import it.tiburtinavalley.marvelheroes.recyclerviewadapter.HeroDetailAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.UrlsRecyclerView;
 import it.tiburtinavalley.marvelheroes.volley.CreatorsVolley;
 import it.tiburtinavalley.marvelheroes.volley.MarvelApiVolley;
@@ -41,7 +42,7 @@ public class ComicsActivity extends AppCompatActivity {
         private RecyclerView rvUrls;
         private RecyclerView rvHeroesComics;
         private RecyclerView rvCreatorsComics;
-        private HeroAdapter heroAdapter;
+        private HeroDetailAdapter heroDetAdapter;
         private CreatorsAdapter creatorsAdapter;
         private MarvelApiVolley heroVolley;
         private CreatorsVolley creatorsVolley;
@@ -60,8 +61,8 @@ public class ComicsActivity extends AppCompatActivity {
             heroVolley = new MarvelApiVolley(appContext) {
                 @Override
                 public void fillList(List<HeroModel> heroes) {
-                    heroAdapter = new HeroAdapter(heroes, appContext);
-                    rvHeroesComics.setAdapter(heroAdapter);
+                    heroDetAdapter = new HeroDetailAdapter(heroes, appContext);
+                    rvHeroesComics.setAdapter(heroDetAdapter);
                 }
             };
 
