@@ -73,7 +73,7 @@ public abstract class CreatorsVolley implements Response.ErrorListener, Response
             Type listType = new TypeToken<List<Creators>>() {
             }.getType();
             List<Creators> creatorsList = gson.fromJson(creators, listType);
-            if (creatorsList != null && creatorsList.size() > 0) {
+            if (creatorsList != null) {
                 Log.w("CA", "" + creatorsList.size());
                 //db.cocktailDAO().insertAll(cnt);    // NON OBBLIGATORIO
                 fillCreatorsInfo(creatorsList);

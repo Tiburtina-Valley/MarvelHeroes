@@ -75,7 +75,7 @@ public abstract class ComicsVolley implements Response.ErrorListener, Response.L
             Type listType = new TypeToken<List<Comics>>() {
             }.getType();
             List<Comics> comicsList = gson.fromJson(comics, listType);
-            if (comicsList != null && comicsList.size() > 0) {
+            if (comicsList != null) {
                 Log.w("CA", "" + comicsList.size());
                 //db.cocktailDAO().insertAll(cnt);    // NON OBBLIGATORIO
                 fillComics(comicsList);
