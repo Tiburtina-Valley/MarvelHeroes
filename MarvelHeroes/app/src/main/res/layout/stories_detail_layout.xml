@@ -28,6 +28,7 @@
 
     <TextView
         android:id="@+id/tvComics"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/tvMarginTop"
         android:text="@string/related_comics"
