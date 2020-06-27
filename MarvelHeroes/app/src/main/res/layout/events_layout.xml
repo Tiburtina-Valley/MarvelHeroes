@@ -159,7 +159,7 @@
 
                     <TextView
                         android:id="@+id/ivHeroes"
-                        android:layout_width="102dp"
+                        android:layout_width="130dp"
                         android:layout_height="27dp"
                         android:layout_marginStart="@dimen/marginStartRv"
                         android:layout_marginTop="@dimen/tvMarginTop"
