@@ -87,23 +87,24 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
             Type listType = new TypeToken<List<HeroModel>>() {
             }.getType();
             List<HeroModel> heroesList = gson.fromJson(heroes, listType);
-            if (heroesList != null && heroesList.size() > 0) {
-                Log.w("CA", "" + heroesList.size());
-                //db.cocktailDAO().insertAll(cnt);    // NON OBBLIGATORIO
+            if (heroesList != null) { //controlla che la lista non sia null per evitare NullPointerException
+                if (heroesList.size() > 0) { //se la lista non è vuota, Log per vedere quant eroi effettivamente sono stati trovati
+                    Log.w("CA", "" + heroesList.size());
+                    //db.cocktailDAO().insertAll(cnt);    // NON OBBLIGATORIO
+                }
+                else {
+                    //showToast("No results has to been showed");
+                }
                 fillList(heroesList);
-
-            }
-            else {
-                showToast("No results has to been showed");
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public void showToast(CharSequence text) {
+    /*public void showToast(CharSequence text) {
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(this.context, text, duration);
         toast.show();
-    }
+    }*/
 }
