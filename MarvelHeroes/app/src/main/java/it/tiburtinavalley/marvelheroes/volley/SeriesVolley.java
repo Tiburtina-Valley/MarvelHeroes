@@ -31,7 +31,7 @@ public abstract class SeriesVolley implements Response.ErrorListener, Response.L
         requestQueue = Volley.newRequestQueue(context);
     }
 
-    public void getStoriesInfo(String heroId){
+    public void getSeriesInfo(String heroId){
         String serie = "characters/" + heroId + "/series?";
         seriesApiCall(serie);
     }
@@ -40,6 +40,12 @@ public abstract class SeriesVolley implements Response.ErrorListener, Response.L
     public void getSeriesByStories(String storyId){
         String param = "stories/"+storyId+"/series?";
         seriesApiCall(param);
+    }
+
+    //metodo per cercare le stories filtrando mediante l'id di un creator
+    public void getSeriesByCreator(String creatorId){
+        String creator = "creators/"+ creatorId+ "/series?";
+        seriesApiCall(creator);
     }
 
     public void getSeriesByEvent(String eventId){

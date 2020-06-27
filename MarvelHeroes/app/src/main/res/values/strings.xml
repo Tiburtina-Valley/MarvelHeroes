@@ -51,4 +51,5 @@
     <string name="event_links">Links</string>
     <string name="event_s_comics">Event\'s comics</string>
     <string name="event_s_heroes">Event\'s heroes</string>
+    <string name="related_series">Related series :</string>
 </resources>
