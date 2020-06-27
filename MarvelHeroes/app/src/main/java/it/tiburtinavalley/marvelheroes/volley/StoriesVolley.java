@@ -31,14 +31,14 @@ public abstract class StoriesVolley implements Response.ErrorListener, Response.
 
     public void getStoriesInfo(String heroId){
         String story = heroId + "/stories?";
-
+        storiesApiCall(story);
     }
 
     private void storiesApiCall(String storyUrl){
         String url = urlBase + apiKey;
-        url = String.format(urlBase, storyUrl);
+        url = String.format(url, storyUrl);
         StringRequest sr = new StringRequest(Request.Method.GET,
-                urlBase,
+                url,
                 this,
                 this);
         requestQueue.add(sr);

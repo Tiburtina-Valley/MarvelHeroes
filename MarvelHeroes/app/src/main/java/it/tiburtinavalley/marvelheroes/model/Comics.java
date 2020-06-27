@@ -9,7 +9,6 @@ import java.util.List;
 public class Comics extends Element {
     private List<Items> variants; //other comics related to the main one
     private List<Images> images;
-    private String title;
     private String upc;
     private String diamondCode;
     private String isbn;
@@ -63,10 +62,6 @@ public class Comics extends Element {
 
     public List<Items> getItems() {
         return variants;
-    }
-
-    public String getTitle() {
-        return title;
     }
 
     public List<Images> getImages() {

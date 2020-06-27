@@ -52,7 +52,7 @@ public class StoriesActivity extends AppCompatActivity {
         private void setData() {
 
             tvStoryTitle.setText(story.getTitle());
-            tvType.setText(story.getType());
+            tvType.setText("Type of story : "+story.getType());
             LinearLayoutManager layoutManagerComics = new LinearLayoutManager(StoriesActivity.this);
             rvComics.setLayoutManager(layoutManagerComics);
 

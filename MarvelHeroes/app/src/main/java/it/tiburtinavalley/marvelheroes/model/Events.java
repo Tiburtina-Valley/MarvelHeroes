@@ -14,7 +14,6 @@ import java.util.List;
 
 
 public class Events extends Element {
-    private String title;
     private String start;
     private String end;
 

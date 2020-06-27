@@ -7,7 +7,6 @@ import java.util.List;
 
 public class Series extends Element {
     private List<Items> items;
-    private String title;
     private String startYear;
     private String endYear;
     private String rating;
@@ -40,10 +39,6 @@ public class Series extends Element {
 
     public List<Items> getItems() {
         return items;
-    }
-
-    public String getTitle() {
-        return title;
     }
 
     public String getStartYear() {
