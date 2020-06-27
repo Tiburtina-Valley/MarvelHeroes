@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
-        setFragment(new FavouritesFragment());
+        setFragment(new HomeFragment());
 
     }
 
@@ -41,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
             switch(item.getItemId()) {
+                case R.id.action_home:
+                    setFragment(new HomeFragment());
+                    return true;
+
                 case R.id.action_favourites:
                     setFragment(new FavouritesFragment());
                     return true;
@@ -48,9 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.action_search:
                     setFragment(new SearchFragment());
                     return true;
-                case R.id.action_home:
-                    setFragment(new HomeFragment());
-                    return true;
+
 
             }
             return true;
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
         fragmentTransaction.replace(R.id.fragment_container,fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
