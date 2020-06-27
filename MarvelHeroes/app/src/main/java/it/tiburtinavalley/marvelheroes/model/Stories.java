@@ -2,20 +2,18 @@ package it.tiburtinavalley.marvelheroes.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import java.util.List;
 
-//TODO : Capire a che cazzo servono ste storie
-public class Stories extends Element implements Parcelable {
-    List<Items> items;
-    private List<Images> images;
-    private String pageCount;
+//Storie collegate ad un fumetto e ad una serie
+public class Stories implements Parcelable {
+    private String id;
+    private String type;
+    private String title;
 
     protected Stories(Parcel in) {
-
-        items = in.createTypedArrayList(Items.CREATOR);
-
-    pageCount = in.readString();
-    images = in.createTypedArrayList(Images.CREATOR);}
+        id = in.readString();
+        title = in.readString();
+        type = in.readString();
+    }
 
     public static final Creator<Stories> CREATOR = new Creator<Stories>() {
         @Override
@@ -29,9 +27,6 @@ public class Stories extends Element implements Parcelable {
         }
     };
 
-    public List<Items> getItems() {
-        return items;
-    }
 
     @Override
     public int describeContents() {
@@ -40,21 +35,20 @@ public class Stories extends Element implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeTypedList(items);
-    }
-
-    public Thumbnail getThumbnail() {
-        return null;
+        parcel.writeString(id);
+        parcel.writeString(title);
+        parcel.writeString(type);
     }
 
     public String getTitle() {
-        return null;
-    }
-    public List<Images> getImages() {
-        return images;
+        return title;
     }
 
-    public String getPageCount() {
-        return pageCount;
+    public String getType() {
+        return type;
+    }
+
+    public String getId() {
+        return id;
     }
 }

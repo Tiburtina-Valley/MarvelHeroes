@@ -116,7 +116,7 @@
             </ScrollView>
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/tvComicsHeroes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -167,7 +167,7 @@
                 android:layout_marginEnd="@dimen/marginEndRv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4">
+                app:layout_constraintTop_toBottomOf="@+id/tvComicsHeroes">
 
             </androidx.recyclerview.widget.RecyclerView>
 

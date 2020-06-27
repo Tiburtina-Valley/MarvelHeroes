@@ -93,6 +93,14 @@ public class HeroDetailActivity extends AppCompatActivity{
 
                 @Override
                 public void fillComics(List<Comics> comicsList) {
+                    //controlla se sono stati trovati dei fumetti legati agli eroi
+                    if(comicsList.isEmpty()){
+                        TextView tvComics = findViewById(R.id.tvComicsHeroes); // prende la TextView da oscurare
+                        tvComics.setTextSize(0);
+
+                        ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvComics.getLayoutParams();
+                        marginParams.setMargins(0, 0, 0, 0); // setta i margini per non lasciare spazi in più
+                    }
                     cAdapter = new ComicsAdapter(comicsList, getApplicationContext());
                     rvComics.setAdapter(cAdapter);
 
@@ -118,7 +126,6 @@ public class HeroDetailActivity extends AppCompatActivity{
                 public void fillStories(List<Stories> storiesList) {
                     stAdapter = new StoriesAdapter(storiesList, getApplicationContext());
                     rvStories.setAdapter(stAdapter);
-
                 }
             };
         }
@@ -138,7 +145,7 @@ public class HeroDetailActivity extends AppCompatActivity{
                     + "." + hero.getThumbnail().getExtension());
             // TODO: fill comics, series and stories
             cVolley.getComicsInfo(hm.getId());
-            seVolley.getStoriesInfo(hm.getId());
+            seVolley.getSeriesInfo(hm.getId());
             stVolley.getStoriesInfo(hm.getId());
             eVolley.getEventInfo(hm.getId());
         }
