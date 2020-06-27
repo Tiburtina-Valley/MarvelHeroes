@@ -48,4 +48,7 @@
     <string name="comics_series">Related comics :</string>
     <string name="noPageCount">No page count available</string>
     <string name="noUPC">No Upc code available</string>
+    <string name="event_s_series">Event\'s series</string>
+    <string name="event_links">Links</string>
+    <string name="event_s_comics">Event\'s comics</string>
 </resources>

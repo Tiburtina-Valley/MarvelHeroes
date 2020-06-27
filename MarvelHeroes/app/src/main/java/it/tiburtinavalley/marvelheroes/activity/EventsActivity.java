@@ -2,6 +2,8 @@ package it.tiburtinavalley.marvelheroes.activity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,7 +46,8 @@ public class EventsActivity extends AppCompatActivity {
         event = getIntent().getParcelableExtra("event");
          Holder holder = new Holder();
     }
-//start,and,title,description,urls,thumbnail,creators
+
+
     class Holder {
         private ImageView ivEventImage;
         private TextView tvEventName;
@@ -65,6 +68,10 @@ public class EventsActivity extends AppCompatActivity {
         private SeriesAdapter seriesAdapter;
         private CreatorsAdapter creatorsAdapter;
         private UrlsRecyclerView urlsAdapter;
+        private TextView tvSeries;
+        private TextView tvCreators;
+        private TextView tvComics;
+        private TextView tvHeroes;
 
 
         public Holder() {
@@ -78,14 +85,25 @@ public class EventsActivity extends AppCompatActivity {
             rvHeroes=findViewById(R.id.rvEventHeroes);
             rvComics=findViewById(R.id.rvEventComics);
             rvSeries=findViewById(R.id.rvEventSeries);
+            tvSeries=findViewById(R.id.tvSeries);
+            tvCreators=findViewById(R.id.tvCreators);
+            tvComics=findViewById(R.id.tvComics);
+            tvHeroes=findViewById(R.id.tvHeroes);
 
             setRecyclerViews();
+
 
             heroVolley = new MarvelApiVolley(getApplicationContext()) {
                 @Override
                 public void fillList(List<HeroModel> heroes) {
                     heroAdapter = new HeroDetailAdapter(heroes, getApplicationContext());
                     rvHeroes.setAdapter(heroAdapter);
+                    if (heroAdapter.getItemCount() == 0) {
+                        tvHeroes.setTextSize(0);
+                        rvHeroes.setVisibility(View.INVISIBLE);
+                        ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvHeroes.getLayoutParams();
+                        marginParams.setMargins(0, 0, 0, 0);
+                    }
                 }
             };
 
@@ -94,6 +112,12 @@ public class EventsActivity extends AppCompatActivity {
                 public void fillCreatorsInfo(List<Creators> creatorsList) {
                     creatorsAdapter = new CreatorsAdapter(creatorsList, getApplicationContext());
                     rvCreators.setAdapter(creatorsAdapter);
+                    if (creatorsAdapter.getItemCount() == 0) {
+                        tvCreators.setTextSize(0);
+                        rvCreators.setVisibility(View.INVISIBLE);
+                        ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvCreators.getLayoutParams();
+                        marginParams.setMargins(0, 0, 0, 0);
+                    }
                 }
             };
 
@@ -102,6 +126,12 @@ public class EventsActivity extends AppCompatActivity {
                 public void fillComics(List<Comics> comicsList) {
                     comicsAdapter = new ComicsAdapter(comicsList, getApplicationContext());
                     rvComics.setAdapter(comicsAdapter);
+                    if (comicsAdapter.getItemCount() == 0) {
+                        tvComics.setTextSize(0);
+                        rvComics.setVisibility(View.INVISIBLE);
+                        ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvComics.getLayoutParams();
+                        marginParams.setMargins(0, 0, 0, 0);
+                    }
                 }};
 
             seriesVolley=new SeriesVolley(getApplicationContext()) {
@@ -109,13 +139,20 @@ public class EventsActivity extends AppCompatActivity {
                 public void fillSeries(List<Series> seriesList) {
                     seriesAdapter=new SeriesAdapter(seriesList,getApplicationContext());
                     rvSeries.setAdapter(seriesAdapter);
+                    if (seriesAdapter.getItemCount() == 0) {
+                        tvSeries.setTextSize(0);
+                        rvSeries.setVisibility(View.INVISIBLE);
+                        ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvSeries.getLayoutParams();
+                        marginParams.setMargins(0, 0, 0, 0);
+                    }
                 }
             };
 
-
-
             setData();
         }
+
+
+
     private void setRecyclerViews(){
         LinearLayoutManager layoutManagerHeroes = new LinearLayoutManager(
                 EventsActivity.this, RecyclerView.HORIZONTAL, false);
@@ -153,26 +190,18 @@ public class EventsActivity extends AppCompatActivity {
                 description.setText(R.string.noDescription);
             }
 
-
-             ImageApiVolley imgVolley;
-             imgVolley = new ImageApiVolley(getApplicationContext());
-             imgVolley.addHeroImg(ivEventImage);
-
             String urlThumbnail = event.getThumbnail().getPath().replaceFirst("http", "https")
                     + "." + event.getThumbnail().getExtension();
-            Log.w("1",urlThumbnail);
             Glide.with(getApplicationContext()).load(urlThumbnail).into(ivEventImage);
 
-            String id = event.getId();
-            Log.w("1",id);
+             String id = event.getId();
              heroVolley.getHeroesFromEvents(id);
              creatorsVolley.getCreatorsByEvents(id);
              seriesVolley.getSeriesByEvent(id);
              comicsVolley.getComicsByEvent(id);
 
-
-            urlsAdapter = new UrlsRecyclerView(event.getUrls());
-            rvUrls.setAdapter(urlsAdapter);
+             urlsAdapter = new UrlsRecyclerView(event.getUrls());
+             rvUrls.setAdapter(urlsAdapter);
 
             }
 

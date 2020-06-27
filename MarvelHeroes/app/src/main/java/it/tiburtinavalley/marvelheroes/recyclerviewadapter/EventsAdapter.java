@@ -24,9 +24,8 @@ import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHolder> implements View.OnClickListener {
     private List<Events> events;
-    private Context appContext; //servirà per poter lanciare con successo la nuova activity nella onClick
+    private Context appContext;
     private ImageApiVolley imgVolley;
-
 
 
     public EventsAdapter(List<Events> all, Context appContext) {
