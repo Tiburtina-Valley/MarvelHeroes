@@ -21,21 +21,20 @@ import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.EventsActivity;
 import it.tiburtinavalley.marvelheroes.model.Events;
 import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
+//Definisco l'adapter che gestirà le recycler view degli eventi
 
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHolder> implements View.OnClickListener {
     private List<Events> events;
-    private Context appContext; //servirà per poter lanciare con successo la nuova activity nella onClick
-    private ImageApiVolley imgVolley;
-
+    private Context appContext;
 
 
     public EventsAdapter(List<Events> all, Context appContext) {
         events = new ArrayList<>();
         events.addAll(all);
         this.appContext = appContext;
-        imgVolley = new ImageApiVolley(appContext);
     }
 
+    //Funzione che crea le righe della recycler view
     @NonNull
     @Override
     public EventsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -47,22 +46,24 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
         return new EventsHolder(cl);
     }
 
-
+    //Funzione che popola le righe della recycler view
     @Override
     public void onBindViewHolder(@NonNull EventsAdapter.EventsHolder holder, int position) {
-        imgVolley.addHeroImg(holder.ivEvent);
         String urlThumbnail = events.get(position).getThumbnail().getPath().replaceFirst("http", "https")
                 + "." + events.get(position).getThumbnail().getExtension();
         Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivEvent);
         holder.tvEventName.setText(events.get(position).getTitle());
     }
 
-
+    //Funzione che restituisce la dimensione della lista degli eventi
     @Override
     public int getItemCount() {
         return events.size();
     }
 
+
+
+    //Funzione che gestisce il click su un determinato evento nella recycler view,facendo partire correttamente l'activity di dettaglio
     @Override
     public void onClick(View v) {
         int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
@@ -73,6 +74,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
         appContext.startActivity(i);
     }
 
+    //Holder che definisce come sono fatte le singole righe della recycler view(collegando lo specifico layout)
     class EventsHolder extends RecyclerView.ViewHolder {
         final ImageView ivEvent;
         final TextView tvEventName;

@@ -1,6 +1,5 @@
 package it.tiburtinavalley.marvelheroes.model;
 
-/* Model che mantiene le informazioni relative ad un evento per un particolare eroe */
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -9,15 +8,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+/*Definisco una classe evento,che ha come attributi un titolo,una data d'inizio/fine,una descrizione,
+  un id,un immagine thumbnails,e una lista di urls(questi ultimi attributi presenti nelle classi
+  element e basic element che i nostri eventi estendono)*/
+
+
 public class Events extends Element {
     private String title;
     private String start;
     private String end;
-    //private String description;
-    //private List<Creators> creators;
-    private List<Images> images;
-    private String pageCount;
 
+    //Definisco le operazioni necessarie per rendere l'elemento parcelable
     protected Events(Parcel in) {
         id = in.readString();
         title = in.readString();
@@ -26,9 +27,21 @@ public class Events extends Element {
         end = in.readString();
         thumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
         urls = in.createTypedArrayList(Urls.CREATOR);
-        //creators = in.createTypedArrayList(Creators.CREATOR);
     }
 
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(title);
+        parcel.writeString(description);
+        parcel.writeString(start);
+        parcel.writeString(end);
+        parcel.writeParcelable(thumbnail, i);
+        parcel.writeTypedList(urls);
+    }
+
+
+    //
     public static final Creator<Events> CREATOR = new Creator<Events>() {
         @Override
         public Events createFromParcel(Parcel in) {
@@ -46,18 +59,8 @@ public class Events extends Element {
         return 0;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(id);
-        parcel.writeString(title);
-        parcel.writeString(description);
-        parcel.writeString(start);
-        parcel.writeString(end);
-        parcel.writeParcelable(thumbnail, i);
-        parcel.writeTypedList(urls);
-        //parcel.writeTypedList(creators);
 
-    }
+    //Getter necessari per prendere gli attributi degli events(che sono private)
 
     public String getTitle() {
         return title;
@@ -69,15 +72,4 @@ public class Events extends Element {
 
     public String getEnd() { return end; }
 
-   // public List<Creators> getCreators() {
-     //   return creators;
-   // }
-
-    public List<Images> getImages() {
-        return images;
-    }
-
-    public String getPageCount() {
-        return pageCount;
-    }
 }

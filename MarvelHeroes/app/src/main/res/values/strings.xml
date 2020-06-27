@@ -42,10 +42,13 @@
     <string name="rating">Rating:</string>
     <string name="type">Type:</string>
     <string name="created_comics">Comics drawn :</string>
-    <string name="event_s_heroes">Event\'s heroes:</string>
     <string name="event_s_creators">Event\'s creators:</string>
     <string name="noDescription">No description available</string>
     <string name="comics_series">Related comics :</string>
     <string name="noPageCount">No page count available</string>
     <string name="noUPC">No Upc code available</string>
+    <string name="event_s_series">Event\'s series</string>
+    <string name="event_links">Links</string>
+    <string name="event_s_comics">Event\'s comics</string>
+    <string name="event_s_heroes">Event\'s heroes</string>
 </resources>

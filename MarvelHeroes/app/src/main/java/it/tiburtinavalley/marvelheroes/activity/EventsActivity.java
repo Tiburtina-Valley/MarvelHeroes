@@ -2,6 +2,8 @@ package it.tiburtinavalley.marvelheroes.activity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,7 +38,7 @@ public class EventsActivity extends AppCompatActivity {
     private Events event;
     private UrlsRecyclerView urlsAdapter;
 
-
+    //Creo l'activity, prelevando dal bundle i dati dell'evento selezionato,e impostando il layout.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +46,8 @@ public class EventsActivity extends AppCompatActivity {
         event = getIntent().getParcelableExtra("event");
          Holder holder = new Holder();
     }
-//start,and,title,description,urls,thumbnail,creators
+
+    //Definisco l'holder con tutti gli elementi della view.
     class Holder {
         private ImageView ivEventImage;
         private TextView tvEventName;
@@ -65,8 +68,12 @@ public class EventsActivity extends AppCompatActivity {
         private SeriesAdapter seriesAdapter;
         private CreatorsAdapter creatorsAdapter;
         private UrlsRecyclerView urlsAdapter;
+        private TextView tvSeries;
+        private TextView tvCreators;
+        private TextView tvComics;
+        private TextView tvHeroes;
 
-
+        //Inizializzo l'holder collegando gli attributi java all'xml.
         public Holder() {
             ivEventImage = findViewById(R.id.ivEventImg);
             tvEventName = findViewById(R.id.tvEventTitle);
@@ -78,44 +85,80 @@ public class EventsActivity extends AppCompatActivity {
             rvHeroes=findViewById(R.id.rvEventHeroes);
             rvComics=findViewById(R.id.rvEventComics);
             rvSeries=findViewById(R.id.rvEventSeries);
+            tvSeries=findViewById(R.id.ivSeries);
+            tvCreators=findViewById(R.id.tvCreators);
+            tvComics=findViewById(R.id.tvComics);
+            tvHeroes=findViewById(R.id.tvHeroes);
 
+            //Setto le recyclers views.
             setRecyclerViews();
 
+            //Creo una volley per gestire le query degli eroi.
             heroVolley = new MarvelApiVolley(getApplicationContext()) {
                 @Override
                 public void fillList(List<HeroModel> heroes) {
                     heroAdapter = new HeroDetailAdapter(heroes, getApplicationContext());
                     rvHeroes.setAdapter(heroAdapter);
+                    if (heroAdapter.getItemCount() == 0) {
+                        tvHeroes.setTextSize(0);
+                        rvHeroes.setVisibility(View.INVISIBLE);
+                        ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvHeroes.getLayoutParams();
+                        marginParams.setMargins(0, 0, 0, 0);
+                    }
                 }
             };
 
+
+            //Creo una volley per gestire le query dei creators.
             creatorsVolley = new CreatorsVolley(getApplicationContext()) {
                 @Override
                 public void fillCreatorsInfo(List<Creators> creatorsList) {
                     creatorsAdapter = new CreatorsAdapter(creatorsList, getApplicationContext());
                     rvCreators.setAdapter(creatorsAdapter);
+                    if (creatorsAdapter.getItemCount() == 0) {
+                        tvCreators.setTextSize(0);
+                        rvCreators.setVisibility(View.INVISIBLE);
+                        ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvCreators.getLayoutParams();
+                        marginParams.setMargins(0, 0, 0, 0);
+                    }
                 }
             };
 
+            //Creo una volley per gestire le query dei comics.
             comicsVolley = new ComicsVolley(getApplicationContext()) {
                 @Override
                 public void fillComics(List<Comics> comicsList) {
                     comicsAdapter = new ComicsAdapter(comicsList, getApplicationContext());
                     rvComics.setAdapter(comicsAdapter);
+                    if (comicsAdapter.getItemCount() == 0) {
+                        tvComics.setTextSize(0);
+                        rvComics.setVisibility(View.INVISIBLE);
+                        ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvComics.getLayoutParams();
+                        marginParams.setMargins(0, 0, 0, 0);
+                    }
                 }};
 
+
+            //Creo una volley per gestire le query delle serie.
             seriesVolley=new SeriesVolley(getApplicationContext()) {
                 @Override
                 public void fillSeries(List<Series> seriesList) {
                     seriesAdapter=new SeriesAdapter(seriesList,getApplicationContext());
                     rvSeries.setAdapter(seriesAdapter);
+                    if (seriesAdapter.getItemCount() == 0) {
+                        tvSeries.setTextSize(0);
+                        rvSeries.setVisibility(View.INVISIBLE);
+                        ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvSeries.getLayoutParams();
+                        marginParams.setMargins(0, 0, 0, 0);
+                    }
                 }
             };
-
-
-
+            //Setto tutti gli elementi della view.
             setData();
         }
+
+
+    //Definisco tutti i layout manager delle recyclers view,collegandole anche ai rispettivi adapter.
     private void setRecyclerViews(){
         LinearLayoutManager layoutManagerHeroes = new LinearLayoutManager(
                 EventsActivity.this, RecyclerView.HORIZONTAL, false);
@@ -139,10 +182,9 @@ public class EventsActivity extends AppCompatActivity {
     }
 
 
-
+        //Definisco la funzione che setta tutti gli elementi della view.
         private void setData() {
-
-
+             //Setto titolo,descrizione,e data inizio/fine dell'evento.
              tvEventName.setText(event.getTitle());
              startDate.setText(event.getStart());
              endDate.setText(event.getEnd());
@@ -153,26 +195,21 @@ public class EventsActivity extends AppCompatActivity {
                 description.setText(R.string.noDescription);
             }
 
-
-             ImageApiVolley imgVolley;
-             imgVolley = new ImageApiVolley(getApplicationContext());
-             imgVolley.addHeroImg(ivEventImage);
-
+            //Setto l'immagine dell'evento.
             String urlThumbnail = event.getThumbnail().getPath().replaceFirst("http", "https")
                     + "." + event.getThumbnail().getExtension();
-            Log.w("1",urlThumbnail);
             Glide.with(getApplicationContext()).load(urlThumbnail).into(ivEventImage);
 
-            String id = event.getId();
-            Log.w("1",id);
+             //Inizializzo le query per settare gli eroi, i creators, le serie e i comics.
+             String id = event.getId();
              heroVolley.getHeroesFromEvents(id);
              creatorsVolley.getCreatorsByEvents(id);
              seriesVolley.getSeriesByEvent(id);
              comicsVolley.getComicsByEvent(id);
 
-
-            urlsAdapter = new UrlsRecyclerView(event.getUrls());
-            rvUrls.setAdapter(urlsAdapter);
+             //Setto i link dell'evento.
+             urlsAdapter = new UrlsRecyclerView(event.getUrls());
+             rvUrls.setAdapter(urlsAdapter);
 
             }
 
