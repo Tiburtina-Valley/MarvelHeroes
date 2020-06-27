@@ -25,13 +25,11 @@ import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.StoriesHolder> implements View.OnClickListener {
     private List<Stories> stories;
     private Context appContext; //servirà per poter lanciare con successo la nuova activity nella onClick
-    private ImageApiVolley imgVolley;
 
     public StoriesAdapter(List<Stories> all, Context appContext) {
         stories = new ArrayList<>();
         stories.addAll(all);
         this.appContext = appContext;
-        imgVolley = new ImageApiVolley(appContext);
     }
 
     @NonNull
@@ -40,23 +38,15 @@ public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.StoriesH
         ConstraintLayout cl;
         cl = (ConstraintLayout) LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.item_detail_layout, parent, false);
+                .inflate(R.layout.story_layout, parent, false);
         cl.setOnClickListener(this);
         return new StoriesHolder(cl);
     }
 
     @Override
     public void onBindViewHolder(@NonNull StoriesHolder holder, int position) {
-        imgVolley.addHeroImg(holder.ivStories);
-        String urlThumbnail = stories.get(position).getThumbnail().getPath().replaceFirst("http", "https")
-                + "." + stories.get(position).getThumbnail().getExtension();
-        Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivStories);
-        holder.tvStoriesName.setText(stories.get(position).getTitle());
+        holder.tvStoryName.setText(stories.get(position).getTitle());
     }
-
-
-
-
 
     @Override
     public int getItemCount() {
@@ -75,13 +65,11 @@ public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.StoriesH
     }
 
     class StoriesHolder extends RecyclerView.ViewHolder {
-        final ImageView ivStories;
-        final TextView tvStoriesName;
+        final TextView tvStoryName;
 
         StoriesHolder(@NonNull View itemView) {
             super(itemView);
-            ivStories = itemView.findViewById(R.id.ivCreator);
-            tvStoriesName = itemView.findViewById(R.id.tvCreatorName);
+            tvStoryName = itemView.findViewById(R.id.tvTitle);
         }
     }
 }
