@@ -18,8 +18,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCreatCom"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="@dimen/rvHeight"
+        android:layout_marginStart="@dimen/marginStartRv"
+        android:layout_marginTop="@dimen/marginTopRv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDrawn" />
 
@@ -43,4 +44,23 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCreatorSeries"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginTopRv"
+        android:text="@string/related_series"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvCreatCom" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCreatorSeries"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/rvHeight"
+        android:layout_marginStart="@dimen/marginStartRv"
+        android:layout_marginTop="@dimen/marginTopRv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCreatorSeries" />
 </androidx.constraintlayout.widget.ConstraintLayout>
