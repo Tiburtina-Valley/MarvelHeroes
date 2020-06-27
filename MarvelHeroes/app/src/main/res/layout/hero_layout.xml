@@ -3,45 +3,72 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:clickable="true"
+
+    >
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="0dp"
-        android:layout_marginVertical="0dp"
+        android:layout_marginHorizontal="4dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorPrimaryLight">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryLight"
+            >
 
             <TextView
                 android:id="@+id/tvHeroName"
-                android:layout_width="280dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="28dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:textColor="#FFFFFF"
                 android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.123"
-                app:layout_constraintStart_toEndOf="@+id/ivHeroPhoto"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/cvPhotoContainer"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/ivHeroPhoto"
-                android:layout_width="106dp"
-                android:layout_height="97dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:contentDescription="@string/hero_picture_cnt_description"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvPhotoContainer"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:elevation="12dp"
+                app:cardCornerRadius="40dp"
+                android:layout_centerHorizontal="true"
+                android:innerRadius="0dp"
+                android:shape="ring"
+                android:thicknessRatio="1.9"
+                android:layout_marginBottom="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                >
+
+                <ImageView
+                    android:id="@+id/ivHeroPhoto"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:transitionName="profile"
+
+                    android:contentDescription="@string/hero_picture_cnt_description"
+
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            </androidx.cardview.widget.CardView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

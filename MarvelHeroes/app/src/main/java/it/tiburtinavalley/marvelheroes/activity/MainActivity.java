@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+        fragmentTransaction.setCustomAnimations(R.anim.anim_fade_in, R.anim.anim_fade_out);
         fragmentTransaction.replace(R.id.fragment_container,fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();

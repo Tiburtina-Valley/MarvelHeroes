@@ -1,15 +1,18 @@
 package it.tiburtinavalley.marvelheroes.recyclerviewadapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -57,6 +60,8 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.Holder> implem
                     + "." + hero.getThumbnail().getExtension();
             Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivHeroPic);
         }
+        holder.itemView.setAnimation(AnimationUtils.loadAnimation(appContext,R.anim.anim_zoom_in));
+
     }
 
     @Override
@@ -72,7 +77,9 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.Holder> implem
 
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.putExtra("hero", hero);
-        appContext.startActivity(i);
+        ActivityOptionsCompat options = ActivityOptionsCompat.
+                makeSceneTransitionAnimation((Activity) appContext, (View) v, "profile");
+        appContext.startActivity(i, options.toBundle());
     }
 
     class Holder extends RecyclerView.ViewHolder {
