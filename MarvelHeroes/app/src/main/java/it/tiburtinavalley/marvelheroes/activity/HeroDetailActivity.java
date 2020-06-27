@@ -3,6 +3,7 @@ package it.tiburtinavalley.marvelheroes.activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -94,6 +95,7 @@ public class HeroDetailActivity extends AppCompatActivity{
                 public void fillComics(List<Comics> comicsList) {
                     cAdapter = new ComicsAdapter(comicsList, getApplicationContext());
                     rvComics.setAdapter(cAdapter);
+
                 }
             };
             seVolley = new SeriesVolley(getApplicationContext()) {

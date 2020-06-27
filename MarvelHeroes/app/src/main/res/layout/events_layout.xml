@@ -42,19 +42,19 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.464"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvSeries"
+                        app:layout_constraintTop_toBottomOf="@+id/ivSeries"
                         tools:itemCount="5"
                         tools:layoutManager="GridLayoutManager"
                         tools:listitem="@layout/recycler_view_item"
                         tools:spanCount="5" />
 
                     <TextView
-                        android:id="@+id/tvSeries"
+                        android:id="@+id/ivSeries"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/rvMarginTop"
-                        android:layout_marginEnd="@dimen/marginEndRv"
+                        android:layout_marginTop="@dimen/tvMarginTop"
+                        android:layout_marginEnd="@dimen/tvEnd"
                         android:text="@string/event_s_series"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -73,7 +73,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.525"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvComics"
+                        app:layout_constraintTop_toBottomOf="@+id/ivComics"
                         tools:itemCount="5"
                         tools:layoutManager="GridLayoutManager"
                         tools:listitem="@layout/recycler_view_item"
@@ -83,26 +83,27 @@
                         android:id="@+id/rvUrlsEvent"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="32dp"
+                        android:layout_marginStart="@dimen/marginStartRv"
                         android:layout_marginTop="@dimen/marginTopRv"
+                        android:layout_marginEnd="@dimen/marginEndRv"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvLink"
+                        app:layout_constraintTop_toBottomOf="@+id/textView12"
                         tools:itemCount="5"
                         tools:layoutManager="GridLayoutManager"
                         tools:listitem="@layout/recycler_view_item"
                         tools:spanCount="5" />
 
                     <TextView
-                        android:id="@+id/tvLink"
+                        android:id="@+id/textView12"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/rvMarginTop"
+                        android:layout_marginTop="28dp"
                         android:layout_marginEnd="@dimen/marginEndRv"
                         android:text="@string/event_links"
-                        android:textSize="18sp"
+                        android:textSize="@dimen/text_size"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.042"
@@ -119,18 +120,18 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.444"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvCreators"
+                        app:layout_constraintTop_toBottomOf="@+id/ivCreators"
                         tools:itemCount="5"
                         tools:layoutManager="GridLayoutManager"
                         tools:listitem="@layout/recycler_view_item"
                         tools:spanCount="5" />
 
                     <TextView
-                        android:id="@+id/tvCreators"
+                        android:id="@+id/ivCreators"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/rvMarginTop"
+                        android:layout_marginTop="@dimen/tvMarginTop"
                         android:layout_marginEnd="@dimen/marginEndRv"
                         android:text="@string/event_s_creators"
                         android:textSize="18sp"
@@ -150,18 +151,18 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.14"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvHeroes"
+                        app:layout_constraintTop_toBottomOf="@+id/ivHeroes"
                         tools:itemCount="5"
                         tools:layoutManager="GridLayoutManager"
                         tools:listitem="@layout/recycler_view_item"
                         tools:spanCount="5" />
 
                     <TextView
-                        android:id="@+id/tvHeroes"
+                        android:id="@+id/ivHeroes"
                         android:layout_width="102dp"
                         android:layout_height="27dp"
                         android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/rvMarginTop"
+                        android:layout_marginTop="@dimen/tvMarginTop"
                         android:layout_marginEnd="@dimen/marginEndRv"
                         android:text="@string/event_s_heroes"
                         android:textSize="18sp"
@@ -172,11 +173,11 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/tvComics"
+                        android:id="@+id/ivComics"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/rvMarginTop"
+                        android:layout_marginTop="@dimen/tvMarginTop"
                         android:layout_marginEnd="@dimen/marginEndRv"
                         android:text="@string/event_s_comics"
                         android:textSize="18sp"
@@ -287,4 +288,4 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
-    </ScrollView>
+</ScrollView>

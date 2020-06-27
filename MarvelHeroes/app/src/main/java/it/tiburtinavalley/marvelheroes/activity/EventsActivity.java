@@ -85,7 +85,7 @@ public class EventsActivity extends AppCompatActivity {
             rvHeroes=findViewById(R.id.rvEventHeroes);
             rvComics=findViewById(R.id.rvEventComics);
             rvSeries=findViewById(R.id.rvEventSeries);
-            tvSeries=findViewById(R.id.tvSeries);
+            tvSeries=findViewById(R.id.ivSeries);
             tvCreators=findViewById(R.id.tvCreators);
             tvComics=findViewById(R.id.tvComics);
             tvHeroes=findViewById(R.id.tvHeroes);

@@ -11,4 +11,6 @@
     <dimen name="tvMarginTop">16dp</dimen>
     <dimen name="tvMarginTopComics">6dp</dimen>
     <dimen name="rvMarginTop">16dp</dimen>
+    <dimen name="tvEnd">368dp</dimen>
+    <dimen name="text_size">18sp</dimen>
 </resources>
