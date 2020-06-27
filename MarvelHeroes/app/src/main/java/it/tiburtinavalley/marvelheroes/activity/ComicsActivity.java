@@ -66,19 +66,13 @@ public class ComicsActivity extends AppCompatActivity {
             heroVolley = new MarvelApiVolley(appContext) {
                 @Override
                 public void fillList(List<HeroModel> heroes) {
-                    // se la lista degli eroi è vuota, cancella la RecyclerView degli eroi ed attacca l'ultima RecyclerView alla prima
+                    // se la lista degli eroi è vuota, nasconde la RecyclerView degli eroi
                     if(heroes.isEmpty()){
-                        ((ViewGroup) rvHeroesComics.getParent()).removeView(rvHeroesComics);
+                        TextView tvHeroes = findViewById(R.id.tvHeroes); // prende la TextView da oscurare
+                        tvHeroes.setTextSize(0);
 
-                        View tvHeroComics = findViewById(R.id.tvHeroes);
-                        ((ViewGroup) tvHeroComics.getParent()).removeView(tvHeroComics);
-
-                        View tvCreators = findViewById(R.id.tvCreatorsComics);
-                        ConstraintSet cs = new ConstraintSet();
-                        ConstraintLayout comicsConstraintLayout = (ConstraintLayout)findViewById(R.id.comicsConstraintLayout);
-                        cs.clone(comicsConstraintLayout);
-                        cs.connect(tvCreators.getId(), ConstraintSet.TOP, rvUrls.getId(), ConstraintSet.BOTTOM, 16);
-                        cs.applyTo(comicsConstraintLayout);
+                        ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvHeroes.getLayoutParams();
+                        marginParams.setMargins(0, 0, 0, 0); // setta i margini per non lasciare spazi in più
                     }
                     else {
                         heroDetAdapter = new HeroDetailAdapter(heroes, appContext);
