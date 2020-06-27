@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#2b2b2b">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHeroes"
@@ -32,21 +33,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        app:layout_constraintTop_toTopOf="parent"      >
+        >        <!--
+   -->
 
         <EditText
             android:id="@+id/etHeroSearch"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="#ffffff"
+            android:background="#353535"
+            android:textColor="#FFFFFF"
             android:hint="@string/search_name_hint"
+            android:textColorHint="#ffffff"
             android:paddingLeft="18dp"
             android:textSize="16sp"
             android:inputType="textPersonName"
             android:autofillHints="heroName, marvelHero"
-
             />
     </androidx.cardview.widget.CardView>
 

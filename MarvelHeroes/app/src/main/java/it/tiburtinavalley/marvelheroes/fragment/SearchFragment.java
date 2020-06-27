@@ -1,11 +1,13 @@
 package it.tiburtinavalley.marvelheroes.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,6 +47,18 @@ public class SearchFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        View view = getActivity().getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+
+
     class Holder {
         final RecyclerView rvHeroes;
         final EditText etHeroSearch;
@@ -51,7 +66,7 @@ public class SearchFragment extends Fragment {
         public Holder() {
             this.rvHeroes = rootView.findViewById(R.id.rvHeroes);
 
-            volleyMarvel = new MarvelApiVolley(getActivity().getApplicationContext()) {
+            volleyMarvel = new MarvelApiVolley(rootView.getContext()) {
 
                 @Override
                 public void fillList(List<HeroModel> heroes) {
@@ -67,24 +82,40 @@ public class SearchFragment extends Fragment {
             };
 
             this.etHeroSearch = rootView.findViewById(R.id.etHeroSearch);
-            this.etHeroSearch.setOnEditorActionListener(new ConfButtonListener());
-        }
+            etHeroSearch.setOnKeyListener(new View.OnKeyListener() {
+                @Override
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+                    if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                        String nameStartsWith = etHeroSearch.getText().toString();
+                        volleyMarvel.getCharactersInfo(nameStartsWith);
+                        return true;
+                    }
+                    return false;
+
+                }
+            });
 
 
-        public class ConfButtonListener  implements TextView.OnEditorActionListener {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
+            etHeroSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                     String nameStartsWith = etHeroSearch.getText().toString();
                     volleyMarvel.getCharactersInfo(nameStartsWith);
-                    hideSoftKeyboard(getActivity());
                     return true;
                 }
-                else {
-                    return false;
-                }
+            });
+
+
+            if (etHeroSearch.requestFocus()) {
+                ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(
+                        InputMethodManager.SHOW_FORCED,
+                        InputMethodManager.HIDE_IMPLICIT_ONLY
+                );
             }
+
         }
+
+
 
         public void hideSoftKeyboard(Activity activity){
             InputMethodManager imm = (InputMethodManager)activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
