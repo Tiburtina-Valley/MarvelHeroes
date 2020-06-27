@@ -5,12 +5,10 @@ import android.os.Parcelable;
 
 /* Model che raccoglie tutte le informazioni relative al singolo eroe */
 
-public class HeroModel extends Element {
+public class HeroModel extends BasicElement {
     private String name;
     private String resourceURI;
-
-
-
+    private String description;
 
     protected HeroModel(Parcel in) {
         id = in.readString();
@@ -37,6 +35,9 @@ public class HeroModel extends Element {
         return this.name;
     }
 
+    public String getDescription() {
+        return description;
+    }
 
     @Override
     public int describeContents() {

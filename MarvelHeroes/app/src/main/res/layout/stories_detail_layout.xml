@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvStoryTitle"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/tvMarginTop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvType"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/tvMarginTop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvStoryTitle" />
+
+    <TextView
+        android:id="@+id/tvComics"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/tvMarginTop"
+        android:text="@string/related_comics"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvType" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvStoriesComics"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/rvHeight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvComics" />
+
+    <TextView
+        android:id="@+id/tvSeries"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/rvMarginTop"
+        android:text="@string/series"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvStoriesComics" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvStoriesSeries"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/rvHeight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSeries" />
+</androidx.constraintlayout.widget.ConstraintLayout>

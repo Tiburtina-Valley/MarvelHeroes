@@ -118,7 +118,6 @@ public class HeroDetailActivity extends AppCompatActivity{
                 public void fillStories(List<Stories> storiesList) {
                     stAdapter = new StoriesAdapter(storiesList, getApplicationContext());
                     rvStories.setAdapter(stAdapter);
-
                 }
             };
         }

@@ -36,9 +36,9 @@ public abstract class SeriesVolley implements Response.ErrorListener, Response.L
         seriesApiCall(serie);
     }
 
-    //metodo per cercare le storie collegate ad un fumetto
-    public void getSeriesByComics(String comicId){
-        String param = "comics/"+comicId+"/series?";
+    //metodo per cercare le storie collegate ad una storia
+    public void getSeriesByStories(String storyId){
+        String param = "stories/"+storyId+"/series?";
         seriesApiCall(param);
     }
 
