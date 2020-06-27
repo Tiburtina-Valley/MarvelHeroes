@@ -70,7 +70,7 @@ public abstract class EventsVolley implements Response.ErrorListener, Response.L
             Type listType = new TypeToken<List<Events>>() {
             }.getType();
             List<Events> eventsList = gson.fromJson(event, listType);
-            if (eventsList != null && eventsList.size() > 0) {
+            if (eventsList != null) {
                 Log.w("Events", "" + eventsList.size());
                 //db.cocktailDAO().insertAll(cnt);    // NON OBBLIGATORIO
                 fillEvents(eventsList);

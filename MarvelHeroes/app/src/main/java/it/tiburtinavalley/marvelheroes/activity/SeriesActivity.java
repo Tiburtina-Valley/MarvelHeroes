@@ -2,6 +2,8 @@ package it.tiburtinavalley.marvelheroes.activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -67,6 +69,7 @@ public class SeriesActivity extends AppCompatActivity {
         private TextView tvComics;
         private RecyclerView rvComics;
         private TextView tvEvents;
+        private TextView tvCreators;
         private RecyclerView rvEvents;
 
         public Holder() {
@@ -84,6 +87,7 @@ public class SeriesActivity extends AppCompatActivity {
             rvComics = findViewById(R.id.rvComics);
             tvEvents = findViewById(R.id.tvEvents);
             rvEvents = findViewById(R.id.rvEvents);
+            tvCreators = findViewById(R.id.tvCreators);
 
             final Context appContext = getApplicationContext();
 
@@ -100,6 +104,12 @@ public class SeriesActivity extends AppCompatActivity {
                 public void fillCreatorsInfo(List<Creators> creatorsList) {
                     creatorsAdapter = new CreatorsAdapter(creatorsList, getApplicationContext());
                     rvCreators.setAdapter(creatorsAdapter);
+                    if (creatorsAdapter.getItemCount() == 0) {
+                        tvCreators.setTextSize(0);
+                        tvCreators.setVisibility(View.INVISIBLE);
+                        ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvCreators.getLayoutParams();
+                        marginParams.setMargins(0, 0, 0, 0);
+                    }
                 }
             };
 
@@ -108,6 +118,12 @@ public class SeriesActivity extends AppCompatActivity {
                 public void fillEvents(List<Events> eventsList) {
                     eventsAdapter = new EventsAdapter(eventsList, getApplicationContext());
                     rvEvents.setAdapter(eventsAdapter);
+                    if (eventsAdapter.getItemCount() == 0) {
+                        tvEvents.setTextSize(0);
+                        tvEvents.setVisibility(View.INVISIBLE);
+                        ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvEvents.getLayoutParams();
+                        marginParams.setMargins(0, 0, 0, 0);
+                    }
                 }
             };
 
@@ -116,6 +132,12 @@ public class SeriesActivity extends AppCompatActivity {
                 public void fillComics(List<Comics> comicsList) {
                     comicsAdapter = new ComicsAdapter(comicsList, getApplicationContext());
                     rvComics.setAdapter(comicsAdapter);
+                    if (comicsAdapter.getItemCount() == 0) {
+                        tvComics.setTextSize(0);
+                        tvComics.setVisibility(View.INVISIBLE);
+                        ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvComics.getLayoutParams();
+                        marginParams.setMargins(0, 0, 0, 0);
+                    }
                 }
             };
 
