@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.action_search:
-                    setFragment(new SearchFragment());
+                    setFragment(new SearchFragment(getApplicationContext()));
                     return true;
 
 

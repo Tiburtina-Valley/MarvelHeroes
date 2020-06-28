@@ -2,6 +2,8 @@ package it.tiburtinavalley.marvelheroes.recyclerviewadapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.SeriesActivity;
+import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.Series;
 import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 
@@ -64,13 +67,21 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
 
     @Override
     public void onClick(View v) {
-        int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
-        Series serie  = series.get(position);
+        ConnectivityManager cm = (ConnectivityManager)appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+            int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
+            Series serie = series.get(position);
 
-        Intent i = new Intent(appContext, SeriesActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.putExtra("series",  serie);
-        appContext.startActivity(i);
+            Intent i = new Intent(appContext, SeriesActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.putExtra("series", serie);
+            appContext.startActivity(i);
+        }
+        else {
+                ToastClass toast = new ToastClass(appContext);
+                toast.showToast(appContext.getString(R.string.internet_required));
+            }
     }
 
     class SeriesHolder extends RecyclerView.ViewHolder {

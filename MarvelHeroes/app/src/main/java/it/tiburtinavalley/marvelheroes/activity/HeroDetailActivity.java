@@ -106,6 +106,7 @@ public class HeroDetailActivity extends AppCompatActivity{
 
                 }
             };
+
             seVolley = new SeriesVolley(getApplicationContext()) {
                 @Override
                 public void fillSeries(List<Series> seriesList) {
@@ -113,6 +114,7 @@ public class HeroDetailActivity extends AppCompatActivity{
                     rvSeries.setAdapter(sAdapter);
                 }
             };
+
             eVolley= new EventsVolley(getApplicationContext()) {
                 @Override
                 public void fillEvents(List<Events> eventsList) {

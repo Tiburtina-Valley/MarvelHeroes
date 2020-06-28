@@ -22,11 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.tiburtinavalley.marvelheroes.activity.MainActivity;
+import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
 
 public abstract class MarvelApiVolley implements Response.ErrorListener, Response.Listener<String> {
     List<ImageView> heroesImg;
     StringRequest sr;
+    public boolean showToast = false;
     private RequestQueue requestQueue;
     private Context context;
     private String urlBase = "https://gateway.marvel.com/v1/public/%s";
@@ -42,22 +44,26 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
 
 
     public void getCharactersInfo(String nameStartsWith) {
+        showToast = true;
         String param = "characters?nameStartsWith=" + nameStartsWith+"&";
         callApi(param);
     }
 
     // metodo che esegue una query in base all'ID di un fumetto, per trovare gli eroi correlati
     public void getHeroesFromComics(String comicId){
+        showToast = false;
         String param = "comics/"+comicId+"/characters?";
         callApi(param);
     }
 
     public void getHeroesFromEvents(String eventId){
+        showToast = false;
         String param = "events/"+eventId+"/characters?";
         callApi(param);
     }
 
     public void getHeroesFromSeries(String seriesId){
+        showToast = false;
         String param = "series/"+seriesId+"/characters?";
         callApi(param);
     }
@@ -93,7 +99,10 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
                     //db.cocktailDAO().insertAll(cnt);    // NON OBBLIGATORIO
                 }
                 else {
-                    //showToast("No results has to been showed");
+                    if (showToast) {
+                        ToastClass toast = new ToastClass(context);
+                        toast.showToast("No results has to been showed");
+                    }
                 }
                 fillList(heroesList);
             }
@@ -101,10 +110,4 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
             e.printStackTrace();
         }
     }
-
-    /*public void showToast(CharSequence text) {
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(this.context, text, duration);
-        toast.show();
-    }*/
 }

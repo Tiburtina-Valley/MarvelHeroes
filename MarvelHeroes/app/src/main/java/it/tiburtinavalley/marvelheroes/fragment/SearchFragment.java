@@ -2,6 +2,8 @@ package it.tiburtinavalley.marvelheroes.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -24,6 +26,7 @@ import java.util.List;
 
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.MainActivity;
+import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.HeroAdapter;
 import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
@@ -35,6 +38,11 @@ public class SearchFragment extends Fragment {
     MarvelApiVolley volleyMarvel;
     ImageApiVolley imgVolley;
     View rootView;
+    Context context;
+
+    public SearchFragment(Context context) {
+        this.context = context;
+    }
 
 
     @Nullable
@@ -87,8 +95,17 @@ public class SearchFragment extends Fragment {
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
                     if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                         String nameStartsWith = etHeroSearch.getText().toString();
-                        volleyMarvel.getCharactersInfo(nameStartsWith);
-                        return true;
+
+                        ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+                            volleyMarvel.getCharactersInfo(nameStartsWith);
+                            return true;
+                        }
+                        else {
+                            ToastClass toast = new ToastClass(context);
+                            toast.showToast(context.getString(R.string.internet_required));
+                        }
                     }
                     return false;
 
@@ -100,8 +117,18 @@ public class SearchFragment extends Fragment {
                 @Override
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                     String nameStartsWith = etHeroSearch.getText().toString();
-                    volleyMarvel.getCharactersInfo(nameStartsWith);
-                    return true;
+
+                    ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                    NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                    if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+                        volleyMarvel.getCharactersInfo(nameStartsWith);
+                        return true;
+                    }
+                    else {
+                        ToastClass toast = new ToastClass(context);
+                        toast.showToast(context.getString(R.string.internet_required));
+                        return false;
+                    }
                 }
             });
 
