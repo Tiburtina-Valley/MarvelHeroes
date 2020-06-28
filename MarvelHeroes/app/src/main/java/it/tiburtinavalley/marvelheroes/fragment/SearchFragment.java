@@ -90,34 +90,13 @@ public class SearchFragment extends Fragment {
             };
 
             this.etHeroSearch = rootView.findViewById(R.id.etHeroSearch);
-            etHeroSearch.setOnKeyListener(new View.OnKeyListener() {
-                @Override
-                public boolean onKey(View v, int keyCode, KeyEvent event) {
-                    if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                        String nameStartsWith = etHeroSearch.getText().toString();
-
-                        ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-                        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-                        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-                            volleyMarvel.getCharactersInfo(nameStartsWith);
-                            return true;
-                        }
-                        else {
-                            ToastClass toast = new ToastClass(context);
-                            toast.showToast(context.getString(R.string.internet_required));
-                        }
-                    }
-                    return false;
-
-                }
-            });
 
 
             etHeroSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                     String nameStartsWith = etHeroSearch.getText().toString();
-
+                    hideSoftKeyboard(getActivity());
                     ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
                     NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
                     if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
