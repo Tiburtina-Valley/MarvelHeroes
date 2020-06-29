@@ -20,6 +20,7 @@ import java.util.List;
 
 import it.tiburtinavalley.marvelheroes.model.Series;
 
+/** Classe che gestisce le query legate alle series. */
 public abstract class SeriesVolley implements Response.ErrorListener, Response.Listener<String>{
     private String urlBase = "https://gateway.marvel.com/v1/public/%s";
     private String apiKey = "ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea&limit=100";
@@ -36,23 +37,25 @@ public abstract class SeriesVolley implements Response.ErrorListener, Response.L
         seriesApiCall(serie);
     }
 
-    //metodo per cercare le storie collegate ad una storia
+    /** metodo per cercare le series filtrando mediante l'id di una storia */
     public void getSeriesByStories(String storyId){
         String param = "stories/"+storyId+"/series?";
         seriesApiCall(param);
     }
 
-    //metodo per cercare le stories filtrando mediante l'id di un creator
+    /** metodo per cercare le series filtrando mediante l'id di un creator */
     public void getSeriesByCreator(String creatorId){
         String creator = "creators/"+ creatorId+ "/series?";
         seriesApiCall(creator);
     }
 
+    /** metodo per cercare le series filtrando mediante l'id di un evento */
     public void getSeriesByEvent(String eventId){
         String param = "events/"+eventId+"/series?";
         seriesApiCall(param);
     }
 
+    /** Inserisco la specifica richiesta nella coda. */
     private void seriesApiCall(String storyUrl){
         String url = urlBase + apiKey;
         url = String.format(url, storyUrl);

@@ -45,6 +45,7 @@ public abstract class ComicsVolley implements Response.ErrorListener, Response.L
         comicApiCall(comics);
     }
 
+    /** Ottiene tutti i comics relativi ad una serie.*/
     public void getComicsBySeries(String seriesId) {
         String comics = "series/" + seriesId + "/comics?";
         comicApiCall(comics);

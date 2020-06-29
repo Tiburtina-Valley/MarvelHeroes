@@ -66,7 +66,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
 
 
 
-    //Funzione che gestisce il click su un determinato evento nella recycler view,facendo partire correttamente l'activity di dettaglio
+    //Funzione che gestisce il click su un determinato evento nella recycler view, facendo partire correttamente l'activity di dettaglio
     @Override
     public void onClick(View v) {
         ConnectivityManager cm = (ConnectivityManager)appContext.getSystemService(Context.CONNECTIVITY_SERVICE);

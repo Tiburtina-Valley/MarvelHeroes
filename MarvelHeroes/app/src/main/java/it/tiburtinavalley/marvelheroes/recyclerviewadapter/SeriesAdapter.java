@@ -21,6 +21,7 @@ import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.Series;
 import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 
+/** Classe adapter che gestisce le recycler view delle series*/
 public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHolder> implements View.OnClickListener {
     private List<Series> series;
     ImageApiVolley imgVolley;
@@ -33,6 +34,8 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
         this.appContext = appContext;
     }
 
+    /** Meotdo che crea le righe della recycler view, gonfiando il corrispettivo layout xml.
+     * Associa anche un OnClickListener*/
     @NonNull
     @Override
     public SeriesHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,7 +47,7 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
         return new SeriesHolder(cl);
     }
 
-    // This method sets the layout of the hero
+    /** Metodo che setta il layout delle series */
     @Override
     public void onBindViewHolder(@NonNull SeriesHolder holder, int position) {
         imgVolley.addHeroImg(holder.ivSeries);
@@ -61,10 +64,7 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
         return series.size();
     }
 
-    public void addSeries(Series series){
-        this.series.add(series);
-    }
-
+    /** Metodo che gestisce il click su una determinata series nella recycler view, facendo partire l'activity di dettaglio */
     @Override
     public void onClick(View v) {
         ConnectivityManager cm = (ConnectivityManager)appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -78,12 +78,13 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
             i.putExtra("series", serie);
             appContext.startActivity(i);
         }
-        else {
+        else {                                                      //toast che avverte in caso di mancanza di connessiona ad internet
                 ToastClass toast = new ToastClass(appContext);
                 toast.showToast(appContext.getString(R.string.internet_required));
             }
     }
 
+    /** Holder che definisce come sono fatte le singole entry della recycler view */
     class SeriesHolder extends RecyclerView.ViewHolder {
         final ImageView ivSeries;
         final TextView tvSeriesName;

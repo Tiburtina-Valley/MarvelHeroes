@@ -42,26 +42,27 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
         heroesImg = new ArrayList<>();
     }
 
-
     public void getCharactersInfo(String nameStartsWith) {
         showToast = true;
         String param = "characters?nameStartsWith=" + nameStartsWith+"&";
         callApi(param);
     }
 
-    // metodo che esegue una query in base all'ID di un fumetto, per trovare gli eroi correlati
+    /** metodo che esegue una query in base all'ID di un fumetto, per trovare gli eroi correlati */
     public void getHeroesFromComics(String comicId){
         showToast = false;
         String param = "comics/"+comicId+"/characters?";
         callApi(param);
     }
 
+    /** Ottiene tutti gli eroi relativi ad un evento.*/
     public void getHeroesFromEvents(String eventId){
         showToast = false;
         String param = "events/"+eventId+"/characters?";
         callApi(param);
     }
 
+    /** Ottiene tutti gli eroi relativi ad una serie.*/
     public void getHeroesFromSeries(String seriesId){
         showToast = false;
         String param = "series/"+seriesId+"/characters?";

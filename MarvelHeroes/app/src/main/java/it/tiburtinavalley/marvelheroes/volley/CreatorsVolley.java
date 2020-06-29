@@ -27,21 +27,25 @@ public abstract class CreatorsVolley implements Response.ErrorListener, Response
         requestQueue = Volley.newRequestQueue(context);
     }
 
+    /** Ottiene tutti gli i creatori di un dato comics.*/
     public void getCreatorsByComics(String comicId){
         String creator = comicId + "/creators?";
         creatorsApiCall(creator);
     }
 
+    /** Ottiene tutti gli i creatori di un dato evento.*/
     public void getCreatorsByEvents(String eventId){
         String creator = eventId + "/creators?";
         creatorsApiCall(creator);
     }
 
+    /** Ottiene tutti i creatori di una data serie.*/
     public void getCreatorsBySeries(String serieId){
         String creator = serieId + "/creators?";
         creatorsApiCall(creator);
     }
 
+    /** Ottiene tutti gli i creatori di una data storia.*/
     public void getCreatorsByStories(String storyId){
         String creator = storyId + "/creators";
         creatorsApiCall(creator);
