@@ -27,8 +27,6 @@ import it.tiburtinavalley.marvelheroes.recyclerviewadapter.FavoriteHeroAdapter;
 public class FavouritesFragment extends Fragment {
 
 
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,24 +45,4 @@ public class FavouritesFragment extends Fragment {
         }
         return v;
     }
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
