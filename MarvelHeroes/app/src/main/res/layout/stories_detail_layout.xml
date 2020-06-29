@@ -39,9 +39,19 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvStoriesComics"
         android:layout_width="0dp"
-        android:layout_height="@dimen/rvHeight"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvComics" />
+        app:layout_constraintTop_toBottomOf="@+id/tvComics"
+        tools:itemCount="5"
+        tools:layoutManager="GridLayoutManager"
+        tools:layout_constraintHorizontal_bias="1.0"
+        tools:listitem="@layout/recycler_view_item"
+        tools:spanCount="5" />
 
     <TextView
         android:id="@+id/tvSeries"
@@ -56,7 +66,16 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvStoriesSeries"
         android:layout_width="0dp"
-        android:layout_height="@dimen/rvHeight"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSeries" />
+        app:layout_constraintTop_toBottomOf="@+id/tvSeries"
+        app:layout_constraintVertical_bias="0.0"
+        tools:itemCount="5"
+        tools:layoutManager="GridLayoutManager"
+        tools:listitem="@layout/recycler_view_item"
+        tools:spanCount="5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,7 +34,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -54,11 +54,15 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvCreatCom"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/rvHeight"
-                    android:layout_marginStart="@dimen/marginStartRv"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/marginTopRv"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvDrawn" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvDrawn"
+                    tools:itemCount="5"
+                    tools:layoutManager="GridLayoutManager"
+                    tools:listitem="@layout/recycler_view_item"
+                    tools:spanCount="5" />
 
                 <TextView
                     android:id="@+id/tvDrawn"
@@ -94,11 +98,15 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvCreatorSeries"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/rvHeight"
-                    android:layout_marginStart="@dimen/marginStartRv"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/marginTopRv"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvCreatorSeries" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvCreatorSeries"
+                    tools:itemCount="5"
+                    tools:layoutManager="GridLayoutManager"
+                    tools:listitem="@layout/recycler_view_item"
+                    tools:spanCount="5" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>

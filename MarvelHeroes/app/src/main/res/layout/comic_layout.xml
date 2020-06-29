@@ -38,15 +38,23 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvCreatorComics"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/rvHeight"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvCreatorsComics" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvCreatorsComics"
+                    tools:itemCount="5"
+                    tools:layoutManager="GridLayoutManager"
+                    tools:listitem="@layout/recycler_view_item"
+                    tools:spanCount="5" />
 
                 <TextView
                     android:id="@+id/tvHeroes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/heroes"
                     android:textSize="18sp"
@@ -57,6 +65,7 @@
                     android:id="@+id/tvCreatorsComics"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/creators_comics"
                     android:textSize="18sp"
@@ -66,15 +75,23 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvHeroComics"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/rvHeight"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvHeroes" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvHeroes"
+                    tools:itemCount="5"
+                    tools:layoutManager="GridLayoutManager"
+                    tools:listitem="@layout/recycler_view_item"
+                    tools:spanCount="5" />
 
                 <TextView
                     android:id="@+id/tvLinks"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="25dp"
                     android:text="@string/urls"
                     android:textSize="18sp"
@@ -83,9 +100,12 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvUrls"
-                    android:layout_width="384dp"
+                    android:layout_width="0dp"
                     android:layout_height="@dimen/rvHeight"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvLinks" />
 
