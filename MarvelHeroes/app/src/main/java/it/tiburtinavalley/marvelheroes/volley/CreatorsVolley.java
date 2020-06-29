@@ -77,7 +77,7 @@ public abstract class CreatorsVolley implements Response.ErrorListener, Response
             Type listType = new TypeToken<List<Creators>>() {
             }.getType();
             List<Creators> creatorsList = gson.fromJson(creators, listType);
-            if (creatorsList != null) {
+            if (creatorsList != null) { //controllo solo se la lista non è vuota, ci penserà il metodo definito nell'Activity a settare o meno la RecyclerView
                 Log.w("CA", "" + creatorsList.size());
                 //db.cocktailDAO().insertAll(cnt);    // NON OBBLIGATORIO
                 fillCreatorsInfo(creatorsList);
