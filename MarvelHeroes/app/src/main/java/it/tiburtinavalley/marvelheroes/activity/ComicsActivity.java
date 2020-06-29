@@ -77,7 +77,7 @@ public class ComicsActivity extends AppCompatActivity {
                     if(heroes.isEmpty()){
                         TextView tvHeroes = findViewById(R.id.tvHeroes); // prende la TextView da oscurare
                         tvHeroes.setTextSize(0);
-
+                        tvHeroes.setVisibility(View.INVISIBLE);
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvHeroes.getLayoutParams();
                         marginParams.setMargins(0, 0, 0, 0); // setta i margini per non lasciare spazi in più
                     }
@@ -93,12 +93,27 @@ public class ComicsActivity extends AppCompatActivity {
             creatorsVolley = new CreatorsVolley(getApplicationContext()) {
                 @Override
                 public void fillCreatorsInfo(List<Creators> creatorsList) {
-                    creatorsAdapter = new CreatorsAdapter(creatorsList, appContext);
-                    rvCreatorsComics.setAdapter(creatorsAdapter);
+                    if(creatorsList.isEmpty()){
+                        TextView tvCreators = findViewById(R.id.tvCreatorsComics);
+                        tvCreators.setTextSize(0);
+                        tvCreators.setVisibility(View.INVISIBLE);
+                        ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvCreators.getLayoutParams();
+                        marginParams.setMargins(0, 0, 0, 0); // setta i margini per non lasciare spazi in più
+                    }
+                    else {
+                        creatorsAdapter = new CreatorsAdapter(creatorsList, appContext);
+                        rvCreatorsComics.setAdapter(creatorsAdapter);
+                    }
                     loading_count++;
                     dismissLoading();
                 }
             };
+            // Vengono chiamati i metodi delle volley per rimepire le RecyclerView con i valori ritornati dalle query
+            urlsAdapter = new UrlsRecyclerView(comic.getUrls()); // gli urls sono già stati caricati precedentemente, quando è stata caricata l'activity per i dettagli dell'eroe
+            rvUrls.setAdapter(urlsAdapter);
+            String id = comic.getId();
+            heroVolley.getHeroesFromComics(id);
+            creatorsVolley.getCreatorsByComics(id);
 
             setRecyclerViews();
             setData();
@@ -145,13 +160,6 @@ public class ComicsActivity extends AppCompatActivity {
             else{
                 tvDescription.setText(R.string.noDescription);
             }
-
-            // Vengono chiamati i metodi delle volley per rimepire le RecyclerView con i valori ritornati dalle query
-            urlsAdapter = new UrlsRecyclerView(comic.getUrls()); // gli urls sono già stati caricati precedentemente, quando è stata caricata l'activity per i dettagli dell'eroe
-            rvUrls.setAdapter(urlsAdapter);
-            String id = comic.getId();
-            heroVolley.getHeroesFromComics(id);
-            creatorsVolley.getCreatorsByComics(id);
         }
 
         private void dismissLoading() {
