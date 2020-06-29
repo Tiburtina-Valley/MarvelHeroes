@@ -3,14 +3,19 @@ package it.tiburtinavalley.marvelheroes.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.List;
 
 import it.tiburtinavalley.marvelheroes.dao.AppDatabase;
@@ -47,6 +52,9 @@ public class HeroDetailActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.AppThemeNoBar);
+
+
         setContentView(R.layout.hero_detail_layout);
         imgVolley = new ImageApiVolley(getApplicationContext());
         hm = getIntent().getParcelableExtra("hero");
@@ -67,10 +75,14 @@ public class HeroDetailActivity extends AppCompatActivity{
         private StoriesAdapter stAdapter;
         private EventsAdapter eAdapter;
         private ImageView ivStar;
-        private Button btnAddFavorite;
-
+        private FloatingActionButton btnAddFavorite;
+        private Toolbar toolbar;
 
         public Holder() {
+
+            toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
+            setSupportActionBar(toolbar);
+
             rvEvents=findViewById(R.id.rvEvents);
             rvStories=findViewById(R.id.rvStories);
             rvComics = findViewById(R.id.rvComics);
@@ -148,7 +160,8 @@ public class HeroDetailActivity extends AppCompatActivity{
 
 
         public void setDetails(HeroModel hero) {
-            this.tvHeroName.setText(hero.getName());
+            getSupportActionBar().setTitle(hm.getName());
+
             if(hero.getDescription() != null && !hero.getDescription().equalsIgnoreCase("")) {
                 this.tvHeroDescription.setText(hero.getDescription());
             }
@@ -194,9 +207,9 @@ public class HeroDetailActivity extends AppCompatActivity{
             isFavorite = AppDatabase.getInstance(getApplicationContext()).heroDao().hasHero(Integer.parseInt(hm.getId()));
 
             if (isFavorite){
-                btnAddFavorite.setText("Remove");
+                 btnAddFavorite.setImageResource(R.drawable.ic_action_favourites);
             } else {
-                btnAddFavorite.setText("Save");
+                btnAddFavorite.setImageResource(R.drawable.ic_action_favourite_border);
             }
         }
 
