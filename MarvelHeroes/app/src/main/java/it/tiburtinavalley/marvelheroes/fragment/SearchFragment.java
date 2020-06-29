@@ -104,6 +104,8 @@ public class SearchFragment extends Fragment {
                     if(nameStartsWith.isEmpty()){
                         hideSoftKeyboard(getActivity());
                         loading.setVisibility(View.GONE);
+                        ToastClass toast = new ToastClass(context);
+                        toast.showToast(getString(R.string.empty_serach));
                         return true;
                     }
                     hideSoftKeyboard(getActivity());
@@ -114,6 +116,7 @@ public class SearchFragment extends Fragment {
                         return true;
                     }
                     else {
+                        loading.setVisibility(View.GONE);
                         ToastClass toast = new ToastClass(context);
                         toast.showToast(context.getString(R.string.internet_required));
                         return false;

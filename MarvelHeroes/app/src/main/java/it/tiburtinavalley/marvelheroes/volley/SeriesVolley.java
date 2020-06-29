@@ -24,7 +24,7 @@ import it.tiburtinavalley.marvelheroes.model.Series;
 /** Classe che gestisce le query legate alle series. */
 public abstract class SeriesVolley implements Response.ErrorListener, Response.Listener<String>{
     private String urlBase = "https://gateway.marvel.com/v1/public/%s";
-    private String apiKey = "ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea&limit=100";
+    private String apiKey = "ts=1&apikey=68bdde3ebf9ba45c6c11839bd1f51cc3&hash=6433747692d0e40eaf799ef75ccc78ea";//"ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea&limit=100";
     private RequestQueue requestQueue;
 
     public abstract void fillSeries(List<Series> seriesList);
