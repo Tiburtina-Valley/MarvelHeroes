@@ -111,7 +111,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvUrlsEvent"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/rvHeight"
                         android:layout_marginStart="@dimen/marginStartRv"
                         android:layout_marginTop="@dimen/marginTopRv"
                         android:layout_marginEnd="@dimen/marginEndRv"
