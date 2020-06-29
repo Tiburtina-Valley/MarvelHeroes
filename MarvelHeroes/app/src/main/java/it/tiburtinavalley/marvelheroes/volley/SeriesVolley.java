@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Random;
 
 import it.tiburtinavalley.marvelheroes.model.Series;
 
@@ -33,8 +34,15 @@ public abstract class SeriesVolley implements Response.ErrorListener, Response.L
     }
 
     public void getSeriesInfo(String heroId){
-        String serie = "characters/" + heroId + "/series?";
-        seriesApiCall(serie);
+        String series = "characters/" + heroId + "/series?";
+        seriesApiCall(series);
+    }
+
+    public void getRandomSeries(){
+        Random r = new Random();
+        char randomLetter = (char) (r.nextInt(26) + 'a');
+        String param = "/series?titleStartsWith=" + randomLetter + "&limit=1&";
+        seriesApiCall(param);
     }
 
     /** metodo per cercare le series filtrando mediante l'id di una storia */
