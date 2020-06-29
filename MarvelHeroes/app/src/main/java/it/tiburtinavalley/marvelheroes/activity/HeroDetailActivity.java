@@ -1,9 +1,9 @@
 package it.tiburtinavalley.marvelheroes.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
+import it.tiburtinavalley.marvelheroes.dao.AppDatabase;
+import it.tiburtinavalley.marvelheroes.entity.HeroEntity;
+import it.tiburtinavalley.marvelheroes.entity.RelatedEntity;
 import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.model.Events;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
@@ -47,20 +50,21 @@ public class HeroDetailActivity extends AppCompatActivity{
         holder.setDetails(hm);
     }
 
-    class Holder  { //implements View.OnClickListener {
+    class Holder  implements View.OnClickListener { //implements View.OnClickListener {
         private final RecyclerView rvComics;
         private final RecyclerView rvSeries;
         private final RecyclerView rvEvents;
         private final RecyclerView rvStories;
         private ImageView ivHeroPhoto;
         private TextView tvHeroName;
-        private TextView tvHeroId;
         private TextView tvHeroDescription;
         private ComicsAdapter cAdapter;
         private SeriesAdapter sAdapter;
         private StoriesAdapter stAdapter;
         private EventsAdapter eAdapter;
         private ImageView ivStar;
+        private Button btnAddFavorite;
+
 
         public Holder() {
             rvEvents=findViewById(R.id.rvEvents);
@@ -68,11 +72,14 @@ public class HeroDetailActivity extends AppCompatActivity{
             rvComics = findViewById(R.id.rvComics);
             rvSeries = findViewById(R.id.rvSeries);
             ivHeroPhoto = findViewById(R.id.ivHeroPhoto);
-            tvHeroId = findViewById(R.id.tvHeroId);
             tvHeroName = findViewById(R.id.tvHeroName);
             //ivStar = findViewById(R.id.ivStar);
             //ivStar.setOnClickListener(this);
             tvHeroDescription = findViewById(R.id.tvHeroDescription);
+
+            btnAddFavorite = findViewById(R.id.btnAddFavorite);
+            btnAddFavorite.setOnClickListener(this);
+
             LinearLayoutManager layoutManagerComics = new LinearLayoutManager(
                     HeroDetailActivity.this, RecyclerView.HORIZONTAL, false);
             rvComics.setLayoutManager(layoutManagerComics);
@@ -133,7 +140,6 @@ public class HeroDetailActivity extends AppCompatActivity{
 
         public void setDetails(HeroModel hero) {
             this.tvHeroName.setText(hero.getName());
-            this.tvHeroId.setText(hero.getId());
             if(hero.getDescription() != null && !hero.getDescription().equalsIgnoreCase("")) {
                 this.tvHeroDescription.setText(hero.getDescription());
             }
@@ -149,6 +155,20 @@ public class HeroDetailActivity extends AppCompatActivity{
             stVolley.getStoriesInfo(hm.getId());
             eVolley.getEventInfo(hm.getId());
         }
+
+
+
+        public void onClick(View v) {
+            if (v.getId() == R.id.btnAddFavorite) {
+                HeroEntity hero = new HeroEntity(Integer.parseInt(hm.getId()), hm.getName(), "", hm.getDescription());
+
+                AppDatabase.getInstance(getApplicationContext()).heroDao().insertHero(hero);
+                System.out.println("hero saved");
+            }
+        }
+
+
+
 
         /*@Override
         public void onClick(View v) {

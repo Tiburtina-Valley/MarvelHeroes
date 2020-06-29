@@ -2,20 +2,14 @@ package it.tiburtinavalley.marvelheroes.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-import static androidx.room.ForeignKey.CASCADE;
 
-@Entity(foreignKeys = @ForeignKey(entity = HeroEntity.class,
-        parentColumns = "iArticleID",
-        childColumns = "article_id",
-        onDelete = CASCADE))
-public class ReleatedEntity {
+@Entity(tableName = "related")
+public class RelatedEntity {
 
-    @ColumnInfo(name = "id")
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey
+    private int relatedId;
 
     @ColumnInfo(name = "hero_id")
     private int heroId;
@@ -27,4 +21,51 @@ public class ReleatedEntity {
     @ColumnInfo(name = "type")
     private String type;
 
+    public RelatedEntity(int relatedId, int heroId, String name, String picturePath, String type) {
+        this.relatedId = relatedId;
+        this.heroId = heroId;
+        this.name = name;
+        this.picturePath = picturePath;
+        this.type = type;
+    }
+
+    public int getRelatedId() {
+        return relatedId;
+    }
+
+    public void setRelatedId(int relatedId) {
+        this.relatedId = relatedId;
+    }
+
+    public int getHeroId() {
+        return heroId;
+    }
+
+    public void setHeroId(int heroId) {
+        this.heroId = heroId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPicturePath() {
+        return picturePath;
+    }
+
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }
