@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -13,6 +14,8 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import it.tiburtinavalley.marvelheroes.R;
@@ -75,6 +78,10 @@ public class HomeFragment extends Fragment {
         private ImageView ivHero;
         private ImageView ivComic;
         private ImageView ivSeries;
+        private ProgressBar loading;
+        private ConstraintLayout layout;
+
+        private int loading_count = 0;
 
         public Holder() {
             tvHeroName = rootView.findViewById(R.id.tvHeroName);
@@ -86,6 +93,8 @@ public class HomeFragment extends Fragment {
             ivHero = rootView.findViewById(R.id.ivHero);
             ivComic = rootView.findViewById(R.id.ivComic);
             ivSeries = rootView.findViewById(R.id.ivSeries);
+            loading = rootView.findViewById(R.id.progress_loader);
+            layout = rootView.findViewById(R.id.layout);
         }
 
         private void fillSeriesInfo(List<Series> seriesList) {
@@ -107,6 +116,8 @@ public class HomeFragment extends Fragment {
                             + "." + series.getThumbnail().getExtension();
                     Glide.with(rootView).load(urlThumbnail).into(ivSeries);
                 }
+                loading_count++;
+                dismissLoading();
             }
         }
 
@@ -127,6 +138,8 @@ public class HomeFragment extends Fragment {
                             + "." + comic.getThumbnail().getExtension();
                     Glide.with(rootView).load(urlThumbnail).into(ivComic);
                 }
+                loading_count++;
+                dismissLoading();
             }
         }
 
@@ -147,6 +160,15 @@ public class HomeFragment extends Fragment {
                             + "." + hero.getThumbnail().getExtension();
                     Glide.with(rootView).load(urlThumbnail).into(ivHero);
                 }
+                loading_count++;
+                dismissLoading();
+            }
+        }
+
+        private void dismissLoading() {
+            if (loading_count >= 2) {
+                loading.setVisibility(View.GONE);
+                layout.setVisibility(View.VISIBLE);
             }
         }
     }

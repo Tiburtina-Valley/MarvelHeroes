@@ -6,11 +6,14 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -62,7 +65,7 @@ public class HeroDetailActivity extends AppCompatActivity{
         holder.setDetails(hm);
     }
 
-    class Holder  implements View.OnClickListener { //implements View.OnClickListener {
+    class Holder  implements View.OnClickListener {
         private final RecyclerView rvComics;
         private final RecyclerView rvSeries;
         private final RecyclerView rvEvents;
@@ -74,9 +77,12 @@ public class HeroDetailActivity extends AppCompatActivity{
         private SeriesAdapter sAdapter;
         private StoriesAdapter stAdapter;
         private EventsAdapter eAdapter;
-        private ImageView ivStar;
         private FloatingActionButton btnAddFavorite;
         private Toolbar toolbar;
+        private ProgressBar loading;
+        private ConstraintLayout layout;
+
+        private int loading_count = 0;
 
         public Holder() {
 
@@ -89,12 +95,12 @@ public class HeroDetailActivity extends AppCompatActivity{
             rvSeries = findViewById(R.id.rvSeries);
             ivHeroPhoto = findViewById(R.id.ivHeroPhoto);
             tvHeroName = findViewById(R.id.tvHeroName);
-            //ivStar = findViewById(R.id.ivStar);
-            //ivStar.setOnClickListener(this);
             tvHeroDescription = findViewById(R.id.tvHeroDescription);
 
             btnAddFavorite = findViewById(R.id.btnAddFavorite);
             btnAddFavorite.setOnClickListener(this);
+            loading = findViewById(R.id.progress_loader);
+            layout = findViewById(R.id.linearLayout);
 
             initFavoriteBtn();
 
@@ -128,7 +134,8 @@ public class HeroDetailActivity extends AppCompatActivity{
                     }
                     cAdapter = new ComicsAdapter(comicsList, getApplicationContext());
                     rvComics.setAdapter(cAdapter);
-
+                    loading_count++;
+                    dismissLoading();
                 }
             };
 
@@ -137,6 +144,8 @@ public class HeroDetailActivity extends AppCompatActivity{
                 public void fillSeries(List<Series> seriesList) {
                     sAdapter = new SeriesAdapter(seriesList, getApplicationContext());
                     rvSeries.setAdapter(sAdapter);
+                    loading_count++;
+                    dismissLoading();
                 }
             };
 
@@ -145,6 +154,8 @@ public class HeroDetailActivity extends AppCompatActivity{
                 public void fillEvents(List<Events> eventsList) {
                     eAdapter=new EventsAdapter(eventsList,getApplicationContext());
                     rvEvents.setAdapter(eAdapter);
+                    loading_count++;
+                    dismissLoading();
 
                 }
             };
@@ -153,6 +164,8 @@ public class HeroDetailActivity extends AppCompatActivity{
                 public void fillStories(List<Stories> storiesList) {
                     stAdapter = new StoriesAdapter(storiesList, getApplicationContext());
                     rvStories.setAdapter(stAdapter);
+                    loading_count++;
+                    dismissLoading();
                 }
             };
 
@@ -213,17 +226,11 @@ public class HeroDetailActivity extends AppCompatActivity{
             }
         }
 
-
-        /*@Override
-        public void onClick(View v) {
-            if (v.getId() == R.id.ivStar) {
-                if (ivStar.getImageAlpha() == android.R.drawable.btn_star_big_on) {
-                    ivStar.setImageResource(android.R.drawable.btn_star_big_off);
-                }
-                else {
-                    ivStar.setImageResource(android.R.drawable.btn_star_big_on);
-                }
+        private void dismissLoading() {
+            if (loading_count >= 3) {
+                loading.setVisibility(View.GONE);
+                layout.setVisibility(View.VISIBLE);
             }
-        }*/
+        }
     }
 }
