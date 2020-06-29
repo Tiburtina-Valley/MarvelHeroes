@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -65,6 +67,10 @@ public class SeriesActivity extends AppCompatActivity {
         private TextView tvEvents;
         private TextView tvCreators;
         private RecyclerView rvEvents;
+        private ProgressBar loading;
+        private ConstraintLayout layout;
+
+        private int loading_count = 0;
 
         public Holder() {
             ivSeriesImage = findViewById(R.id.ivStoriesmg);
@@ -82,6 +88,8 @@ public class SeriesActivity extends AppCompatActivity {
             tvEvents = findViewById(R.id.tvEvents);
             rvEvents = findViewById(R.id.rvEvents);
             tvCreators = findViewById(R.id.tvCreators);
+            loading = findViewById(R.id.progress_loader);
+            layout = findViewById(R.id.layout);
 
             final Context appContext = getApplicationContext();
 
@@ -97,6 +105,8 @@ public class SeriesActivity extends AppCompatActivity {
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvCreators.getLayoutParams();
                         marginParams.setMargins(0, 0, 0, 0);
                     }
+                    loading_count++;
+                    dismissLoading();
                 }
             };
 
@@ -112,6 +122,8 @@ public class SeriesActivity extends AppCompatActivity {
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvCreators.getLayoutParams();
                         marginParams.setMargins(0, 0, 0, 0);
                     }
+                    loading_count++;
+                    dismissLoading();
                 }
             };
 
@@ -127,6 +139,8 @@ public class SeriesActivity extends AppCompatActivity {
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvEvents.getLayoutParams();
                         marginParams.setMargins(0, 0, 0, 0);
                     }
+                    loading_count++;
+                    dismissLoading();
                 }
             };
 
@@ -142,6 +156,8 @@ public class SeriesActivity extends AppCompatActivity {
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvComics.getLayoutParams();
                         marginParams.setMargins(0, 0, 0, 0);
                     }
+                    loading_count++;
+                    dismissLoading();
                 }
             };
 
@@ -206,6 +222,13 @@ public class SeriesActivity extends AppCompatActivity {
             //Setta i link associati alla serie.
             UrlsRecyclerView urlsAdapter = new UrlsRecyclerView(series.getUrls());
             rvUrls.setAdapter(urlsAdapter);
+        }
+
+        private void dismissLoading() {
+            if (loading_count >= 3) {
+                loading.setVisibility(View.GONE);
+                layout.setVisibility(View.VISIBLE);
+            }
         }
     }
 }
