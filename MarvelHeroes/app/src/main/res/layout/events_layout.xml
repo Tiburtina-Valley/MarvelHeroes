@@ -91,6 +91,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView12"
                         tools:itemCount="5"
+                        android:textSize="18sp"
                         tools:layoutManager="GridLayoutManager"
                         tools:listitem="@layout/recycler_view_item"
                         tools:spanCount="5" />
@@ -120,14 +121,14 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.444"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/ivCreators"
+                        app:layout_constraintTop_toBottomOf="@+id/tvCreators"
                         tools:itemCount="5"
                         tools:layoutManager="GridLayoutManager"
                         tools:listitem="@layout/recycler_view_item"
                         tools:spanCount="5" />
 
                     <TextView
-                        android:id="@+id/ivCreators"
+                        android:id="@+id/tvCreators"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/marginStartRv"
