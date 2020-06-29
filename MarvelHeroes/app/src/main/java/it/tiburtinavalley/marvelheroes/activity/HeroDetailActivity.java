@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,6 +41,8 @@ public class HeroDetailActivity extends AppCompatActivity{
     private EventsVolley eVolley;
     private StoriesVolley stVolley;
     private ImageApiVolley imgVolley;
+
+    private Boolean isFavorite = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +83,8 @@ public class HeroDetailActivity extends AppCompatActivity{
 
             btnAddFavorite = findViewById(R.id.btnAddFavorite);
             btnAddFavorite.setOnClickListener(this);
+
+            initFavoriteBtn();
 
             LinearLayoutManager layoutManagerComics = new LinearLayoutManager(
                     HeroDetailActivity.this, RecyclerView.HORIZONTAL, false);
@@ -137,6 +143,7 @@ public class HeroDetailActivity extends AppCompatActivity{
                     rvStories.setAdapter(stAdapter);
                 }
             };
+
         }
 
 
@@ -159,17 +166,39 @@ public class HeroDetailActivity extends AppCompatActivity{
         }
 
 
-
         public void onClick(View v) {
             if (v.getId() == R.id.btnAddFavorite) {
-                HeroEntity hero = new HeroEntity(Integer.parseInt(hm.getId()), hm.getName(), "", hm.getDescription());
 
-                AppDatabase.getInstance(getApplicationContext()).heroDao().insertHero(hero);
-                System.out.println("hero saved");
+                if (!isFavorite) {
+                    HeroEntity hero = new HeroEntity(Integer.parseInt(hm.getId()), hm.getName(), "", hm.getDescription());
+                    AppDatabase.getInstance(getApplicationContext()).heroDao().insertHero(hero);
+
+
+                    Toast toast = Toast.makeText(getApplicationContext(), "hero saved", Toast.LENGTH_LONG);
+                    toast.show();
+
+                } else {
+                    AppDatabase.getInstance(getApplicationContext()).heroDao().deleteHeroFromId(Integer.parseInt(hm.getId()));
+
+                    Toast toast = Toast.makeText(getApplicationContext(), "hero removed", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+
+                initFavoriteBtn();
             }
         }
 
 
+        private void initFavoriteBtn()
+        {
+            isFavorite = AppDatabase.getInstance(getApplicationContext()).heroDao().hasHero(Integer.parseInt(hm.getId()));
+
+            if (isFavorite){
+                btnAddFavorite.setText("Remove");
+            } else {
+                btnAddFavorite.setText("Save");
+            }
+        }
 
 
         /*@Override

@@ -16,6 +16,12 @@ public interface HeroDao {
     @Query("Select * from hero")
     List<HeroEntity> getHeroList();
 
+    @Query("SELECT EXISTS(SELECT * FROM hero WHERE heroId = :heroId)")
+    Boolean hasHero(int heroId);
+
+    @Query("DELETE FROM hero WHERE heroId = :heroId")
+    void deleteHeroFromId(int heroId);
+
     @Insert
     void insertHero(HeroEntity hero);
 
