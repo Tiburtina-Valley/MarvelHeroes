@@ -53,4 +53,9 @@
     <string name="event_s_heroes">Event\'s heroes</string>
     <string name="related_series">Related series :</string>
     <string name="internet_required">Please check your connection</string>
+    <string name="home_first_section_title">Hero of the day</string>
+    <string name="home_title">Home</string>
+    <string name="ellipsis">...</string>
+    <string name="home_second_section_title">Comic of the day</string>
+    <string name="home_third_section_title">Series of the day</string>
 </resources>

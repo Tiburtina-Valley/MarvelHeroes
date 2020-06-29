@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import it.tiburtinavalley.marvelheroes.activity.MainActivity;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
@@ -45,6 +46,14 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
     public void getCharactersInfo(String nameStartsWith) {
         showToast = true;
         String param = "characters?nameStartsWith=" + nameStartsWith+"&";
+        callApi(param);
+    }
+
+    public void getRandomCharacterInfo(){
+        showToast = true;
+        Random r = new Random();
+        char randomLetter = (char) (r.nextInt(26) + 'a');
+        String param = "characters?nameStartsWith=" + randomLetter + "&limit=1&";
         callApi(param);
     }
 

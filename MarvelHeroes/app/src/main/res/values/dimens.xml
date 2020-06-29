@@ -12,5 +12,7 @@
     <dimen name="tvMarginTopComics">6dp</dimen>
     <dimen name="rvMarginTop">16dp</dimen>
     <dimen name="tvEnd">368dp</dimen>
-    <dimen name="text_size">18sp</dimen>
+    <dimen name="plainTextSize">18sp</dimen>
+    <dimen name="sectionTitleTextSize">20sp</dimen>
+    <dimen name="homeTitleTextSize">30sp</dimen>
 </resources>

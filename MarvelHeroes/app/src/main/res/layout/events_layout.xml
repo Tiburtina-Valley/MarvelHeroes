@@ -130,7 +130,7 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="@dimen/marginEndRv"
                         android:text="@string/event_links"
-                        android:textSize="@dimen/text_size"
+                        android:textSize="@dimen/plainTextSize"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"

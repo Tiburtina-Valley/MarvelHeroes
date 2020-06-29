@@ -14,6 +14,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Random;
+
 import it.tiburtinavalley.marvelheroes.model.Comics;
 
 /* in questa classe , vengono gestite le ricerche in Internet per cercare le informazioni
@@ -28,6 +30,13 @@ public abstract class ComicsVolley implements Response.ErrorListener, Response.L
 
     public ComicsVolley(Context context){
         requestQueue = Volley.newRequestQueue(context);
+    }
+
+    public void getRandomComic(){
+        Random r = new Random();
+        char randomLetter = (char) (r.nextInt(26) + 'a');
+        String param = "/comics?titleStartsWith=" + randomLetter + "&limit=1&";
+        comicApiCall(param);
     }
 
     public void getComicsInfo(String heroId){
