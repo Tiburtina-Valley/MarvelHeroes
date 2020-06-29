@@ -101,6 +101,11 @@ public class SearchFragment extends Fragment {
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                     loading.setVisibility(View.VISIBLE);
                     String nameStartsWith = etHeroSearch.getText().toString();
+                    if(nameStartsWith.isEmpty()){
+                        hideSoftKeyboard(getActivity());
+                        loading.setVisibility(View.GONE);
+                        return true;
+                    }
                     hideSoftKeyboard(getActivity());
                     ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
                     NetworkInfo activeNetwork = cm.getActiveNetworkInfo();

@@ -105,7 +105,7 @@ public class HomeFragment extends Fragment {
                         && !series.getThumbnail().getExtension().equalsIgnoreCase("")) {
                     String urlThumbnail = series.getThumbnail().getPath().replaceFirst("http", "https")
                             + "." + series.getThumbnail().getExtension();
-                    Glide.with(getView()).load(urlThumbnail).into(ivSeries);
+                    Glide.with(rootView).load(urlThumbnail).into(ivSeries);
                 }
             }
         }
@@ -125,7 +125,7 @@ public class HomeFragment extends Fragment {
                         && !comic.getThumbnail().getExtension().equalsIgnoreCase("")) {
                     String urlThumbnail = comic.getThumbnail().getPath().replaceFirst("http", "https")
                             + "." + comic.getThumbnail().getExtension();
-                    Glide.with(getView()).load(urlThumbnail).into(ivComic);
+                    Glide.with(rootView).load(urlThumbnail).into(ivComic);
                 }
             }
         }
@@ -145,7 +145,7 @@ public class HomeFragment extends Fragment {
                         && !hero.getThumbnail().getExtension().equalsIgnoreCase("")) {
                     String urlThumbnail = hero.getThumbnail().getPath().replaceFirst("http", "https")
                             + "." + hero.getThumbnail().getExtension();
-                    Glide.with(getView()).load(urlThumbnail).into(ivHero);
+                    Glide.with(rootView).load(urlThumbnail).into(ivHero);
                 }
             }
         }
