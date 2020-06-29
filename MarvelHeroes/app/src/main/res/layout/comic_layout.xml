@@ -111,9 +111,9 @@
 
                 <TextView
                     android:id="@+id/tvDescription"
-                    android:layout_width="212dp"
-                    android:layout_height="70dp"
-                    android:layout_marginStart="20dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -123,9 +123,9 @@
 
                 <TextView
                     android:id="@+id/tvUpcCode"
-                    android:layout_width="212dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="20dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -135,19 +135,23 @@
 
                 <TextView
                     android:id="@+id/tvStoriesName"
-                    android:layout_width="212dp"
-                    android:layout_height="43dp"
-                    android:layout_marginStart="20dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/ivStoriesmg"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tvPageCount"
-                    android:layout_width="212dp"
-                    android:layout_height="23dp"
-                    android:layout_marginStart="21dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/ivStoriesmg"
                     app:layout_constraintTop_toBottomOf="@+id/tvCreatorName" />
 
@@ -163,10 +167,12 @@
 
                 <TextView
                     android:id="@+id/tvCreatorName"
-                    android:layout_width="212dp"
-                    android:layout_height="33dp"
-                    android:layout_marginStart="20dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="12dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/ivStoriesmg"
                     app:layout_constraintTop_toBottomOf="@+id/tvStoriesName" />
 
