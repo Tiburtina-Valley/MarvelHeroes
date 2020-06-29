@@ -1,233 +1,259 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <ProgressBar
+        android:id="@+id/progress_loader"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="fill_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#FFFFFF">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tvCharacters"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/marginStartRv"
-                android:layout_marginTop="@dimen/marginTopRv"
-                android:text="@string/heroes"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF"
+                android:visibility="invisible">
 
-            <ImageView
-                android:id="@+id/ivStoriesmg"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:contentDescription="@string/hero"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                <TextView
+                    android:id="@+id/tvCharacters"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStartRv"
+                    android:layout_marginTop="@dimen/marginTopRv"
+                    android:text="@string/heroes"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
 
-            <TextView
-                android:id="@+id/tvLinks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/urls"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvType" />
+                <ImageView
+                    android:id="@+id/ivStoriesmg"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:contentDescription="@string/hero"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-            <TextView
-                android:id="@+id/tvDescr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/marginStartRv"
-                android:layout_marginTop="@dimen/marginTopRv"
-                android:text="@string/hero_detail_description"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rvUrls" />
+                <TextView
+                    android:id="@+id/tvLinks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/urls"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvType" />
 
-            <TextView
-                android:id="@+id/tvDescription"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/marginStartRv"
-                android:layout_marginTop="@dimen/marginTopRv"
-                android:layout_marginEnd="@dimen/marginEndRv"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvDescr" />
+                <TextView
+                    android:id="@+id/tvDescr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStartRv"
+                    android:layout_marginTop="@dimen/marginTopRv"
+                    android:text="@string/hero_detail_description"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rvUrls" />
 
-            <TextView
-                android:id="@+id/tvCreatorName"
-                android:layout_width="212dp"
-                android:layout_height="33dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintStart_toEndOf="@+id/ivStoriesmg"
-                app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/tvDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStartRv"
+                    android:layout_marginTop="@dimen/marginTopRv"
+                    android:layout_marginEnd="@dimen/marginEndRv"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDescr" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvCharacters"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/marginStartRv"
-                android:layout_marginTop="@dimen/marginTopRv"
-                android:layout_marginEnd="@dimen/marginEndRv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvCharacters"
-                tools:itemCount="5"
-                tools:layoutManager="GridLayoutManager"
-                tools:listitem="@layout/recycler_view_item"
-                tools:spanCount="5" />
+                <TextView
+                    android:id="@+id/tvCreatorName"
+                    android:layout_width="212dp"
+                    android:layout_height="33dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toEndOf="@+id/ivStoriesmg"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvUrls"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/marginStartRv"
-                android:layout_marginTop="@dimen/marginTopRv"
-                android:layout_marginEnd="@dimen/marginEndRv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvLinks"
-                tools:itemCount="3" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCharacters"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStartRv"
+                    android:layout_marginTop="@dimen/marginTopRv"
+                    android:layout_marginEnd="@dimen/marginEndRv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCharacters"
+                    tools:itemCount="5"
+                    tools:layoutManager="GridLayoutManager"
+                    tools:listitem="@layout/recycler_view_item"
+                    tools:spanCount="5" />
 
-            <TextView
-                android:id="@+id/tvCreators"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/marginStartRv"
-                android:layout_marginTop="@dimen/marginTopRv"
-                android:text="@string/creators_comics"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rvCharacters" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvUrls"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStartRv"
+                    android:layout_marginTop="@dimen/marginTopRv"
+                    android:layout_marginEnd="@dimen/marginEndRv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvLinks"
+                    tools:itemCount="3" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvCreators"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/marginStartRv"
-                android:layout_marginTop="@dimen/marginTopRv"
-                android:layout_marginEnd="@dimen/marginEndRv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvCreators"
-                tools:itemCount="5"
-                tools:layoutManager="GridLayoutManager"
-                tools:listitem="@layout/recycler_view_item"
-                tools:spanCount="5" />
+                <TextView
+                    android:id="@+id/tvCreators"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStartRv"
+                    android:layout_marginTop="@dimen/marginTopRv"
+                    android:text="@string/creators_comics"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rvCharacters" />
 
-            <TextView
-                android:id="@+id/tvEndYear"
-                android:layout_width="212dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="13dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/ivStoriesmg"
-                app:layout_constraintTop_toBottomOf="@+id/tvStartYear" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvCreators"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStartRv"
+                    android:layout_marginTop="@dimen/marginTopRv"
+                    android:layout_marginEnd="@dimen/marginEndRv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCreators"
+                    tools:itemCount="5"
+                    tools:layoutManager="GridLayoutManager"
+                    tools:listitem="@layout/recycler_view_item"
+                    tools:spanCount="5" />
 
-            <TextView
-                android:id="@+id/tvStartYear"
-                android:layout_width="212dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintStart_toEndOf="@+id/ivStoriesmg"
-                app:layout_constraintTop_toBottomOf="@+id/tvCreatorName" />
+                <TextView
+                    android:id="@+id/tvEndYear"
+                    android:layout_width="212dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="13dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/ivStoriesmg"
+                    app:layout_constraintTop_toBottomOf="@+id/tvStartYear" />
 
-            <TextView
-                android:id="@+id/tvType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/marginStartRv"
-                android:layout_marginTop="@dimen/marginTopRv"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivStoriesmg" />
+                <TextView
+                    android:id="@+id/tvStartYear"
+                    android:layout_width="212dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toEndOf="@+id/ivStoriesmg"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCreatorName" />
 
-            <TextView
-                android:id="@+id/tvRating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="@dimen/marginTopRv"
-                app:layout_constraintStart_toEndOf="@+id/tvType"
-                app:layout_constraintTop_toBottomOf="@+id/ivStoriesmg" />
+                <TextView
+                    android:id="@+id/tvType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStartRv"
+                    android:layout_marginTop="@dimen/marginTopRv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivStoriesmg" />
 
-            <TextView
-                android:id="@+id/tvComics"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/marginStartRv"
-                android:layout_marginTop="@dimen/marginTopRv"
-                android:text="@string/related_comics"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rvCreators" />
+                <TextView
+                    android:id="@+id/tvRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="@dimen/marginTopRv"
+                    app:layout_constraintStart_toEndOf="@+id/tvType"
+                    app:layout_constraintTop_toBottomOf="@+id/ivStoriesmg" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvComics"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/marginStartRv"
-                android:layout_marginTop="@dimen/marginTopRv"
-                android:layout_marginEnd="@dimen/marginEndRv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvComics"
-                tools:itemCount="5"
-                tools:layoutManager="GridLayoutManager"
-                tools:listitem="@layout/recycler_view_item"
-                tools:spanCount="5" />
+                <TextView
+                    android:id="@+id/tvComics"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStartRv"
+                    android:layout_marginTop="@dimen/marginTopRv"
+                    android:text="@string/related_comics"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rvCreators" />
 
-            <TextView
-                android:id="@+id/tvEvents"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/marginStartRv"
-                android:layout_marginTop="@dimen/marginTopRv"
-                android:text="@string/events_comics"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rvComics" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvComics"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStartRv"
+                    android:layout_marginTop="@dimen/marginTopRv"
+                    android:layout_marginEnd="@dimen/marginEndRv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvComics"
+                    tools:itemCount="5"
+                    tools:layoutManager="GridLayoutManager"
+                    tools:listitem="@layout/recycler_view_item"
+                    tools:spanCount="5" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvEvents"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/marginStartRv"
-                android:layout_marginTop="@dimen/marginTopRv"
-                android:layout_marginEnd="@dimen/marginEndRv"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvEvents"
-                app:layout_constraintVertical_bias="0.0"
-                tools:itemCount="5"
-                tools:layoutManager="GridLayoutManager"
-                tools:listitem="@layout/recycler_view_item"
-                tools:spanCount="5" />
+                <TextView
+                    android:id="@+id/tvEvents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStartRv"
+                    android:layout_marginTop="@dimen/marginTopRv"
+                    android:text="@string/events_comics"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rvComics" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
-</ScrollView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvEvents"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/marginStartRv"
+                    android:layout_marginTop="@dimen/marginTopRv"
+                    android:layout_marginEnd="@dimen/marginEndRv"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvEvents"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:itemCount="5"
+                    tools:layoutManager="GridLayoutManager"
+                    tools:listitem="@layout/recycler_view_item"
+                    tools:spanCount="5" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

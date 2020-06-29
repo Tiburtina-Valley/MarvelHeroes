@@ -1,10 +1,13 @@
 package it.tiburtinavalley.marvelheroes.activity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
@@ -34,12 +37,18 @@ public class CreatorsActivity extends AppCompatActivity {
         private RecyclerView rvCreatorSeries;
         private ComicsAdapter comAdapter;
         private SeriesAdapter seriesAdapter;
+        private ProgressBar loading;
+        private ConstraintLayout layout;
+
+        private int loading_count = 0;
 
         public Holder(Creators creator){
             creatorName = findViewById(R.id.tvCreatName);
             creatorImg = findViewById(R.id.ivCreatorPic);
             rvCreatorsComics = findViewById(R.id.rvCreatCom);
             rvCreatorSeries = findViewById(R.id.rvCreatorSeries);
+            loading = findViewById(R.id.progress_loader);
+            layout = findViewById(R.id.layout);
 
             creatorName.setText(creator.getFullName());
             String urlThumbnail = creator.getThumbnail().getPath().replaceFirst("http", "https")
@@ -59,6 +68,8 @@ public class CreatorsActivity extends AppCompatActivity {
                 public void fillComics(List<Comics> comicsList) {
                     comAdapter = new ComicsAdapter(comicsList, getApplicationContext());
                     rvCreatorsComics.setAdapter(comAdapter);
+                    loading_count++;
+                    dismissLoading();
                 }
             };
 
@@ -74,11 +85,20 @@ public class CreatorsActivity extends AppCompatActivity {
                     }
                     seriesAdapter = new SeriesAdapter(seriesList, getApplicationContext());
                     rvCreatorSeries.setAdapter(seriesAdapter);
+                    loading_count++;
+                    dismissLoading();
                 }
             };
 
             cv.getComicsByCreators(creator.getId());
             sv.getSeriesByCreator(creator.getId());
+        }
+
+        private void dismissLoading() {
+            if (loading_count >= 1) {
+                loading.setVisibility(View.GONE);
+                layout.setVisibility(View.VISIBLE);
+            }
         }
     }
 }

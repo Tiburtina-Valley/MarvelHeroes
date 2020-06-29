@@ -1,292 +1,315 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <ProgressBar
+        android:id="@+id/progress_loader"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="fill_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#FFFFFF">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
 
-            <ScrollView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="#FFFFFF"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.166"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/scrollView5"
-                app:layout_constraintVertical_bias="1.0">
+                android:visibility="invisible">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
+                <ScrollView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="#FFFFFF">
+                    android:layout_marginTop="8dp"
+                    android:background="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.166"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/scrollView5"
+                    app:layout_constraintVertical_bias="1.0">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvEventSeries"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/marginTopRv"
-                        android:layout_marginEnd="@dimen/marginEndRv"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.464"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/ivSeries"
-                        tools:itemCount="5"
-                        tools:layoutManager="GridLayoutManager"
-                        tools:listitem="@layout/recycler_view_item"
-                        tools:spanCount="5" />
-
-                    <TextView
-                        android:id="@+id/ivSeries"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/tvMarginTop"
-                        android:layout_marginEnd="@dimen/tvEnd"
-                        android:text="@string/event_s_series"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/rvEventComics" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvEventComics"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/marginTopRv"
-                        android:layout_marginEnd="@dimen/marginEndRv"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.525"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/ivComics"
-                        tools:itemCount="5"
-                        tools:layoutManager="GridLayoutManager"
-                        tools:listitem="@layout/recycler_view_item"
-                        tools:spanCount="5" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvUrlsEvent"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/marginTopRv"
-                        android:layout_marginEnd="@dimen/marginEndRv"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView12"
-                        tools:itemCount="5"
-                        android:textSize="18sp"
-                        tools:layoutManager="GridLayoutManager"
-                        tools:listitem="@layout/recycler_view_item"
-                        tools:spanCount="5" />
-
-                    <TextView
-                        android:id="@+id/textView12"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="28dp"
-                        android:layout_marginEnd="@dimen/marginEndRv"
-                        android:text="@string/event_links"
-                        android:textSize="@dimen/text_size"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.042"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/rvEventSeries" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvEventCreators"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/marginTopRv"
-                        android:layout_marginEnd="@dimen/marginEndRv"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.444"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvCreators"
-                        tools:itemCount="5"
-                        tools:layoutManager="GridLayoutManager"
-                        tools:listitem="@layout/recycler_view_item"
-                        tools:spanCount="5" />
-
-                    <TextView
-                        android:id="@+id/tvCreators"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/tvMarginTop"
-                        android:layout_marginEnd="@dimen/marginEndRv"
-                        android:text="@string/event_s_creators"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/rvEventHeroes" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvEventHeroes"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/marginTopRv"
-                        android:layout_marginEnd="@dimen/marginEndRv"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.14"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/ivHeroes"
-                        tools:itemCount="5"
-                        tools:layoutManager="GridLayoutManager"
-                        tools:listitem="@layout/recycler_view_item"
-                        tools:spanCount="5" />
-
-                    <TextView
-                        android:id="@+id/ivHeroes"
-                        android:layout_width="130dp"
-                        android:layout_height="27dp"
-                        android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/tvMarginTop"
-                        android:layout_marginEnd="@dimen/marginEndRv"
-                        android:text="@string/event_s_heroes"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/ivComics"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/tvMarginTop"
-                        android:layout_marginEnd="@dimen/marginEndRv"
-                        android:text="@string/event_s_comics"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/rvEventCreators" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </ScrollView>
-
-            <ScrollView
-                android:id="@+id/scrollView5"
-                android:layout_width="415dp"
-                android:layout_height="82dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivEventImg">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tvEventDescription"
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-            </ScrollView>
+                        android:layout_height="wrap_content"
+                        android:background="#FFFFFF">
 
-            <TextView
-                android:id="@+id/tvEventEndDate"
-                android:layout_width="110dp"
-                android:layout_height="34dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="180dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/tvEnd"
-                app:layout_constraintTop_toTopOf="parent" />
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvEventSeries"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/marginStartRv"
+                            android:layout_marginTop="@dimen/marginTopRv"
+                            android:layout_marginEnd="@dimen/marginEndRv"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.464"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ivSeries"
+                            tools:itemCount="5"
+                            tools:layoutManager="GridLayoutManager"
+                            tools:listitem="@layout/recycler_view_item"
+                            tools:spanCount="5" />
 
-            <TextView
-                android:id="@+id/tvEnd"
-                android:layout_width="92dp"
-                android:layout_height="21dp"
-                android:layout_marginTop="56dp"
-                android:layout_marginEnd="33dp"
-                android:text="@string/event_end_date"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.107"
-                app:layout_constraintStart_toEndOf="@+id/ivEventImg"
-                app:layout_constraintTop_toBottomOf="@+id/tvStart" />
+                        <TextView
+                            android:id="@+id/ivSeries"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/marginStartRv"
+                            android:layout_marginTop="@dimen/tvMarginTop"
+                            android:layout_marginEnd="@dimen/tvEnd"
+                            android:text="@string/event_s_series"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/rvEventComics" />
 
-            <ImageView
-                android:id="@+id/ivEventImg"
-                android:layout_width="162dp"
-                android:layout_height="152dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="72dp"
-                android:contentDescription="@string/event_description"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvEventComics"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/marginStartRv"
+                            android:layout_marginTop="@dimen/marginTopRv"
+                            android:layout_marginEnd="@dimen/marginEndRv"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.525"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ivComics"
+                            tools:itemCount="5"
+                            tools:layoutManager="GridLayoutManager"
+                            tools:listitem="@layout/recycler_view_item"
+                            tools:spanCount="5" />
 
-            <TextView
-                android:id="@+id/tvEventTitle"
-                android:layout_width="373dp"
-                android:layout_height="33dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:textSize="26sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvUrlsEvent"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/marginStartRv"
+                            android:layout_marginTop="@dimen/marginTopRv"
+                            android:layout_marginEnd="@dimen/marginEndRv"
+                            android:textSize="18sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView12"
+                            tools:itemCount="5"
+                            tools:layoutManager="GridLayoutManager"
+                            tools:listitem="@layout/recycler_view_item"
+                            tools:spanCount="5" />
 
-            <TextView
-                android:id="@+id/tvStart"
-                android:layout_width="99dp"
-                android:layout_height="19dp"
-                android:layout_marginTop="60dp"
-                android:layout_marginEnd="33dp"
-                android:text="@string/event_start_date"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.114"
-                app:layout_constraintStart_toEndOf="@+id/ivEventImg"
-                app:layout_constraintTop_toBottomOf="@+id/tvEventTitle" />
+                        <TextView
+                            android:id="@+id/textView12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/marginStartRv"
+                            android:layout_marginTop="28dp"
+                            android:layout_marginEnd="@dimen/marginEndRv"
+                            android:text="@string/event_links"
+                            android:textSize="@dimen/text_size"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.042"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/rvEventSeries" />
 
-            <TextView
-                android:id="@+id/tvEventStartDate"
-                android:layout_width="107dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="105dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/tvStart"
-                app:layout_constraintTop_toTopOf="parent" />
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvEventCreators"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/marginStartRv"
+                            android:layout_marginTop="@dimen/marginTopRv"
+                            android:layout_marginEnd="@dimen/marginEndRv"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.444"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvCreators"
+                            tools:itemCount="5"
+                            tools:layoutManager="GridLayoutManager"
+                            tools:listitem="@layout/recycler_view_item"
+                            tools:spanCount="5" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
-</ScrollView>
+                        <TextView
+                            android:id="@+id/tvCreators"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/marginStartRv"
+                            android:layout_marginTop="@dimen/tvMarginTop"
+                            android:layout_marginEnd="@dimen/marginEndRv"
+                            android:text="@string/event_s_creators"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/rvEventHeroes" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvEventHeroes"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/marginStartRv"
+                            android:layout_marginTop="@dimen/marginTopRv"
+                            android:layout_marginEnd="@dimen/marginEndRv"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.14"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ivHeroes"
+                            tools:itemCount="5"
+                            tools:layoutManager="GridLayoutManager"
+                            tools:listitem="@layout/recycler_view_item"
+                            tools:spanCount="5" />
+
+                        <TextView
+                            android:id="@+id/ivHeroes"
+                            android:layout_width="130dp"
+                            android:layout_height="27dp"
+                            android:layout_marginStart="@dimen/marginStartRv"
+                            android:layout_marginTop="@dimen/tvMarginTop"
+                            android:layout_marginEnd="@dimen/marginEndRv"
+                            android:text="@string/event_s_heroes"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/ivComics"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/marginStartRv"
+                            android:layout_marginTop="@dimen/tvMarginTop"
+                            android:layout_marginEnd="@dimen/marginEndRv"
+                            android:text="@string/event_s_comics"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/rvEventCreators" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </ScrollView>
+
+                <ScrollView
+                    android:id="@+id/scrollView5"
+                    android:layout_width="415dp"
+                    android:layout_height="82dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivEventImg">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvEventDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                </ScrollView>
+
+                <TextView
+                    android:id="@+id/tvEventEndDate"
+                    android:layout_width="110dp"
+                    android:layout_height="34dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="180dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/tvEnd"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvEnd"
+                    android:layout_width="92dp"
+                    android:layout_height="21dp"
+                    android:layout_marginTop="56dp"
+                    android:layout_marginEnd="33dp"
+                    android:text="@string/event_end_date"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.107"
+                    app:layout_constraintStart_toEndOf="@+id/ivEventImg"
+                    app:layout_constraintTop_toBottomOf="@+id/tvStart" />
+
+                <ImageView
+                    android:id="@+id/ivEventImg"
+                    android:layout_width="162dp"
+                    android:layout_height="152dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="72dp"
+                    android:contentDescription="@string/event_description"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+                <TextView
+                    android:id="@+id/tvEventTitle"
+                    android:layout_width="373dp"
+                    android:layout_height="33dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:textSize="26sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvStart"
+                    android:layout_width="99dp"
+                    android:layout_height="19dp"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginEnd="33dp"
+                    android:text="@string/event_start_date"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.114"
+                    app:layout_constraintStart_toEndOf="@+id/ivEventImg"
+                    app:layout_constraintTop_toBottomOf="@+id/tvEventTitle" />
+
+                <TextView
+                    android:id="@+id/tvEventStartDate"
+                    android:layout_width="107dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="105dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/tvStart"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

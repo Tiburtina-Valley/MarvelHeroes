@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import androidx.appcompat.app.AppCompatActivity;
@@ -51,6 +52,10 @@ public class ComicsActivity extends AppCompatActivity {
         private CreatorsAdapter creatorsAdapter;
         private MarvelApiVolley heroVolley;
         private CreatorsVolley creatorsVolley;
+        private ProgressBar loading;
+        private ConstraintLayout layout;
+
+        private int loading_count = 0;
 
         public Holder() {
             ivComicImage = findViewById(R.id.ivStoriesmg);
@@ -61,6 +66,8 @@ public class ComicsActivity extends AppCompatActivity {
             tvDescription = findViewById(R.id.tvDescription);
             rvHeroesComics = findViewById(R.id.rvHeroComics);
             rvCreatorsComics = findViewById(R.id.rvCreatorComics);
+            loading = findViewById(R.id.progress_loader);
+            layout = findViewById(R.id.layout);
             final Context appContext = getApplicationContext();
 
             heroVolley = new MarvelApiVolley(appContext) {
@@ -78,6 +85,8 @@ public class ComicsActivity extends AppCompatActivity {
                         heroDetAdapter = new HeroDetailAdapter(heroes, appContext);
                         rvHeroesComics.setAdapter(heroDetAdapter);
                     }
+                    loading_count++;
+                    dismissLoading();
                 }
             };
 
@@ -86,6 +95,8 @@ public class ComicsActivity extends AppCompatActivity {
                 public void fillCreatorsInfo(List<Creators> creatorsList) {
                     creatorsAdapter = new CreatorsAdapter(creatorsList, appContext);
                     rvCreatorsComics.setAdapter(creatorsAdapter);
+                    loading_count++;
+                    dismissLoading();
                 }
             };
 
@@ -141,6 +152,13 @@ public class ComicsActivity extends AppCompatActivity {
             String id = comic.getId();
             heroVolley.getHeroesFromComics(id);
             creatorsVolley.getCreatorsByComics(id);
+        }
+
+        private void dismissLoading() {
+            if (loading_count >= 1) {
+                loading.setVisibility(View.GONE);
+                layout.setVisibility(View.VISIBLE);
+            }
         }
     }
 }
