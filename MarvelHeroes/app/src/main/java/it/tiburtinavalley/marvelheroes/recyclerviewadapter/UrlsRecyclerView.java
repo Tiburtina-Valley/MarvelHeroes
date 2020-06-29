@@ -2,6 +2,8 @@ package it.tiburtinavalley.marvelheroes.recyclerviewadapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import it.tiburtinavalley.marvelheroes.R;
+import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.Urls;
 
 /* RecyclerView che mostra gli url legati ad un elemento, che può essere un fumetto, una serie o un evento*/
@@ -51,11 +54,20 @@ public class UrlsRecyclerView extends RecyclerView.Adapter<UrlsRecyclerView.Hold
 
     @Override
     public void onClick(View v) {
-        int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
-        Urls url=urls.get(position);
-        Uri uri = Uri.parse(url.getUrl());
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        appContext.startActivity(intent);}
+        ConnectivityManager cm = (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+            int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
+            Urls url = urls.get(position);
+            Uri uri = Uri.parse(url.getUrl());
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            appContext.startActivity(intent);
+        }
+        else {
+            ToastClass toast = new ToastClass(appContext);
+            toast.showToast(appContext.getString(R.string.internet_required));
+        }
+    }
 
 
     class Holder extends RecyclerView.ViewHolder {

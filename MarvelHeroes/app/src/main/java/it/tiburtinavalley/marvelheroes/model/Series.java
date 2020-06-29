@@ -1,19 +1,17 @@
 package it.tiburtinavalley.marvelheroes.model;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
-import java.util.List;
-
+/** Classe series che estende la classe Element. Possiede come attributi, un titolo, un anno d'inizio e un anno di fine,
+una descrizione, un id, un immagine thumbnails, una lista di urls, la tipologia di series e il rating associatogli */
 public class Series extends Element {
-    private List<Items> items;
     private String startYear;
     private String endYear;
     private String rating;
     private String type;
 
+    /** Definisco le operazioni necessarie per rendere l'elemento parcelable */
     protected Series(Parcel in) {
-        items = in.createTypedArrayList(Items.CREATOR);
         urls = in.createTypedArrayList(Urls.CREATOR);
         id = in.readString();
         title = in.readString();
@@ -36,10 +34,6 @@ public class Series extends Element {
             return new Series[size];
         }
     };
-
-    public List<Items> getItems() {
-        return items;
-    }
 
     public String getStartYear() {
         return startYear;
@@ -64,7 +58,6 @@ public class Series extends Element {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeTypedList(items);
         dest.writeTypedList(urls);
         dest.writeString(id);
         dest.writeString(title);

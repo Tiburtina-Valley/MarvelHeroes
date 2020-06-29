@@ -29,9 +29,9 @@
     <string name="version">Version 1.0</string>
     <string name="events">Events</string>
     <string name="event_end_date">event ends:</string>
-    <string name="series_end_date">Series ends:</string>
+    <string name="series_end_date">Series ends: %1$s</string>
     <string name="event_title">Event title</string>
-    <string name="series_start_date">Series starts:</string>
+    <string name="series_start_date">Series starts: %1$s</string>
     <string name="event_start_date">event starts:</string>
     <string name="event_description">Description</string>
     <string name="series_comics">Related series :</string>
@@ -39,8 +39,8 @@
     <string name="creators_comics">Related creators :</string>
     <string name="related_comics">Related comics :</string>
     <string name="heroes">Related heroes :</string>
-    <string name="rating">Rating:</string>
-    <string name="type">Type:</string>
+    <string name="rating">Rating: %1$s</string>
+    <string name="type">Type: %1$s</string>
     <string name="created_comics">Comics drawn :</string>
     <string name="event_s_creators">Event\'s creators:</string>
     <string name="noDescription">No description available</string>
@@ -52,4 +52,5 @@
     <string name="event_s_comics">Event\'s comics</string>
     <string name="event_s_heroes">Event\'s heroes</string>
     <string name="related_series">Related series :</string>
+    <string name="internet_required">Please check your connection</string>
 </resources>

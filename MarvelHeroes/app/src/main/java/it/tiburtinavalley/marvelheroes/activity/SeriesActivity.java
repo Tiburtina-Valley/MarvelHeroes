@@ -24,7 +24,6 @@ import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.ComicsAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.CreatorsAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.EventsAdapter;
-import it.tiburtinavalley.marvelheroes.recyclerviewadapter.HeroAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.HeroDetailAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.UrlsRecyclerView;
 import it.tiburtinavalley.marvelheroes.volley.ComicsVolley;
@@ -35,7 +34,6 @@ import it.tiburtinavalley.marvelheroes.volley.MarvelApiVolley;
 
 public class SeriesActivity extends AppCompatActivity {
     private Series series;
-    private UrlsRecyclerView urlsAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,13 +56,9 @@ public class SeriesActivity extends AppCompatActivity {
         private RecyclerView rvCharacters;
         private RecyclerView rvUrls;
         private HeroDetailAdapter heroAdapter;
-        private MarvelApiVolley heroVolley;
         private RecyclerView rvCreators;
-        private CreatorsVolley creatorsVolley;
         private CreatorsAdapter creatorsAdapter;
-        private ComicsVolley comicsVolley;
         private ComicsAdapter comicsAdapter;
-        private EventsVolley eventsVolley;
         private EventsAdapter eventsAdapter;
         private TextView tvComics;
         private RecyclerView rvComics;
@@ -91,20 +85,13 @@ public class SeriesActivity extends AppCompatActivity {
 
             final Context appContext = getApplicationContext();
 
-            heroVolley = new MarvelApiVolley(appContext) {
+            /* inizializza una MarvelApiVolley per la ricerca di eroi correlati alla series*/
+            MarvelApiVolley heroVolley = new MarvelApiVolley(appContext) {
                 @Override
                 public void fillList(List<HeroModel> heroes) {
                     heroAdapter = new HeroDetailAdapter(heroes, appContext);
                     rvCharacters.setAdapter(heroAdapter);
-                }
-            };
-
-            creatorsVolley = new CreatorsVolley(getApplicationContext()) {
-                @Override
-                public void fillCreatorsInfo(List<Creators> creatorsList) {
-                    creatorsAdapter = new CreatorsAdapter(creatorsList, getApplicationContext());
-                    rvCreators.setAdapter(creatorsAdapter);
-                    if (creatorsAdapter.getItemCount() == 0) {
+                    if (heroAdapter.getItemCount() == 0) {  //nasconde recyclerView e textView nel caso in cui la ricerca non dia risultati
                         tvCreators.setTextSize(0);
                         tvCreators.setVisibility(View.INVISIBLE);
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvCreators.getLayoutParams();
@@ -113,12 +100,28 @@ public class SeriesActivity extends AppCompatActivity {
                 }
             };
 
-            eventsVolley = new EventsVolley(getApplicationContext()) {
+            /* inizializza una CreatorsVolley per la ricerca dei creatori della series*/
+            CreatorsVolley creatorsVolley = new CreatorsVolley(getApplicationContext()) {
+                @Override
+                public void fillCreatorsInfo(List<Creators> creatorsList) {
+                    creatorsAdapter = new CreatorsAdapter(creatorsList, getApplicationContext());
+                    rvCreators.setAdapter(creatorsAdapter);
+                    if (creatorsAdapter.getItemCount() == 0) {  //nasconde recyclerView e textView nel caso in cui la ricerca non dia risultati
+                        tvCreators.setTextSize(0);
+                        tvCreators.setVisibility(View.INVISIBLE);
+                        ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvCreators.getLayoutParams();
+                        marginParams.setMargins(0, 0, 0, 0);
+                    }
+                }
+            };
+
+            /* inizializza una EventsVolley per la ricerca di eventi correlati alla series*/
+            EventsVolley eventsVolley = new EventsVolley(getApplicationContext()) {
                 @Override
                 public void fillEvents(List<Events> eventsList) {
                     eventsAdapter = new EventsAdapter(eventsList, getApplicationContext());
                     rvEvents.setAdapter(eventsAdapter);
-                    if (eventsAdapter.getItemCount() == 0) {
+                    if (eventsAdapter.getItemCount() == 0) {  //nasconde recyclerView e textView nel caso in cui la ricerca non dia risultati
                         tvEvents.setTextSize(0);
                         tvEvents.setVisibility(View.INVISIBLE);
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvEvents.getLayoutParams();
@@ -127,12 +130,13 @@ public class SeriesActivity extends AppCompatActivity {
                 }
             };
 
-            comicsVolley = new ComicsVolley(getApplicationContext()) {
+            /* inizializza una MarvelApiVolley per la ricerca di comics correlati alla series*/
+            ComicsVolley comicsVolley = new ComicsVolley(getApplicationContext()) {
                 @Override
                 public void fillComics(List<Comics> comicsList) {
                     comicsAdapter = new ComicsAdapter(comicsList, getApplicationContext());
                     rvComics.setAdapter(comicsAdapter);
-                    if (comicsAdapter.getItemCount() == 0) {
+                    if (comicsAdapter.getItemCount() == 0) {  //nasconde recyclerView e textView nel caso in cui la ricerca non dia risultati
                         tvComics.setTextSize(0);
                         tvComics.setVisibility(View.INVISIBLE);
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvComics.getLayoutParams();
@@ -141,6 +145,7 @@ public class SeriesActivity extends AppCompatActivity {
                 }
             };
 
+            /* chiamata ai metodi per la ricerca di informazioni correlate alla series*/
             String id = series.getId();
             heroVolley.getHeroesFromSeries(id);
             creatorsVolley.getCreatorsBySeries(id);
@@ -148,6 +153,7 @@ public class SeriesActivity extends AppCompatActivity {
             eventsVolley.getEventsBySeries(id);
         }
 
+        /** metodo per settare il Layuout delle varie recylerViews presenti nella schermata */
         private void setRecyclerViews(){
             LinearLayoutManager layoutManagerUrls = new LinearLayoutManager(
                     SeriesActivity.this, RecyclerView.VERTICAL, false);
@@ -170,9 +176,12 @@ public class SeriesActivity extends AppCompatActivity {
             rvEvents.setLayoutManager(layoutManagerEvents);
         }
 
+        /** metodo per settare le informazioni della series selezionata */
         private void setData() {
             ImageApiVolley imgVolley = new ImageApiVolley(getApplicationContext());
             imgVolley.addHeroImg(ivSeriesImage);
+
+            //Setta l'immagine di copertina della serie, se presente.
             if (series.getThumbnail() != null) {
                 String urlThumbnail = series.getThumbnail().getPath().replaceFirst("http", "https")
                         + "." + series.getThumbnail().getExtension();
@@ -180,12 +189,12 @@ public class SeriesActivity extends AppCompatActivity {
             }
 
             tvSeriesName.setText(series.getTitle());
-            tvStartYear.setText(getString(R.string.series_start_date) + " " + series.getStartYear());
-            tvEndYear.setText(getString(R.string.series_end_date) + " " + series.getEndYear());
+            tvStartYear.setText(getString(R.string.series_start_date, series.getStartYear()));
+            tvEndYear.setText(getString(R.string.series_end_date, series.getEndYear()));
             if (!series.getType().equals(""))
-                tvType.setText(getString(R.string.type) + " " + series.getType());
+                tvType.setText(getString(R.string.type, series.getType()));
             if (!series.getRating().equals(""))
-                tvRating.setText(getString(R.string.rating) + " " + series.getRating());
+                tvRating.setText(getString(R.string.rating, series.getRating()));
 
             if (series.getDescription() != null) {
                 tvDescription.setText(series.getDescription());
@@ -193,7 +202,9 @@ public class SeriesActivity extends AppCompatActivity {
             else {
                 tvDescription.setText(R.string.noDescription);
             }
-            urlsAdapter = new UrlsRecyclerView(series.getUrls());
+
+            //Setta i link associati alla serie.
+            UrlsRecyclerView urlsAdapter = new UrlsRecyclerView(series.getUrls());
             rvUrls.setAdapter(urlsAdapter);
         }
     }
