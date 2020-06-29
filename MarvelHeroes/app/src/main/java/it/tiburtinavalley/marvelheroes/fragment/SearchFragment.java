@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -70,9 +71,11 @@ public class SearchFragment extends Fragment {
     class Holder {
         final RecyclerView rvHeroes;
         final EditText etHeroSearch;
+        private ProgressBar loading;
 
         public Holder() {
             this.rvHeroes = rootView.findViewById(R.id.rvHeroes);
+            loading = rootView.findViewById(R.id.progress_loader);
 
             volleyMarvel = new MarvelApiVolley(rootView.getContext()) {
 
@@ -86,6 +89,7 @@ public class SearchFragment extends Fragment {
                     rvHeroes.setLayoutManager(layoutManager);
                     HeroAdapter mAdapter = new HeroAdapter(heroes, (Context) getActivity());
                     rvHeroes.setAdapter(mAdapter);
+                    loading.setVisibility(View.GONE);
                 }
             };
 
@@ -95,6 +99,7 @@ public class SearchFragment extends Fragment {
             etHeroSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override
                 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    loading.setVisibility(View.VISIBLE);
                     String nameStartsWith = etHeroSearch.getText().toString();
                     hideSoftKeyboard(getActivity());
                     ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
