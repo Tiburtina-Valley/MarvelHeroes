@@ -18,6 +18,7 @@ import com.google.gson.internal.$Gson$Preconditions;
 
 import java.util.List;
 
+import it.tiburtinavalley.marvelheroes.dao.AppDatabase;
 import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.model.Creators;
 import it.tiburtinavalley.marvelheroes.model.Events;
@@ -198,6 +199,7 @@ public class EventsActivity extends AppCompatActivity {
                     EventsActivity.this, RecyclerView.HORIZONTAL, false);
             rvSeries.setLayoutManager(layoutManagerSeries);
         }
+
 
 
         //Definisco la funzione che setta tutti gli elementi della view.
