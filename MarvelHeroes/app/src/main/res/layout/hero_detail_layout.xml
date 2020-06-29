@@ -108,6 +108,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/rvHeight"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="24dp"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -130,6 +132,8 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginStart="24dp"
+
                 android:id="@+id/rvEvents"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/rvHeight"
@@ -165,6 +169,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/rvEvents" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginStart="24dp"
+
                 android:id="@+id/rvSeries"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/rvHeight"
@@ -175,6 +181,8 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvStories"
+                android:layout_marginStart="24dp"
+
                 android:layout_width="@dimen/rvWidth"
                 android:layout_height="@dimen/rvHeight"
                 android:layout_marginTop="22sp"

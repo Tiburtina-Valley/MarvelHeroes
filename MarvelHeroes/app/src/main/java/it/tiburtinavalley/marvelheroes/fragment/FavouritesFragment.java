@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,7 +36,9 @@ public class FavouritesFragment extends Fragment {
         rvHeroes = v.findViewById(R.id.rvFavouriteHeroes);
         LinearLayoutManager layoutManagerHeroes = new LinearLayoutManager(
                 getActivity(), RecyclerView.VERTICAL, false);
-        rvHeroes.setLayoutManager(layoutManagerHeroes);
+        int numberOfColumns = 2;
+        rvHeroes.setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns));
+
         List<HeroEntity> list = AppDatabase.getInstance(getActivity().getApplicationContext()).heroDao().getHeroList();
         if (list != null) {
             FavoriteHeroAdapter favoriteAdapter = new FavoriteHeroAdapter(list, getContext());

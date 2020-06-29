@@ -59,7 +59,7 @@ public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapte
         ConstraintLayout cl;
         cl = (ConstraintLayout) LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.hero_layout, parent, false);
+                .inflate(R.layout.favourite_hero_layout, parent, false);
         cl.setOnClickListener(this);
         return new FavoriteHeroAdapter.Holder(cl);
     }
