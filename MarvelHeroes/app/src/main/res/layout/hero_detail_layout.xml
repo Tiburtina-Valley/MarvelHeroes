@@ -54,9 +54,8 @@
         android:id="@+id/scrollView2"
         android:layout_width="411dp"
         android:layout_height="595dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvPhotoContainer">
+        app:layout_constraintTop_toBottomOf="@+id/cvPhotoContainer"
+        tools:layout_editor_absoluteX="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout"
