@@ -29,8 +29,8 @@
         android:paddingTop="0dp"
         android:paddingEnd="0dp"
         android:paddingRight="0dp"
-        android:paddingBottom="0dp"
 
+        android:paddingBottom="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"

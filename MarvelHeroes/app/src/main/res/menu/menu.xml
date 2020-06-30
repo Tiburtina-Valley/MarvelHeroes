@@ -4,8 +4,4 @@
     <item
         android:id="@+id/AboutBtn"
         android:title="@string/AboutBtn" />
-    <item
-        android:id="@+id/itemDelete"
-        android:title="Remove heroes"
-        app:showAsAction="always"/>
 </menu>
