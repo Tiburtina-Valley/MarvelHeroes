@@ -2,19 +2,16 @@ package it.tiburtinavalley.marvelheroes.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-
 import it.tiburtinavalley.marvelheroes.fragment.FavouritesFragment;
 import it.tiburtinavalley.marvelheroes.fragment.HomeFragment;
 import it.tiburtinavalley.marvelheroes.fragment.SearchFragment;
@@ -22,7 +19,6 @@ import it.tiburtinavalley.marvelheroes.R;
 
 
 public class MainActivity extends AppCompatActivity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
         setFragment(new HomeFragment());
-
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -50,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.action_search:
-                    setFragment(new SearchFragment(getApplicationContext()));
+                    setFragment(new SearchFragment());
                     return true;
 
 

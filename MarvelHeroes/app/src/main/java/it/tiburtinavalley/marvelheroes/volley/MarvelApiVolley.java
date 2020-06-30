@@ -3,6 +3,8 @@ package it.tiburtinavalley.marvelheroes.volley;
 /* this class is in charge on internet queries*/
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -34,15 +36,17 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
     private RequestQueue requestQueue;
     private Context context;
     private String urlBase = "https://gateway.marvel.com/v1/public/%s";
+  
+    public abstract void fillList(List<HeroModel> heroes);
+  
     private String apiKey = "ts=1&apikey=a5f7b1501c40d87b927d3176fe38f22f&hash=dad24154bc30827c2290b5bd86f088fa&limit=100";//"ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea&limit=100";//"ts=1&apikey=68bdde3ebf9ba45c6c11839bd1f51cc3&hash=6433747692d0e40eaf799ef75ccc78ea";
+
 
     public MarvelApiVolley(Context context) {
         this.context = context;
         requestQueue = Volley.newRequestQueue(this.context);
         heroesImg = new ArrayList<>();
     }
-
-    public abstract void fillList(List<HeroModel> heroes);
 
     public void getCharacterInfoFromId(String heroId) {
         showToast = false;
@@ -103,8 +107,12 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        ToastClass toast = new ToastClass(context);
-        toast.showToast(context.getString(R.string.request_throttled));
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+            ToastClass toast = new ToastClass(context);
+            toast.showToast(context.getString(R.string.request_throttled));
+        }
         if (error != null && error.getMessage() != null) {
             Log.w("QueryFail", error.getMessage());
         }

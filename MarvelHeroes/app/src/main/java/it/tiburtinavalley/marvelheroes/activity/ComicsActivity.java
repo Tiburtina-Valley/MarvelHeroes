@@ -163,7 +163,7 @@ public class ComicsActivity extends AppCompatActivity {
         }
 
         private void dismissLoading() {
-            if (loading_count >= 1) {
+            if (loading_count >= 2) {
                 loading.setVisibility(View.GONE);
                 layout.setVisibility(View.VISIBLE);
             }

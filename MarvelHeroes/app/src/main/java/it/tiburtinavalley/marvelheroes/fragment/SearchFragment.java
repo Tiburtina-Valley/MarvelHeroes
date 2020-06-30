@@ -38,14 +38,10 @@ public class SearchFragment extends Fragment {
     View rootView;
     Context context;
 
-    public SearchFragment(Context context) {
-        this.context = context;
-    }
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        this.context = getActivity().getApplicationContext();
         imgVolley = new ImageApiVolley(getActivity().getApplicationContext());
 
         rootView = inflater.inflate(R.layout.fragment_search, container, false);
