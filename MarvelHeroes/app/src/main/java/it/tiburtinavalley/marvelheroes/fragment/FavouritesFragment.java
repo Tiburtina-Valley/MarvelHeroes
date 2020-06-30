@@ -2,6 +2,7 @@ package it.tiburtinavalley.marvelheroes.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import it.tiburtinavalley.marvelheroes.HeroActionMode;
+import it.tiburtinavalley.marvelheroes.HeroSelectMode;
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.EventsActivity;
 import it.tiburtinavalley.marvelheroes.dao.AppDatabase;
@@ -25,7 +28,6 @@ import it.tiburtinavalley.marvelheroes.recyclerviewadapter.FavoriteHeroAdapter;
 
 
 public class FavouritesFragment extends Fragment {
-
 
     @Nullable
     @Override

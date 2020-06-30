@@ -58,4 +58,5 @@
     <string name="ellipsis">...</string>
     <string name="home_second_section_title">Comic of the day</string>
     <string name="home_third_section_title">Series of the day</string>
+    <string name="delete_heroes">Delete</string>
 </resources>
