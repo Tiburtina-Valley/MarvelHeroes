@@ -111,7 +111,7 @@ public class EventsActivity extends AppCompatActivity {
                     rvHeroes.setAdapter(heroAdapter);
                     if (heroAdapter.getItemCount() == 0) {
                         tvHeroes.setTextSize(0);
-                        rvHeroes.setVisibility(View.INVISIBLE);
+                        tvHeroes.setVisibility(View.INVISIBLE);
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvHeroes.getLayoutParams();
                         marginParams.setMargins(0, 0, 0, 0);
                     }
@@ -129,7 +129,7 @@ public class EventsActivity extends AppCompatActivity {
                     rvCreators.setAdapter(creatorsAdapter);
                     if (creatorsAdapter.getItemCount() == 0) {
                         tvCreators.setTextSize(0);
-                        rvCreators.setVisibility(View.INVISIBLE);
+                        tvCreators.setVisibility(View.INVISIBLE);
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvCreators.getLayoutParams();
                         marginParams.setMargins(0, 0, 0, 0);
                     }
@@ -146,7 +146,7 @@ public class EventsActivity extends AppCompatActivity {
                     rvComics.setAdapter(comicsAdapter);
                     if (comicsAdapter.getItemCount() == 0) {
                         tvComics.setTextSize(0);
-                        rvComics.setVisibility(View.INVISIBLE);
+                        tvComics.setVisibility(View.INVISIBLE);
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvComics.getLayoutParams();
                         marginParams.setMargins(0, 0, 0, 0);
                     }
@@ -164,7 +164,7 @@ public class EventsActivity extends AppCompatActivity {
                     rvSeries.setAdapter(seriesAdapter);
                     if (seriesAdapter.getItemCount() == 0) {
                         tvSeries.setTextSize(0);
-                        rvSeries.setVisibility(View.INVISIBLE);
+                        tvSeries.setVisibility(View.INVISIBLE);
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvSeries.getLayoutParams();
                         marginParams.setMargins(0, 0, 0, 0);
                     }
