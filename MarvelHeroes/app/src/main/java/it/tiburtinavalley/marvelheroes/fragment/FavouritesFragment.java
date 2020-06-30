@@ -16,6 +16,7 @@ import java.util.List;
 
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.EventsActivity;
+import it.tiburtinavalley.marvelheroes.activity.MainActivity;
 import it.tiburtinavalley.marvelheroes.dao.AppDatabase;
 import it.tiburtinavalley.marvelheroes.dao.HeroDao;
 import it.tiburtinavalley.marvelheroes.dao.HeroRelatedDao;
@@ -32,6 +33,8 @@ public class FavouritesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_favourites, container, false);
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle("Your heroes");
+
         RecyclerView rvHeroes;
         rvHeroes = v.findViewById(R.id.rvFavouriteHeroes);
         LinearLayoutManager layoutManagerHeroes = new LinearLayoutManager(

@@ -1,5 +1,7 @@
 package it.tiburtinavalley.marvelheroes.fragment;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +46,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle("Home");
 
         defaultHeroId = getString(R.string.default_hero_id);;
         defaultComicId = getString(R.string.default_comic_id);

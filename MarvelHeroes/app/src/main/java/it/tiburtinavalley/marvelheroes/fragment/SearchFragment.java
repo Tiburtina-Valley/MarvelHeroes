@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import it.tiburtinavalley.marvelheroes.R;
+import it.tiburtinavalley.marvelheroes.activity.MainActivity;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.HeroAdapter;
@@ -48,6 +49,8 @@ public class SearchFragment extends Fragment {
         imgVolley = new ImageApiVolley(getActivity().getApplicationContext());
 
         rootView = inflater.inflate(R.layout.fragment_search, container, false);
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle("Search");
+
         holder = new Holder();
         return rootView;
     }
