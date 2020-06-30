@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
 
@@ -102,8 +103,11 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        if (error != null && error.getMessage() != null)
+        ToastClass toast = new ToastClass(context);
+        toast.showToast(context.getString(R.string.request_throttled));
+        if (error != null && error.getMessage() != null) {
             Log.w("QueryFail", error.getMessage());
+        }
     }
 
     @Override

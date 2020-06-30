@@ -62,4 +62,5 @@
     <string name="default_hero_id">1009351</string>
     <string name="default_comic_id">47903</string>
     <string name="default_series_id">354</string>
+    <string name="request_throttled">You have exceeded your rate limit.  Please try again later.</string>
 </resources>
