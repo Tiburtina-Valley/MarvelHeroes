@@ -179,7 +179,7 @@ public class HeroDetailActivity extends AppCompatActivity{
             else{
                 tvHeroDescription.setText(R.string.noDescription);
             }
-         
+
 
             if (hero.getThumbnail() != null) {
                 String urlThumbnail = hero.getThumbnail().getPath().replaceFirst("http", "https")

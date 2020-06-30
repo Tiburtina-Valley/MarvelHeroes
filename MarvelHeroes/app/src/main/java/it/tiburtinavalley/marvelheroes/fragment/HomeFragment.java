@@ -32,7 +32,7 @@ import it.tiburtinavalley.marvelheroes.volley.MarvelApiVolley;
 import it.tiburtinavalley.marvelheroes.volley.SeriesVolley;
 
 public class HomeFragment extends Fragment {
-    final int MAX_ATTEMPTS = 5;
+    final int MAX_ATTEMPTS = 2;
     MarvelApiVolley apiHero;
     ComicsVolley apiComic;
     SeriesVolley apiSeries;
