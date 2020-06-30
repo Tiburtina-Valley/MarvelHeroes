@@ -55,40 +55,39 @@ public class FavouritesFragment extends Fragment {
         return v;
     }
 
-    public class SelectModeListener implements HeroSelectMode{
+    public class SelectModeListener implements HeroSelectMode {
 
         @Override
         public void onSelect(int size) {
-            System.out.println("Qui\n");
-            if(mActionMode != null){
-                if(size == 0){
+            if (mActionMode != null) {
+                if (size == 0) {
                     mActionMode.finish();
                 }
                 return;
             }
-            mActionMode = ((AppCompatActivity)getActivity()).startSupportActionMode(hActionModeCallback);
+            mActionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(hActionModeCallback);
         }
     }
 
-    private androidx.appcompat.view.ActionMode.Callback hActionModeCallback = new androidx.appcompat.view.ActionMode.Callback() {
+    private ActionMode.Callback hActionModeCallback = new ActionMode.Callback() {
         @Override
-        public boolean onCreateActionMode(androidx.appcompat.view.ActionMode actionMode, Menu menu) {
+        public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
             actionMode.getMenuInflater().inflate(R.menu.menu_delete, menu);
             return true;
         }
 
         @Override
-        public boolean onPrepareActionMode(androidx.appcompat.view.ActionMode actionMode, Menu menu) {
-            return false;
-        }
-
-        @Override
-        public boolean onActionItemClicked(androidx.appcompat.view.ActionMode actionMode, MenuItem menuItem) {
-            switch (menuItem.getItemId()){
+        public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
                 case R.id.itemDelete:
                     favoriteAdapter.removeSelected();
                     actionMode.finish();
-                    return true;
+                    return true; 
                 default:
                     return false;
             }

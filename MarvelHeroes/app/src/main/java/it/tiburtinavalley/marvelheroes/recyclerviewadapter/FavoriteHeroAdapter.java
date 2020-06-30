@@ -52,6 +52,7 @@ public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapte
         final TextView tvHeroName;
         final ImageView ivHeroPic;
         final ConstraintLayout cl;
+        final ConstraintLayout borderLayout;
 
         Holder(@NonNull View itemView) {
             super(itemView);
@@ -59,6 +60,7 @@ public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapte
             tvHeroName = itemView.findViewById(R.id.tvHeroName);
             ivHeroPic = itemView.findViewById(R.id.ivHeroPhoto);
             cl = itemView.findViewById(R.id.heroConstraintLayout);
+            borderLayout = itemView.findViewById(R.id.borderLayout);
             cl.setBackground(ContextCompat.getDrawable(itemView.getContext(), R.drawable.hero_selector));
         }
     }
@@ -66,10 +68,15 @@ public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapte
     // carica l'activity di dettaglio dell'eroe
     @Override
     public void onClick(View v) {
-        if (selectedMenu) {
-            onLongClick(v);
+        if (selectedHeroesList.size() == 0) {
+            selectedMenu = false;
         }
         else {
+            if (selectedMenu) {
+                onLongClick(v);
+            }
+        }
+        if (!selectedMenu) {
             ConnectivityManager cm = (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
             if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
@@ -78,7 +85,6 @@ public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapte
                 HeroModel heroModel = new HeroModel();
                 heroModel.setHeroModelFromDb(hero);
                 Intent i = new Intent(appContext, FavoriteHeroDetail.class);
-
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.putExtra("hero", heroModel);
                 ActivityOptionsCompat options = ActivityOptionsCompat.
@@ -154,12 +160,17 @@ public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapte
             String urlThumbnail = hero.getPicturePath().replaceFirst("http", "https")
                     + ".jpg";
             Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivHeroPic);
+        }
+        if (holder.cl.isSelected()) {
+            holder.borderLayout.setBackgroundResource(R.drawable.border_selection);
+        }
+        else {
+            holder.borderLayout.setBackgroundResource(0);
+        }
     }
-}
 
     @Override
     public int getItemCount() {
         return heroes.size();
     }
-
 }
