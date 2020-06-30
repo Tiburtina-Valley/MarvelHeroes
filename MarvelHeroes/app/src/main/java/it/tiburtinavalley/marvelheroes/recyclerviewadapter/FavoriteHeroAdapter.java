@@ -38,6 +38,7 @@ public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapte
     private Context appContext;
     private SparseBooleanArray selectedHeroesList;
     private HeroSelectMode smListener;
+    private boolean selectedMenu = false;
 
     public FavoriteHeroAdapter(List<HeroEntity> all, Context appContext, HeroSelectMode listener) {
         heroes = new ArrayList<>();
@@ -65,24 +66,28 @@ public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapte
     // carica l'activity di dettaglio dell'eroe
     @Override
     public void onClick(View v) {
-        ConnectivityManager cm = (ConnectivityManager)appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-            int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
-            HeroEntity hero = heroes.get(position);
-            HeroModel heroModel=new HeroModel();
-            heroModel.setHeroModelFromDb(hero);
-            Intent i = new Intent(appContext, FavoriteHeroDetail.class);
-
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            i.putExtra("hero",  heroModel);
-            ActivityOptionsCompat options = ActivityOptionsCompat.
-                    makeSceneTransitionAnimation((Activity) appContext, (View) v, "profile");
-            appContext.startActivity(i, options.toBundle());
+        if (selectedMenu) {
+            onLongClick(v);
         }
         else {
-            ToastClass toast = new ToastClass(appContext);
-            toast.showToast(appContext.getString(R.string.internet_required));
+            ConnectivityManager cm = (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+            if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+                int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
+                HeroEntity hero = heroes.get(position);
+                HeroModel heroModel = new HeroModel();
+                heroModel.setHeroModelFromDb(hero);
+                Intent i = new Intent(appContext, FavoriteHeroDetail.class);
+
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                i.putExtra("hero", heroModel);
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation((Activity) appContext, (View) v, "profile");
+                appContext.startActivity(i, options.toBundle());
+            } else {
+                ToastClass toast = new ToastClass(appContext);
+                toast.showToast(appContext.getString(R.string.internet_required));
+            }
         }
     }
 
@@ -90,6 +95,7 @@ public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapte
     //Attiva un menù che permette di togliere dai preferiti più di un eroe
     @Override
     public boolean onLongClick(View view) {
+        selectedMenu = true;
         int pos = ((RecyclerView) view.getParent()).getChildAdapterPosition(view); //acquisisce la posizione dell'elemento della RecyclerView che è stato clickato
         boolean isSelected = selectedHeroesList.get(pos, false);
         if(isSelected) {
@@ -109,6 +115,7 @@ public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapte
 
     //cancella tutti glie elementi selezionati della lista
     public void removeSelected(){
+        selectedMenu = false;
         if(selectedHeroesList.size() > 0){ //controlla se c'è qualcosa da eliminare
             for(int i = heroes.size() -1; i >= 0; i--) { //si procede dal fondo verso la cima
                 if(selectedHeroesList.get(i, false)){
@@ -148,16 +155,6 @@ public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapte
                     + ".jpg";
             Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivHeroPic);
     }
-
-
-
-
-
-
-
-
-
-
 }
 
     @Override
