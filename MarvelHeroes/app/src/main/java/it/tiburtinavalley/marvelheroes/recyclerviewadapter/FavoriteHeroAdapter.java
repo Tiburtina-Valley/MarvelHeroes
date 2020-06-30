@@ -41,8 +41,6 @@ public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapte
         smListener = listener;
     }
 
-
-
     class Holder extends RecyclerView.ViewHolder {
         final TextView tvHeroName;
         final ImageView ivHeroPic;

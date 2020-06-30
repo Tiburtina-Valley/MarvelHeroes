@@ -48,8 +48,6 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
         heroesImg = new ArrayList<>();
     }
 
-    public abstract void fillList(List<HeroModel> heroes);
-
     public void getCharacterInfoFromId(String heroId) {
         showToast = false;
         String param = "characters/" + heroId + "?";
