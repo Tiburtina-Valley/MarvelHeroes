@@ -1,7 +1,6 @@
 package it.tiburtinavalley.marvelheroes.recyclerviewadapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +20,8 @@ import java.util.List;
 
 import it.tiburtinavalley.marvelheroes.HeroSelectMode;
 import it.tiburtinavalley.marvelheroes.R;
-import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.dao.AppDatabase;
 import it.tiburtinavalley.marvelheroes.entity.HeroEntity;
-import it.tiburtinavalley.marvelheroes.model.HeroModel;
-import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 
 public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapter.Holder> implements View.OnClickListener, View.OnLongClickListener {
     private final List<HeroEntity> heroes;

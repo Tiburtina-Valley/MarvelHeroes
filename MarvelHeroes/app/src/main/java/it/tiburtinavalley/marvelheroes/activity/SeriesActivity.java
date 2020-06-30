@@ -31,7 +31,6 @@ import it.tiburtinavalley.marvelheroes.recyclerviewadapter.UrlsRecyclerView;
 import it.tiburtinavalley.marvelheroes.volley.ComicsVolley;
 import it.tiburtinavalley.marvelheroes.volley.CreatorsVolley;
 import it.tiburtinavalley.marvelheroes.volley.EventsVolley;
-import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 import it.tiburtinavalley.marvelheroes.volley.MarvelApiVolley;
 
 public class SeriesActivity extends AppCompatActivity {
@@ -194,8 +193,6 @@ public class SeriesActivity extends AppCompatActivity {
 
         /** metodo per settare le informazioni della series selezionata */
         private void setData() {
-            ImageApiVolley imgVolley = new ImageApiVolley(getApplicationContext());
-            imgVolley.addHeroImg(ivSeriesImage);
 
             //Setta l'immagine di copertina della serie, se presente.
             if (series.getThumbnail() != null) {

@@ -19,18 +19,15 @@ import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.SeriesActivity;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.Series;
-import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 
 /** Classe adapter che gestisce le recycler view delle series*/
 public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHolder> implements View.OnClickListener {
     private List<Series> series;
-    ImageApiVolley imgVolley;
     Context appContext;
 
     public SeriesAdapter(List<Series> all, Context appContext) {
         series = new ArrayList<>();
         series.addAll(all);
-        imgVolley = new ImageApiVolley(appContext);
         this.appContext = appContext;
     }
 
@@ -50,7 +47,6 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
     /** Metodo che setta il layout delle series */
     @Override
     public void onBindViewHolder(@NonNull SeriesHolder holder, int position) {
-        imgVolley.addHeroImg(holder.ivSeries);
         if(series.get(position).getThumbnail() != null) {
             String urlThumbnail = series.get(position).getThumbnail().getPath().replaceFirst("http", "https")
                     + "." + series.get(position).getThumbnail().getExtension();

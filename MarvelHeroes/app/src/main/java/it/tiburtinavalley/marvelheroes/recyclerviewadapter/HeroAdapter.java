@@ -26,17 +26,14 @@ import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.HeroDetailActivity;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
-import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 
 public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.Holder> implements View.OnClickListener {
     private final List<HeroModel> heroes;
-    private ImageApiVolley imgVolley;
     private Context appContext;
 
     public HeroAdapter(List<HeroModel> all, Context appContext) {
         heroes = new ArrayList<>();
         heroes.addAll(all);
-        imgVolley = new ImageApiVolley(appContext);
         this.appContext = appContext;
     }
 
@@ -56,7 +53,6 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.Holder> implem
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         HeroModel hero = heroes.get(position);
         holder.tvHeroName.setText(hero.getName());
-        imgVolley.addHeroImg(holder.ivHeroPic);
         if (!hero.getThumbnail().getPath().equalsIgnoreCase("")
                 && !hero.getThumbnail().getExtension().equalsIgnoreCase("")) {
             String urlThumbnail = hero.getThumbnail().getPath().replaceFirst("http", "https")

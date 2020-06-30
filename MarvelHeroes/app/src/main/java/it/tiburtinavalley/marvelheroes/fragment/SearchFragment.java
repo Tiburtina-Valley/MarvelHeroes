@@ -27,14 +27,12 @@ import it.tiburtinavalley.marvelheroes.activity.MainActivity;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.HeroAdapter;
-import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 import it.tiburtinavalley.marvelheroes.volley.MarvelApiVolley;
 
 public class SearchFragment extends Fragment {
 
     Holder holder;
     MarvelApiVolley volleyMarvel;
-    ImageApiVolley imgVolley;
     View rootView;
     Context context;
 
@@ -42,7 +40,6 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.context = getActivity().getApplicationContext();
-        imgVolley = new ImageApiVolley(getActivity().getApplicationContext());
 
         rootView = inflater.inflate(R.layout.fragment_search, container, false);
         ((MainActivity)getActivity()).getSupportActionBar().setTitle("Search");

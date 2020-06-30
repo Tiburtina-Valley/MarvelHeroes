@@ -1,7 +1,6 @@
 package it.tiburtinavalley.marvelheroes.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -14,11 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.internal.$Gson$Preconditions;
 
 import java.util.List;
 
-import it.tiburtinavalley.marvelheroes.dao.AppDatabase;
 import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.model.Creators;
 import it.tiburtinavalley.marvelheroes.model.Events;
@@ -27,13 +24,11 @@ import it.tiburtinavalley.marvelheroes.model.HeroModel;
 import it.tiburtinavalley.marvelheroes.model.Series;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.ComicsAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.CreatorsAdapter;
-import it.tiburtinavalley.marvelheroes.recyclerviewadapter.HeroAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.HeroDetailAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.SeriesAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.UrlsRecyclerView;
 import it.tiburtinavalley.marvelheroes.volley.ComicsVolley;
 import it.tiburtinavalley.marvelheroes.volley.CreatorsVolley;
-import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 import it.tiburtinavalley.marvelheroes.volley.MarvelApiVolley;
 import it.tiburtinavalley.marvelheroes.volley.SeriesVolley;
 
@@ -111,7 +106,7 @@ public class EventsActivity extends AppCompatActivity {
                     rvHeroes.setAdapter(heroAdapter);
                     if (heroAdapter.getItemCount() == 0) {
                         tvHeroes.setTextSize(0);
-                        rvHeroes.setVisibility(View.INVISIBLE);
+                        tvHeroes.setVisibility(View.INVISIBLE);
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvHeroes.getLayoutParams();
                         marginParams.setMargins(0, 0, 0, 0);
                     }
@@ -129,7 +124,7 @@ public class EventsActivity extends AppCompatActivity {
                     rvCreators.setAdapter(creatorsAdapter);
                     if (creatorsAdapter.getItemCount() == 0) {
                         tvCreators.setTextSize(0);
-                        rvCreators.setVisibility(View.INVISIBLE);
+                        tvCreators.setVisibility(View.INVISIBLE);
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvCreators.getLayoutParams();
                         marginParams.setMargins(0, 0, 0, 0);
                     }
@@ -146,7 +141,7 @@ public class EventsActivity extends AppCompatActivity {
                     rvComics.setAdapter(comicsAdapter);
                     if (comicsAdapter.getItemCount() == 0) {
                         tvComics.setTextSize(0);
-                        rvComics.setVisibility(View.INVISIBLE);
+                        tvComics.setVisibility(View.INVISIBLE);
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvComics.getLayoutParams();
                         marginParams.setMargins(0, 0, 0, 0);
                     }
@@ -164,7 +159,7 @@ public class EventsActivity extends AppCompatActivity {
                     rvSeries.setAdapter(seriesAdapter);
                     if (seriesAdapter.getItemCount() == 0) {
                         tvSeries.setTextSize(0);
-                        rvSeries.setVisibility(View.INVISIBLE);
+                        tvSeries.setVisibility(View.INVISIBLE);
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvSeries.getLayoutParams();
                         marginParams.setMargins(0, 0, 0, 0);
                     }

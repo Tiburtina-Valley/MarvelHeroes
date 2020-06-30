@@ -19,18 +19,15 @@ import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.ComicsActivity;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.Comics;
-import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 
 
 public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsHolder> implements View.OnClickListener {
     private List<Comics> comics;
-    ImageApiVolley imgVolley;
     Context appContext;
 
     public ComicsAdapter(List<Comics> all, Context appContext) {
         comics = new ArrayList<>();
         comics.addAll(all);
-        imgVolley = new ImageApiVolley(appContext);
         this.appContext = appContext;
     }
 
@@ -48,7 +45,6 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsHold
     // This method sets the layout of the hero
     @Override
     public void onBindViewHolder(@NonNull ComicsHolder holder, int position) {
-        imgVolley.addHeroImg(holder.ivComic);
         String urlThumbnail = comics.get(position).getThumbnail().getPath().replaceFirst("http", "https")
                 + "." + comics.get(position).getThumbnail().getExtension();
         Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivComic);

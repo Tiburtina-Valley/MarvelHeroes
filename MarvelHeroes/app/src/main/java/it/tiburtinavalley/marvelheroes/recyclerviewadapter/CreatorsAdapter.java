@@ -15,15 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import java.util.List;
 import it.tiburtinavalley.marvelheroes.R;
-import it.tiburtinavalley.marvelheroes.activity.ComicsActivity;
 import it.tiburtinavalley.marvelheroes.activity.CreatorsActivity;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.Creators;
-import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 
 public class CreatorsAdapter extends RecyclerView.Adapter<CreatorsAdapter.CreatorsHolder> implements View.OnClickListener{
     private List<Creators> creators;
-    private ImageApiVolley imgVolley;
     private Context appContext;
 
     public CreatorsAdapter(List<Creators> creatorsList, Context appContext){
@@ -53,7 +50,6 @@ public class CreatorsAdapter extends RecyclerView.Adapter<CreatorsAdapter.Creato
     @NonNull
     @Override
     public CreatorsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        imgVolley = new ImageApiVolley(parent.getContext());
         ConstraintLayout cl;
         cl = (ConstraintLayout) LayoutInflater
                 .from(parent.getContext())
@@ -64,7 +60,6 @@ public class CreatorsAdapter extends RecyclerView.Adapter<CreatorsAdapter.Creato
 
     @Override
     public void onBindViewHolder(@NonNull CreatorsHolder holder, int position) {
-        imgVolley.addHeroImg(holder.ivComic);
         if(creators.get(position).getThumbnail() != null) {
             String urlThumbnail = creators.get(position).getThumbnail().getPath().replaceFirst("http", "https")
                     + "." + creators.get(position).getThumbnail().getExtension();
