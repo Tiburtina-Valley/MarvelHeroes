@@ -9,8 +9,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -18,7 +16,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import it.tiburtinavalley.marvelheroes.R;
-import it.tiburtinavalley.marvelheroes.activity.MainActivity;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.HeroAdapter;
@@ -41,14 +37,10 @@ public class SearchFragment extends Fragment {
     View rootView;
     Context context;
 
-    public SearchFragment(Context context) {
-        this.context = context;
-    }
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        this.context = getActivity().getApplicationContext();
         imgVolley = new ImageApiVolley(getActivity().getApplicationContext());
 
         rootView = inflater.inflate(R.layout.fragment_search, container, false);
@@ -104,6 +96,8 @@ public class SearchFragment extends Fragment {
                     if(nameStartsWith.isEmpty()){
                         hideSoftKeyboard(getActivity());
                         loading.setVisibility(View.GONE);
+                        ToastClass toast = new ToastClass(context);
+                        toast.showToast(getString(R.string.empty_search));
                         return true;
                     }
                     hideSoftKeyboard(getActivity());
@@ -114,6 +108,7 @@ public class SearchFragment extends Fragment {
                         return true;
                     }
                     else {
+                        loading.setVisibility(View.GONE);
                         ToastClass toast = new ToastClass(context);
                         toast.showToast(context.getString(R.string.internet_required));
                         return false;

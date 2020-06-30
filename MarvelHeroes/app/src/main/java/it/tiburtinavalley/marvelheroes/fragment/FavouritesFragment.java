@@ -15,6 +15,7 @@ import androidx.appcompat.view.ActionMode;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
@@ -38,7 +39,9 @@ public class FavouritesFragment extends Fragment {
         rvHeroes = v.findViewById(R.id.rvFavouriteHeroes);
         LinearLayoutManager layoutManagerHeroes = new LinearLayoutManager(
                 getActivity(), RecyclerView.VERTICAL, false);
-        rvHeroes.setLayoutManager(layoutManagerHeroes);
+        int numberOfColumns = 2;
+        rvHeroes.setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns));
+
         List<HeroEntity> list = AppDatabase.getInstance(getActivity().getApplicationContext()).heroDao().getHeroList();
         if (list != null) {
             smListener = new SelectModeListener();
