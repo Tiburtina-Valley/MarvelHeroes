@@ -96,7 +96,7 @@ public abstract class SeriesVolley implements Response.ErrorListener, Response.L
             Type listType = new TypeToken<List<Series>>() {
             }.getType();
             List<Series> seriesList = gson.fromJson(comics, listType);
-            if (seriesList != null && seriesList.size() > 0) {
+            if (seriesList != null) {
                 //db.cocktailDAO().insertAll(cnt);    // NON OBBLIGATORIO
                 fillSeries(seriesList);
             }

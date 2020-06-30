@@ -43,6 +43,7 @@ public class HeroDetailActivity extends AppCompatActivity{
     private EventsVolley eVolley;
 
     private Boolean isFavorite = false;
+    private Holder holder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +53,15 @@ public class HeroDetailActivity extends AppCompatActivity{
 
         setContentView(R.layout.hero_detail_layout);
         hm = getIntent().getParcelableExtra("hero");
-        Holder holder = new Holder();
+        holder = new Holder();
+        holder.setRecyclerViews();
         holder.setDetails(hm);
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        holder.dismissLoading();
     }
 
     class Holder  implements View.OnClickListener {
@@ -98,18 +106,6 @@ public class HeroDetailActivity extends AppCompatActivity{
 
             initFavoriteBtn();
 
-            LinearLayoutManager layoutManagerComics = new LinearLayoutManager(
-                    HeroDetailActivity.this, RecyclerView.HORIZONTAL, false);
-            rvComics.setLayoutManager(layoutManagerComics);
-
-            LinearLayoutManager layoutManagerSeries = new LinearLayoutManager(
-                    HeroDetailActivity.this, RecyclerView.HORIZONTAL, false);
-            rvSeries.setLayoutManager(layoutManagerSeries);
-
-            LinearLayoutManager layoutManagerEvents = new LinearLayoutManager(
-                    HeroDetailActivity.this, RecyclerView.HORIZONTAL, false);
-            rvEvents.setLayoutManager(layoutManagerEvents);
-
             cVolley = new ComicsVolley(getApplicationContext()) {
                 @Override
                 public void fillComics(List<Comics> comicsList) {
@@ -134,7 +130,6 @@ public class HeroDetailActivity extends AppCompatActivity{
             };
 
             seVolley = new SeriesVolley(getApplicationContext()) {
-
                 @Override
                 public void fillSeries(List<Series> seriesList) {
                     sAdapter = new SeriesAdapter(seriesList, getApplicationContext());
@@ -150,8 +145,6 @@ public class HeroDetailActivity extends AppCompatActivity{
             };
 
             eVolley= new EventsVolley(getApplicationContext()) {
-
-
                 @Override
                 public void fillEvents(List<Events> eventsList) {
                     eAdapter=new EventsAdapter(eventsList,getApplicationContext());
@@ -166,9 +159,21 @@ public class HeroDetailActivity extends AppCompatActivity{
 
                 }
             };
-
         }
 
+        private void setRecyclerViews() {
+            LinearLayoutManager layoutManagerComics = new LinearLayoutManager(
+                    HeroDetailActivity.this, RecyclerView.HORIZONTAL, false);
+            rvComics.setLayoutManager(layoutManagerComics);
+
+            LinearLayoutManager layoutManagerSeries = new LinearLayoutManager(
+                    HeroDetailActivity.this, RecyclerView.HORIZONTAL, false);
+            rvSeries.setLayoutManager(layoutManagerSeries);
+
+            LinearLayoutManager layoutManagerEvents = new LinearLayoutManager(
+                    HeroDetailActivity.this, RecyclerView.HORIZONTAL, false);
+            rvEvents.setLayoutManager(layoutManagerEvents);
+        }
 
         public void setDetails(HeroModel hero) {
             getSupportActionBar().setTitle(hm.getName());
@@ -190,6 +195,7 @@ public class HeroDetailActivity extends AppCompatActivity{
             cVolley.getComicsRelatedToHero(hm.getId());
             seVolley.getSeriesRelatedToHero(hm.getId());
             eVolley.getEventInfo(hm.getId());
+            dismissLoading();
         }
 
 
@@ -228,7 +234,7 @@ public class HeroDetailActivity extends AppCompatActivity{
         }
 
         private void dismissLoading() {
-            if (loading_count >= 2) {
+            if (loading_count >= 3) {
                 loading.setVisibility(View.GONE);
                 layout.setVisibility(View.VISIBLE);
             }
