@@ -52,13 +52,12 @@ public class HeroDetailAdapter extends RecyclerView.Adapter<HeroDetailAdapter.Ho
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         HeroModel hero = heroes.get(position);
         holder.tvHeroName.setText(hero.getName());;
-        if (!hero.getThumbnail().getPath().equalsIgnoreCase("")
-                && !hero.getThumbnail().getExtension().equalsIgnoreCase("")) {
-            String urlThumbnail = hero.getThumbnail().getPath().replaceFirst("http", "https")
-                    + "." + hero.getThumbnail().getExtension();
+        if (hero.getThumbnail()!=null);
+        String urlThumbnail = hero.getThumbnail().getPath().replaceFirst("http", "https")
+                + "." + hero.getThumbnail().getExtension();
             Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivHeroPic);
         }
-    }
+    
 
     @Override
     public int getItemCount() {

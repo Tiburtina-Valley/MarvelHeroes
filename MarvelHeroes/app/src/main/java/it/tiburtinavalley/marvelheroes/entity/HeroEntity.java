@@ -17,6 +17,7 @@ public class HeroEntity {
     @ColumnInfo(name = "description")
     private String description;
 
+
     public HeroEntity(int heroId, String name, String picturePath, String description) {
         this.heroId = heroId;
         this.name = name;
@@ -55,4 +56,7 @@ public class HeroEntity {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
+
 }

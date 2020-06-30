@@ -3,6 +3,8 @@ package it.tiburtinavalley.marvelheroes.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import it.tiburtinavalley.marvelheroes.entity.HeroEntity;
+
 /* Model che raccoglie tutte le informazioni relative al singolo eroe */
 
 public class HeroModel extends BasicElement {
@@ -10,7 +12,9 @@ public class HeroModel extends BasicElement {
     private String resourceURI;
     private String description;
 
-    protected HeroModel(Parcel in) {
+    public HeroModel(){}
+
+    public HeroModel(Parcel in) {
         id = in.readString();
         name = in.readString();
         description = in.readString();
@@ -18,6 +22,9 @@ public class HeroModel extends BasicElement {
         thumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
 
     }
+
+
+
 
     public static final Creator<HeroModel> CREATOR = new Creator<HeroModel>() {
         @Override
@@ -30,6 +37,10 @@ public class HeroModel extends BasicElement {
             return new HeroModel[size];
         }
     };
+
+    public String getResourceURI() {
+        return resourceURI;
+    }
 
     public String getName(){
         return this.name;
@@ -44,6 +55,8 @@ public class HeroModel extends BasicElement {
         return 0;
     }
 
+
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id);
@@ -52,5 +65,12 @@ public class HeroModel extends BasicElement {
         dest.writeString(resourceURI);
         dest.writeParcelable(thumbnail, flags);
 
+    }
+
+    public void setHeroModelFromDb(HeroEntity hero){
+        this.id=Integer.toString(hero.getHeroId());
+        this.name=hero.getName();
+        this.description=hero.getDescription();
+        this.resourceURI=hero.getPicturePath();
     }
 }
