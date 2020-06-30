@@ -23,6 +23,9 @@ public class HeroModel extends BasicElement {
 
     }
 
+
+
+
     public static final Creator<HeroModel> CREATOR = new Creator<HeroModel>() {
         @Override
         public HeroModel createFromParcel(Parcel in) {
@@ -34,6 +37,10 @@ public class HeroModel extends BasicElement {
             return new HeroModel[size];
         }
     };
+
+    public String getResourceURI() {
+        return resourceURI;
+    }
 
     public String getName(){
         return this.name;
@@ -47,6 +54,8 @@ public class HeroModel extends BasicElement {
     public int describeContents() {
         return 0;
     }
+
+
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
@@ -62,6 +71,6 @@ public class HeroModel extends BasicElement {
         this.id=Integer.toString(hero.getHeroId());
         this.name=hero.getName();
         this.description=hero.getDescription();
-        this.resourceURI=hero.getPicturePath();
+      
     }
 }
