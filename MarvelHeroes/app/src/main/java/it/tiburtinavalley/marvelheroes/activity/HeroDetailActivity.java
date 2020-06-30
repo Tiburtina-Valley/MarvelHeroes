@@ -193,6 +193,7 @@ public class HeroDetailActivity extends AppCompatActivity{
             }
             // TODO: fill comics, series and stories
 
+
             cVolley.getComicsRelatedToHero(hm.getId());
             seVolley.getSeriesRelatedToHero(hm.getId());
             eVolley.getEventInfo(hm.getId());
