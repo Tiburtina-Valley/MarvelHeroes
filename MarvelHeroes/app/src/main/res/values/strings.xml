@@ -58,5 +58,8 @@
     <string name="ellipsis">...</string>
     <string name="home_second_section_title">Comic of the day</string>
     <string name="home_third_section_title">Series of the day</string>
-    <string name="empty_serach">Please insert an hero\'s name</string>
+    <string name="empty_search">Please insert a hero\'s name</string>
+    <string name="default_hero_id">1009351</string>
+    <string name="default_comic_id">47903</string>
+    <string name="default_series_id">354</string>
 </resources>

@@ -14,10 +14,8 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
@@ -27,9 +25,16 @@ import it.tiburtinavalley.marvelheroes.volley.MarvelApiVolley;
 import it.tiburtinavalley.marvelheroes.volley.SeriesVolley;
 
 public class HomeFragment extends Fragment {
+    final int MAX_ATTEMPTS = 5;
     MarvelApiVolley apiHero;
     ComicsVolley apiComic;
     SeriesVolley apiSeries;
+    int heroAttempts;
+    int comicAttempts;
+    int seriesAttempts;
+    String defaultHeroId;
+    String defaultComicId;
+    String defaultStoriesId;
     Holder holder;
     View rootView;
 
@@ -37,6 +42,15 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        defaultHeroId = getString(R.string.default_hero_id);;
+        defaultComicId = getString(R.string.default_comic_id);
+        defaultStoriesId = getString(R.string.default_series_id);
+        
+        heroAttempts = 0;
+        comicAttempts = 0;
+        seriesAttempts = 0;
+
         holder = new Holder();
 
         apiHero = new MarvelApiVolley(getContext()) {
@@ -46,7 +60,7 @@ public class HomeFragment extends Fragment {
             }
         };
 
-        apiComic = new ComicsVolley(getContext()){
+        apiComic = new ComicsVolley(getContext()) {
             @Override
             public void fillComics(List<Comics> comicsList) {
                 holder.fillComicInfo(comicsList);
@@ -98,16 +112,25 @@ public class HomeFragment extends Fragment {
         }
 
         private void fillSeriesInfo(List<Series> seriesList) {
-            if(!seriesList.isEmpty()) {
+            seriesAttempts++;
+
+            if (!seriesList.isEmpty()) {
                 Series series = seriesList.get(0);
-                if(series.getDescription() == null || series.getDescription().isEmpty()){
-                    apiSeries.getRandomSeries();
+                if (series.getDescription() == null || series.getDescription().isEmpty()) {
+                    if (seriesAttempts >= MAX_ATTEMPTS) {
+                        apiSeries.getSeriesFromId(defaultStoriesId);
+                    } else {
+                        apiSeries.getRandomSeries();
+                    }
                     return;
                 }
+
+                seriesAttempts = 0;
+
                 String title = series.getTitle() != null ? series.getTitle() : "";
                 tvSeriesTitle.setText(title);
                 String description = series.getDescription() != null ? series.getDescription() : "";
-                if(!description.isEmpty())
+                if (!description.isEmpty())
                     tvSeriesDescription.setText(description);
 
                 if (!series.getThumbnail().getPath().equalsIgnoreCase("")
@@ -122,14 +145,23 @@ public class HomeFragment extends Fragment {
         }
 
         private void fillComicInfo(List<Comics> comicsList) {
-            if(!comicsList.isEmpty()) {
+            comicAttempts++;
+
+            if (!comicsList.isEmpty()) {
                 Comics comic = comicsList.get(0);
-                if(comic.getDescription() == null || comic.getDescription().isEmpty()){
-                    apiComic.getRandomComic();
+                if (comic.getDescription() == null || comic.getDescription().isEmpty()) {
+                    if (comicAttempts >= MAX_ATTEMPTS) {
+                        apiComic.getComicFromId(defaultComicId);
+                    } else {
+                        apiComic.getRandomComic();
+                    }
                     return;
                 }
+
+                comicAttempts = 0;
+
                 tvComicTitle.setText(comic.getTitle());
-                if(comic.getDescription() != null && !comic.getDescription().isEmpty());
+                if (comic.getDescription() != null && !comic.getDescription().isEmpty())
                     tvComicDescription.setText(comic.getDescription());
 
                 if (!comic.getThumbnail().getPath().equalsIgnoreCase("")
@@ -143,15 +175,24 @@ public class HomeFragment extends Fragment {
             }
         }
 
-        private void fillHeroInfo(List<HeroModel> heroes){
-            if(!heroes.isEmpty()) {
+        private void fillHeroInfo(List<HeroModel> heroes) {
+            heroAttempts++;
+
+            if (!heroes.isEmpty()) {
                 HeroModel hero = heroes.get(0);
-                if(hero.getDescription() == null || hero.getDescription().isEmpty()){
-                    apiHero.getRandomCharacterInfo();
+                if (hero.getDescription() == null || hero.getDescription().isEmpty()) {
+                    if (heroAttempts >= MAX_ATTEMPTS) {
+                        apiHero.getCharacterInfoFromId(defaultHeroId);
+                    } else {
+                        apiHero.getRandomCharacterInfo();
+                    }
                     return;
                 }
+
+                heroAttempts = 0;
+
                 tvHeroName.setText(hero.getName());
-                if(hero.getDescription() != null && !hero.getDescription().isEmpty());
+                if (hero.getDescription() != null && !hero.getDescription().isEmpty())
                     tvHeroDescription.setText(hero.getDescription());
 
                 if (!hero.getThumbnail().getPath().equalsIgnoreCase("")

@@ -3,10 +3,7 @@ package it.tiburtinavalley.marvelheroes.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,7 +20,6 @@ import java.util.List;
 
 import it.tiburtinavalley.marvelheroes.dao.AppDatabase;
 import it.tiburtinavalley.marvelheroes.entity.HeroEntity;
-import it.tiburtinavalley.marvelheroes.entity.RelatedEntity;
 import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.model.Events;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
@@ -185,8 +181,8 @@ public class HeroDetailActivity extends AppCompatActivity{
             imgVolley.getImageFromUrl(hero.getThumbnail().getPath().replaceFirst("http", "https")
                     + "." + hero.getThumbnail().getExtension());
             // TODO: fill comics, series and stories
-            cVolley.getComicsInfo(hm.getId());
-            seVolley.getSeriesInfo(hm.getId());
+            cVolley.getComicsRelatedToHero(hm.getId());
+            seVolley.getSeriesRelatedToHero(hm.getId());
             stVolley.getStoriesInfo(hm.getId());
             eVolley.getEventInfo(hm.getId());
         }

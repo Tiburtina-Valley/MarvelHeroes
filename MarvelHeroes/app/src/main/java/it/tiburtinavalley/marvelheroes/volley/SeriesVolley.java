@@ -33,7 +33,12 @@ public abstract class SeriesVolley implements Response.ErrorListener, Response.L
         requestQueue = Volley.newRequestQueue(context);
     }
 
-    public void getSeriesInfo(String heroId){
+    public void getSeriesFromId(String seriesId){
+        String param = "series/" + seriesId + "?";
+        seriesApiCall(param);
+    }
+
+    public void getSeriesRelatedToHero(String heroId){
         String series = "characters/" + heroId + "/series?";
         seriesApiCall(series);
     }

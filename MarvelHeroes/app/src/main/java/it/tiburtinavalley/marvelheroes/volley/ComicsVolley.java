@@ -22,8 +22,8 @@ import it.tiburtinavalley.marvelheroes.model.Comics;
    relative a Storie, Fumetti e Serie collegate agli eroi*/
 
 public abstract class ComicsVolley implements Response.ErrorListener, Response.Listener<String>{
-    private String urlBase = "https://gateway.marvel.com/v1/public/%s";
-    private String apiKey = "ts=1&apikey=68bdde3ebf9ba45c6c11839bd1f51cc3&hash=6433747692d0e40eaf799ef75ccc78ea";//"ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea&limit=100";
+    private final String urlBase = "https://gateway.marvel.com/v1/public/%s";
+    private final String apiKey = "ts=1&apikey=68bdde3ebf9ba45c6c11839bd1f51cc3&hash=6433747692d0e40eaf799ef75ccc78ea";//"ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea&limit=100";
     private RequestQueue requestQueue;
 
     public abstract void fillComics(List<Comics> comicsList);
@@ -35,11 +35,16 @@ public abstract class ComicsVolley implements Response.ErrorListener, Response.L
     public void getRandomComic(){
         Random r = new Random();
         char randomLetter = (char) (r.nextInt(26) + 'a');
-        String param = "/comics?titleStartsWith=" + randomLetter + "&limit=1&";
+        String param = "comics?titleStartsWith=" + randomLetter + "&limit=1&";
         comicApiCall(param);
     }
 
-    public void getComicsInfo(String heroId){
+    public void getComicFromId(String comicId){
+        String param = "comics/" + comicId + "?";
+        comicApiCall(param);
+    }
+
+    public void getComicsRelatedToHero(String heroId){
         String comic = "characters/"+ heroId + "/comics?";
         comicApiCall(comic);
     }
