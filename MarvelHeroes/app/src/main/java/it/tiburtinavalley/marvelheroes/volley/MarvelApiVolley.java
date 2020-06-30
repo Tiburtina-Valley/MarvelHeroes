@@ -3,6 +3,8 @@ package it.tiburtinavalley.marvelheroes.volley;
 /* this class is in charge on internet queries*/
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -103,8 +105,12 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        ToastClass toast = new ToastClass(context);
-        toast.showToast(context.getString(R.string.request_throttled));
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+            ToastClass toast = new ToastClass(context);
+            toast.showToast(context.getString(R.string.request_throttled));
+        }
         if (error != null && error.getMessage() != null) {
             Log.w("QueryFail", error.getMessage());
         }

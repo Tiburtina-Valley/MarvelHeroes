@@ -1,5 +1,8 @@
 package it.tiburtinavalley.marvelheroes.fragment;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +22,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.MainActivity;
+import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
 import it.tiburtinavalley.marvelheroes.model.Series;
@@ -39,10 +43,12 @@ public class HomeFragment extends Fragment {
     String defaultStoriesId;
     Holder holder;
     View rootView;
+    private Context context;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        this.context = getActivity().getApplicationContext();
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         defaultHeroId = getString(R.string.default_hero_id);;
@@ -54,6 +60,7 @@ public class HomeFragment extends Fragment {
         seriesAttempts = 0;
 
         holder = new Holder();
+        holder.checkConnection();
 
         apiHero = new MarvelApiVolley(getContext()) {
             @Override
@@ -114,6 +121,16 @@ public class HomeFragment extends Fragment {
             layout = rootView.findViewById(R.id.layout);
         }
 
+        private void checkConnection() {
+            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+            if (activeNetwork == null || !activeNetwork.isConnectedOrConnecting()) {
+                loading.setVisibility(View.GONE);
+                ToastClass toast = new ToastClass(context);
+                toast.showToast(context.getString(R.string.internet_required));
+            }
+        }
+
         private void fillSeriesInfo(List<Series> seriesList) {
             // if null, activity was probably destroyed
             if(getActivity() == null)
@@ -139,7 +156,6 @@ public class HomeFragment extends Fragment {
                 String description = series.getDescription() != null ? series.getDescription() : "";
                 if (!description.isEmpty())
                     tvSeriesDescription.setText(description);
-
                 if (!series.getThumbnail().getPath().equalsIgnoreCase("")
                         && !series.getThumbnail().getExtension().equalsIgnoreCase("")) {
                     String urlThumbnail = series.getThumbnail().getPath().replaceFirst("http", "https")
@@ -222,7 +238,7 @@ public class HomeFragment extends Fragment {
         }
 
         private void dismissLoading() {
-            if (loading_count >= 2) {
+            if (loading_count >= 3) {
                 loading.setVisibility(View.GONE);
                 layout.setVisibility(View.VISIBLE);
             }

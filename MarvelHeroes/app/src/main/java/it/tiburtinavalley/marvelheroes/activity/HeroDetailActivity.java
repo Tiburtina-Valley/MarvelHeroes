@@ -117,7 +117,6 @@ public class HeroDetailActivity extends AppCompatActivity{
             rvEvents.setLayoutManager(layoutManagerEvents);
 
             cVolley = new ComicsVolley(getApplicationContext()) {
-
                 @Override
                 public void fillComics(List<Comics> comicsList) {
                     //controlla se sono stati trovati dei fumetti legati agli eroi

@@ -225,7 +225,7 @@ public class SeriesActivity extends AppCompatActivity {
         }
 
         private void dismissLoading() {
-            if (loading_count >= 3) {
+            if (loading_count >= 4) {
                 loading.setVisibility(View.GONE);
                 layout.setVisibility(View.VISIBLE);
             }
