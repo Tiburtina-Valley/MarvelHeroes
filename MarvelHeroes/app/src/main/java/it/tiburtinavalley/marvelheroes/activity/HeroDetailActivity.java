@@ -185,13 +185,14 @@ public class HeroDetailActivity extends AppCompatActivity{
                 tvHeroDescription.setText(R.string.noDescription);
             }
 
-
             if (hero.getThumbnail() != null) {
+
                 String urlThumbnail = hero.getThumbnail().getPath().replaceFirst("http", "https")
                         + "." + hero.getThumbnail().getExtension();
                 Glide.with(getApplicationContext()).load(urlThumbnail).into(this.ivHeroPhoto);
             }
             // TODO: fill comics, series and stories
+
             cVolley.getComicsRelatedToHero(hm.getId());
             seVolley.getSeriesRelatedToHero(hm.getId());
             eVolley.getEventInfo(hm.getId());
@@ -203,7 +204,7 @@ public class HeroDetailActivity extends AppCompatActivity{
             if (v.getId() == R.id.btnAddFavorite) {
 
                 if (!isFavorite) {
-                    HeroEntity hero = new HeroEntity(Integer.parseInt(hm.getId()), hm.getName(), "", hm.getDescription());
+                    HeroEntity hero = new HeroEntity(Integer.parseInt(hm.getId()), hm.getName(),hm.getThumbnail().getPath(), hm.getDescription());
                     AppDatabase.getInstance(getApplicationContext()).heroDao().insertHero(hero);
 
 

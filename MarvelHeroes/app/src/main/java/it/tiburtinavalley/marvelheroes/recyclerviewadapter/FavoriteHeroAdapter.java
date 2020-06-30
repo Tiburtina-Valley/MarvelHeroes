@@ -26,6 +26,7 @@ import java.util.List;
 
 import it.tiburtinavalley.marvelheroes.HeroSelectMode;
 import it.tiburtinavalley.marvelheroes.R;
+import it.tiburtinavalley.marvelheroes.activity.FavoriteHeroDetail;
 import it.tiburtinavalley.marvelheroes.activity.HeroDetailActivity;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.dao.AppDatabase;
@@ -71,7 +72,7 @@ public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapte
             HeroEntity hero = heroes.get(position);
             HeroModel heroModel=new HeroModel();
             heroModel.setHeroModelFromDb(hero);
-            Intent i = new Intent(appContext, HeroDetailActivity.class);
+            Intent i = new Intent(appContext, FavoriteHeroDetail.class);
 
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             i.putExtra("hero",  heroModel);

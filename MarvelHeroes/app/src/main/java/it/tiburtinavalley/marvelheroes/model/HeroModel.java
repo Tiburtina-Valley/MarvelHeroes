@@ -71,6 +71,6 @@ public class HeroModel extends BasicElement {
         this.id=Integer.toString(hero.getHeroId());
         this.name=hero.getName();
         this.description=hero.getDescription();
-      
+        this.resourceURI=hero.getPicturePath();
     }
 }
