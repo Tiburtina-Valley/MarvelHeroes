@@ -9,6 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import it.tiburtinavalley.marvelheroes.R;
+import it.tiburtinavalley.marvelheroes.activity.MainActivity;
 import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
 import it.tiburtinavalley.marvelheroes.model.Series;
@@ -46,7 +48,7 @@ public class HomeFragment extends Fragment {
         defaultHeroId = getString(R.string.default_hero_id);;
         defaultComicId = getString(R.string.default_comic_id);
         defaultStoriesId = getString(R.string.default_series_id);
-        
+
         heroAttempts = 0;
         comicAttempts = 0;
         seriesAttempts = 0;
@@ -94,6 +96,7 @@ public class HomeFragment extends Fragment {
         private ImageView ivSeries;
         private ProgressBar loading;
         private ConstraintLayout layout;
+        RequestOptions requestOptions = new RequestOptions();
 
         private int loading_count = 0;
 
@@ -112,6 +115,10 @@ public class HomeFragment extends Fragment {
         }
 
         private void fillSeriesInfo(List<Series> seriesList) {
+            // if null, activity was probably destroyed
+            if(getActivity() == null)
+                return;
+
             seriesAttempts++;
 
             if (!seriesList.isEmpty()) {
@@ -137,7 +144,7 @@ public class HomeFragment extends Fragment {
                         && !series.getThumbnail().getExtension().equalsIgnoreCase("")) {
                     String urlThumbnail = series.getThumbnail().getPath().replaceFirst("http", "https")
                             + "." + series.getThumbnail().getExtension();
-                    Glide.with(rootView).load(urlThumbnail).into(ivSeries);
+                    Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivSeries);
                 }
                 loading_count++;
                 dismissLoading();
@@ -145,6 +152,10 @@ public class HomeFragment extends Fragment {
         }
 
         private void fillComicInfo(List<Comics> comicsList) {
+            // if null, activity was probably destroyed
+            if(getActivity() == null)
+                return;
+
             comicAttempts++;
 
             if (!comicsList.isEmpty()) {
@@ -168,7 +179,7 @@ public class HomeFragment extends Fragment {
                         && !comic.getThumbnail().getExtension().equalsIgnoreCase("")) {
                     String urlThumbnail = comic.getThumbnail().getPath().replaceFirst("http", "https")
                             + "." + comic.getThumbnail().getExtension();
-                    Glide.with(rootView).load(urlThumbnail).into(ivComic);
+                    Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivComic);
                 }
                 loading_count++;
                 dismissLoading();
@@ -176,6 +187,10 @@ public class HomeFragment extends Fragment {
         }
 
         private void fillHeroInfo(List<HeroModel> heroes) {
+            // if null, activity was probably destroyed
+            if(getActivity() == null)
+                return;
+
             heroAttempts++;
 
             if (!heroes.isEmpty()) {
@@ -199,7 +214,7 @@ public class HomeFragment extends Fragment {
                         && !hero.getThumbnail().getExtension().equalsIgnoreCase("")) {
                     String urlThumbnail = hero.getThumbnail().getPath().replaceFirst("http", "https")
                             + "." + hero.getThumbnail().getExtension();
-                    Glide.with(rootView).load(urlThumbnail).into(ivHero);
+                    Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivHero);
                 }
                 loading_count++;
                 dismissLoading();
@@ -214,5 +229,8 @@ public class HomeFragment extends Fragment {
         }
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }
