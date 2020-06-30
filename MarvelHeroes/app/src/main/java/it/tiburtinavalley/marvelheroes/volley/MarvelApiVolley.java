@@ -102,7 +102,7 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        if (error != null)
+        if (error != null && error.getMessage() != null)
             Log.w("QueryFail", error.getMessage());
     }
 
