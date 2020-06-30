@@ -14,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -31,7 +32,6 @@ import it.tiburtinavalley.marvelheroes.recyclerviewadapter.SeriesAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.StoriesAdapter;
 import it.tiburtinavalley.marvelheroes.volley.ComicsVolley;
 import it.tiburtinavalley.marvelheroes.volley.EventsVolley;
-import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 import it.tiburtinavalley.marvelheroes.volley.SeriesVolley;
 
 
@@ -41,7 +41,6 @@ public class HeroDetailActivity extends AppCompatActivity{
     private ComicsVolley cVolley;
     private SeriesVolley seVolley;
     private EventsVolley eVolley;
-    private ImageApiVolley imgVolley;
 
     private Boolean isFavorite = false;
 
@@ -52,7 +51,6 @@ public class HeroDetailActivity extends AppCompatActivity{
 
 
         setContentView(R.layout.hero_detail_layout);
-        imgVolley = new ImageApiVolley(getApplicationContext());
         hm = getIntent().getParcelableExtra("hero");
         Holder holder = new Holder();
         holder.setDetails(hm);
@@ -181,9 +179,13 @@ public class HeroDetailActivity extends AppCompatActivity{
             else{
                 tvHeroDescription.setText(R.string.noDescription);
             }
-            imgVolley.addHeroImg(this.ivHeroPhoto);
-            imgVolley.getImageFromUrl(hero.getThumbnail().getPath().replaceFirst("http", "https")
-                    + "." + hero.getThumbnail().getExtension());
+         
+
+            if (hero.getThumbnail() != null) {
+                String urlThumbnail = hero.getThumbnail().getPath().replaceFirst("http", "https")
+                        + "." + hero.getThumbnail().getExtension();
+                Glide.with(getApplicationContext()).load(urlThumbnail).into(this.ivHeroPhoto);
+            }
             // TODO: fill comics, series and stories
             cVolley.getComicsRelatedToHero(hm.getId());
             seVolley.getSeriesRelatedToHero(hm.getId());

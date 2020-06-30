@@ -23,7 +23,6 @@ import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.EventsActivity;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.Events;
-import it.tiburtinavalley.marvelheroes.volley.ImageApiVolley;
 //Definisco l'adapter che gestirà le recycler view degli eventi
 
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHolder> implements View.OnClickListener {
