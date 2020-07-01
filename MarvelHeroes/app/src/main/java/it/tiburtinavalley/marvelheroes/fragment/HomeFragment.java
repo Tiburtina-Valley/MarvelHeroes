@@ -1,7 +1,9 @@
 package it.tiburtinavalley.marvelheroes.fragment;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -19,10 +21,16 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 import it.tiburtinavalley.marvelheroes.R;
+import it.tiburtinavalley.marvelheroes.activity.ComicsActivity;
+import it.tiburtinavalley.marvelheroes.activity.HeroDetailActivity;
 import it.tiburtinavalley.marvelheroes.activity.MainActivity;
+import it.tiburtinavalley.marvelheroes.activity.SeriesActivity;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
@@ -45,15 +53,19 @@ public class HomeFragment extends Fragment {
     Holder holder;
     View rootView;
     private Context context;
+    private HeroModel heroOfTheDay;
+    private Comics comicOfTheDay;
+    private Series seriesOfTheDay;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.context = getActivity().getApplicationContext();
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle("Home");
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Home");
 
-        defaultHeroId = getString(R.string.default_hero_id);;
+        defaultHeroId = getString(R.string.default_hero_id);
+        ;
         defaultComicId = getString(R.string.default_comic_id);
         defaultStoriesId = getString(R.string.default_series_id);
 
@@ -93,7 +105,10 @@ public class HomeFragment extends Fragment {
     }
 
 
-    class Holder {
+    class Holder implements View.OnClickListener {
+        private CardView cvHero;
+        private CardView cvComic;
+        private CardView cvSeries;
         private TextView tvHeroName;
         private TextView tvComicTitle;
         private TextView tvSeriesTitle;
@@ -110,6 +125,10 @@ public class HomeFragment extends Fragment {
         private int loading_count = 0;
 
         public Holder() {
+            cvHero = rootView.findViewById(R.id.cvHero);
+            cvComic = rootView.findViewById(R.id.cvComic);
+            cvSeries = rootView.findViewById(R.id.cvSeries);
+
             tvHeroName = rootView.findViewById(R.id.tvHeroName);
             tvComicTitle = rootView.findViewById(R.id.tvComicTitle);
             tvSeriesTitle = rootView.findViewById(R.id.tvSeriesTitle);
@@ -121,6 +140,10 @@ public class HomeFragment extends Fragment {
             ivSeries = rootView.findViewById(R.id.ivSeries);
             loading = rootView.findViewById(R.id.progress_loader);
             layout = rootView.findViewById(R.id.layout);
+
+            cvHero.setOnClickListener(this);
+            cvComic.setOnClickListener(this);
+            cvSeries.setOnClickListener(this);
         }
 
         private void checkConnection() {
@@ -135,14 +158,14 @@ public class HomeFragment extends Fragment {
 
         private void fillSeriesInfo(List<Series> seriesList) {
             // if null, activity was probably destroyed
-            if(getActivity() == null)
+            if (getActivity() == null)
                 return;
 
             seriesAttempts++;
 
             if (!seriesList.isEmpty()) {
-                Series series = seriesList.get(0);
-                if (series.getDescription() == null || series.getDescription().isEmpty()) {
+                seriesOfTheDay = seriesList.get(0);
+                if (seriesOfTheDay.getDescription() == null || seriesOfTheDay.getDescription().isEmpty()) {
                     if (seriesAttempts >= MAX_ATTEMPTS) {
                         apiSeries.getSeriesFromId(defaultStoriesId);
                     } else {
@@ -153,15 +176,15 @@ public class HomeFragment extends Fragment {
 
                 seriesAttempts = 0;
 
-                String title = series.getTitle() != null ? series.getTitle() : "";
+                String title = seriesOfTheDay.getTitle() != null ? seriesOfTheDay.getTitle() : "";
                 tvSeriesTitle.setText(title);
-                String description = series.getDescription() != null ? series.getDescription() : "";
+                String description = seriesOfTheDay.getDescription() != null ? seriesOfTheDay.getDescription() : "";
                 if (!description.isEmpty())
                     tvSeriesDescription.setText(description);
-                if (!series.getThumbnail().getPath().equalsIgnoreCase("")
-                        && !series.getThumbnail().getExtension().equalsIgnoreCase("")) {
-                    String urlThumbnail = series.getThumbnail().getPath().replaceFirst("http", "https")
-                            + "." + series.getThumbnail().getExtension();
+                if (!seriesOfTheDay.getThumbnail().getPath().equalsIgnoreCase("")
+                        && !seriesOfTheDay.getThumbnail().getExtension().equalsIgnoreCase("")) {
+                    String urlThumbnail = seriesOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
+                            + "." + seriesOfTheDay.getThumbnail().getExtension();
                     Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivSeries);
                 }
                 loading_count++;
@@ -171,14 +194,14 @@ public class HomeFragment extends Fragment {
 
         private void fillComicInfo(List<Comics> comicsList) {
             // if null, activity was probably destroyed
-            if(getActivity() == null)
+            if (getActivity() == null)
                 return;
 
             comicAttempts++;
 
             if (!comicsList.isEmpty()) {
-                Comics comic = comicsList.get(0);
-                if (comic.getDescription() == null || comic.getDescription().isEmpty()) {
+                comicOfTheDay = comicsList.get(0);
+                if (comicOfTheDay.getDescription() == null || comicOfTheDay.getDescription().isEmpty()) {
                     if (comicAttempts >= MAX_ATTEMPTS) {
                         apiComic.getComicFromId(defaultComicId);
                     } else {
@@ -189,14 +212,14 @@ public class HomeFragment extends Fragment {
 
                 comicAttempts = 0;
 
-                tvComicTitle.setText(comic.getTitle());
-                if (comic.getDescription() != null && !comic.getDescription().isEmpty())
-                    tvComicDescription.setText(comic.getDescription());
+                tvComicTitle.setText(comicOfTheDay.getTitle());
+                if (comicOfTheDay.getDescription() != null && !comicOfTheDay.getDescription().isEmpty())
+                    tvComicDescription.setText(comicOfTheDay.getDescription());
 
-                if (!comic.getThumbnail().getPath().equalsIgnoreCase("")
-                        && !comic.getThumbnail().getExtension().equalsIgnoreCase("")) {
-                    String urlThumbnail = comic.getThumbnail().getPath().replaceFirst("http", "https")
-                            + "." + comic.getThumbnail().getExtension();
+                if (!comicOfTheDay.getThumbnail().getPath().equalsIgnoreCase("")
+                        && !comicOfTheDay.getThumbnail().getExtension().equalsIgnoreCase("")) {
+                    String urlThumbnail = comicOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
+                            + "." + comicOfTheDay.getThumbnail().getExtension();
                     Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivComic);
                 }
                 loading_count++;
@@ -206,14 +229,14 @@ public class HomeFragment extends Fragment {
 
         private void fillHeroInfo(List<HeroModel> heroes) {
             // if null, activity was probably destroyed
-            if(getActivity() == null)
+            if (getActivity() == null)
                 return;
 
             heroAttempts++;
 
             if (!heroes.isEmpty()) {
-                HeroModel hero = heroes.get(0);
-                if (hero.getDescription() == null || hero.getDescription().isEmpty()) {
+                heroOfTheDay = heroes.get(0);
+                if (heroOfTheDay.getDescription() == null || heroOfTheDay.getDescription().isEmpty()) {
                     if (heroAttempts >= MAX_ATTEMPTS) {
                         apiHero.getCharacterInfoFromId(defaultHeroId);
                     } else {
@@ -224,14 +247,14 @@ public class HomeFragment extends Fragment {
 
                 heroAttempts = 0;
 
-                tvHeroName.setText(hero.getName());
-                if (hero.getDescription() != null && !hero.getDescription().isEmpty())
-                    tvHeroDescription.setText(hero.getDescription());
+                tvHeroName.setText(heroOfTheDay.getName());
+                if (heroOfTheDay.getDescription() != null && !heroOfTheDay.getDescription().isEmpty())
+                    tvHeroDescription.setText(heroOfTheDay.getDescription());
 
-                if (!hero.getThumbnail().getPath().equalsIgnoreCase("")
-                        && !hero.getThumbnail().getExtension().equalsIgnoreCase("")) {
-                    String urlThumbnail = hero.getThumbnail().getPath().replaceFirst("http", "https")
-                            + "." + hero.getThumbnail().getExtension();
+                if (!heroOfTheDay.getThumbnail().getPath().equalsIgnoreCase("")
+                        && !heroOfTheDay.getThumbnail().getExtension().equalsIgnoreCase("")) {
+                    String urlThumbnail = heroOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
+                            + "." + heroOfTheDay.getThumbnail().getExtension();
                     Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivHero);
                 }
                 loading_count++;
@@ -243,6 +266,56 @@ public class HomeFragment extends Fragment {
             if (loading_count >= 3) {
                 loading.setVisibility(View.GONE);
                 layout.setVisibility(View.VISIBLE);
+            }
+        }
+
+        @Override
+        public void onClick(View view) {
+            // click on Hero
+            if (view.getId() == R.id.cvHero) {
+                ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+
+                    Intent i = new Intent(context, HeroDetailActivity.class);
+
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    i.putExtra("hero", heroOfTheDay);
+                    context.startActivity(i);
+                } else {
+                    ToastClass toast = new ToastClass(context);
+                    toast.showToast(getContext().getString(R.string.internet_required));
+                }
+            }
+            // click on Comic
+            else if (view.getId() == R.id.cvComic) {
+                ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+
+                    Intent i = new Intent(context, ComicsActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    i.putExtra("comic", comicOfTheDay);
+                    context.startActivity(i);
+                } else {
+                    ToastClass toast = new ToastClass(context);
+                    toast.showToast(context.getString(R.string.internet_required));
+                }
+            }
+            // click on Series
+            else if (view.getId() == R.id.cvSeries) {
+                ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+
+                    Intent i = new Intent(context, SeriesActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    i.putExtra("series", seriesOfTheDay);
+                    context.startActivity(i);
+                } else {                                                      //toast che avverte in caso di mancanza di connessione ad internet
+                    ToastClass toast = new ToastClass(context);
+                    toast.showToast(context.getString(R.string.internet_required));
+                }
             }
         }
     }

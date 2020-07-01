@@ -9,12 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
-import com.bumptech.glide.Glide;
-import java.util.ArrayList;
-import java.util.List;
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.SeriesActivity;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
@@ -63,7 +66,7 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
     /** Metodo che gestisce il click su una determinata series nella recycler view, facendo partire l'activity di dettaglio */
     @Override
     public void onClick(View v) {
-        ConnectivityManager cm = (ConnectivityManager)appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
             int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
@@ -73,11 +76,10 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             i.putExtra("series", serie);
             appContext.startActivity(i);
+        } else {                                                      //toast che avverte in caso di mancanza di connessiona ad internet
+            ToastClass toast = new ToastClass(appContext);
+            toast.showToast(appContext.getString(R.string.internet_required));
         }
-        else {                                                      //toast che avverte in caso di mancanza di connessiona ad internet
-                ToastClass toast = new ToastClass(appContext);
-                toast.showToast(appContext.getString(R.string.internet_required));
-            }
     }
 
     /** Holder che definisce come sono fatte le singole entry della recycler view */
