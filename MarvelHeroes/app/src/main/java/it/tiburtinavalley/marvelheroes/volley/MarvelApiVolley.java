@@ -111,7 +111,7 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
             ToastClass toast = new ToastClass(context);
-            toast.showToast(context.getString(R.string.request_throttled));
+            toast.showToast(context.getString(R.string.msg_request_throttled));
         }
         if (error != null && error.getMessage() != null) {
             Log.w("QueryFail", error.getMessage());

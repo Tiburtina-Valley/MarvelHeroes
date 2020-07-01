@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
-                android:text="@string/comics"
+                android:text="@string/label_comics"
                 android:textColor="#FFFFFF"
 
                 android:textSize="22sp"
@@ -126,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
-                android:text="@string/events"
+                android:text="@string/label_events"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -156,7 +156,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
-                android:text="@string/series"
+                android:text="@string/label_series"
                 android:textColor="#FFFFFF"
 
                 android:textSize="22sp"

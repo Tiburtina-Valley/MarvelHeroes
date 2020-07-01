@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/marginStartRv"
                     android:layout_marginTop="@dimen/marginTopRv"
-                    android:text="@string/heroes"
+                    android:text="@string/label_heroes"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
@@ -56,7 +56,7 @@
                     android:layout_height="110dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:contentDescription="@string/hero"
+                    android:contentDescription="@string/label_hero"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:srcCompat="@tools:sample/backgrounds/scenic" />
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:text="@string/urls"
+                    android:text="@string/label_urls"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/btnType" />
@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/marginStartRv"
                     android:layout_marginTop="@dimen/marginTopRv"
-                    android:text="@string/hero_detail_description"
+                    android:text="@string/label_hero_detail_description"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rvUrls" />
@@ -140,7 +140,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/marginStartRv"
                     android:layout_marginTop="@dimen/marginTopRv"
-                    android:text="@string/creators_comics"
+                    android:text="@string/label_related_creators"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rvCharacters" />
@@ -204,7 +204,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/marginStartRv"
                     android:layout_marginTop="@dimen/marginTopRv"
-                    android:text="@string/related_comics"
+                    android:text="@string/label_related_comics"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rvCreators" />
@@ -230,7 +230,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/marginStartRv"
                     android:layout_marginTop="@dimen/marginTopRv"
-                    android:text="@string/events_comics"
+                    android:text="@string/label_events_comics"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rvComics" />

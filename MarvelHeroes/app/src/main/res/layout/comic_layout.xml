@@ -60,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
-                    android:text="@string/heroes"
+                    android:text="@string/label_heroes"
                     android:textColor="#FFFFFF"
 
                     android:textSize="22sp"
@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
-                    android:text="@string/creators_comics"
+                    android:text="@string/label_related_creators"
                     android:textColor="#FFFFFF"
                     android:textSize="22sp"
                     app:layout_constraintStart_toStartOf="parent"

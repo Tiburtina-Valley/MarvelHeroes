@@ -183,7 +183,7 @@ public class FavoriteHeroDetail extends AppCompatActivity{
                 this.tvHeroDescription.setText(hero.getDescription());
             }
             else{
-                tvHeroDescription.setText(R.string.noDescription);
+                tvHeroDescription.setText(R.string.tv_noDescription);
             }
 
             if (hero.getResourceURI() != null) {
