@@ -417,7 +417,7 @@ public class HomeFragment extends Fragment {
 
             Thumbnail thumb = new Thumbnail();
             thumb.setPath(sp.getString("heropath", ""));
-            thumb.setPath(sp.getString("heroext", ""));
+            thumb.setExtension(sp.getString("heroext", ""));
 
             heroOfTheDay.setThumbnail(thumb);
         }
@@ -430,7 +430,7 @@ public class HomeFragment extends Fragment {
 
             Thumbnail thumb = new Thumbnail();
             thumb.setPath(sp.getString("comicspath", ""));
-            thumb.setPath(sp.getString("comicsext", ""));
+            thumb.setExtension(sp.getString("comicsext", ""));
 
             comicOfTheDay.setThumbnail(thumb);
         }
@@ -447,7 +447,7 @@ public class HomeFragment extends Fragment {
 
             Thumbnail thumb = new Thumbnail();
             thumb.setPath(sp.getString("seriespath", ""));
-            thumb.setPath(sp.getString("seriesext", ""));
+            thumb.setExtension(sp.getString("seriesext", ""));
 
             seriesOfTheDay.setThumbnail(thumb);
         }
