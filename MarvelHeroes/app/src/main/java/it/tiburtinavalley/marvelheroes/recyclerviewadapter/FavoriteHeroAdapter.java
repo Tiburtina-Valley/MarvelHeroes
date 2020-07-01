@@ -3,11 +3,9 @@ package it.tiburtinavalley.marvelheroes.recyclerviewadapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,7 +91,7 @@ public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapte
                 appContext.startActivity(i, options.toBundle());
             } else {
                 ToastClass toast = new ToastClass(appContext);
-                toast.showToast(appContext.getString(R.string.internet_required));
+                toast.showToast(appContext.getString(R.string.msg_internet_required));
             }
         }
     }

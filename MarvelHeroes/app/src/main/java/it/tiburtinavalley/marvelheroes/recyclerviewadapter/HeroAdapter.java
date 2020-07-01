@@ -85,7 +85,7 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.Holder> implem
         }
         else {
             ToastClass toast = new ToastClass(appContext);
-            toast.showToast(appContext.getString(R.string.internet_required));
+            toast.showToast(appContext.getString(R.string.msg_internet_required));
         }
     }
 

@@ -1,19 +1,15 @@
 package it.tiburtinavalley.marvelheroes.activity;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
@@ -21,7 +17,6 @@ import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.model.Creators;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
-import it.tiburtinavalley.marvelheroes.model.Urls;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.CreatorsAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.HeroDetailAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.UrlsRecyclerView;
@@ -155,20 +150,20 @@ public class ComicsActivity extends AppCompatActivity {
                 tvPageCount.setText(comic.getPageCount() + " pages");
             }
             else{
-                tvPageCount.setText(R.string.noPageCount);
+                tvPageCount.setText(R.string.tv_noPageCount);
             }
             if(!comic.getUpc().equalsIgnoreCase("")) {
                 tvUpcCode.setText("Upc code : " + comic.getUpc());
             }
             else{
-                tvUpcCode.setText(R.string.noUPC);
+                tvUpcCode.setText(R.string.tv_noUPC);
             }
 
             if(comic.getDescription() != null){
                 tvDescription.setText(comic.getDescription());
             }
             else{
-                tvDescription.setText(R.string.noDescription);
+                tvDescription.setText(R.string.tv_noDescription);
             }
         }
 

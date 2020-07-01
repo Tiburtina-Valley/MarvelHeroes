@@ -43,7 +43,7 @@ public class CreatorsAdapter extends RecyclerView.Adapter<CreatorsAdapter.Creato
         }
         else {
                 ToastClass toast = new ToastClass(appContext);
-                toast.showToast(appContext.getString(R.string.internet_required));
+                toast.showToast(appContext.getString(R.string.msg_internet_required));
             }
     }
 

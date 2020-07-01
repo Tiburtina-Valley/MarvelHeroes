@@ -67,7 +67,7 @@ public class StoriesAdapter extends RecyclerView.Adapter<StoriesAdapter.StoriesH
         }
         else {
             ToastClass toast = new ToastClass(appContext);
-            toast.showToast(appContext.getString(R.string.internet_required));
+            toast.showToast(appContext.getString(R.string.msg_internet_required));
         }
     }
 

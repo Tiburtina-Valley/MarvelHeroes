@@ -1,7 +1,6 @@
 package it.tiburtinavalley.marvelheroes.fragment;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,16 +19,13 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
+
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.ComicsActivity;
 import it.tiburtinavalley.marvelheroes.activity.HeroDetailActivity;
@@ -192,7 +188,7 @@ public class HomeFragment extends Fragment {
             if (activeNetwork == null || !activeNetwork.isConnectedOrConnecting()) {
                 loading.setVisibility(View.GONE);
                 ToastClass toast = new ToastClass(context);
-                toast.showToast(context.getString(R.string.internet_required));
+                toast.showToast(context.getString(R.string.msg_internet_required));
             }
         }
 
@@ -353,7 +349,7 @@ public class HomeFragment extends Fragment {
                     context.startActivity(i);
                 } else {
                     ToastClass toast = new ToastClass(context);
-                    toast.showToast(getContext().getString(R.string.internet_required));
+                    toast.showToast(getContext().getString(R.string.msg_internet_required));
                 }
             }
             // click on Comic
@@ -368,7 +364,7 @@ public class HomeFragment extends Fragment {
                     context.startActivity(i);
                 } else {
                     ToastClass toast = new ToastClass(context);
-                    toast.showToast(context.getString(R.string.internet_required));
+                    toast.showToast(context.getString(R.string.msg_internet_required));
                 }
             }
             // click on Series
@@ -383,7 +379,7 @@ public class HomeFragment extends Fragment {
                     context.startActivity(i);
                 } else {                                                      //toast che avverte in caso di mancanza di connessione ad internet
                     ToastClass toast = new ToastClass(context);
-                    toast.showToast(context.getString(R.string.internet_required));
+                    toast.showToast(context.getString(R.string.msg_internet_required));
                 }
             }
         }

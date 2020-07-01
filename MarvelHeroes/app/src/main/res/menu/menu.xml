@@ -3,5 +3,5 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/AboutBtn"
-        android:title="@string/AboutBtn" />
+        android:title="@string/btn_about" />
 </menu>

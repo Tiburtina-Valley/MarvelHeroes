@@ -79,7 +79,7 @@ public class HeroDetailAdapter extends RecyclerView.Adapter<HeroDetailAdapter.Ho
         }
         else {
             ToastClass toast = new ToastClass(appContext);
-            toast.showToast(appContext.getString(R.string.internet_required));
+            toast.showToast(appContext.getString(R.string.msg_internet_required));
         }
     }
 
