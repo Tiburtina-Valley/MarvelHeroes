@@ -75,7 +75,8 @@ public class HomeFragment extends Fragment {
         sp = getActivity().getPreferences(Context.MODE_PRIVATE); //prende il file da scrivere
         editor = sp.edit();
 
-        defaultHeroId = getString(R.string.default_hero_id);;
+        defaultHeroId = getString(R.string.default_hero_id);
+        ;
         defaultComicId = getString(R.string.default_comic_id);
         defaultStoriesId = getString(R.string.default_series_id);
 
@@ -88,11 +89,12 @@ public class HomeFragment extends Fragment {
         int minutes = c.get(Calendar.MINUTE);
         int seconds = c.get(Calendar.SECOND);
 
-        if(hours*3600 + minutes*60 + seconds < 1800){ //controlliamo se è passata la mezzanotte
+        holder = new Holder();
+
+        if (hours * 3600 + minutes * 60 + seconds < 1800 || !sp.contains("heroname")) { //controlliamo se è passata la mezzanotte
             editor.clear();
             editor.commit();
 
-            holder = new Holder();
             holder.checkConnection();
 
             apiHero = new MarvelApiVolley(getContext()) {
@@ -119,12 +121,10 @@ public class HomeFragment extends Fragment {
             apiHero.getRandomCharacterInfo();
             apiComic.getRandomComic();
             apiSeries.getRandomSeries();
-        }
-
-        else if(sp.contains("heroname")) { //datas are saved
+        } else if (sp.contains("heroname")) { //datas are saved
             holder.setAll();
         }
-            return rootView;
+        return rootView;
     }
 
 
@@ -216,138 +216,128 @@ public class HomeFragment extends Fragment {
 
                 seriesAttempts = 0;
 
-                String title = seriesOfTheDay.getTitle() != null ? seriesOfTheDay.getTitle() : "";
-                tvSeriesTitle.setText(title);
-                String description = seriesOfTheDay.getDescription() != null ? seriesOfTheDay.getDescription() : "";
-                if (!description.isEmpty())
-                    tvSeriesDescription.setText(description);
-                if (!seriesOfTheDay.getThumbnail().getPath().equalsIgnoreCase("")
-                        && !seriesOfTheDay.getThumbnail().getExtension().equalsIgnoreCase("")) {
-                    String urlThumbnail = seriesOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
-                            + "." + seriesOfTheDay.getThumbnail().getExtension();
-                String title = series.getTitle() != null ? series.getTitle() : "";
-                editor.putString("seriestitle", series.getTitle());
-                editor.commit();
-                tvSeriesTitle.setText(title);
-                String description = series.getDescription() != null ? series.getDescription() : "";
-                if (!description.isEmpty()) {
-                    tvSeriesDescription.setText(description);
-                    editor.putString("seriesdescr", series.getDescription());
-                    editor.commit(); // fa commit del salvataggio
-                }
-                if (!series.getThumbnail().getPath().equalsIgnoreCase("")
-                        && !series.getThumbnail().getExtension().equalsIgnoreCase("")) {
-                    String urlThumbnail = series.getThumbnail().getPath().replaceFirst("http", "https")
-                            + "." + series.getThumbnail().getExtension();
-                    Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivSeries);
-                    editor.putString("seriesthumb", series.getThumbnail().getPath().replaceFirst("http", "https")+"."+series.getThumbnail().getExtension());
+                    String title = seriesOfTheDay.getTitle() != null ? seriesOfTheDay.getTitle() : "";
+                    editor.putString("seriestitle", seriesOfTheDay.getTitle());
                     editor.commit();
-                }
-
-                loading_count++;
-                dismissLoading();
-            }
-        }
-
-        private void fillComicInfo(List<Comics> comicsList) {
-            // if null, activity was probably destroyed
-            if (getActivity() == null)
-                return;
-
-            comicAttempts++;
-
-            if (!comicsList.isEmpty()) {
-                comicOfTheDay = comicsList.get(0);
-                if (comicOfTheDay.getDescription() == null || comicOfTheDay.getDescription().isEmpty()) {
-                    if (comicAttempts >= MAX_ATTEMPTS) {
-                        apiComic.getComicFromId(defaultComicId);
-                    } else {
-                        apiComic.getRandomComic();
+                    tvSeriesTitle.setText(title);
+                    String description = seriesOfTheDay.getDescription() != null ? seriesOfTheDay.getDescription() : "";
+                    if (!description.isEmpty()) {
+                        tvSeriesDescription.setText(description);
+                        editor.putString("seriesdescr", seriesOfTheDay.getDescription());
+                        editor.commit(); // fa commit del salvataggio
                     }
-                    return;
-                }
-
-                comicAttempts = 0;
-
-                tvComicTitle.setText(comicOfTheDay.getTitle());
-                if (comicOfTheDay.getDescription() != null && !comicOfTheDay.getDescription().isEmpty())
-                    tvComicDescription.setText(comicOfTheDay.getDescription());
-                tvComicTitle.setText(comic.getTitle());
-                editor.putString("comicstitle", comic.getTitle());
-                editor.commit();
-                if (comic.getDescription() != null && !comic.getDescription().isEmpty()) {
-                    tvComicDescription.setText(comic.getDescription());
-                    editor.putString("comicsdescr", comic.getTitle());
-                    editor.commit();
-                }
-
-                if (!comicOfTheDay.getThumbnail().getPath().equalsIgnoreCase("")
-                        && !comicOfTheDay.getThumbnail().getExtension().equalsIgnoreCase("")) {
-                    String urlThumbnail = comicOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
-                            + "." + comicOfTheDay.getThumbnail().getExtension();
-                    Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivComic);
-                    editor.putString("comicsthumb", comic.getThumbnail().getPath().replaceFirst("http", "https")
-                            + "." + comic.getThumbnail().getExtension());
-                    editor.commit();
-                }
-                loading_count++;
-                dismissLoading();
-            }
-        }
-
-        private void fillHeroInfo(List<HeroModel> heroes) {
-            // if null, activity was probably destroyed
-            if (getActivity() == null)
-                return;
-
-            heroAttempts++;
-
-            if (!heroes.isEmpty()) {
-                heroOfTheDay = heroes.get(0);
-                if (heroOfTheDay.getDescription() == null || heroOfTheDay.getDescription().isEmpty()) {
-                    if (heroAttempts >= MAX_ATTEMPTS) {
-                        apiHero.getCharacterInfoFromId(defaultHeroId);
-                    } else {
-                        apiHero.getRandomCharacterInfo();
+                    if (!seriesOfTheDay.getThumbnail().getPath().equalsIgnoreCase("")
+                            && !seriesOfTheDay.getThumbnail().getExtension().equalsIgnoreCase("")) {
+                        String urlThumbnail = seriesOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
+                                + "." + seriesOfTheDay.getThumbnail().getExtension();
+                        Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivSeries);
+                        editor.putString("seriesthumb", seriesOfTheDay.getThumbnail().getPath().replaceFirst("http", "https") + "." + seriesOfTheDay.getThumbnail().getExtension());
+                        editor.commit();
                     }
+
+                    loading_count++;
+                    dismissLoading();
+                }
+            }
+
+            private void fillComicInfo (List < Comics > comicsList) {
+                // if null, activity was probably destroyed
+                if (getActivity() == null)
                     return;
-                }
 
-                heroAttempts = 0;
+                comicAttempts++;
 
-                tvHeroName.setText(heroOfTheDay.getName());
-                if (heroOfTheDay.getDescription() != null && !heroOfTheDay.getDescription().isEmpty())
-                    tvHeroDescription.setText(heroOfTheDay.getDescription());
-                tvHeroName.setText(hero.getName());
-                editor.putString("heroname", hero.getName());
-                editor.commit();
-                if (hero.getDescription() != null && !hero.getDescription().isEmpty()) {
-                    tvHeroDescription.setText(hero.getDescription());
-                    editor.putString("herodescr", hero.getDescription());
+                if (!comicsList.isEmpty()) {
+                    comicOfTheDay = comicsList.get(0);
+                    if (comicOfTheDay.getDescription() == null || comicOfTheDay.getDescription().isEmpty()) {
+                        if (comicAttempts >= MAX_ATTEMPTS) {
+                            apiComic.getComicFromId(defaultComicId);
+                        } else {
+                            apiComic.getRandomComic();
+                        }
+                        return;
+                    }
+
+                    comicAttempts = 0;
+
+                    tvComicTitle.setText(comicOfTheDay.getTitle());
+                    if (comicOfTheDay.getDescription() != null && !comicOfTheDay.getDescription().isEmpty())
+                        tvComicDescription.setText(comicOfTheDay.getDescription());
+                    tvComicTitle.setText(comicOfTheDay.getTitle());
+                    editor.putString("comicstitle", comicOfTheDay.getTitle());
                     editor.commit();
-                }
+                    if (comicOfTheDay.getDescription() != null && !comicOfTheDay.getDescription().isEmpty()) {
+                        tvComicDescription.setText(comicOfTheDay.getDescription());
+                        editor.putString("comicsdescr", comicOfTheDay.getTitle());
+                        editor.commit();
+                    }
 
-                if (!heroOfTheDay.getThumbnail().getPath().equalsIgnoreCase("")
-                        && !heroOfTheDay.getThumbnail().getExtension().equalsIgnoreCase("")) {
-                    String urlThumbnail = heroOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
-                            + "." + heroOfTheDay.getThumbnail().getExtension();
-                    Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivHero);
-                    editor.putString("herothumb", hero.getThumbnail().getPath().replaceFirst("http", "https")
-                            + "." + hero.getThumbnail().getExtension());
+                    if (!comicOfTheDay.getThumbnail().getPath().equalsIgnoreCase("")
+                            && !comicOfTheDay.getThumbnail().getExtension().equalsIgnoreCase("")) {
+                        String urlThumbnail = comicOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
+                                + "." + comicOfTheDay.getThumbnail().getExtension();
+                        Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivComic);
+                        editor.putString("comicsthumb", comicOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
+                                + "." + comicOfTheDay.getThumbnail().getExtension());
+                        editor.commit();
+                    }
+                    loading_count++;
+                    dismissLoading();
+                }
+            }
+
+            private void fillHeroInfo (List < HeroModel > heroes) {
+                // if null, activity was probably destroyed
+                if (getActivity() == null)
+                    return;
+
+                heroAttempts++;
+
+                if (!heroes.isEmpty()) {
+                    heroOfTheDay = heroes.get(0);
+                    if (heroOfTheDay.getDescription() == null || heroOfTheDay.getDescription().isEmpty()) {
+                        if (heroAttempts >= MAX_ATTEMPTS) {
+                            apiHero.getCharacterInfoFromId(defaultHeroId);
+                        } else {
+                            apiHero.getRandomCharacterInfo();
+                        }
+                        return;
+                    }
+
+                    heroAttempts = 0;
+
+                    tvHeroName.setText(heroOfTheDay.getName());
+                    if (heroOfTheDay.getDescription() != null && !heroOfTheDay.getDescription().isEmpty())
+                        tvHeroDescription.setText(heroOfTheDay.getDescription());
+                    tvHeroName.setText(heroOfTheDay.getName());
+                    editor.putString("heroname", heroOfTheDay.getName());
                     editor.commit();
+                    if (heroOfTheDay.getDescription() != null && !heroOfTheDay.getDescription().isEmpty()) {
+                        tvHeroDescription.setText(heroOfTheDay.getDescription());
+                        editor.putString("herodescr", heroOfTheDay.getDescription());
+                        editor.commit();
+                    }
+
+                    if (!heroOfTheDay.getThumbnail().getPath().equalsIgnoreCase("")
+                            && !heroOfTheDay.getThumbnail().getExtension().equalsIgnoreCase("")) {
+                        String urlThumbnail = heroOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
+                                + "." + heroOfTheDay.getThumbnail().getExtension();
+                        Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivHero);
+                        editor.putString("herothumb", heroOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
+                                + "." + heroOfTheDay.getThumbnail().getExtension());
+                        editor.commit();
+                    }
+                    loading_count++;
+                    dismissLoading();
                 }
-                loading_count++;
-                dismissLoading();
             }
-        }
 
-        private void dismissLoading() {
-            if (loading_count >= 3) {
-                loading.setVisibility(View.GONE);
-                layout.setVisibility(View.VISIBLE);
+            private void dismissLoading () {
+                if (loading_count >= 3) {
+                    loading.setVisibility(View.GONE);
+                    layout.setVisibility(View.VISIBLE);
+                }
             }
-        }
-
         @Override
         public void onClick(View view) {
             // click on Hero
@@ -398,9 +388,9 @@ public class HomeFragment extends Fragment {
             }
         }
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
     }
+
 }
