@@ -11,18 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import it.tiburtinavalley.marvelheroes.HeroSelectMode;
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.FavoriteHeroDetail;
@@ -163,6 +159,15 @@ public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapte
         }
         else {
             holder.borderLayout.setBackgroundResource(0);
+        }
+    }
+
+    //metodo che va a deselezioanre
+    public void unselectElements(){
+        for(int i = 0; i < selectedHeroesList.size(); i++){
+            if(selectedHeroesList.get(i, false)){ //se l'eroe è selezionato, deselezionalo
+
+            }
         }
     }
 
