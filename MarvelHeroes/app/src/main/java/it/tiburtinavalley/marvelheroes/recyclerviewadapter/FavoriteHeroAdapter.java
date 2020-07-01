@@ -102,7 +102,7 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
                 appContext.startActivity(i, options.toBundle());
             } else {
                 ToastClass toast = new ToastClass(appContext);
-                toast.showToast(appContext.getString(R.string.internet_required));
+                toast.showToast(appContext.getString(R.string.msg_internet_required));
             }
         }
     }
@@ -178,10 +178,10 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
         if (holder.cl.isSelected()) {
 
             holder.ivHeroPic.setColorFilter(R.color.selectionColor, PorterDuff.Mode.SRC_ATOP);
-        }
-        else {
+        } else {
             holder.ivHeroPic.clearColorFilter();
         }
+    }
 
     @Override
     public void onBindSubheaderViewHolder(SubheaderHolder subheaderHolder, int nextItemPosition) {
