@@ -17,8 +17,8 @@ import androidx.appcompat.view.ActionMode;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import it.tiburtinavalley.marvelheroes.GridDividerDecoration;
 import it.tiburtinavalley.marvelheroes.HeroSelectMode;
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.MainActivity;
@@ -32,27 +32,28 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
     FavoriteHeroAdapter favoriteAdapter;
     SelectModeListener smListener;
     private List<HeroEntity> heroes;
-    private List<HeroEntity> heroesSelected;
-    View v;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_favourites, container, false);
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle(R.string.title_favourites);
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_favourites);
 
         RecyclerView rvHeroes;
         rvHeroes = v.findViewById(R.id.rvFavouriteHeroes);
-        LinearLayoutManager layoutManagerHeroes = new LinearLayoutManager(
-                getActivity(), RecyclerView.VERTICAL, false);
-        int numberOfColumns = 1;
-        rvHeroes.setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns));
+        GridDividerDecoration gridDividerDecoration = new GridDividerDecoration(getContext());
+
+        int numberOfColumns = 2;
+        rvHeroes.addItemDecoration(gridDividerDecoration);
+        GridLayoutManager glm = new GridLayoutManager(getContext(), numberOfColumns);
+        rvHeroes.setLayoutManager(glm);
 
         heroes = AppDatabase.getInstance(getActivity().getApplicationContext()).heroDao().getHeroList();
         if (heroes != null) {
             smListener = new SelectModeListener();
             favoriteAdapter = new FavoriteHeroAdapter(heroes, getContext(), smListener);
             favoriteAdapter.setOnItemClickListener(this);
+            favoriteAdapter.setGridLayoutManager(glm);
             rvHeroes.setAdapter(favoriteAdapter);
         } else {
             return v;
@@ -62,8 +63,8 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
 
     @Override
     public boolean onBackPressed() {
-        Log.w("12",getString(R.string.msg_is_pressed));
-        
+        Log.w("12", getString(R.string.msg_is_pressed));
+
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.anim_fade_in, R.anim.anim_fade_out);
         HomeFragment home = new HomeFragment();
@@ -123,12 +124,12 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
         @Override
         public void onDestroyActionMode(ActionMode actionMode) {
             actionMode = null;
-            Log.w("ww","destroy");
+            Log.w("ww", "destroy");
             //mActionMode.finish();
             FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.anim_fade_in, R.anim.anim_fade_out);
             FavouritesFragment favorite = new FavouritesFragment();
-            fragmentTransaction.replace(R.id.fragment_container,favorite);
+            fragmentTransaction.replace(R.id.fragment_container, favorite);
             //fragmentTransaction.addToBackStack(null);   cosi da poter poi chiudere l'app direttamente se premuto back nella home
             fragmentTransaction.commit();
         }

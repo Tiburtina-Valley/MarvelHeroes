@@ -19,6 +19,7 @@ import com.zhukic.sectionedrecyclerview.SectionedRecyclerViewAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityOptionsCompat;
@@ -180,7 +181,9 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
     }
 
     @Override
+    @CallSuper
     public void onBindSubheaderViewHolder(SubheaderHolder subheaderHolder, int nextItemPosition) {
+
         if (nextItemPosition >= heroes.size())
             return;
 

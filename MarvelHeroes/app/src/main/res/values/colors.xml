@@ -6,4 +6,5 @@
     <color name="colorPrimaryLight">#2b2b2b</color>
     <color name="colorSectionTitle">#FFEBEE</color>
     <color name="selectionColor">#77000000</color>
+    <color name="dividerColor">#e0e0e0</color>
 </resources>
