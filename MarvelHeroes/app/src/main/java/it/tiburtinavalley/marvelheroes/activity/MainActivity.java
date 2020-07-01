@@ -2,16 +2,18 @@ package it.tiburtinavalley.marvelheroes.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import it.tiburtinavalley.marvelheroes.fragment.FavouritesFragment;
 import it.tiburtinavalley.marvelheroes.fragment.HomeFragment;
 import it.tiburtinavalley.marvelheroes.fragment.SearchFragment;
@@ -19,7 +21,7 @@ import it.tiburtinavalley.marvelheroes.R;
 
 
 public class MainActivity extends AppCompatActivity {
-    private FavouritesFragment frag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +43,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
 
                 case R.id.action_favourites:
-                    FavouritesFragment favFrag = new  FavouritesFragment();
-                    frag = favFrag;
-                    setFragment(favFrag);
-
+                    setFragment(new FavouritesFragment());
                     return true;
 
                 case R.id.action_search:
@@ -78,4 +77,22 @@ public class MainActivity extends AppCompatActivity {
         //fragmentTransaction.addToBackStack(null);   cosi da poter poi chiudere l'app direttamente se premuto back nella home
         fragmentTransaction.commit();
     }
+    public interface IOnBackPressed {
+        boolean onBackPressed();
+    }
+
+
+            @Override public void onBackPressed() {
+                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+                if (!(fragment instanceof IOnBackPressed) || !((IOnBackPressed) fragment).onBackPressed()) {
+                    super.onBackPressed();
+                }
+            }
+
+
 }
+
+
+
+
+

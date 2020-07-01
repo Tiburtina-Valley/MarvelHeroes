@@ -1,13 +1,17 @@
 package it.tiburtinavalley.marvelheroes;
 
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.fragment.app.FragmentTransaction;
+
+import it.tiburtinavalley.marvelheroes.fragment.HomeFragment;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.FavoriteHeroAdapter;
 
 //classe che implementa la ActionMode.Callback, che rappresenta una modalità contestuale dell'intrefaccia utente
-public class HeroActionMode implements ActionMode.Callback{
+public class HeroActionMode implements ActionMode.Callback {
     private FavoriteHeroAdapter favAdapter;
 
     public HeroActionMode(FavoriteHeroAdapter fav){
@@ -37,8 +41,10 @@ public class HeroActionMode implements ActionMode.Callback{
         }
     }
 
+
     @Override
     public void onDestroyActionMode(ActionMode actionMode) {
         actionMode = null;
+
     }
 }
