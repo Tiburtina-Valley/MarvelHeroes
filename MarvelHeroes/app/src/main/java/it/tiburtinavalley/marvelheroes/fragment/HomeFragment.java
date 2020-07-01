@@ -51,9 +51,9 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.context = getActivity().getApplicationContext();
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle("Home");
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle("MARVEL HEROES");
 
-        defaultHeroId = getString(R.string.default_hero_id);;
+        defaultHeroId = getString(R.string.default_hero_id);
         defaultComicId = getString(R.string.default_comic_id);
         defaultStoriesId = getString(R.string.default_series_id);
 
