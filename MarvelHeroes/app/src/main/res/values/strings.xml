@@ -66,5 +66,6 @@
     <string name="title_home" translatable="false">HOME</string>
     <string name="msg_is_pressed" translatable="false">ispressed</string>
     <string name="title_favourites">YOUR HEROES</string>
+    <string name="msg_no_results">No results has to been showed</string>
 
 </resources>

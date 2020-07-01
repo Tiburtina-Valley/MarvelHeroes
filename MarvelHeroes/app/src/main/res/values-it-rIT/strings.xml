@@ -44,4 +44,5 @@
     <string name="btn_favourites">Preferiti</string>
     <string name="title_favourites">I TUOI EROI</string>
     <string name="title_search">RICERCA</string>
+    <string name="msg_no_results">Nessun risultato da mostrare</string>
 </resources>
