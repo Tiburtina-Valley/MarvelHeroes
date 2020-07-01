@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.Gson;
 
 import java.util.Calendar;
 import java.util.List;
@@ -83,7 +84,7 @@ public class HomeFragment extends Fragment {
 
         holder = new Holder();
 
-        if (!sp.contains("heroname") || !sp.getString("day", "").equalsIgnoreCase(String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)))) { //controlliamo se è passata la mezzanotte
+        if (!sp.contains("hero") || !sp.getString("day", "").equalsIgnoreCase(String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)))) { //controlliamo se è passata la mezzanotte
 
             holder.checkConnection();
             editor.putString("day", String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)));
@@ -113,7 +114,7 @@ public class HomeFragment extends Fragment {
             apiComic.getRandomComic();
             apiSeries.getRandomSeries();
         }
-        else if (sp.contains("heroname")) { //datas are saved
+        else if (sp.contains("hero")) { //datas are saved
             holder.setAll();
         }
         return rootView;
@@ -138,6 +139,7 @@ public class HomeFragment extends Fragment {
         RequestOptions requestOptions = new RequestOptions();
 
         private int loading_count = 0;
+        private Object Comics;
 
         public Holder() {
             cvHero = rootView.findViewById(R.id.cvHero);
@@ -162,22 +164,25 @@ public class HomeFragment extends Fragment {
         }
 
         private void setAll() {
-            tvHeroName.setText(sp.getString("heroname", ""));
-            tvHeroDescription.setText(sp.getString("herodescr", ""));
-            String urlHero = sp.getString("heropath", "")
-                    + "." + sp.getString("heroext", "");
+            heroOfTheDay = setHeroFromCache();
+            tvHeroName.setText(heroOfTheDay.getName());
+            tvHeroDescription.setText(heroOfTheDay.getDescription());
+            String urlHero = heroOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
+                    +"/portrait_xlarge" + "." + heroOfTheDay.getThumbnail().getExtension();
             Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlHero).into(ivHero);
 
-            tvComicTitle.setText(sp.getString("comicstitle", ""));
-            tvComicDescription.setText(sp.getString("comicsdescr", "No description"));
-            String urlComics = sp.getString("comicspath", "")
-                    + "." + sp.getString("comcisext", "");
+            comicOfTheDay = setComicFromCache();
+            tvComicTitle.setText(comicOfTheDay.getTitle());
+            tvComicDescription.setText(comicOfTheDay.getDescription());
+            String urlComics = comicOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
+                    +"/portrait_xlarge" + "." + comicOfTheDay.getThumbnail().getExtension();
             Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlComics).into(ivComic);
 
-            tvSeriesTitle.setText(sp.getString("seriestitle", ""));
-            tvSeriesDescription.setText(sp.getString("seriesdescr", "No description"));
-            String urlSeries = sp.getString("seriespath", "")
-                    + "." + sp.getString("seriesext", "");
+            seriesOfTheDay = setSeriesFromCache();
+            tvSeriesTitle.setText(seriesOfTheDay.getTitle());
+            tvSeriesDescription.setText(seriesOfTheDay.getDescription());
+            String urlSeries = seriesOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
+                    +"/portrait_xlarge" + "." + seriesOfTheDay.getThumbnail().getExtension();
             Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlSeries).into(ivSeries);
 
             loading_count = 3;
@@ -215,37 +220,25 @@ public class HomeFragment extends Fragment {
 
                 seriesAttempts = 0;
 
-                    String title = seriesOfTheDay.getTitle() != null ? seriesOfTheDay.getTitle() : "";
-                    editor.putString("seriestitle", seriesOfTheDay.getTitle());
-                    editor.commit();
+                String title = seriesOfTheDay.getTitle() != null ? seriesOfTheDay.getTitle() : "";
+                tvSeriesTitle.setText(title);
+                String description = seriesOfTheDay.getDescription() != null ? seriesOfTheDay.getDescription() : "";
+                if (!description.isEmpty()) {
+                    tvSeriesDescription.setText(description);
+                }
+                if (!seriesOfTheDay.getThumbnail().getPath().equalsIgnoreCase("")
+                        && !seriesOfTheDay.getThumbnail().getExtension().equalsIgnoreCase("")) {
+                    String urlThumbnail = seriesOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
+                            + "." + seriesOfTheDay.getThumbnail().getExtension();
+                    Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivSeries);
+                }
+                Gson gson = new Gson();
+                String json = gson.toJson(seriesOfTheDay);
+                editor.putString("series", json);
+                editor.commit();
 
-                    editor.putString("seriesid", seriesOfTheDay.getId());
-                    editor.commit();
-
-                    tvSeriesTitle.setText(title);
-                    String description = seriesOfTheDay.getDescription() != null ? seriesOfTheDay.getDescription() : "";
-                    if (!description.isEmpty()) {
-                        tvSeriesDescription.setText(description);
-                        editor.putString("seriesdescr", seriesOfTheDay.getDescription());
-                        editor.commit(); // fa commit del salvataggio
-                    }
-                    if (!seriesOfTheDay.getThumbnail().getPath().equalsIgnoreCase("")
-                            && !seriesOfTheDay.getThumbnail().getExtension().equalsIgnoreCase("")) {
-                        String urlThumbnail = seriesOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
-                                + "." + seriesOfTheDay.getThumbnail().getExtension();
-                        Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivSeries);
-                        editor.putString("seriespath", seriesOfTheDay.getThumbnail().getPath().replaceFirst("http", "https"));
-                        editor.putString("seriesext", seriesOfTheDay.getThumbnail().getExtension());
-                        editor.commit();
-                    }
-                    editor.putString("seriestype", seriesOfTheDay.getType());
-                    editor.putString("seriesrating", seriesOfTheDay.getRating());
-                    editor.putString("startyear", "");
-                    editor.putString("endyear", "");
-                    editor.commit();
-
-                    loading_count++;
-                    dismissLoading();
+                loading_count++;
+                dismissLoading();
                 }
             }
 
@@ -268,20 +261,9 @@ public class HomeFragment extends Fragment {
                     }
 
                     comicAttempts = 0;
-
-                    editor.putString("comicid", comicOfTheDay.getId());
-                    editor.commit();
-
                     tvComicTitle.setText(comicOfTheDay.getTitle());
-                    if (comicOfTheDay.getDescription() != null && !comicOfTheDay.getDescription().isEmpty())
-                        tvComicDescription.setText(comicOfTheDay.getDescription());
-                    tvComicTitle.setText(comicOfTheDay.getTitle());
-                    editor.putString("comicstitle", comicOfTheDay.getTitle());
-                    editor.commit();
                     if (comicOfTheDay.getDescription() != null && !comicOfTheDay.getDescription().isEmpty()) {
                         tvComicDescription.setText(comicOfTheDay.getDescription());
-                        editor.putString("comicsdescr", comicOfTheDay.getTitle());
-                        editor.commit();
                     }
 
                     if (!comicOfTheDay.getThumbnail().getPath().equalsIgnoreCase("")
@@ -289,10 +271,12 @@ public class HomeFragment extends Fragment {
                         String urlThumbnail = comicOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
                                 + "." + comicOfTheDay.getThumbnail().getExtension();
                         Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivComic);
-                        editor.putString("comicspath", comicOfTheDay.getThumbnail().getPath().replaceFirst("http", "https"));
-                        editor.putString("comicsext", comicOfTheDay.getThumbnail().getExtension());
-                        editor.commit();
                     }
+                    Gson gson = new Gson();
+                    String json = gson.toJson(comicOfTheDay);
+                    editor.putString("comic", json);
+                    editor.commit();
+
                     loading_count++;
                     dismissLoading();
                 }
@@ -318,19 +302,9 @@ public class HomeFragment extends Fragment {
 
                     heroAttempts = 0;
 
-                    editor.putString("heroid", heroOfTheDay.getId());
-                    editor.commit();
-
                     tvHeroName.setText(heroOfTheDay.getName());
-                    if (heroOfTheDay.getDescription() != null && !heroOfTheDay.getDescription().isEmpty())
-                        tvHeroDescription.setText(heroOfTheDay.getDescription());
-                    tvHeroName.setText(heroOfTheDay.getName());
-                    editor.putString("heroname", heroOfTheDay.getName());
-                    editor.commit();
                     if (heroOfTheDay.getDescription() != null && !heroOfTheDay.getDescription().isEmpty()) {
                         tvHeroDescription.setText(heroOfTheDay.getDescription());
-                        editor.putString("herodescr", heroOfTheDay.getDescription());
-                        editor.commit();
                     }
 
                     if (!heroOfTheDay.getThumbnail().getPath().equalsIgnoreCase("")
@@ -338,10 +312,13 @@ public class HomeFragment extends Fragment {
                         String urlThumbnail = heroOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
                                 + "." + heroOfTheDay.getThumbnail().getExtension();
                         Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivHero);
-                        editor.putString("heropath", heroOfTheDay.getThumbnail().getPath().replaceFirst("http", "https"));
-                        editor.putString("heroext", heroOfTheDay.getThumbnail().getExtension());
-                        editor.commit();
                     }
+
+                    Gson gson = new Gson();
+                    String json = gson.toJson(heroOfTheDay);
+                    editor.putString("hero", json);
+                    editor.commit();
+
                     loading_count++;
                     dismissLoading();
                 }
@@ -361,7 +338,7 @@ public class HomeFragment extends Fragment {
                 NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
                 if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
                     if(heroOfTheDay == null){
-                        setHeroFromCache();
+                        heroOfTheDay = setHeroFromCache();
                     }
                     Intent i = new Intent(context, HeroDetailActivity.class);
 
@@ -379,7 +356,7 @@ public class HomeFragment extends Fragment {
                 NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
                 if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
                     if(comicOfTheDay == null){
-                        setComicFromCache();
+                        comicOfTheDay = setComicFromCache();
                     }
                     Intent i = new Intent(context, ComicsActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -396,7 +373,7 @@ public class HomeFragment extends Fragment {
                 NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
                 if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
                     if(seriesOfTheDay == null){
-                        setSeriesFromCache();
+                        seriesOfTheDay = setSeriesFromCache();
                     }
                     Intent i = new Intent(context, SeriesActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -409,47 +386,25 @@ public class HomeFragment extends Fragment {
             }
         }
 
-        private void setHeroFromCache(){
-            heroOfTheDay = new HeroModel();
-            heroOfTheDay.setId(sp.getString("heroid", ""));
-            heroOfTheDay.setName(sp.getString("heroname", ""));
-            heroOfTheDay.setDescription(sp.getString("herodescr", ""));
-
-            Thumbnail thumb = new Thumbnail();
-            thumb.setPath(sp.getString("heropath", ""));
-            thumb.setExtension(sp.getString("heroext", ""));
-
-            heroOfTheDay.setThumbnail(thumb);
+        private HeroModel setHeroFromCache(){
+            Gson gson = new Gson();
+            String json = sp.getString("hero", "");
+            HeroModel heroOfTheDay = gson.fromJson(json, HeroModel.class);
+            return heroOfTheDay;
         }
 
-        private void setComicFromCache(){
-            comicOfTheDay = new Comics();
-            comicOfTheDay.setId(sp.getString("comicsid", ""));
-            comicOfTheDay.setTitle(sp.getString("comicsname", ""));
-            comicOfTheDay.setDescription(sp.getString("comicsdescr", ""));
-
-            Thumbnail thumb = new Thumbnail();
-            thumb.setPath(sp.getString("comicspath", ""));
-            thumb.setExtension(sp.getString("comicsext", ""));
-
-            comicOfTheDay.setThumbnail(thumb);
+        private Comics setComicFromCache(){
+            Gson gson = new Gson();
+            String json = sp.getString("comic", "");
+            Comics comicOfTheDay = gson.fromJson(json, Comics.class);
+            return comicOfTheDay;
         }
 
-        private void setSeriesFromCache(){
-            seriesOfTheDay = new Series();
-            seriesOfTheDay.setId(sp.getString("seriesid", ""));
-            seriesOfTheDay.setTitle(sp.getString("seriestitle", ""));
-            seriesOfTheDay.setDescription(sp.getString("seriesdescr", ""));
-            seriesOfTheDay.setType(sp.getString("seriestype", ""));
-            seriesOfTheDay.setRating(sp.getString("seriesrating", ""));
-            seriesOfTheDay.setStartYear(sp.getString("startyear", ""));
-            seriesOfTheDay.setEndYear(sp.getString("endyear", ""));
-
-            Thumbnail thumb = new Thumbnail();
-            thumb.setPath(sp.getString("seriespath", ""));
-            thumb.setExtension(sp.getString("seriesext", ""));
-
-            seriesOfTheDay.setThumbnail(thumb);
+        private Series setSeriesFromCache(){
+            Gson gson = new Gson();
+            String json = sp.getString("series", "");
+            Series seriesOfTheDay = gson.fromJson(json, Series.class);
+            return seriesOfTheDay;
         }
     }
 

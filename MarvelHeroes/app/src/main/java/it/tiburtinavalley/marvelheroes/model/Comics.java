@@ -75,7 +75,7 @@ public class Comics extends Element {
     public String getUpc() {
         return upc;
     }
-
+    
     public String getDiamondCode() {
         return diamondCode;
     }
@@ -87,5 +87,6 @@ public class Comics extends Element {
     public String getPageCount() {
         return pageCount;
     }
+
 
 }
