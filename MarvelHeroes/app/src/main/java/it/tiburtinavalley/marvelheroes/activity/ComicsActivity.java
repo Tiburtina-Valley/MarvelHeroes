@@ -140,7 +140,7 @@ public class ComicsActivity extends AppCompatActivity {
 
         //Vengono settati tutti i valori degli elementi del fumetto, controllando che non siano null. In tal caso, viene inserita una stringa apposita.
         private void setData() {
-            if (comic.getImages() != null || comic.getImages().size() > 0) {
+            if (comic.getThumbnail() != null) {
                 String urlThumbnail = comic.getThumbnail().getPath().replaceFirst("http", "https")
                        +"/portrait_xlarge" + "." + comic.getThumbnail().getExtension();
                 Glide.with(getApplicationContext()).load(urlThumbnail).into(this.ivComicImage);

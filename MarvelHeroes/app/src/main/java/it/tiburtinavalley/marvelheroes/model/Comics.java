@@ -2,6 +2,8 @@ package it.tiburtinavalley.marvelheroes.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import java.util.Calendar;
 import java.util.List;
 
 /* Model per mantenere i dati relativi ai fumetti legati agli eroi */
@@ -13,6 +15,8 @@ public class Comics extends Element {
     private String diamondCode;
     private String isbn;
     private String pageCount;
+
+    public Comics(){}
 
     protected Comics(Parcel in) {
         variants = in.createTypedArrayList(Items.CREATOR);
