@@ -3,24 +3,15 @@ package it.tiburtinavalley.marvelheroes.recyclerviewadapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.zhukic.sectionedrecyclerview.SectionedRecyclerViewAdapter;
@@ -28,6 +19,11 @@ import com.zhukic.sectionedrecyclerview.SectionedRecyclerViewAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 import it.tiburtinavalley.marvelheroes.HeroSelectMode;
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.FavoriteHeroDetail;
@@ -36,7 +32,7 @@ import it.tiburtinavalley.marvelheroes.dao.AppDatabase;
 import it.tiburtinavalley.marvelheroes.entity.HeroEntity;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
 
-public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHeroAdapter.SubheaderHolder, FavoriteHeroAdapter.Holder> implements View.OnClickListener, View.OnLongClickListener {
+public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHeroAdapter.SubheaderHolder, FavoriteHeroAdapter.Holder> {
 
     public interface OnItemClickListener {
         void onSubheaderClicked(int position);
@@ -46,14 +42,14 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
 
     private final List<HeroEntity> heroes;
     private Context appContext;
-    private SparseBooleanArray selectedHeroesList;
+    private ArrayList<HeroEntity> selectedHeroesList;
     private HeroSelectMode smListener;
     private boolean selectedMenu = false;
 
     public FavoriteHeroAdapter(List<HeroEntity> all, Context appContext, HeroSelectMode listener) {
         heroes = new ArrayList<>();
         heroes.addAll(all);
-        selectedHeroesList = new SparseBooleanArray();
+        selectedHeroesList = new ArrayList<>();
         this.appContext = appContext;
         smListener = listener;
     }
@@ -66,7 +62,6 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
 
         Holder(@NonNull View itemView) {
             super(itemView);
-            itemView.setOnLongClickListener(FavoriteHeroAdapter.this);
             tvHeroName = itemView.findViewById(R.id.tvHeroName);
             ivHeroPic = itemView.findViewById(R.id.ivHeroPhoto);
             cl = itemView.findViewById(R.id.heroConstraintLayout);
@@ -75,54 +70,53 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
         }
     }
 
-    // carica l'activity di dettaglio dell'eroe
-    @Override
-    public void onClick(View v) {
+    public void onClick(View view, HeroEntity hero) {
         if (selectedHeroesList.size() == 0) {
             selectedMenu = false;
-        }
-        else {
+        } else {
             if (selectedMenu) {
-                onLongClick(v);
+                onLongClick(view, hero);
             }
         }
+
         if (!selectedMenu) {
             ConnectivityManager cm = (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
             if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-                int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
-                HeroEntity hero = heroes.get(position);
                 HeroModel heroModel = new HeroModel();
                 heroModel.setHeroModelFromDb(hero);
                 Intent i = new Intent(appContext, FavoriteHeroDetail.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.putExtra("hero", heroModel);
                 ActivityOptionsCompat options = ActivityOptionsCompat.
-                        makeSceneTransitionAnimation((Activity) appContext, (View) v, "profile");
+                        makeSceneTransitionAnimation((Activity) appContext, view, "profile");
                 appContext.startActivity(i, options.toBundle());
             } else {
                 ToastClass toast = new ToastClass(appContext);
                 toast.showToast(appContext.getString(R.string.msg_internet_required));
             }
+        } else {
+            if (view.isSelected())
+                selectedHeroesList.add(hero);
+            else
+                selectedHeroesList.remove(hero);
         }
     }
 
 
     //Attiva un menù che permette di togliere dai preferiti più di un eroe
-    @Override
-    public boolean onLongClick(View view) {
+
+    public boolean onLongClick(View view, HeroEntity hero) {
         selectedMenu = true;
-        int pos = ((RecyclerView) view.getParent()).getChildAdapterPosition(view); //acquisisce la posizione dell'elemento della RecyclerView che è stato clickato
-        boolean isSelected = selectedHeroesList.get(pos, false);
-        if(isSelected) {
+
+        if (view.isSelected()) {
+            selectedHeroesList.remove(hero);
             view.setSelected(false);
-            selectedHeroesList.delete(pos);
-        }
-        else{
+        } else {
             view.setSelected(true);
-            selectedHeroesList.put(pos,true);
+            selectedHeroesList.add(hero);
         }
-        if(smListener != null){
+        if (smListener != null) {
             smListener.onSelect(selectedHeroesList.size()); //callback verso l'Activity
         }
         notifyDataSetChanged();
@@ -130,25 +124,17 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
     }
 
     //cancella tutti glie elementi selezionati della lista
-    public void removeSelected(){
+    public void removeSelected() {
         selectedMenu = false;
-        if(selectedHeroesList.size() > 0){ //controlla se c'è qualcosa da eliminare
-            for(int i = heroes.size() -1; i >= 0; i--) { //si procede dal fondo verso la cima
-                if(selectedHeroesList.get(i, false)){
-                    AppDatabase.getInstance(appContext).heroDao().deleteHero(heroes.get(i)); // cancella dal db
-                    remove(i);
-                }
-            }
-        }
+
+        selectedHeroesList.forEach(heroEntity -> {
+            heroes.remove(heroEntity);
+            AppDatabase.getInstance(appContext).heroDao().deleteHero(heroEntity);
+        });
         selectedHeroesList.clear();
-    }
 
-    //elimina l'elemento e notifica all'adapter che deve ristrutturare la RecyclerView
-    private void remove(int index){
-        heroes.remove(index);
-        notifyItemRemoved(index);
+        notifyDataSetChanged();
     }
-
 
     @Override
     public Holder onCreateItemViewHolder(ViewGroup parent, int viewType) {
@@ -156,7 +142,6 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
         cl = (ConstraintLayout) LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.favourite_hero_layout, parent, false);
-        cl.setOnClickListener(this);
         return new FavoriteHeroAdapter.Holder(cl);
     }
 
@@ -167,7 +152,18 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
 
     @Override
     public void onBindItemViewHolder(Holder holder, int position) {
+        if (position >= heroes.size())
+            return;
+
         HeroEntity hero = heroes.get(position);
+
+        holder.itemView.setOnLongClickListener(view -> {
+            onLongClick(view, hero);
+            return true;
+        });
+
+        holder.itemView.setOnClickListener(view -> onClick(view, hero));
+
         holder.tvHeroName.setText(hero.getName());
         if (!hero.getPicturePath().equalsIgnoreCase("")
                 && !hero.getPicturePath().equalsIgnoreCase("")) {
@@ -185,11 +181,14 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
 
     @Override
     public void onBindSubheaderViewHolder(SubheaderHolder subheaderHolder, int nextItemPosition) {
+        if (nextItemPosition >= heroes.size())
+            return;
+
         final HeroEntity nextHero = heroes.get(nextItemPosition);
         final int sectionSize = getSectionSize(getSectionIndex(subheaderHolder.getAdapterPosition()));
         final String sectionLetter = nextHero.getName().substring(0, 1);
         final String subheaderText;
-        if(sectionSize > 1 || sectionSize == 0)
+        if (sectionSize > 1 || sectionSize == 0)
             subheaderText = sectionLetter + "\t(" + sectionSize + " items)";
         else
             subheaderText = sectionLetter + "\t(" + sectionSize + " item)";

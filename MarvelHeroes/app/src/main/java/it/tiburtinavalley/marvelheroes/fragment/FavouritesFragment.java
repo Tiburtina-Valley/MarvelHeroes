@@ -31,8 +31,9 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
     private ActionMode mActionMode;
     FavoriteHeroAdapter favoriteAdapter;
     SelectModeListener smListener;
+    private List<HeroEntity> heroes;
+    private List<HeroEntity> heroesSelected;
     View v;
-
 
     @Nullable
     @Override
@@ -47,10 +48,10 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
         int numberOfColumns = 1;
         rvHeroes.setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns));
 
-        List<HeroEntity> list = AppDatabase.getInstance(getActivity().getApplicationContext()).heroDao().getHeroList();
-        if (list != null) {
+        heroes = AppDatabase.getInstance(getActivity().getApplicationContext()).heroDao().getHeroList();
+        if (heroes != null) {
             smListener = new SelectModeListener();
-            favoriteAdapter = new FavoriteHeroAdapter(list, getContext(), smListener);
+            favoriteAdapter = new FavoriteHeroAdapter(heroes, getContext(), smListener);
             favoriteAdapter.setOnItemClickListener(this);
             rvHeroes.setAdapter(favoriteAdapter);
         } else {
