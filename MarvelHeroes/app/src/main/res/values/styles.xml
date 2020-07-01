@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
         <item name="android:windowContentTransitions">true</item>
-
+     <!--   <item name="android:fontFamily">@font/font_marvel_regular</item> -->
     </style>
 
 

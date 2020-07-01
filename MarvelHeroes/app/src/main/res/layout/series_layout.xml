@@ -70,7 +70,7 @@
                     android:text="@string/urls"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvType" />
+                    app:layout_constraintTop_toBottomOf="@+id/btnType" />
 
                 <TextView
                     android:id="@+id/tvDescr"
@@ -181,7 +181,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvCreatorName" />
 
                 <TextView
-                    android:id="@+id/tvType"
+                    android:id="@+id/btnType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/marginStartRv"
@@ -195,7 +195,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="@dimen/marginTopRv"
-                    app:layout_constraintStart_toEndOf="@+id/tvType"
+                    app:layout_constraintStart_toEndOf="@+id/btnType"
                     app:layout_constraintTop_toBottomOf="@+id/ivStoriesmg" />
 
                 <TextView

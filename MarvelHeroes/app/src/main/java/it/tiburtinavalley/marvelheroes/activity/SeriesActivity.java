@@ -79,7 +79,7 @@ public class SeriesActivity extends AppCompatActivity {
             rvUrls = findViewById(R.id.rvUrls);
             tvDescription = findViewById(R.id.tvDescription);
             rvCharacters = findViewById(R.id.rvCharacters);
-            tvType = findViewById(R.id.tvType);
+            tvType = findViewById(R.id.btnType);
             tvRating = findViewById(R.id.tvRating);
             rvCreators = findViewById(R.id.rvCreators);
             tvComics = findViewById(R.id.tvComics);

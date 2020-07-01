@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Marvel Heroes</string>
+    <string name="btn_search">Ricerca</string>
+    <string name="search_name_hint">Nome dell\'eroe</string>
+    <string name="hero_picture_cnt_description">Immagine dell\'eroe</string>
+    <string name="comics">Fumetti</string>
+    <string name="series">Serie</string>
+    <string name="hero_detail_description">Descrizione</string>
+    <string name="hero">Eroe</string>
+    <string name="hero_detail_stories">Storie</string>
+    <string name="about_us_description">\"il nostro team\"</string>
+    <string name="FRONTEND_HOST">\"il nostro sito web\"</string>
+    <string name="developers">\"sviluppatori\"</string>
+    <string name="share">\"condividi</string>
+    <string name="events">Eventi</string>
+    <string name="event_end_date">Evento termina:</string>
+    <string name="series_end_date">Serie terminata: %1$s</string>
+    <string name="event_title">Titolo dell\'evento</string>
+    <string name="series_start_date">Serie iniziata: %1$s</string>
+    <string name="event_start_date">Evento iniziato:</string>
+    <string name="event_description">Descrizione</string>
+    <string name="series_comics">Serie collegate :</string>
+    <string name="events_comics">Eventi collegati :</string>
+    <string name="creators_comics">Creatori :</string>
+    <string name="related_comics">Fumetti collegati :</string>
+    <string name="heroes">Eroi collegati :</string>
+    <string name="rating">Valutazione: %1$s</string>
+    <string name="type">Tipo: %1$s</string>
+    <string name="noDescription">Nessuna descrizione disponibile</string>
+    <string name="comics_series">Fumetti collegati :</string>
+    <string name="noPageCount">Numero pagine non disponibile</string>
+    <string name="noUPC">Upc code non disponibile</string>
+    <string name="created_comics">Fumetti disegnati :</string>
+    <string name="related_series">Serie collegate :</string>
+    <string name="internet_required">Per favore controlla la tua connessione</string>
+    <string name="home_first_section_title">Eroe del giorno</string>
+    <string name="home_second_section_title">Fumetto del giorno</string>
+    <string name="home_third_section_title">Serie del giorno</string>
+    <string name="delete_heroes">Elimina</string>
+    <string name="empty_search">Per favore inserisci il nome di un eroe</string>
+    <string name="AboutBtn">Su di noi</string>
+    <string name="request_throttled">Hai superato il limite di richieste. Per favore riprova più tardi.</string>
+</resources>

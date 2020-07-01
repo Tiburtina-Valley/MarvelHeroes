@@ -1,9 +1,12 @@
 package it.tiburtinavalley.marvelheroes.activity;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -18,6 +21,7 @@ import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.model.Creators;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
+import it.tiburtinavalley.marvelheroes.model.Urls;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.CreatorsAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.HeroDetailAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.UrlsRecyclerView;
@@ -58,6 +62,9 @@ public class ComicsActivity extends AppCompatActivity {
         private int loading_count = 0;
 
         public Holder() {
+
+            getSupportActionBar().setTitle("Comic details");
+
             ivComicImage = findViewById(R.id.ivStoriesmg);
             tvComicName = findViewById(R.id.tvCreatorName);
             tvPageCount = findViewById(R.id.tvPageCount);
@@ -68,6 +75,7 @@ public class ComicsActivity extends AppCompatActivity {
             rvCreatorsComics = findViewById(R.id.rvCreatorComics);
             loading = findViewById(R.id.progress_loader);
             layout = findViewById(R.id.layout);
+
             final Context appContext = getApplicationContext();
 
             heroVolley = new MarvelApiVolley(appContext) {
@@ -111,6 +119,7 @@ public class ComicsActivity extends AppCompatActivity {
             // Vengono chiamati i metodi delle volley per rimepire le RecyclerView con i valori ritornati dalle query
             urlsAdapter = new UrlsRecyclerView(comic.getUrls()); // gli urls sono già stati caricati precedentemente, quando è stata caricata l'activity per i dettagli dell'eroe
             rvUrls.setAdapter(urlsAdapter);
+
             String id = comic.getId();
             heroVolley.getHeroesFromComics(id);
             creatorsVolley.getCreatorsByComics(id);
@@ -121,7 +130,8 @@ public class ComicsActivity extends AppCompatActivity {
 
         // funzione che si occupa di settare i LayoutManager per le RecyclerView
         private void setRecyclerViews(){
-            LinearLayoutManager layoutManagerUrls = new LinearLayoutManager(ComicsActivity.this);
+            LinearLayoutManager layoutManagerUrls = new LinearLayoutManager(
+                    ComicsActivity.this, RecyclerView.HORIZONTAL, false);
             rvUrls.setLayoutManager(layoutManagerUrls);
 
             LinearLayoutManager layoutManagerHeroes = new LinearLayoutManager(
@@ -142,7 +152,7 @@ public class ComicsActivity extends AppCompatActivity {
             }
             tvComicName.setText(comic.getTitle());
             if(!comic.getPageCount().equalsIgnoreCase("") && !comic.getPageCount().equalsIgnoreCase("0")){
-                tvPageCount.setText("Total pages : "+comic.getPageCount());
+                tvPageCount.setText(comic.getPageCount() + " pages");
             }
             else{
                 tvPageCount.setText(R.string.noPageCount);
