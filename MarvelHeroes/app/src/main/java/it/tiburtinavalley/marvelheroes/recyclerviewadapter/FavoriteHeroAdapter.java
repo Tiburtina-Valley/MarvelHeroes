@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
@@ -22,6 +23,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.zhukic.sectionedrecyclerview.SectionedRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +36,14 @@ import it.tiburtinavalley.marvelheroes.dao.AppDatabase;
 import it.tiburtinavalley.marvelheroes.entity.HeroEntity;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
 
-public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapter.Holder> implements View.OnClickListener, View.OnLongClickListener {
+public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHeroAdapter.SubheaderHolder, FavoriteHeroAdapter.Holder> implements View.OnClickListener, View.OnLongClickListener {
+
+    public interface OnItemClickListener {
+        void onSubheaderClicked(int position);
+    }
+
+    OnItemClickListener onItemClickListener;
+
     private final List<HeroEntity> heroes;
     private Context appContext;
     private SparseBooleanArray selectedHeroesList;
@@ -141,9 +150,8 @@ public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapte
     }
 
 
-    @NonNull
     @Override
-    public FavoriteHeroAdapter.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Holder onCreateItemViewHolder(ViewGroup parent, int viewType) {
         ConstraintLayout cl;
         cl = (ConstraintLayout) LayoutInflater
                 .from(parent.getContext())
@@ -153,7 +161,12 @@ public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FavoriteHeroAdapter.Holder holder, int position) {
+    public SubheaderHolder onCreateSubheaderViewHolder(ViewGroup parent, int viewType) {
+        return new SubheaderHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.favourites_item_header, parent, false));
+    }
+
+    @Override
+    public void onBindItemViewHolder(Holder holder, int position) {
         HeroEntity hero = heroes.get(position);
         holder.tvHeroName.setText(hero.getName());
         if (!hero.getPicturePath().equalsIgnoreCase("")
@@ -169,12 +182,62 @@ public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapte
         else {
             holder.ivHeroPic.clearColorFilter();
         }
+    }
+
+    @Override
+    public void onBindSubheaderViewHolder(SubheaderHolder subheaderHolder, int nextItemPosition) {
+        final HeroEntity nextHero = heroes.get(nextItemPosition);
+        final int sectionSize = getSectionSize(getSectionIndex(subheaderHolder.getAdapterPosition()));
+        final String sectionLetter = nextHero.getName().substring(0, 1);
+        final String subheaderText;
+        if(sectionSize > 1 || sectionSize == 0)
+            subheaderText = sectionLetter + "\t(" + sectionSize + " items)";
+        else
+            subheaderText = sectionLetter + "\t(" + sectionSize + " item)";
+
+        subheaderHolder.mSubheaderText.setText(subheaderText);
+
+        boolean isSectionExpanded = isSectionExpanded(getSectionIndex(subheaderHolder.getAdapterPosition()));
+
+        if (isSectionExpanded) {
+            subheaderHolder.mArrow.setImageDrawable(ContextCompat.getDrawable(subheaderHolder.itemView.getContext(), R.drawable.ic_keyboard_arrow_up_black_24dp));
+        } else {
+            subheaderHolder.mArrow.setImageDrawable(ContextCompat.getDrawable(subheaderHolder.itemView.getContext(), R.drawable.ic_keyboard_arrow_down_black_24dp));
+        }
+
+        subheaderHolder.itemView.setOnClickListener(v -> onItemClickListener.onSubheaderClicked(subheaderHolder.getAdapterPosition()));
+    }
+
+    @Override
+    public boolean onPlaceSubheaderBetweenItems(int position) {
+        final char heroNameFirstCharacter = heroes.get(position).getName().charAt(0);
+        final char nextHeroNameFirstCharacter = heroes.get(position + 1).getName().charAt(0);
+
+        //The subheader will be placed between two neighboring items if the first characters in movie titles are different.
+        return heroNameFirstCharacter != nextHeroNameFirstCharacter;
+    }
+
+    static class SubheaderHolder extends RecyclerView.ViewHolder {
+
+        private static Typeface meduiumTypeface = null;
+
+        TextView mSubheaderText;
+        ImageView mArrow;
+
+        SubheaderHolder(View itemView) {
+            super(itemView);
+            this.mSubheaderText = (TextView) itemView.findViewById(R.id.subheaderText);
+            this.mArrow = (ImageView) itemView.findViewById(R.id.arrow);
+        }
 
     }
 
-
     @Override
-    public int getItemCount() {
+    public int getItemSize() {
         return heroes.size();
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }
