@@ -42,7 +42,7 @@ public class SearchFragment extends Fragment {
         this.context = getActivity().getApplicationContext();
 
         rootView = inflater.inflate(R.layout.fragment_search, container, false);
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle("Search");
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle("SEARCH");
 
         holder = new Holder();
         return rootView;

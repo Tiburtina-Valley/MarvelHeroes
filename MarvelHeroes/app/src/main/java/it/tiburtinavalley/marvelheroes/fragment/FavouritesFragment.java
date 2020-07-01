@@ -41,7 +41,7 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_favourites, container, false);
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle("Your heroes");
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle("YOUR HEROES");
 
         RecyclerView rvHeroes;
         rvHeroes = v.findViewById(R.id.rvFavouriteHeroes);

@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -26,7 +27,6 @@ public class UrlsRecyclerView extends RecyclerView.Adapter<UrlsRecyclerView.Hold
 
 
 
-
     public UrlsRecyclerView(List<Urls> urlsList){
         urls = urlsList;
     }
@@ -42,9 +42,19 @@ public class UrlsRecyclerView extends RecyclerView.Adapter<UrlsRecyclerView.Hold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Holder holder, int position) {
-        holder.tvType.setText(urls.get(position).getType()+":");
-        holder.tvUrl.setText(urls.get(position).getUrl());
+    public void onBindViewHolder(@NonNull Holder holder, final int position) {
+        String type = urls.get(position).getType();
+
+        holder.btnType.setText(type.substring(0, 1).toUpperCase() + type.substring(1));
+        holder.btnType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Urls url = urls.get(position);
+                Uri uri = Uri.parse(url.getUrl());
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                appContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -71,13 +81,12 @@ public class UrlsRecyclerView extends RecyclerView.Adapter<UrlsRecyclerView.Hold
 
 
     class Holder extends RecyclerView.ViewHolder {
-        private TextView tvUrl;
-        private TextView tvType;
+        private Button btnType;
 
         public Holder(@NonNull View itemView) {
             super(itemView);
-            tvUrl = itemView.findViewById(R.id.tvUrl);
-            tvType = itemView.findViewById(R.id.tvType);
+            btnType = itemView.findViewById(R.id.btnType);
+            appContext = itemView.getContext();
         }
     }
 
