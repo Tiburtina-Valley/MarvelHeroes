@@ -8,52 +8,51 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.List;
 import it.tiburtinavalley.marvelheroes.HeroSelectMode;
 import it.tiburtinavalley.marvelheroes.R;
-
 import it.tiburtinavalley.marvelheroes.activity.MainActivity;
 import it.tiburtinavalley.marvelheroes.dao.AppDatabase;
 import it.tiburtinavalley.marvelheroes.entity.HeroEntity;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.FavoriteHeroAdapter;
 
 
-public class FavouritesFragment extends Fragment implements MainActivity.IOnBackPressed {
+public class FavouritesFragment extends Fragment implements MainActivity.IOnBackPressed, FavoriteHeroAdapter.OnItemClickListener {
     private ActionMode mActionMode;
     FavoriteHeroAdapter favoriteAdapter;
     SelectModeListener smListener;
+    private List<HeroEntity> heroes;
+    private List<HeroEntity> heroesSelected;
     View v;
-
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_favourites, container, false);
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle("YOUR HEROES");
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle(R.string.title_favourites);
 
         RecyclerView rvHeroes;
         rvHeroes = v.findViewById(R.id.rvFavouriteHeroes);
         LinearLayoutManager layoutManagerHeroes = new LinearLayoutManager(
                 getActivity(), RecyclerView.VERTICAL, false);
-        int numberOfColumns = 2;
+        int numberOfColumns = 1;
         rvHeroes.setLayoutManager(new GridLayoutManager(getContext(), numberOfColumns));
 
-        List<HeroEntity> list = AppDatabase.getInstance(getActivity().getApplicationContext()).heroDao().getHeroList();
-        if (list != null) {
+        heroes = AppDatabase.getInstance(getActivity().getApplicationContext()).heroDao().getHeroList();
+        if (heroes != null) {
             smListener = new SelectModeListener();
-            favoriteAdapter = new FavoriteHeroAdapter(list, getContext(), smListener);
+            favoriteAdapter = new FavoriteHeroAdapter(heroes, getContext(), smListener);
+            favoriteAdapter.setOnItemClickListener(this);
             rvHeroes.setAdapter(favoriteAdapter);
         } else {
             return v;
@@ -63,15 +62,24 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
 
     @Override
     public boolean onBackPressed() {
-        Log.w("12","ispressed");
+        Log.w("12",getString(R.string.msg_is_pressed));
         
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.anim_fade_in, R.anim.anim_fade_out);
-        HomeFragment home= new HomeFragment();
-        fragmentTransaction.replace(R.id.fragment_container,home);
+        HomeFragment home = new HomeFragment();
+        fragmentTransaction.replace(R.id.fragment_container, home);
         //fragmentTransaction.addToBackStack(null);   cosi da poter poi chiudere l'app direttamente se premuto back nella home
         fragmentTransaction.commit();
         return true;
+    }
+
+    @Override
+    public void onSubheaderClicked(int position) {
+        if (favoriteAdapter.isSectionExpanded(favoriteAdapter.getSectionIndex(position))) {
+            favoriteAdapter.collapseSection(favoriteAdapter.getSectionIndex(position));
+        } else {
+            favoriteAdapter.expandSection(favoriteAdapter.getSectionIndex(position));
+        }
     }
 
     public class SelectModeListener implements HeroSelectMode {
@@ -106,29 +114,23 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
                 case R.id.itemDelete:
                     favoriteAdapter.removeSelected();
                     actionMode.finish();
-                    return true; 
+                    return true;
                 default:
                     return false;
             }
         }
 
-
-
-
         @Override
         public void onDestroyActionMode(ActionMode actionMode) {
             actionMode = null;
             Log.w("ww","destroy");
-          //  mActionMode.finish();
+            //mActionMode.finish();
             FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.anim_fade_in, R.anim.anim_fade_out);
-            HomeFragment home= new HomeFragment();
-            FavouritesFragment favorite=new FavouritesFragment();
+            FavouritesFragment favorite = new FavouritesFragment();
             fragmentTransaction.replace(R.id.fragment_container,favorite);
             //fragmentTransaction.addToBackStack(null);   cosi da poter poi chiudere l'app direttamente se premuto back nella home
             fragmentTransaction.commit();
-
-
         }
     };
 }

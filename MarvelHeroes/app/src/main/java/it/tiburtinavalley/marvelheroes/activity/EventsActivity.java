@@ -206,7 +206,7 @@ public class EventsActivity extends AppCompatActivity {
             if (event.getDescription() != null) {
                 description.setText(event.getDescription());
             } else {
-                description.setText(R.string.noDescription);
+                description.setText(R.string.tv_noDescription);
             }
 
             //Setto l'immagine dell'evento.

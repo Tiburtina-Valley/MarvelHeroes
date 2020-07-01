@@ -78,7 +78,7 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
             appContext.startActivity(i);
         } else {                                                      //toast che avverte in caso di mancanza di connessiona ad internet
             ToastClass toast = new ToastClass(appContext);
-            toast.showToast(appContext.getString(R.string.internet_required));
+            toast.showToast(appContext.getString(R.string.msg_internet_required));
         }
     }
 

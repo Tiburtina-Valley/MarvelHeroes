@@ -13,7 +13,7 @@ import it.tiburtinavalley.marvelheroes.entity.HeroEntity;
 @Dao
 public interface HeroDao {
 
-    @Query("Select * from hero")
+    @Query("Select * from hero ORDER BY name")
     List<HeroEntity> getHeroList();
 
     @Query("SELECT EXISTS(SELECT * FROM hero WHERE heroId = :heroId)")

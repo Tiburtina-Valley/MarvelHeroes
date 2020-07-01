@@ -202,18 +202,18 @@ public class SeriesActivity extends AppCompatActivity {
             }
 
             tvSeriesName.setText(series.getTitle());
-            tvStartYear.setText(getString(R.string.series_start_date, series.getStartYear()));
-            tvEndYear.setText(getString(R.string.series_end_date, series.getEndYear()));
+            tvStartYear.setText(getString(R.string.label_series_start_date, series.getStartYear()));
+            tvEndYear.setText(getString(R.string.label_series_end_date, series.getEndYear()));
             if (!series.getType().equals(""))
-                tvType.setText(getString(R.string.type, series.getType()));
+                tvType.setText(getString(R.string.label_type, series.getType()));
             if (!series.getRating().equals(""))
-                tvRating.setText(getString(R.string.rating, series.getRating()));
+                tvRating.setText(getString(R.string.label_rating, series.getRating()));
 
             if (series.getDescription() != null) {
                 tvDescription.setText(series.getDescription());
             }
             else {
-                tvDescription.setText(R.string.noDescription);
+                tvDescription.setText(R.string.tv_noDescription);
             }
 
             //Setta i link associati alla serie.

@@ -42,7 +42,7 @@ public class SearchFragment extends Fragment {
         this.context = getActivity().getApplicationContext();
 
         rootView = inflater.inflate(R.layout.fragment_search, container, false);
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle("SEARCH");
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle(R.string.title_search);
 
         holder = new Holder();
         return rootView;
@@ -97,7 +97,7 @@ public class SearchFragment extends Fragment {
                         hideSoftKeyboard(getActivity());
                         loading.setVisibility(View.GONE);
                         ToastClass toast = new ToastClass(context);
-                        toast.showToast(getString(R.string.empty_search));
+                        toast.showToast(getString(R.string.msg_empty_search));
                         return true;
                     }
                     hideSoftKeyboard(getActivity());
@@ -110,7 +110,7 @@ public class SearchFragment extends Fragment {
                     else {
                         loading.setVisibility(View.GONE);
                         ToastClass toast = new ToastClass(context);
-                        toast.showToast(context.getString(R.string.internet_required));
+                        toast.showToast(context.getString(R.string.msg_internet_required));
                         return false;
                     }
                 }

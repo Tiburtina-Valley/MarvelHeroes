@@ -26,8 +26,6 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
-import javax.security.auth.callback.Callback;
-
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.ComicsActivity;
 import it.tiburtinavalley.marvelheroes.activity.HeroDetailActivity;
@@ -66,7 +64,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.context = getActivity().getApplicationContext();
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Home");
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_home);
 
         defaultHeroId = getString(R.string.default_hero_id);
 
@@ -185,7 +183,7 @@ public class HomeFragment extends Fragment {
             if (activeNetwork == null || !activeNetwork.isConnectedOrConnecting()) {
                 loading.setVisibility(View.GONE);
                 ToastClass toast = new ToastClass(context);
-                toast.showToast(context.getString(R.string.internet_required));
+                toast.showToast(context.getString(R.string.msg_internet_required));
             }
         }
 
@@ -346,7 +344,7 @@ public class HomeFragment extends Fragment {
                     context.startActivity(i);
                 } else {
                     ToastClass toast = new ToastClass(context);
-                    toast.showToast(getContext().getString(R.string.internet_required));
+                    toast.showToast(getContext().getString(R.string.msg_internet_required));
                 }
             }
             // click on Comic
@@ -361,7 +359,7 @@ public class HomeFragment extends Fragment {
                     context.startActivity(i);
                 } else {
                     ToastClass toast = new ToastClass(context);
-                    toast.showToast(context.getString(R.string.internet_required));
+                    toast.showToast(context.getString(R.string.msg_internet_required));
                 }
             }
             // click on Series
@@ -376,7 +374,7 @@ public class HomeFragment extends Fragment {
                     context.startActivity(i);
                 } else {                                                      //toast che avverte in caso di mancanza di connessione ad internet
                     ToastClass toast = new ToastClass(context);
-                    toast.showToast(context.getString(R.string.internet_required));
+                    toast.showToast(context.getString(R.string.msg_internet_required));
                 }
             }
         }
