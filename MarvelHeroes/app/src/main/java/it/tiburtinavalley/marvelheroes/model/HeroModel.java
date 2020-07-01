@@ -20,7 +20,6 @@ public class HeroModel extends BasicElement {
         description = in.readString();
         resourceURI = in.readString();
         thumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
-
     }
 
 
@@ -55,7 +54,13 @@ public class HeroModel extends BasicElement {
         return 0;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {

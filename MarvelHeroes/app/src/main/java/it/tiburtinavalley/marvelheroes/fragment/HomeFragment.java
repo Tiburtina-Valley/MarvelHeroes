@@ -35,6 +35,7 @@ import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
 import it.tiburtinavalley.marvelheroes.model.Series;
+import it.tiburtinavalley.marvelheroes.model.Thumbnail;
 import it.tiburtinavalley.marvelheroes.volley.ComicsVolley;
 import it.tiburtinavalley.marvelheroes.volley.MarvelApiVolley;
 import it.tiburtinavalley.marvelheroes.volley.SeriesVolley;
@@ -80,18 +81,12 @@ public class HomeFragment extends Fragment {
         comicAttempts = 0;
         seriesAttempts = 0;
 
-        Calendar c = Calendar.getInstance();
-        int hours = c.get(Calendar.HOUR_OF_DAY);
-        int minutes = c.get(Calendar.MINUTE);
-        int seconds = c.get(Calendar.SECOND);
-
         holder = new Holder();
 
-        if (hours * 3600 + minutes * 60 + seconds < 1800 || !sp.contains("heroname")) { //controlliamo se è passata la mezzanotte
-            editor.clear();
-            editor.commit();
+        if (!sp.contains("heroname") || !sp.getString("day", "").equalsIgnoreCase(String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)))) { //controlliamo se è passata la mezzanotte
 
             holder.checkConnection();
+            editor.putString("day", String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)));
 
             apiHero = new MarvelApiVolley(getContext()) {
                 @Override
@@ -117,7 +112,8 @@ public class HomeFragment extends Fragment {
             apiHero.getRandomCharacterInfo();
             apiComic.getRandomComic();
             apiSeries.getRandomSeries();
-        } else if (sp.contains("heroname")) { //datas are saved
+        }
+        else if (sp.contains("heroname")) { //datas are saved
             holder.setAll();
         }
         return rootView;
@@ -167,20 +163,27 @@ public class HomeFragment extends Fragment {
 
         private void setAll() {
             tvHeroName.setText(sp.getString("heroname", ""));
-            tvHeroDescription.setText(sp.getString("herodescr", "No description"));
-            Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(sp.getString("herothumb", "")).into(ivHero);
+            tvHeroDescription.setText(sp.getString("herodescr", ""));
+            String urlHero = sp.getString("heropath", "")
+                    + "." + sp.getString("heroext", "");
+            Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlHero).into(ivHero);
 
             tvComicTitle.setText(sp.getString("comicstitle", ""));
             tvComicDescription.setText(sp.getString("comicsdescr", "No description"));
-            Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(sp.getString("comicsthumb", "")).into(ivComic);
+            String urlComics = sp.getString("comicspath", "")
+                    + "." + sp.getString("comcisext", "");
+            Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlComics).into(ivComic);
 
             tvSeriesTitle.setText(sp.getString("seriestitle", ""));
             tvSeriesDescription.setText(sp.getString("seriesdescr", "No description"));
-            Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(sp.getString("seriesthumb", "")).into(ivSeries);
+            String urlSeries = sp.getString("seriespath", "")
+                    + "." + sp.getString("seriesext", "");
+            Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlSeries).into(ivSeries);
 
             loading_count = 3;
             dismissLoading();
         }
+
 
         private void checkConnection() {
             ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -215,6 +218,10 @@ public class HomeFragment extends Fragment {
                     String title = seriesOfTheDay.getTitle() != null ? seriesOfTheDay.getTitle() : "";
                     editor.putString("seriestitle", seriesOfTheDay.getTitle());
                     editor.commit();
+
+                    editor.putString("seriesid", seriesOfTheDay.getId());
+                    editor.commit();
+
                     tvSeriesTitle.setText(title);
                     String description = seriesOfTheDay.getDescription() != null ? seriesOfTheDay.getDescription() : "";
                     if (!description.isEmpty()) {
@@ -227,9 +234,15 @@ public class HomeFragment extends Fragment {
                         String urlThumbnail = seriesOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
                                 + "." + seriesOfTheDay.getThumbnail().getExtension();
                         Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivSeries);
-                        editor.putString("seriesthumb", seriesOfTheDay.getThumbnail().getPath().replaceFirst("http", "https") + "." + seriesOfTheDay.getThumbnail().getExtension());
+                        editor.putString("seriespath", seriesOfTheDay.getThumbnail().getPath().replaceFirst("http", "https"));
+                        editor.putString("seriesext", seriesOfTheDay.getThumbnail().getExtension());
                         editor.commit();
                     }
+                    editor.putString("seriestype", seriesOfTheDay.getType());
+                    editor.putString("seriesrating", seriesOfTheDay.getRating());
+                    editor.putString("startyear", "");
+                    editor.putString("endyear", "");
+                    editor.commit();
 
                     loading_count++;
                     dismissLoading();
@@ -256,6 +269,9 @@ public class HomeFragment extends Fragment {
 
                     comicAttempts = 0;
 
+                    editor.putString("comicid", comicOfTheDay.getId());
+                    editor.commit();
+
                     tvComicTitle.setText(comicOfTheDay.getTitle());
                     if (comicOfTheDay.getDescription() != null && !comicOfTheDay.getDescription().isEmpty())
                         tvComicDescription.setText(comicOfTheDay.getDescription());
@@ -273,8 +289,8 @@ public class HomeFragment extends Fragment {
                         String urlThumbnail = comicOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
                                 + "." + comicOfTheDay.getThumbnail().getExtension();
                         Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivComic);
-                        editor.putString("comicsthumb", comicOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
-                                + "." + comicOfTheDay.getThumbnail().getExtension());
+                        editor.putString("comicspath", comicOfTheDay.getThumbnail().getPath().replaceFirst("http", "https"));
+                        editor.putString("comicsext", comicOfTheDay.getThumbnail().getExtension());
                         editor.commit();
                     }
                     loading_count++;
@@ -302,6 +318,9 @@ public class HomeFragment extends Fragment {
 
                     heroAttempts = 0;
 
+                    editor.putString("heroid", heroOfTheDay.getId());
+                    editor.commit();
+
                     tvHeroName.setText(heroOfTheDay.getName());
                     if (heroOfTheDay.getDescription() != null && !heroOfTheDay.getDescription().isEmpty())
                         tvHeroDescription.setText(heroOfTheDay.getDescription());
@@ -319,8 +338,8 @@ public class HomeFragment extends Fragment {
                         String urlThumbnail = heroOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
                                 + "." + heroOfTheDay.getThumbnail().getExtension();
                         Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivHero);
-                        editor.putString("herothumb", heroOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
-                                + "." + heroOfTheDay.getThumbnail().getExtension());
+                        editor.putString("heropath", heroOfTheDay.getThumbnail().getPath().replaceFirst("http", "https"));
+                        editor.putString("heroext", heroOfTheDay.getThumbnail().getExtension());
                         editor.commit();
                     }
                     loading_count++;
@@ -341,7 +360,9 @@ public class HomeFragment extends Fragment {
                 ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
                 if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-
+                    if(heroOfTheDay == null){
+                        setHeroFromCache();
+                    }
                     Intent i = new Intent(context, HeroDetailActivity.class);
 
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -357,7 +378,9 @@ public class HomeFragment extends Fragment {
                 ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
                 if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-
+                    if(comicOfTheDay == null){
+                        setComicFromCache();
+                    }
                     Intent i = new Intent(context, ComicsActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     i.putExtra("comic", comicOfTheDay);
@@ -372,7 +395,9 @@ public class HomeFragment extends Fragment {
                 ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
                 if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-
+                    if(seriesOfTheDay == null){
+                        setSeriesFromCache();
+                    }
                     Intent i = new Intent(context, SeriesActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     i.putExtra("series", seriesOfTheDay);
@@ -383,7 +408,51 @@ public class HomeFragment extends Fragment {
                 }
             }
         }
+
+        private void setHeroFromCache(){
+            heroOfTheDay = new HeroModel();
+            heroOfTheDay.setId(sp.getString("heroid", ""));
+            heroOfTheDay.setName(sp.getString("heroname", ""));
+            heroOfTheDay.setDescription(sp.getString("herodescr", ""));
+
+            Thumbnail thumb = new Thumbnail();
+            thumb.setPath(sp.getString("heropath", ""));
+            thumb.setExtension(sp.getString("heroext", ""));
+
+            heroOfTheDay.setThumbnail(thumb);
+        }
+
+        private void setComicFromCache(){
+            comicOfTheDay = new Comics();
+            comicOfTheDay.setId(sp.getString("comicsid", ""));
+            comicOfTheDay.setTitle(sp.getString("comicsname", ""));
+            comicOfTheDay.setDescription(sp.getString("comicsdescr", ""));
+
+            Thumbnail thumb = new Thumbnail();
+            thumb.setPath(sp.getString("comicspath", ""));
+            thumb.setExtension(sp.getString("comicsext", ""));
+
+            comicOfTheDay.setThumbnail(thumb);
+        }
+
+        private void setSeriesFromCache(){
+            seriesOfTheDay = new Series();
+            seriesOfTheDay.setId(sp.getString("seriesid", ""));
+            seriesOfTheDay.setTitle(sp.getString("seriestitle", ""));
+            seriesOfTheDay.setDescription(sp.getString("seriesdescr", ""));
+            seriesOfTheDay.setType(sp.getString("seriestype", ""));
+            seriesOfTheDay.setRating(sp.getString("seriesrating", ""));
+            seriesOfTheDay.setStartYear(sp.getString("startyear", ""));
+            seriesOfTheDay.setEndYear(sp.getString("endyear", ""));
+
+            Thumbnail thumb = new Thumbnail();
+            thumb.setPath(sp.getString("seriespath", ""));
+            thumb.setExtension(sp.getString("seriesext", ""));
+
+            seriesOfTheDay.setThumbnail(thumb);
+        }
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
