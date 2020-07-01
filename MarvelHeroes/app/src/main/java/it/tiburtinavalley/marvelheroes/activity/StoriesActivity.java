@@ -39,7 +39,7 @@ public class StoriesActivity extends AppCompatActivity {
 
         public Holder() {
             tvStoryTitle = findViewById(R.id.tvStoryTitle);
-            tvType = findViewById(R.id.tvType);
+            tvType = findViewById(R.id.btnType);
             rvComics = findViewById(R.id.rvStoriesComics);
             rvSeries = findViewById(R.id.rvStoriesSeries);
             setData();
