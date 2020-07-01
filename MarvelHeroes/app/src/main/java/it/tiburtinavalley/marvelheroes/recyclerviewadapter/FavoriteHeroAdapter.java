@@ -3,22 +3,29 @@ package it.tiburtinavalley.marvelheroes.recyclerviewadapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import it.tiburtinavalley.marvelheroes.HeroSelectMode;
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.FavoriteHeroDetail;
@@ -91,6 +98,7 @@ public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapte
         }
     }
 
+
     //Attiva un menù che permette di togliere dai preferiti più di un eroe
     @Override
     public boolean onLongClick(View view) {
@@ -155,21 +163,15 @@ public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapte
             Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivHeroPic);
         }
         if (holder.cl.isSelected()) {
-            holder.borderLayout.setBackgroundResource(R.drawable.border_selection);
+
+            holder.ivHeroPic.setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
         }
         else {
-            holder.borderLayout.setBackgroundResource(0);
+            holder.ivHeroPic.clearColorFilter();
         }
+
     }
 
-    //metodo che va a deselezioanre
-    public void unselectElements(){
-        for(int i = 0; i < selectedHeroesList.size(); i++){
-            if(selectedHeroesList.get(i, false)){ //se l'eroe è selezionato, deselezionalo
-
-            }
-        }
-    }
 
     @Override
     public int getItemCount() {
