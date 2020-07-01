@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -34,43 +33,56 @@
                 android:id="@+id/layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#FFFFFF"
                 android:visibility="invisible">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:background="#FFFFFF"
+                    android:background="@color/colorPrimaryLight"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ivEventImg"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayoutUpper"
                     app:layout_constraintVertical_bias="0.0">
 
                     <TextView
                         android:id="@+id/tvEventDescription"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimaryDark"
+                        android:lineSpacingMultiplier="1.2"
+                        android:paddingLeft="24dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="32dp"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvUrlsEvent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:clipToPadding="false"
+                        android:paddingLeft="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@+id/tvEventDescription"
+                        tools:itemCount="3"/>
+
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvEventSeries"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/marginTopRv"
-                        android:layout_marginEnd="@dimen/marginEndRv"
+                        android:layout_marginTop="8dp"
+                        android:clipToPadding="false"
+                        android:paddingLeft="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintTop_toBottomOf="@+id/ivSeries"
                         tools:itemCount="5"
                         tools:layoutManager="GridLayoutManager"
@@ -81,12 +93,11 @@
                         android:id="@+id/ivSeries"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/tvMarginTop"
-                        android:layout_marginEnd="@dimen/tvEnd"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="24dp"
                         android:text="@string/label_related_series"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:textSize="22sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
@@ -96,56 +107,30 @@
                         android:id="@+id/rvEventComics"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/marginTopRv"
-                        android:layout_marginEnd="@dimen/marginEndRv"
+                        android:layout_marginTop="8dp"
+                        android:clipToPadding="false"
+                        android:paddingLeft="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintTop_toBottomOf="@+id/ivComics"
                         tools:itemCount="5"
                         tools:layoutManager="GridLayoutManager"
                         tools:listitem="@layout/recycler_view_item"
                         tools:spanCount="5" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rvUrlsEvent"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/rvHeight"
-                        android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/marginTopRv"
-                        android:layout_marginEnd="@dimen/marginEndRv"
-                        android:textSize="18sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView12"
-                        tools:itemCount="3" />
 
-                    <TextView
-                        android:id="@+id/textView12"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginEnd="@dimen/marginEndRv"
-                        android:text="@string/label_urls"
-                        android:textSize="@dimen/plainTextSize"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/rvEventSeries" />
+
+
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvEventCreators"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/marginTopRv"
-                        android:layout_marginEnd="@dimen/marginEndRv"
+                        android:layout_marginTop="8dp"
+                        android:clipToPadding="false"
+                        android:paddingLeft="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tvCreators"
                         tools:itemCount="5"
@@ -157,12 +142,11 @@
                         android:id="@+id/tvCreators"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/tvMarginTop"
-                        android:layout_marginEnd="@dimen/marginEndRv"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="24dp"
                         android:text="@string/label_related_creators"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:textSize="22sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
@@ -172,11 +156,10 @@
                         android:id="@+id/rvEventHeroes"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/marginTopRv"
-                        android:layout_marginEnd="@dimen/marginEndRv"
+                        android:layout_marginTop="8dp"
+                        android:clipToPadding="false"
+                        android:paddingLeft="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/ivHeroes"
                         tools:itemCount="5"
@@ -188,106 +171,129 @@
                         android:id="@+id/ivHeroes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="24dp"
                         android:text="@string/label_heroes"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:textSize="22sp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.03"
+                        app:layout_constraintHorizontal_bias="0.012"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvEventDescription" />
+                        app:layout_constraintTop_toBottomOf="@+id/rvUrlsEvent" />
 
                     <TextView
                         android:id="@+id/ivComics"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/marginStartRv"
-                        android:layout_marginTop="@dimen/tvMarginTop"
-                        android:layout_marginEnd="@dimen/marginEndRv"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="24dp"
                         android:text="@string/label_related_comics"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:textSize="22sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/rvEventCreators" />
+
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/tvEventEndDate"
-                    android:layout_width="wrap_content"
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayoutUpper"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.402"
-                    app:layout_constraintStart_toEndOf="@+id/ivEventImg"
-                    app:layout_constraintTop_toBottomOf="@+id/tvEnd" />
-
-                <TextView
-                    android:id="@+id/tvEnd"
-                    android:layout_width="92dp"
-                    android:layout_height="21dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="33dp"
-                    android:text="@string/label_event_end_date"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.107"
-                    app:layout_constraintStart_toEndOf="@+id/ivEventImg"
-                    app:layout_constraintTop_toBottomOf="@+id/tvEventStartDate" />
-
-                <ImageView
-                    android:id="@+id/ivEventImg"
-                    android:layout_width="162dp"
-                    android:layout_height="152dp"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="16dp"
-                    android:contentDescription="@string/label_event_description"
+                    android:background="@color/colorPrimaryDark"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvEventTitle"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/tvEventTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:textSize="26sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvCComicImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginBottom="24dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0">
 
-                <TextView
-                    android:id="@+id/tvStart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="36dp"
-                    android:layout_marginEnd="33dp"
-                    android:text="@string/label_event_start_date"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.113"
-                    app:layout_constraintStart_toEndOf="@+id/ivEventImg"
-                    app:layout_constraintTop_toBottomOf="@+id/tvEventTitle" />
+                        <ImageView
+                            android:id="@+id/ivEventImg"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:contentDescription="@string/label_event_description"
+                            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                    </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:id="@+id/tvEventStartDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.402"
-                    app:layout_constraintStart_toEndOf="@+id/ivEventImg"
-                    app:layout_constraintTop_toBottomOf="@+id/tvStart" />
+                    <TextView
+                        android:id="@+id/tvEventStartDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="startDateHere"
+                        android:textColor="#FFFFFF"
+                        app:layout_constraintStart_toEndOf="@+id/cvCComicImg"
+                        app:layout_constraintTop_toBottomOf="@+id/tvStart" />
+
+                    <TextView
+                        android:id="@+id/tvEnd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="21dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/label_event_end_date"
+                        android:textAllCaps="true"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@+id/cvCComicImg"
+                        app:layout_constraintTop_toBottomOf="@+id/tvEventStartDate" />
+
+                    <TextView
+                        android:id="@+id/tvEventEndDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:textColor="#FFFFFF"
+                        android:text="ciao"
+                        app:layout_constraintStart_toEndOf="@+id/cvCComicImg"
+                        app:layout_constraintTop_toBottomOf="@+id/tvEnd" />
+
+                    <TextView
+                        android:id="@+id/tvEventTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="ciao"
+                        android:textColor="#FFFFFF"
+                        android:textSize="@dimen/sectionTitleTextSize"
+                        app:layout_constraintStart_toEndOf="@+id/cvCComicImg"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvStart"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="35dp"
+                        android:text="@string/label_event_start_date"
+                        android:textAllCaps="true"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toEndOf="@+id/cvCComicImg"
+                        app:layout_constraintTop_toBottomOf="@+id/tvEventTitle" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

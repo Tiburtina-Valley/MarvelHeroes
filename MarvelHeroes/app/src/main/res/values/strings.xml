@@ -28,16 +28,16 @@
     <string name="mail" translatable="false">tiburtinaMail.com</string>
     <string name="version" translatable="false">Version 1.0</string>
     <string name="label_events">Events</string>
-    <string name="label_event_end_date">event ends :</string>
+    <string name="label_event_end_date">To</string>
     <string name="label_series_end_date">Series ends: %1$s</string>
     <string name="label_event_title">Event title</string>
     <string name="label_series_start_date">Series starts: %1$s</string>
-    <string name="label_event_start_date">event start :</string>
+    <string name="label_event_start_date">From</string>
     <string name="label_event_description">Description</string>
-    <string name="label_events_comics">Related events :</string>
-    <string name="label_related_creators">Related creators :</string>
-    <string name="label_related_comics">Related comics :</string>
-    <string name="label_heroes">Related heroes :</string>
+    <string name="label_events_comics">Related events</string>
+    <string name="label_related_creators">Related creators</string>
+    <string name="label_related_comics">Related comics</string>
+    <string name="label_heroes">Related heroes</string>
     <string name="label_rating">Rating: %1$s</string>
     <string name="label_type">Type: %1$s</string>
     <string name="label_created_comics">Comics drawn :</string>
@@ -46,7 +46,7 @@
     <string name="label_comics_series">Related comics :</string>
     <string name="tv_noPageCount">No page count available</string>
     <string name="tv_noUPC">No Upc code available</string>
-    <string name="label_related_series">Related series :</string>
+    <string name="label_related_series">Related series</string>
     <string name="msg_internet_required">Please check your connection</string>
     <string name="label_home_first_section_title">Hero of the day</string>
     <string name="home_title" translatable="false">Home</string>
