@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.context = getActivity().getApplicationContext();
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Home");
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_home);
 
         defaultHeroId = getString(R.string.default_hero_id);
 

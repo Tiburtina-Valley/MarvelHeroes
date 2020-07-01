@@ -41,7 +41,7 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_favourites, container, false);
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle("YOUR HEROES");
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle(R.string.title_favourites);
 
         RecyclerView rvHeroes;
         rvHeroes = v.findViewById(R.id.rvFavouriteHeroes);
@@ -63,7 +63,7 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
 
     @Override
     public boolean onBackPressed() {
-        Log.w("12","ispressed");
+        Log.w("12",getString(R.string.msg_is_pressed));
         
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.anim_fade_in, R.anim.anim_fade_out);

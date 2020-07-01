@@ -59,5 +59,12 @@
     <string name="default_comic_id" translatable="false">47903</string>
     <string name="default_series_id" translatable="false">354</string>
     <string name="msg_request_throttled">You have exceeded your rate limit.  Please try again later.</string>
+    <string name="label_favourite_heroes">YOUR HEROES</string>
+    <string name="btn_home" translatable="false">Home</string>
+    <string name="btn_favourites">Favourites</string>
+    <string name="title_search">SEARCH</string>
+    <string name="title_home" translatable="false">HOME</string>
+    <string name="msg_is_pressed" translatable="false">ispressed</string>
+    <string name="title_favourites">YOUR HEROES</string>
 
 </resources>

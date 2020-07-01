@@ -5,19 +5,19 @@
     <item
         android:id="@+id/action_home"
         android:enabled="true"
-        android:title="To Do"
+        android:title="@string/btn_home"
         android:icon="@drawable/ic_action_home"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_search"
         android:enabled="true"
-        android:title="Search"
+        android:title="@string/btn_search"
         android:icon="@drawable/ic_action_search"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_favourites"
         android:enabled="true"
-        android:title="Favourites"
+        android:title="@string/btn_favourites"
         android:icon="@drawable/ic_action_favourites"
         app:showAsAction="ifRoom" />
 

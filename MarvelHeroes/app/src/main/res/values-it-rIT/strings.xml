@@ -20,7 +20,6 @@
     <string name="label_series_start_date">Serie iniziata: %1$s</string>
     <string name="label_event_start_date">Evento iniziato:</string>
     <string name="label_event_description">Descrizione</string>
-    <string name="label_series_comics">Serie collegate :</string>
     <string name="label_events_comics">Eventi collegati :</string>
     <string name="label_related_creators">Creatori :</string>
     <string name="label_related_comics">Fumetti collegati :</string>
@@ -41,4 +40,8 @@
     <string name="msg_empty_search">Per favore inserisci il nome di un eroe</string>
     <string name="btn_about">Su di noi</string>
     <string name="msg_request_throttled">Hai superato il limite di richieste. Per favore riprova più tardi.</string>
+    <string name="label_favourite_heroes">I TUOI EROI</string>
+    <string name="btn_favourites">Preferiti</string>
+    <string name="title_favourites">I TUOI EROI</string>
+    <string name="title_search">RICERCA</string>
 </resources>
