@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -81,15 +82,13 @@ public class MainActivity extends AppCompatActivity {
         boolean onBackPressed();
     }
 
-
-            @Override public void onBackPressed() {
-                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-                if (!(fragment instanceof IOnBackPressed) || !((IOnBackPressed) fragment).onBackPressed()) {
-                    super.onBackPressed();
-                }
-            }
-
-
+    @Override
+    public void onBackPressed() {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (!(fragment instanceof IOnBackPressed) || !((IOnBackPressed) fragment).onBackPressed()) {
+            super.onBackPressed();
+        }
+    }
 }
 
 

@@ -1,7 +1,6 @@
 package it.tiburtinavalley.marvelheroes.fragment;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,16 +19,15 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
+
+import javax.security.auth.callback.Callback;
+
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.ComicsActivity;
 import it.tiburtinavalley.marvelheroes.activity.HeroDetailActivity;
@@ -84,18 +82,12 @@ public class HomeFragment extends Fragment {
         comicAttempts = 0;
         seriesAttempts = 0;
 
-        Calendar c = Calendar.getInstance();
-        int hours = c.get(Calendar.HOUR_OF_DAY);
-        int minutes = c.get(Calendar.MINUTE);
-        int seconds = c.get(Calendar.SECOND);
-
         holder = new Holder();
 
-        if (hours * 3600 + minutes * 60 + seconds < 1800 || !sp.contains("heroname")) { //controlliamo se è passata la mezzanotte
-            editor.clear();
-            editor.commit();
+        if (!sp.contains("heroname") || !sp.getString("day", "").equalsIgnoreCase(String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)))) { //controlliamo se è passata la mezzanotte
 
             holder.checkConnection();
+            editor.putString("day", String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)));
 
             apiHero = new MarvelApiVolley(getContext()) {
                 @Override
@@ -121,7 +113,8 @@ public class HomeFragment extends Fragment {
             apiHero.getRandomCharacterInfo();
             apiComic.getRandomComic();
             apiSeries.getRandomSeries();
-        } else if (sp.contains("heroname")) { //datas are saved
+        }
+        else if (sp.contains("heroname")) { //datas are saved
             holder.setAll();
         }
         return rootView;
@@ -388,6 +381,7 @@ public class HomeFragment extends Fragment {
             }
         }
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
