@@ -68,7 +68,8 @@ public abstract class EventsVolley implements Response.ErrorListener, Response.L
     //Comportamento in caso di fallimento della query
     @Override
     public void onErrorResponse(VolleyError error) {
-        Log.w("QueryFail", error.getMessage());
+        if(error != null)
+            Log.w("QueryFail", error.getMessage());
     }
 
     //Comportamento da seguire dopo aver ricevuto una risposta ad una richiesta fatta.
