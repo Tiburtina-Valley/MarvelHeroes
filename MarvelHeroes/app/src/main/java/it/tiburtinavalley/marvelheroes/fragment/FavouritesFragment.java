@@ -112,23 +112,17 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
             }
         }
 
-
-
-
         @Override
         public void onDestroyActionMode(ActionMode actionMode) {
             actionMode = null;
             Log.w("ww","destroy");
-          //  mActionMode.finish();
+            //mActionMode.finish();
             FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
             fragmentTransaction.setCustomAnimations(R.anim.anim_fade_in, R.anim.anim_fade_out);
-            HomeFragment home= new HomeFragment();
-            FavouritesFragment favorite=new FavouritesFragment();
+            FavouritesFragment favorite = new FavouritesFragment();
             fragmentTransaction.replace(R.id.fragment_container,favorite);
             //fragmentTransaction.addToBackStack(null);   cosi da poter poi chiudere l'app direttamente se premuto back nella home
             fragmentTransaction.commit();
-
-
         }
     };
 }

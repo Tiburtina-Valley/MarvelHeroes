@@ -8,25 +8,25 @@
     <string name="hero_detail_description">Description</string>
     <string name="hero_detail_stories">Stories</string>
     <string name="hero">Hero</string>
-    <string name="urls">Links: </string>
+    <string name="urls" translatable="false">Links: </string>
     <string name="AboutBtn">About us </string>
     <string name="about_us_description">\"our team\"</string>
     <string name="FRONTEND_HOST">\"myWebsite\"</string>
-    <string name="FACEBOOK_ID">\"facebook\"</string>
-    <string name="TWITTER_ID">\"twitter\"</string>
-    <string name="YOUTUBE_ID">\"youtube\"</string>
+    <string name="FACEBOOK_ID" translatable="false">\"facebook\"</string>
+    <string name="TWITTER_ID" translatable="false">\"twitter\"</string>
+    <string name="YOUTUBE_ID" translatable="false">\"youtube\"</string>
     <string name="developers">\"developers\"</string>
     <string name="share">\"share\"</string>
-    <string name="third_party_licenses">\"license\"</string>
-    <string name="githubPage">Tiburtina-Valley</string>
-    <string name="instagramPage">TiburtinaValleyDev</string>
-    <string name="playStore">it.tiburtinavalley.marvelheroes</string>
-    <string name="youTubePage">iHsgkpP0aUY</string>
-    <string name="twitterPage">baobabexp</string>
-    <string name="facebookPage">stazioneromatiburtina</string>
-    <string name="website">https://github.com/piercirocaliandro/MarvelHero</string>
-    <string name="mail">tiburtinaMail.com</string>
-    <string name="version">Version 1.0</string>
+    <string name="third_party_licenses" translatable="false">\"license\"</string>
+    <string name="githubPage" translatable="false">Tiburtina-Valley</string>
+    <string name="instagramPage" translatable="false">TiburtinaValleyDev</string>
+    <string name="playStore" translatable="false">it.tiburtinavalley.marvelheroes</string>
+    <string name="youTubePage" translatable="false">iHsgkpP0aUY</string>
+    <string name="twitterPage" translatable="false">baobabexp</string>
+    <string name="facebookPage" translatable="false">stazioneromatiburtina</string>
+    <string name="website" translatable="false">https://github.com/piercirocaliandro/MarvelHero</string>
+    <string name="mail" translatable="false">tiburtinaMail.com</string>
+    <string name="version" translatable="false">Version 1.0</string>
     <string name="events">Events</string>
     <string name="event_end_date">event ends:</string>
     <string name="series_end_date">Series ends: %1$s</string>
@@ -42,27 +42,27 @@
     <string name="rating">Rating: %1$s</string>
     <string name="type">Type: %1$s</string>
     <string name="created_comics">Comics drawn :</string>
-    <string name="event_s_creators">Event\'s creators:</string>
+    <string name="event_s_creators" translatable="false">Event\'s creators:</string>
     <string name="noDescription">No description available</string>
     <string name="comics_series">Related comics :</string>
     <string name="noPageCount">No page count available</string>
     <string name="noUPC">No Upc code available</string>
-    <string name="event_s_series">Event\'s series</string>
-    <string name="event_links">Links</string>
-    <string name="event_s_comics">Event\'s comics</string>
-    <string name="event_s_heroes">Event\'s heroes</string>
+    <string name="event_s_series" translatable="false">Event\'s series</string>
+    <string name="event_links" translatable="false">Links</string>
+    <string name="event_s_comics" translatable="false">Event\'s comics</string>
+    <string name="event_s_heroes" translatable="false">Event\'s heroes</string>
     <string name="related_series">Related series :</string>
     <string name="internet_required">Please check your connection</string>
     <string name="home_first_section_title">Hero of the day</string>
-    <string name="home_title">Home</string>
-    <string name="ellipsis">...</string>
+    <string name="home_title" translatable="false">Home</string>
+    <string name="ellipsis" translatable="false">...</string>
     <string name="home_second_section_title">Comic of the day</string>
     <string name="home_third_section_title">Series of the day</string>
     <string name="delete_heroes">Delete</string>
     <string name="empty_search">Please insert a hero\'s name</string>
-    <string name="default_hero_id">1009351</string>
-    <string name="default_comic_id">47903</string>
-    <string name="default_series_id">354</string>
+    <string name="default_hero_id" translatable="false">1009351</string>
+    <string name="default_comic_id" translatable="false">47903</string>
+    <string name="default_series_id" translatable="false">354</string>
     <string name="request_throttled">You have exceeded your rate limit.  Please try again later.</string>
 
 </resources>

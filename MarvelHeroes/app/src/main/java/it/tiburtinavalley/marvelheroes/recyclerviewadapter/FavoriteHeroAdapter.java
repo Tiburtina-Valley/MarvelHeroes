@@ -164,14 +164,12 @@ public class FavoriteHeroAdapter extends RecyclerView.Adapter<FavoriteHeroAdapte
         }
         if (holder.cl.isSelected()) {
 
-            holder.ivHeroPic.setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+            holder.ivHeroPic.setColorFilter(R.color.selectionColor, PorterDuff.Mode.SRC_ATOP);
         }
         else {
             holder.ivHeroPic.clearColorFilter();
         }
-
     }
-
 
     @Override
     public int getItemCount() {
