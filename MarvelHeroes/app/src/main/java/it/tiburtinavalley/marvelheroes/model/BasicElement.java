@@ -20,4 +20,12 @@ public abstract class BasicElement implements Parcelable {
     public List<Urls> getUrls() {
         return urls;
     }
+
+    public void setThumbnail(Thumbnail thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }
