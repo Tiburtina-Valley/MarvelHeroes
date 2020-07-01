@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
+
 import it.tiburtinavalley.marvelheroes.HeroSelectMode;
 import it.tiburtinavalley.marvelheroes.R;
 
@@ -53,6 +54,10 @@ public class FavouritesFragment extends Fragment {
             return v;
         }
         return v;
+    }
+
+    public void deselectOnBack() {
+        favoriteAdapter.unselectElements(); //chiama il metodo nell'Adapter per far si che vengano deselezionati gli elementi
     }
 
     public class SelectModeListener implements HeroSelectMode {
@@ -96,6 +101,7 @@ public class FavouritesFragment extends Fragment {
         @Override
         public void onDestroyActionMode(ActionMode actionMode) {
             actionMode = null;
+            mActionMode = null; //fa si che il menù ricompaia se tutti gli elementi sono deselezionati
         }
     };
 }
