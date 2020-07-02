@@ -140,6 +140,7 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
         selectedHeroesList.clear();
 
         notifyDataChanged();
+        notifyDataSetChanged();
     }
 
     @Override
