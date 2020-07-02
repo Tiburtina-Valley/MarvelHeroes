@@ -31,6 +31,7 @@ public class CreatorsAdapter extends RecyclerView.Adapter<CreatorsAdapter.Creato
     @Override
     public void onClick(View v) {
         ConnectivityManager cm = (ConnectivityManager)appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
             int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
@@ -73,7 +74,7 @@ public class CreatorsAdapter extends RecyclerView.Adapter<CreatorsAdapter.Creato
         return creators.size();
     }
 
-    class CreatorsHolder extends RecyclerView.ViewHolder {
+    static class CreatorsHolder extends RecyclerView.ViewHolder {
         final ImageView ivComic;
         final TextView tvComicName;
 

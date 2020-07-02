@@ -67,6 +67,7 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
     @Override
     public void onClick(View v) {
         ConnectivityManager cm = (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
             int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
@@ -83,7 +84,7 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
     }
 
     /** Holder che definisce come sono fatte le singole entry della recycler view */
-    class SeriesHolder extends RecyclerView.ViewHolder {
+    static class SeriesHolder extends RecyclerView.ViewHolder {
         final ImageView ivSeries;
         final TextView tvSeriesName;
 

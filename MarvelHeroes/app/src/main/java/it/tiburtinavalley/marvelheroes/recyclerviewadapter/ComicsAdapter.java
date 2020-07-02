@@ -59,6 +59,7 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsHold
     @Override
     public void onClick(View v) {
         ConnectivityManager cm = (ConnectivityManager)appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
             int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
@@ -75,7 +76,7 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsHold
         }
     }
 
-    class ComicsHolder extends RecyclerView.ViewHolder {
+    static class ComicsHolder extends RecyclerView.ViewHolder {
         final ImageView ivComic;
         final TextView tvComicName;
 
@@ -84,9 +85,5 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsHold
             ivComic = itemView.findViewById(R.id.ivCreator);
             tvComicName = itemView.findViewById(R.id.tvCreatorName);
         }
-    }
-
-    public void addComic(Comics comics){
-        this.comics.add(comics);
     }
 }

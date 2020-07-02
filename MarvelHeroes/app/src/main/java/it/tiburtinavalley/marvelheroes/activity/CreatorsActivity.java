@@ -1,6 +1,5 @@
 package it.tiburtinavalley.marvelheroes.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import java.util.List;
+import java.util.Objects;
 
 import it.tiburtinavalley.marvelheroes.BackHomeListener;
 import it.tiburtinavalley.marvelheroes.R;
@@ -31,7 +31,7 @@ public class CreatorsActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.creators_detail_layout);
-        Holder hold = new Holder((Creators)getIntent().getParcelableExtra("creator"));
+        new Holder((Creators) Objects.requireNonNull(getIntent().getParcelableExtra("creator")));
     }
 
     class Holder {

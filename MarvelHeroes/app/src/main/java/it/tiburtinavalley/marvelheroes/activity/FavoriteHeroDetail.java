@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+import java.util.Objects;
 
 import it.tiburtinavalley.marvelheroes.dao.AppDatabase;
 import it.tiburtinavalley.marvelheroes.entity.HeroEntity;
@@ -30,7 +31,6 @@ import it.tiburtinavalley.marvelheroes.model.Series;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.ComicsAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.EventsAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.SeriesAdapter;
-import it.tiburtinavalley.marvelheroes.recyclerviewadapter.StoriesAdapter;
 import it.tiburtinavalley.marvelheroes.volley.ComicsVolley;
 import it.tiburtinavalley.marvelheroes.volley.EventsVolley;
 import it.tiburtinavalley.marvelheroes.volley.SeriesVolley;
@@ -70,14 +70,12 @@ public class FavoriteHeroDetail extends AppCompatActivity{
         private final RecyclerView rvSeries;
         private final RecyclerView rvEvents;
         private ImageView ivHeroPhoto;
-        private TextView tvHeroName;
         private TextView tvComics;
         private TextView tvSeries;
         private TextView tvEvents;
         private TextView tvHeroDescription;
         private ComicsAdapter cAdapter;
         private SeriesAdapter sAdapter;
-        private StoriesAdapter stAdapter;
         private EventsAdapter eAdapter;
         private FloatingActionButton btnAddFavorite;
         private Toolbar toolbar;
@@ -97,7 +95,6 @@ public class FavoriteHeroDetail extends AppCompatActivity{
             rvComics = findViewById(R.id.rvComics);
             rvSeries = findViewById(R.id.rvSeries);
             ivHeroPhoto = findViewById(R.id.ivHeroPhoto);
-            tvHeroName = findViewById(R.id.tvHeroName);
             tvHeroDescription = findViewById(R.id.tvHeroDescription);
 
             btnAddFavorite = findViewById(R.id.btnAddFavorite);
@@ -177,7 +174,7 @@ public class FavoriteHeroDetail extends AppCompatActivity{
         }
 
         public void setDetails(HeroModel hero) {
-            getSupportActionBar().setTitle(hm.getName());
+            Objects.requireNonNull(getSupportActionBar()).setTitle(hm.getName());
 
             if(hero.getDescription() != null && !hero.getDescription().equalsIgnoreCase("")) {
                 this.tvHeroDescription.setText(hero.getDescription());

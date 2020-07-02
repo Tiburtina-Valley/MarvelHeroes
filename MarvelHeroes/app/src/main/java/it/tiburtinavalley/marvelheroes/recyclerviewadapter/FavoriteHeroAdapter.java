@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.view.LayoutInflater;
@@ -56,7 +55,7 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
         smListener = listener;
     }
 
-    class Holder extends RecyclerView.ViewHolder {
+    static class Holder extends RecyclerView.ViewHolder {
         final TextView tvHeroName;
         final ImageView ivHeroPic;
         final ConstraintLayout cl;
@@ -83,6 +82,7 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
 
         if (!selectedMenu) {
             ConnectivityManager cm = (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+            assert cm != null;
             NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
             if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
                 HeroModel heroModel = new HeroModel();
@@ -103,7 +103,7 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
 
     //Attiva un menù che permette di togliere dai preferiti più di un eroe
 
-    public boolean onLongClick(View view, HeroEntity hero) {
+    public void onLongClick(View view, HeroEntity hero) {
         selectedMenu = true;
 
         if (view.isSelected()) {
@@ -119,8 +119,6 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
             smListener.onSelect(selectedHeroesList.size()); //callback verso l'Activity
         }
         notifyDataChanged();
-
-        return true; //blocca la catena di chiamate
     }
 
     //cancella tutti glie elementi selezionati della lista
@@ -144,7 +142,7 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
         cl = (ConstraintLayout) LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.favourite_hero_layout, parent, false);
-        return new FavoriteHeroAdapter.Holder(cl);
+        return new Holder(cl);
     }
 
     @Override
@@ -220,8 +218,6 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
     }
 
     static class SubheaderHolder extends RecyclerView.ViewHolder {
-
-        private static Typeface meduiumTypeface = null;
 
         TextView mSubheaderText;
         ImageView mArrow;

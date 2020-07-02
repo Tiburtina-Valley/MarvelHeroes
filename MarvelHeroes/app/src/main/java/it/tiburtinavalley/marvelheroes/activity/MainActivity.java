@@ -30,27 +30,24 @@ public class MainActivity extends AppCompatActivity {
         setFragment(new HomeFragment());
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener = item -> {
 
-            switch(item.getItemId()) {
-                case R.id.action_home:
-                    setFragment(new HomeFragment());
-                    return true;
+        switch(item.getItemId()) {
+            case R.id.action_home:
+                setFragment(new HomeFragment());
+                return true;
 
-                case R.id.action_favourites:
-                    setFragment(new FavouritesFragment());
-                    return true;
+            case R.id.action_favourites:
+                setFragment(new FavouritesFragment());
+                return true;
 
-                case R.id.action_search:
-                    setFragment(new SearchFragment());
-                    return true;
+            case R.id.action_search:
+                setFragment(new SearchFragment());
+                return true;
 
 
-            }
-            return true;
         }
+        return true;
     };
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {

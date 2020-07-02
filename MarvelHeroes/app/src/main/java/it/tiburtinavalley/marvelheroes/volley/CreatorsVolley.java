@@ -47,20 +47,10 @@ public abstract class CreatorsVolley implements Response.ErrorListener, Response
         creatorsApiCall(creator);
     }
 
-    /** Ottiene tutti gli i creatori di una data storia.*/
-    public void getCreatorsByStories(String storyId){
-        String creator = storyId + "/creators";
-        creatorsApiCall(creator);
-    }
-
-
     private void creatorsApiCall(String creatorUrl){
         String url = urlBase + apiKey; // usiamo una stringa di appoggio così da poter ripetere la chiamata
         url = String.format(url, creatorUrl);
-        StringRequest sr = new StringRequest(Request.Method.GET,
-                url,
-                this,
-                this);
+        StringRequest sr = new StringRequest(Request.Method.GET, url, this, this);
         requestQueue.add(sr);
     }
 

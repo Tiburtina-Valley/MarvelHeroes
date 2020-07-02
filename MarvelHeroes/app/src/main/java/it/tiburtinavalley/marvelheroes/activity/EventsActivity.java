@@ -36,7 +36,6 @@ import it.tiburtinavalley.marvelheroes.volley.SeriesVolley;
 
 public class EventsActivity extends AppCompatActivity {
     private Events event;
-    private UrlsRecyclerView urlsAdapter;
 
     //Creo l'activity, prelevando dal bundle i dati dell'evento selezionato,e impostando il layout.
     @Override
@@ -44,7 +43,7 @@ public class EventsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.events_layout);
         event = getIntent().getParcelableExtra("event");
-         Holder holder = new Holder();
+        new Holder();
     }
 
     //Definisco l'holder con tutti gli elementi della view.

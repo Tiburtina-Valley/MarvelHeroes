@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.zhukic.sectionedrecyclerview.SectionedRecyclerViewAdapter;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,7 +25,7 @@ public class GridDividerDecoration extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+    public void onDraw(Canvas c, RecyclerView parent, @NonNull RecyclerView.State state) {
 
         final SectionedRecyclerViewAdapter adapter = (SectionedRecyclerViewAdapter) parent.getAdapter();
 
@@ -34,6 +35,7 @@ public class GridDividerDecoration extends RecyclerView.ItemDecoration {
 
             final int adapterPosition = parent.getChildAdapterPosition(child);
 
+            assert adapter != null;
             if (adapterPosition != RecyclerView.NO_POSITION && i != 0 && adapter.isSubheaderAtPosition(adapterPosition)) {
                 c.drawRect(child.getLeft(), child.getTop(), child.getRight(), child.getTop() + dividerHeight, dividerPaint);
             }

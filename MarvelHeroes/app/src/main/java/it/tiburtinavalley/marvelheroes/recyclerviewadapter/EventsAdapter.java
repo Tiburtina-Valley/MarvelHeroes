@@ -69,6 +69,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
     @Override
     public void onClick(View v) {
         ConnectivityManager cm = (ConnectivityManager)appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
             int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
@@ -85,7 +86,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
     }
 
     //Holder che definisce come sono fatte le singole righe della recycler view(collegando lo specifico layout)
-    class EventsHolder extends RecyclerView.ViewHolder {
+    static class EventsHolder extends RecyclerView.ViewHolder {
         final ImageView ivEvent;
         final TextView tvEventName;
 

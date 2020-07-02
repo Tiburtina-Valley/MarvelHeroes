@@ -1,7 +1,6 @@
 package it.tiburtinavalley.marvelheroes.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,14 +31,13 @@ import it.tiburtinavalley.marvelheroes.volley.MarvelApiVolley;
 
 public class ComicsActivity extends AppCompatActivity {
     private Comics comic;
-    private UrlsRecyclerView urlsAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.comic_layout);
         comic = getIntent().getParcelableExtra("comic");
-        Holder holder = new Holder();
+        new Holder();
     }
 
     class Holder {
@@ -119,7 +117,7 @@ public class ComicsActivity extends AppCompatActivity {
                 }
             };
             // Vengono chiamati i metodi delle volley per rimepire le RecyclerView con i valori ritornati dalle query
-            urlsAdapter = new UrlsRecyclerView(comic.getUrls()); // gli urls sono già stati caricati precedentemente, quando è stata caricata l'activity per i dettagli dell'eroe
+            UrlsRecyclerView urlsAdapter = new UrlsRecyclerView(comic.getUrls()); // gli urls sono già stati caricati precedentemente, quando è stata caricata l'activity per i dettagli dell'eroe
             rvUrls.setAdapter(urlsAdapter);
 
             String id = comic.getId();

@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,7 +37,6 @@ import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
 import it.tiburtinavalley.marvelheroes.model.Series;
-import it.tiburtinavalley.marvelheroes.model.Thumbnail;
 import it.tiburtinavalley.marvelheroes.volley.ComicsVolley;
 import it.tiburtinavalley.marvelheroes.volley.MarvelApiVolley;
 import it.tiburtinavalley.marvelheroes.volley.SeriesVolley;
@@ -64,9 +64,9 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        this.context = getActivity().getApplicationContext();
+        this.context = Objects.requireNonNull(getActivity()).getApplicationContext();
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_home);
+        Objects.requireNonNull(((MainActivity) getActivity()).getSupportActionBar()).setTitle(R.string.title_home);
 
         defaultHeroId = getString(R.string.default_hero_id);
 
@@ -74,7 +74,6 @@ public class HomeFragment extends Fragment {
         editor = sp.edit();
 
         defaultHeroId = getString(R.string.default_hero_id);
-        ;
         defaultComicId = getString(R.string.default_comic_id);
         defaultStoriesId = getString(R.string.default_series_id);
 
@@ -139,7 +138,6 @@ public class HomeFragment extends Fragment {
         RequestOptions requestOptions = new RequestOptions();
 
         private int loading_count = 0;
-        private Object Comics;
 
         public Holder() {
             cvHero = rootView.findViewById(R.id.cvHero);
@@ -169,7 +167,7 @@ public class HomeFragment extends Fragment {
             tvHeroDescription.setText(heroOfTheDay.getDescription());
             String urlHero = heroOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
                     +"/portrait_xlarge" + "." + heroOfTheDay.getThumbnail().getExtension();
-            Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlHero).into(ivHero);
+            Glide.with(Objects.requireNonNull(getActivity())).setDefaultRequestOptions(requestOptions).load(urlHero).into(ivHero);
 
             comicOfTheDay = setComicFromCache();
             tvComicTitle.setText(comicOfTheDay.getTitle());
@@ -192,6 +190,7 @@ public class HomeFragment extends Fragment {
 
         private void checkConnection() {
             ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            assert cm != null;
             NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
             if (activeNetwork == null || !activeNetwork.isConnectedOrConnecting()) {
                 loading.setVisibility(View.GONE);
@@ -335,6 +334,7 @@ public class HomeFragment extends Fragment {
             // click on Hero
             if (view.getId() == R.id.cvHero) {
                 ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                assert cm != null;
                 NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
                 if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
                     if(heroOfTheDay == null){
@@ -347,12 +347,13 @@ public class HomeFragment extends Fragment {
                     context.startActivity(i);
                 } else {
                     ToastClass toast = new ToastClass(context);
-                    toast.showToast(getContext().getString(R.string.msg_internet_required));
+                    toast.showToast(Objects.requireNonNull(getContext()).getString(R.string.msg_internet_required));
                 }
             }
             // click on Comic
             else if (view.getId() == R.id.cvComic) {
                 ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                assert cm != null;
                 NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
                 if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
                     if(comicOfTheDay == null){
@@ -370,6 +371,7 @@ public class HomeFragment extends Fragment {
             // click on Series
             else if (view.getId() == R.id.cvSeries) {
                 ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                assert cm != null;
                 NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
                 if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
                     if(seriesOfTheDay == null){
@@ -389,22 +391,19 @@ public class HomeFragment extends Fragment {
         private HeroModel setHeroFromCache(){
             Gson gson = new Gson();
             String json = sp.getString("hero", "");
-            HeroModel heroOfTheDay = gson.fromJson(json, HeroModel.class);
-            return heroOfTheDay;
+            return gson.fromJson(json, HeroModel.class);
         }
 
         private Comics setComicFromCache(){
             Gson gson = new Gson();
             String json = sp.getString("comic", "");
-            Comics comicOfTheDay = gson.fromJson(json, Comics.class);
-            return comicOfTheDay;
+            return gson.fromJson(json, Comics.class);
         }
 
         private Series setSeriesFromCache(){
             Gson gson = new Gson();
             String json = sp.getString("series", "");
-            Series seriesOfTheDay = gson.fromJson(json, Series.class);
-            return seriesOfTheDay;
+            return gson.fromJson(json, Series.class);
         }
     }
 

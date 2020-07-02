@@ -67,6 +67,7 @@ public class SeriesActivity extends AppCompatActivity {
         private RecyclerView rvComics;
         private TextView tvEvents;
         private TextView tvCreators;
+        private TextView tvCharacters;
         private RecyclerView rvEvents;
         private ProgressBar loading;
         private ConstraintLayout layout;
@@ -91,7 +92,7 @@ public class SeriesActivity extends AppCompatActivity {
             rvComics = findViewById(R.id.rvComics);
             tvEvents = findViewById(R.id.tvEvents);
             rvEvents = findViewById(R.id.rvEvents);
-            tvCreators = findViewById(R.id.tvCreators);
+            tvCharacters = findViewById(R.id.tvCharacters);
             loading = findViewById(R.id.progress_loader);
             layout = findViewById(R.id.layout);
             btnHomeSeries = findViewById(R.id.btnHomeSeries);
@@ -106,9 +107,9 @@ public class SeriesActivity extends AppCompatActivity {
                     heroAdapter = new HeroDetailAdapter(heroes, appContext);
                     rvCharacters.setAdapter(heroAdapter);
                     if (heroAdapter.getItemCount() == 0) {  //nasconde recyclerView e textView nel caso in cui la ricerca non dia risultati
-                        tvCreators.setTextSize(0);
-                        tvCreators.setVisibility(View.INVISIBLE);
-                        ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvCreators.getLayoutParams();
+                        tvCharacters.setTextSize(0);
+                        tvCharacters.setVisibility(View.INVISIBLE);
+                        ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvCharacters.getLayoutParams();
                         marginParams.setMargins(0, 0, 0, 0);
                     }
                     loading_count++;

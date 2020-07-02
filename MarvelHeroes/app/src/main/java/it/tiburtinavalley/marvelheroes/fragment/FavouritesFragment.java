@@ -9,13 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,7 +37,7 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_favourites, container, false);
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_favourites);
+        Objects.requireNonNull(((MainActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).setTitle(R.string.title_favourites);
 
         RecyclerView rvHeroes;
         rvHeroes = v.findViewById(R.id.rvFavouriteHeroes);
@@ -64,7 +64,7 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
     public boolean onBackPressed() {
         Log.w("12", getString(R.string.msg_is_pressed));
 
-        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.anim_fade_in, R.anim.anim_fade_out);
         HomeFragment home = new HomeFragment();
         fragmentTransaction.replace(R.id.fragment_container, home);
@@ -92,7 +92,7 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
                     mActionMode = null;
                 }
             } else
-                mActionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(hActionModeCallback);
+                mActionMode = ((AppCompatActivity) Objects.requireNonNull(getActivity())).startSupportActionMode(hActionModeCallback);
         }
     }
 
@@ -110,31 +110,29 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
 
         @Override
         public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
-            switch (menuItem.getItemId()) {
-                case R.id.itemDelete:
-                    favoriteAdapter.removeSelected();
-                    mActionMode.finish();
-                    FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.setCustomAnimations(R.anim.anim_fade_in, R.anim.anim_fade_out);
-                    FavouritesFragment favorite = new FavouritesFragment();
-                    fragmentTransaction.replace(R.id.fragment_container,favorite);
-                    //fragmentTransaction.addToBackStack(null);   cosi da poter poi chiudere l'app direttamente se premuto back nella home
-                    fragmentTransaction.commit();
-                    return true;
-                default:
-                    return false;
+            if (menuItem.getItemId() == R.id.itemDelete) {
+                favoriteAdapter.removeSelected();
+                mActionMode.finish();
+                FragmentTransaction fragmentTransaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.anim_fade_in, R.anim.anim_fade_out);
+                FavouritesFragment favorite = new FavouritesFragment();
+                fragmentTransaction.replace(R.id.fragment_container, favorite);
+                //fragmentTransaction.addToBackStack(null);   cosi da poter poi chiudere l'app direttamente se premuto back nella home
+                fragmentTransaction.commit();
+                return true;
             }
+            return false;
         }
 
         @Override
         public void onDestroyActionMode(ActionMode actionMode) {
-           FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+           FragmentTransaction fragmentTransaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
            fragmentTransaction.setCustomAnimations(R.anim.anim_fade_in, R.anim.anim_fade_out);
-           HomeFragment home = new HomeFragment();
            FavouritesFragment favorite = new FavouritesFragment();
            fragmentTransaction.replace(R.id.fragment_container, favorite);
            //fragmentTransaction.addToBackStack(null);   cosi da poter poi chiudere l'app direttamente se premuto back nella homefragmentTransaction.commit();
-    };};
+    }
+    };
 
     @Override
     public void onDestroy() {

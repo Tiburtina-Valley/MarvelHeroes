@@ -5,14 +5,12 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Objects;
 
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.MainActivity;
@@ -39,10 +38,10 @@ public class SearchFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        this.context = getActivity().getApplicationContext();
+        this.context = Objects.requireNonNull(getActivity()).getApplicationContext();
 
         rootView = inflater.inflate(R.layout.fragment_search, container, false);
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle(R.string.title_search);
+        Objects.requireNonNull(((MainActivity) getActivity()).getSupportActionBar()).setTitle(R.string.title_search);
 
         holder = new Holder();
         return rootView;
@@ -51,9 +50,10 @@ public class SearchFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        View view = getActivity().getCurrentFocus();
+        View view = Objects.requireNonNull(getActivity()).getCurrentFocus();
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            assert imm != null;
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
@@ -88,37 +88,35 @@ public class SearchFragment extends Fragment {
             this.etHeroSearch = rootView.findViewById(R.id.etHeroSearch);
 
 
-            etHeroSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-                @Override
-                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                    loading.setVisibility(View.VISIBLE);
-                    String nameStartsWith = etHeroSearch.getText().toString();
-                    if(nameStartsWith.isEmpty()){
-                        hideSoftKeyboard(getActivity());
-                        loading.setVisibility(View.GONE);
-                        ToastClass toast = new ToastClass(context);
-                        toast.showToast(getString(R.string.msg_empty_search));
-                        return true;
-                    }
-                    hideSoftKeyboard(getActivity());
-                    ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-                    NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-                    if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-                        volleyMarvel.getCharactersInfo(nameStartsWith);
-                        return true;
-                    }
-                    else {
-                        loading.setVisibility(View.GONE);
-                        ToastClass toast = new ToastClass(context);
-                        toast.showToast(context.getString(R.string.msg_internet_required));
-                        return false;
-                    }
+            etHeroSearch.setOnEditorActionListener((v, actionId, event) -> {
+                loading.setVisibility(View.VISIBLE);
+                String nameStartsWith = etHeroSearch.getText().toString();
+                if(nameStartsWith.isEmpty()){
+                    hideSoftKeyboard(Objects.requireNonNull(getActivity()));
+                    loading.setVisibility(View.GONE);
+                    ToastClass toast = new ToastClass(context);
+                    toast.showToast(getString(R.string.msg_empty_search));
+                    return true;
+                }
+                hideSoftKeyboard(Objects.requireNonNull(getActivity()));
+                ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                assert cm != null;
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+                    volleyMarvel.getCharactersInfo(nameStartsWith);
+                    return true;
+                }
+                else {
+                    loading.setVisibility(View.GONE);
+                    ToastClass toast = new ToastClass(context);
+                    toast.showToast(context.getString(R.string.msg_internet_required));
+                    return false;
                 }
             });
 
 
             if (etHeroSearch.requestFocus()) {
-                ((InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(
+                ((InputMethodManager) Objects.requireNonNull(Objects.requireNonNull(getActivity()).getSystemService(Context.INPUT_METHOD_SERVICE))).toggleSoftInput(
                         InputMethodManager.SHOW_FORCED,
                         InputMethodManager.HIDE_IMPLICIT_ONLY
                 );
@@ -130,7 +128,8 @@ public class SearchFragment extends Fragment {
 
         public void hideSoftKeyboard(Activity activity){
             InputMethodManager imm = (InputMethodManager)activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+            assert imm != null;
+            imm.hideSoftInputFromWindow(Objects.requireNonNull(activity.getCurrentFocus()).getWindowToken(), 0);
         }
 
     }

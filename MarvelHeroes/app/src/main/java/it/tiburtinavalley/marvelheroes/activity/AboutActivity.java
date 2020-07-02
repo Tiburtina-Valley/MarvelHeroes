@@ -5,7 +5,6 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import it.tiburtinavalley.marvelheroes.BuildConfig;
 import it.tiburtinavalley.marvelheroes.R;
 import mehdi.sakout.aboutpage.AboutPage;
 import mehdi.sakout.aboutpage.Element;

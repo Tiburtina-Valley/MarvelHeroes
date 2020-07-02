@@ -71,6 +71,7 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.Holder> implem
     @Override
     public void onClick(View v) {
         ConnectivityManager cm = (ConnectivityManager)appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
             int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
@@ -89,7 +90,7 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.Holder> implem
         }
     }
 
-    class Holder extends RecyclerView.ViewHolder {
+    static class Holder extends RecyclerView.ViewHolder {
         final TextView tvHeroName;
         final ImageView ivHeroPic;
 

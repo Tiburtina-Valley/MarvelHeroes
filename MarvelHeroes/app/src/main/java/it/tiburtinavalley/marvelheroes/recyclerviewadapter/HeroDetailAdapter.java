@@ -51,12 +51,13 @@ public class HeroDetailAdapter extends RecyclerView.Adapter<HeroDetailAdapter.Ho
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         HeroModel hero = heroes.get(position);
-        holder.tvHeroName.setText(hero.getName());;
-        if (hero.getThumbnail()!=null);
-        String urlThumbnail = hero.getThumbnail().getPath().replaceFirst("http", "https")
-                + "." + hero.getThumbnail().getExtension();
+        holder.tvHeroName.setText(hero.getName());
+        if (hero.getThumbnail()!=null) {
+            String urlThumbnail = hero.getThumbnail().getPath().replaceFirst("http", "https")
+                    + "." + hero.getThumbnail().getExtension();
             Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivHeroPic);
         }
+    }
     
 
     @Override
@@ -67,6 +68,7 @@ public class HeroDetailAdapter extends RecyclerView.Adapter<HeroDetailAdapter.Ho
     @Override
     public void onClick(View v) {
         ConnectivityManager cm = (ConnectivityManager)appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
             int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
@@ -83,7 +85,7 @@ public class HeroDetailAdapter extends RecyclerView.Adapter<HeroDetailAdapter.Ho
         }
     }
 
-    class Holder extends RecyclerView.ViewHolder {
+    static class Holder extends RecyclerView.ViewHolder {
         final TextView tvHeroName;
         final ImageView ivHeroPic;
 
