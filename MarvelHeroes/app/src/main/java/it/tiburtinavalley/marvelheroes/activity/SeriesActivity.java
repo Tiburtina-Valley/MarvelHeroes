@@ -93,6 +93,7 @@ public class SeriesActivity extends AppCompatActivity {
             tvEvents = findViewById(R.id.tvEvents);
             rvEvents = findViewById(R.id.rvEvents);
             tvCharacters = findViewById(R.id.tvCharacters);
+            tvCreators = findViewById(R.id.tvCreators);
             loading = findViewById(R.id.progress_loader);
             layout = findViewById(R.id.layout);
             btnHomeSeries = findViewById(R.id.btnHomeSeries);
