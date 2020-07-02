@@ -1,8 +1,10 @@
 package it.tiburtinavalley.marvelheroes.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -12,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import java.util.List;
+
+import it.tiburtinavalley.marvelheroes.BackHomeListener;
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.model.Creators;
@@ -30,7 +34,7 @@ public class CreatorsActivity extends AppCompatActivity {
         Holder hold = new Holder((Creators)getIntent().getParcelableExtra("creator"));
     }
 
-    class Holder{
+    class Holder {
         private TextView creatorName;
         private ImageView creatorImg;
         private RecyclerView rvCreatorsComics;
@@ -39,6 +43,7 @@ public class CreatorsActivity extends AppCompatActivity {
         private SeriesAdapter seriesAdapter;
         private ProgressBar loading;
         private ConstraintLayout layout;
+        private Button btnHomeCreators;
 
         private int loading_count = 0;
 
@@ -49,6 +54,8 @@ public class CreatorsActivity extends AppCompatActivity {
             rvCreatorSeries = findViewById(R.id.rvCreatorSeries);
             loading = findViewById(R.id.progress_loader);
             layout = findViewById(R.id.layout);
+            btnHomeCreators = findViewById(R.id.btnHomeCreators);
+            btnHomeCreators.setOnClickListener(new BackHomeListener(getApplicationContext()));
 
             creatorName.setText(creator.getFullName());
             String urlThumbnail = creator.getThumbnail().getPath().replaceFirst("http", "https")
