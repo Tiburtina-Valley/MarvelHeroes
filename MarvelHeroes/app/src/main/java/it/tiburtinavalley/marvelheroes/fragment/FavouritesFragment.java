@@ -27,7 +27,6 @@ import it.tiburtinavalley.marvelheroes.dao.AppDatabase;
 import it.tiburtinavalley.marvelheroes.entity.HeroEntity;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.FavoriteHeroAdapter;
 
-
 public class FavouritesFragment extends Fragment implements MainActivity.IOnBackPressed, FavoriteHeroAdapter.OnItemClickListener {
     private ActionMode mActionMode;
     FavoriteHeroAdapter favoriteAdapter;
@@ -134,8 +133,7 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
            HomeFragment home = new HomeFragment();
            FavouritesFragment favorite = new FavouritesFragment();
            fragmentTransaction.replace(R.id.fragment_container, favorite);
-           //fragmentTransaction.addToBackStack(null);   cosi da poter poi chiudere l'app direttamente se premuto back nella home
-            fragmentTransaction.commit();
+           //fragmentTransaction.addToBackStack(null);   cosi da poter poi chiudere l'app direttamente se premuto back nella homefragmentTransaction.commit();
     };};
 
     @Override
