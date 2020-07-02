@@ -17,6 +17,7 @@ public class BackHomeListener implements View.OnClickListener{
     public void onClick(View v) {
         Intent i = new Intent(appContext, MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         appContext.startActivity(i);
     }
 }
