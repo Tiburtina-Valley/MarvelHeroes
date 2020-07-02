@@ -126,7 +126,7 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
 
         @Override
         public void onDestroyActionMode(ActionMode actionMode) {
-            
+
             favoriteAdapter.resetSelection();
             favoriteAdapter.notifyDataChanged();
             mActionMode = null;
