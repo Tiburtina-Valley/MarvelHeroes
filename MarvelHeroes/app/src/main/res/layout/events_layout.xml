@@ -54,6 +54,7 @@
                         android:background="@color/colorPrimaryDark"
                         android:lineSpacingMultiplier="1.2"
                         android:paddingLeft="24dp"
+                        android:paddingRight="24dp"
                         android:paddingTop="8dp"
                         android:paddingBottom="32dp"
                         android:textColor="#FFFFFF"
@@ -268,10 +269,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="24dp"
-                        android:layout_marginEnd="8dp"
                         android:text="ciao"
+                        android:layout_marginEnd="16dp"
                         android:textColor="#FFFFFF"
                         android:textSize="@dimen/sectionTitleTextSize"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/cvCComicImg"
                         app:layout_constraintTop_toTopOf="parent" />
 

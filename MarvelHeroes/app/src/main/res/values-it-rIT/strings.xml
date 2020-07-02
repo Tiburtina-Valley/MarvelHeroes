@@ -55,4 +55,6 @@
     <string name="btn_home">Home</string>
     <string name="title_home">Home</string>
     <string name="title_series">Serie</string>
+    <string name="label_event_detail">Evento</string>
+    <string name="label_creator_detail">Autore</string>
 </resources>

@@ -55,4 +55,6 @@
     <string name="btn_home">Startseite</string>
     <string name="title_home">Startseite</string>
     <string name="title_series">Seriendetail</string>
+    <string name="label_event_detail">Ereignisdetail</string>
+    <string name="label_creator_detail">Autorendetail</string>
 </resources>

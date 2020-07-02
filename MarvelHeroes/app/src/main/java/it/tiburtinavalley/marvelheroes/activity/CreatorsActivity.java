@@ -48,6 +48,8 @@ public class CreatorsActivity extends AppCompatActivity {
         private int loading_count = 0;
 
         public Holder(Creators creator){
+            getSupportActionBar().setTitle(getString(R.string.label_creator_detail));
+
             creatorName = findViewById(R.id.tvCreatName);
             creatorImg = findViewById(R.id.ivCreatorPic);
             rvCreatorsComics = findViewById(R.id.rvCreatCom);

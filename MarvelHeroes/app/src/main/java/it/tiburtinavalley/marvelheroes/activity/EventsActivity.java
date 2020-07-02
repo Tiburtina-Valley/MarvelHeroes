@@ -79,6 +79,9 @@ public class EventsActivity extends AppCompatActivity {
 
         //Inizializzo l'holder collegando gli attributi java all'xml.
         public Holder() {
+            getSupportActionBar().setTitle(getString(R.string.label_event_detail));
+
+
             ivEventImage = findViewById(R.id.ivEventImg);
             tvEventName = findViewById(R.id.tvEventTitle);
             startDate = findViewById(R.id.tvEventStartDate);
@@ -183,7 +186,7 @@ public class EventsActivity extends AppCompatActivity {
             rvHeroes.setLayoutManager(layoutManagerHeroes);
 
             LinearLayoutManager layoutManagerUrls = new LinearLayoutManager(
-                    EventsActivity.this, RecyclerView.VERTICAL, false);
+                    EventsActivity.this, RecyclerView.HORIZONTAL, false);
             rvUrls.setLayoutManager(layoutManagerUrls);
 
             LinearLayoutManager layoutManagerCreators = new LinearLayoutManager(

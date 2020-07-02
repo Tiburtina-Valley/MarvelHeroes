@@ -79,5 +79,7 @@
     <string name="btn_check_wiki" translatable="false">wiki</string>
     <string name="btn_check_reader" translatable="false">reader</string>
     <string name="title_series">Series detail</string>
+    <string name="label_event_detail">Event detail</string>
+    <string name="label_creator_detail">Creator detail</string>
 
 </resources>

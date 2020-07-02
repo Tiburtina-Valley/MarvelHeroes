@@ -163,14 +163,13 @@ public class HomeFragment extends Fragment {
 
 
         private void setAll() {
-            int maxStringLength = 240;
-
+            int maxStringLength = 200;
 
             heroOfTheDay = setHeroFromCache();
             tvHeroName.setText(heroOfTheDay.getName());
 
             if ((heroOfTheDay.getDescription().length() + heroOfTheDay.getName().length()) > maxStringLength) {
-                tvHeroDescription.setText(heroOfTheDay.getDescription().substring(0,maxStringLength-heroOfTheDay.getName().length()) + "\n...");
+                tvHeroDescription.setText(heroOfTheDay.getDescription().substring(0,maxStringLength-heroOfTheDay.getName().length()) + "...");
             } else {
                 tvHeroDescription.setText(heroOfTheDay.getDescription());
             }
@@ -183,7 +182,7 @@ public class HomeFragment extends Fragment {
             tvComicTitle.setText(comicOfTheDay.getTitle());
 
             if ((comicOfTheDay.getDescription().length() + comicOfTheDay.getTitle().length() ) > maxStringLength) {
-                tvComicDescription.setText(comicOfTheDay.getDescription().substring(0,maxStringLength-comicOfTheDay.getTitle().length()) + "\n...");
+                tvComicDescription.setText(comicOfTheDay.getDescription().substring(0,maxStringLength-comicOfTheDay.getTitle().length()) + "...");
             } else {
                 tvComicDescription.setText(comicOfTheDay.getDescription());
             }
@@ -195,7 +194,7 @@ public class HomeFragment extends Fragment {
             seriesOfTheDay = setSeriesFromCache();
             tvSeriesTitle.setText(seriesOfTheDay.getTitle());
             if ((seriesOfTheDay.getDescription().length() + seriesOfTheDay.getTitle().length() )> maxStringLength) {
-                tvSeriesDescription.setText(seriesOfTheDay.getDescription().substring(0,maxStringLength-seriesOfTheDay.getTitle().length()) + "\n...");
+                tvSeriesDescription.setText(seriesOfTheDay.getDescription().substring(0,maxStringLength-seriesOfTheDay.getTitle().length()) + "...");
             } else {
                 tvSeriesDescription.setText(seriesOfTheDay.getDescription());
             }
