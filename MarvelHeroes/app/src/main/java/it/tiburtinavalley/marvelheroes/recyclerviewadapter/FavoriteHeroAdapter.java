@@ -228,8 +228,8 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
 
         SubheaderHolder(View itemView) {
             super(itemView);
-            this.mSubheaderText = (TextView) itemView.findViewById(R.id.subheaderText);
-            this.mArrow = (ImageView) itemView.findViewById(R.id.arrow);
+            this.mSubheaderText = itemView.findViewById(R.id.subheaderText);
+            this.mArrow = itemView.findViewById(R.id.arrow);
         }
 
     }
@@ -257,6 +257,7 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
         for (View view : selectedItems){
             view.setSelected(false);
         }
+        selectedHeroesList.clear();
         selectedItems.clear();
     }
 }
