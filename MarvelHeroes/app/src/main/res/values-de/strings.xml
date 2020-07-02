@@ -1,2 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Marvel Heroes</string>
+    <string name="btn_search">Zuchen</string>
+    <string name="hero_picture_cnt_description">Heldenbild</string>
+    <string name="search_name_hint">Helden zuchen</string>
+    <string name="label_comics">Comics</string>
+    <string name="label_series">Serie</string>
+    <string name="label_hero_detail_description">Beschreibung</string>
+    <string name="label_hero_detail_stories">Geschichten</string>
+    <string name="label_hero">Helde</string>
+    <string name="btn_about">Über uns</string>
+    <string name="about_us_description">Unser Team</string>
+    <string name="FRONTEND_HOST">Unser Seite</string>
+    <string name="developers">Entwickler</string>
+    <string name="share">Teilen</string>
+    <string name="label_events">Ereignisen</string>
+    <string name="label_event_end_date">Bis</string>
+    <string name="label_event_start_date">Von</string>
+    <string name="label_series_end_date">Serie beendet</string>
+    <string name="label_event_title">Geschehentitle</string>
+    <string name="label_series_start_date">Serie gestartet</string>
+    <string name="label_event_description">Beschreibung</string>
+    <string name="label_events_comics">Ereignissen</string>
+    <string name="label_related_creators">Autoren</string>
+    <string name="label_related_comics">Comics</string>
+    <string name="label_heroes">Andere Helden</string>
+    <string name="label_rating">Bewertung %1$s</string>
+    <string name="label_type">Art %1$s</string>
+    <string name="label_created_comics">Comics gezeichnet</string>
+    <string name="tv_noDescription">Keine Beschreibung verfügbar</string>
+    <string name="label_favourite_heroes">Ihren Helden</string>
+    <string name="btn_favourites">Lieblings</string>
+    <string name="title_search">Zuchen</string>
+    <string name="title_favourites">Ihren Helden</string>
+    <string name="label_comics_series">Comics</string>
+    <string name="tv_noPageCount">Keine Seitenzahl verfügbar</string>
+    <string name="tv_noUPC">Keine Upc-Code  verfügbar</string>
+    <string name="label_related_series">Serie</string>
+    <string name="msg_internet_required">"Bitte überprüfen Sie Ihre Verbindung "</string>
+    <string name="label_home_first_section_title">Tagesheld</string>
+    <string name="label_home_second_section_title">Tagescomic</string>
+    <string name="label_home_third_section_title">Tagesserie</string>
+    <string name="btn_delete_heroes">löschen</string>
+    <string name="msg_empty_search">Bitte tippen Sie eine Heldenname</string>
+    <string name="msg_request_throttled">Sie haben Ihr Anforderungslimit überschritten. Bitte versuchen Sie es später noch einmal.</string>
+    <string name="msg_no_results">Keine Ergebnisse gefunden</string>
+    <string name="title_home" translatable="false">Startseite</string>
+    <string name="home_title">Startseite</string>
+</resources>
