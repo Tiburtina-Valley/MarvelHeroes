@@ -53,4 +53,6 @@
     <string name="btn_resource">detail</string>
     <string name="btn_reader">lesen</string>
     <string name="btn_home">Startseite</string>
+    <string name="title_home">Startseite</string>
+    <string name="title_series">Seriendetail</string>
 </resources>

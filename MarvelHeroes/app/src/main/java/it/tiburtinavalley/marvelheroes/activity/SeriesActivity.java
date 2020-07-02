@@ -72,6 +72,8 @@ public class SeriesActivity extends AppCompatActivity {
         private int loading_count = 0;
 
         public Holder() {
+            getSupportActionBar().setTitle(R.string.title_series);
+
             ivSeriesImage = findViewById(R.id.ivStoriesmg);
             tvSeriesName = findViewById(R.id.tvCreatorName);
             tvStartYear = findViewById(R.id.tvStartYear);

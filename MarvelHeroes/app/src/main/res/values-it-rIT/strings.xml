@@ -48,9 +48,11 @@
     <string name="home_title">Home</string>
     <string name="label_upc">"Codice upc: "</string>
     <string name="label_pages">" pagine"</string>
-    <string name="title_comic">Dettagli del fumetto</string>
+    <string name="title_comic">Fumetto</string>
     <string name="btn_resource">dettagli</string>
     <string name="btn_purchase">acquista</string>
     <string name="btn_reader">leggi</string>
     <string name="btn_home">Home</string>
+    <string name="title_home">Home</string>
+    <string name="title_series">Serie</string>
 </resources>

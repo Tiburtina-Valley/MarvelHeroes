@@ -63,7 +63,7 @@
     <string name="btn_home">Home</string>
     <string name="btn_favourites">Favourites</string>
     <string name="title_search">Search</string>
-    <string name="title_home" translatable="false">Home</string>
+    <string name="title_home">Home</string>
     <string name="msg_is_pressed" translatable="false">ispressed</string>
     <string name="title_favourites">Your heroes</string>
     <string name="msg_no_results">No results has to been showed</string>
@@ -78,5 +78,6 @@
     <string name="btn_check_purchase" translatable="false">purchase</string>
     <string name="btn_check_wiki" translatable="false">wiki</string>
     <string name="btn_check_reader" translatable="false">reader</string>
+    <string name="title_series">Series detail</string>
 
 </resources>
