@@ -171,7 +171,7 @@ public class SeriesActivity extends AppCompatActivity {
         /** metodo per settare il Layuout delle varie recylerViews presenti nella schermata */
         private void setRecyclerViews(){
             LinearLayoutManager layoutManagerUrls = new LinearLayoutManager(
-                    SeriesActivity.this, RecyclerView.VERTICAL, false);
+                    SeriesActivity.this, RecyclerView.HORIZONTAL, false);
             rvUrls.setLayoutManager(layoutManagerUrls);
 
             LinearLayoutManager layoutManagerHeroes = new LinearLayoutManager(
