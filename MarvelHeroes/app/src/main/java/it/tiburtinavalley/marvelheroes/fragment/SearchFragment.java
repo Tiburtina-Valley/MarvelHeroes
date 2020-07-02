@@ -79,7 +79,7 @@ public class SearchFragment extends Fragment {
                 private void fillRecView(List<HeroModel> heroes) {
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
                     rvHeroes.setLayoutManager(layoutManager);
-                    HeroAdapter mAdapter = new HeroAdapter(heroes, (Context) getActivity());
+                    HeroAdapter mAdapter = new HeroAdapter(heroes, getActivity());
                     rvHeroes.setAdapter(mAdapter);
                     loading.setVisibility(View.GONE);
                 }
