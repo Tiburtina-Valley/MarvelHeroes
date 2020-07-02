@@ -161,24 +161,46 @@ public class HomeFragment extends Fragment {
             cvSeries.setOnClickListener(this);
         }
 
+
         private void setAll() {
+            int maxStringLength = 240;
+
+
             heroOfTheDay = setHeroFromCache();
             tvHeroName.setText(heroOfTheDay.getName());
-            tvHeroDescription.setText(heroOfTheDay.getDescription());
+
+            if ((heroOfTheDay.getDescription().length() + heroOfTheDay.getName().length()) > maxStringLength) {
+                tvHeroDescription.setText(heroOfTheDay.getDescription().substring(0,maxStringLength-heroOfTheDay.getName().length()) + "\n...");
+            } else {
+                tvHeroDescription.setText(heroOfTheDay.getDescription());
+            }
+
             String urlHero = heroOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
                     +"/portrait_xlarge" + "." + heroOfTheDay.getThumbnail().getExtension();
             Glide.with(Objects.requireNonNull(getActivity())).setDefaultRequestOptions(requestOptions).load(urlHero).into(ivHero);
 
             comicOfTheDay = setComicFromCache();
             tvComicTitle.setText(comicOfTheDay.getTitle());
-            tvComicDescription.setText(comicOfTheDay.getDescription());
+
+            if ((comicOfTheDay.getDescription().length() + comicOfTheDay.getTitle().length() ) > maxStringLength) {
+                tvComicDescription.setText(comicOfTheDay.getDescription().substring(0,maxStringLength-comicOfTheDay.getTitle().length()) + "\n...");
+            } else {
+                tvComicDescription.setText(comicOfTheDay.getDescription());
+            }
+
             String urlComics = comicOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
                     +"/portrait_xlarge" + "." + comicOfTheDay.getThumbnail().getExtension();
             Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlComics).into(ivComic);
 
             seriesOfTheDay = setSeriesFromCache();
             tvSeriesTitle.setText(seriesOfTheDay.getTitle());
-            tvSeriesDescription.setText(seriesOfTheDay.getDescription());
+            if ((seriesOfTheDay.getDescription().length() + seriesOfTheDay.getTitle().length() )> maxStringLength) {
+                tvSeriesDescription.setText(seriesOfTheDay.getDescription().substring(0,maxStringLength-seriesOfTheDay.getTitle().length()) + "\n...");
+            } else {
+                tvSeriesDescription.setText(seriesOfTheDay.getDescription());
+            }
+
+
             String urlSeries = seriesOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
                     +"/portrait_xlarge" + "." + seriesOfTheDay.getThumbnail().getExtension();
             Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlSeries).into(ivSeries);

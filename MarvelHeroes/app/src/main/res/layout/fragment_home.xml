@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight"
     tools:context=".activity.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#2b2b2b">
+        android:background="@color/colorPrimaryLight">
 
         <ProgressBar
             android:id="@+id/progress_loader"
@@ -27,24 +28,13 @@
             android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#2b2b2b"
+            android:layout_marginTop="24dp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/home_title"
-                android:textAllCaps="true"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/homeTitleTextSize"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/guideline3"
-                app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -86,6 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:background="@color/colorPrimaryDark"
                 android:visibility="visible"
                 app:layout_constraintEnd_toStartOf="@+id/guideline6"
                 app:layout_constraintStart_toStartOf="@+id/guideline3"
@@ -93,42 +84,81 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout1"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@color/colorPrimaryDark"
                     android:visibility="visible">
 
-                    <ImageView
-                        android:id="@+id/ivHero"
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layoutHero"
                         android:layout_width="128dp"
-                        android:layout_height="76dp"
-                        app:layout_constraintEnd_toStartOf="@+id/tvHeroDescription"
-                        app:layout_constraintStart_toStartOf="@+id/guideline17"
-                        app:layout_constraintTop_toTopOf="@+id/guideline8"
-                        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                        android:layout_height="192dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/ivHero"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+                        <View
+                            android:id="@+id/view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="bottom"
+                            android:background="@drawable/scrim"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                     <TextView
                         android:id="@+id/tvHeroName"
-                        android:layout_width="128dp"
-                        android:layout_height="20dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:textAlignment="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline7"
-                        app:layout_constraintStart_toStartOf="@+id/guideline17"
-                        app:layout_constraintTop_toBottomOf="@+id/ivHero" />
+                        android:layout_marginRight="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:gravity="top|left"
+                        android:paddingRight="8dp"
+                        android:text="ciao"
+                        android:textAllCaps="true"
+
+                        android:textColor="@color/colorAccent"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline10"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/guideline7"
+                        app:layout_constraintTop_toTopOf="@+id/guideline8" />
 
                     <TextView
                         android:id="@+id/tvHeroDescription"
                         android:layout_width="0dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginRight="8dp"
+
                         android:layout_height="0dp"
-                        android:gravity="center"
+                        android:gravity="top|left"
                         android:text="@string/ellipsis"
-                        android:textAlignment="center"
+                        android:textColor="#FFFFFF"
                         app:layout_constraintBottom_toTopOf="@+id/guideline9"
                         app:layout_constraintEnd_toStartOf="@+id/guideline10"
                         app:layout_constraintStart_toStartOf="@+id/guideline7"
-                        app:layout_constraintTop_toTopOf="@+id/guideline8" />
+                        app:layout_constraintTop_toBottomOf="@+id/tvHeroName" />
 
                     <androidx.constraintlayout.widget.Barrier
                         android:id="@+id/barrier"
@@ -176,6 +206,7 @@
 
             </androidx.cardview.widget.CardView>
 
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvComic"
                 android:layout_width="0dp"
@@ -192,76 +223,124 @@
                     android:layout_height="wrap_content"
                     android:visibility="visible">
 
-                    <ImageView
-                        android:id="@+id/ivComic"
-                        android:layout_width="128dp"
-                        android:layout_height="76dp"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline12"
-                        app:layout_constraintStart_toStartOf="@+id/guideline2"
-                        app:layout_constraintTop_toTopOf="@+id/guideline11"
-                        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-                    <TextView
-                        android:id="@+id/tvComicTitle"
-                        android:layout_width="128dp"
-                        android:layout_height="20dp"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginTop="8dp"
-                        android:textAlignment="center"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layoutComic"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimaryDark"
+                        android:visibility="visible"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline12"
-                        app:layout_constraintStart_toStartOf="@+id/guideline2"
-                        app:layout_constraintTop_toBottomOf="@+id/ivComic" />
-
-                    <TextView
-                        android:id="@+id/tvComicDescription"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:gravity="center"
-                        android:text="@string/ellipsis"
-                        android:textAlignment="center"
-                        app:layout_constraintBottom_toTopOf="@+id/guideline13"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline15"
-                        app:layout_constraintStart_toStartOf="@+id/guideline12"
-                        app:layout_constraintTop_toTopOf="@+id/guideline11" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline11"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layout_constraintGuide_begin="8dp" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline12"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_begin="150dp" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintGuide_begin="8dp" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline13"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        app:layout_constraintGuide_end="8dp" />
-
-                    <androidx.constraintlayout.widget.Guideline
-                        android:id="@+id/guideline15"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintGuide_end="8dp" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="128dp"
+                            android:layout_height="192dp"
+
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <ImageView
+                                android:id="@+id/ivComic"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+                            <View
+                                android:id="@+id/viewComic"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="bottom"
+                                android:background="@drawable/scrim"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.0"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.0" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <TextView
+                            android:id="@+id/tvComicDescription"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginRight="8dp"
+
+                            android:layout_marginBottom="8dp"
+                            android:gravity="top|left"
+                            android:text="@string/ellipsis"
+                            android:textColor="#FFFFFF"
+                            app:layout_constraintBottom_toTopOf="@+id/guideline13"
+                            app:layout_constraintEnd_toStartOf="@+id/guideline15"
+                            app:layout_constraintStart_toStartOf="@+id/guideline12"
+                            app:layout_constraintTop_toBottomOf="@+id/tvComicTitle" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintGuide_begin="8dp" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_begin="150dp" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_begin="8dp" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintGuide_end="8dp" />
+
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline15"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintGuide_end="8dp" />
+
+                        <TextView
+                            android:id="@+id/tvComicTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginRight="4dp"
+                            android:layout_marginBottom="4dp"
+                            android:gravity="top|left"
+                            android:paddingRight="8dp"
+                            android:text="ciao"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorAccent"
+                            app:layout_constraintEnd_toStartOf="@+id/guideline15"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/guideline12"
+                            app:layout_constraintTop_toTopOf="@+id/guideline11" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -279,39 +358,77 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layout3"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimaryDark">
 
-                    <ImageView
-                        android:id="@+id/ivSeries"
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintLayout3"
                         android:layout_width="128dp"
-                        android:layout_height="76dp"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline19"
-                        app:layout_constraintStart_toStartOf="@+id/guideline"
-                        app:layout_constraintTop_toTopOf="@+id/guideline16"
-                        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+                        android:layout_height="192dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/ivSeries"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+                        <View
+                            android:id="@+id/viewSeries"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="bottom"
+                            android:background="@drawable/scrim"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                     <TextView
                         android:id="@+id/tvSeriesTitle"
-                        android:layout_width="128dp"
-                        android:layout_height="20dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/guideline19"
-                        app:layout_constraintStart_toStartOf="@+id/guideline"
-                        app:layout_constraintTop_toBottomOf="@+id/ivSeries" />
+                        android:layout_marginRight="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:gravity="top|left"
+                        android:paddingRight="8dp"
+                        android:text="ciao"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorAccent"
+                        app:layout_constraintEnd_toStartOf="@+id/guideline21"
+                        app:layout_constraintStart_toStartOf="@+id/guideline19"
+                        app:layout_constraintTop_toTopOf="@+id/guideline16" />
+
 
                     <TextView
                         android:id="@+id/tvSeriesDescription"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:gravity="center"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:gravity="top|left"
                         android:text="@string/ellipsis"
-                        android:textAlignment="center"
+                        android:textColor="#FFFFFF"
                         app:layout_constraintBottom_toTopOf="@+id/guideline20"
                         app:layout_constraintEnd_toStartOf="@+id/guideline21"
                         app:layout_constraintStart_toStartOf="@+id/guideline19"
-                        app:layout_constraintTop_toTopOf="@+id/guideline16" />
+                        app:layout_constraintTop_toBottomOf="@+id/tvSeriesTitle" />
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guideline"
@@ -377,6 +494,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="20dp" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
