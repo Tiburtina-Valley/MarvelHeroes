@@ -30,6 +30,7 @@ import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.FavoriteHeroDetail;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.dao.AppDatabase;
+import it.tiburtinavalley.marvelheroes.dao.HeroDao;
 import it.tiburtinavalley.marvelheroes.entity.HeroEntity;
 import it.tiburtinavalley.marvelheroes.model.HeroModel;
 
@@ -74,10 +75,6 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
     public void onClick(View view, HeroEntity hero) {
         if (selectedHeroesList.size() == 0) {
             selectedMenu = false;
-        } else {
-            if (selectedMenu) {
-                onLongClick(view, hero);
-            }
         }
 
         if (!selectedMenu) {
@@ -97,10 +94,19 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
                 toast.showToast(appContext.getString(R.string.msg_internet_required));
             }
         } else {
-            if (view.isSelected())
-                selectedHeroesList.add(hero);
-            else
+            if (view.isSelected()) {
                 selectedHeroesList.remove(hero);
+                view.setSelected(false);
+            }
+            else {
+                selectedHeroesList.add(hero);
+                view.setSelected(true);
+            }
+            notifyDataChanged();
+        }
+
+        if (smListener != null) {
+            smListener.onSelect(selectedHeroesList.size()); //callback verso l'Activity
         }
     }
 
@@ -110,31 +116,30 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
     public boolean onLongClick(View view, HeroEntity hero) {
         selectedMenu = true;
 
-        if (view.isSelected()) {
-            selectedHeroesList.remove(hero);
-            view.setSelected(false);
-        } else {
+        if (!view.isSelected()) {
             view.setSelected(true);
             selectedHeroesList.add(hero);
         }
         if (smListener != null) {
             smListener.onSelect(selectedHeroesList.size()); //callback verso l'Activity
         }
-        notifyDataSetChanged();
+        notifyDataChanged();
+
         return true; //blocca la catena di chiamate
     }
 
     //cancella tutti glie elementi selezionati della lista
     public void removeSelected() {
         selectedMenu = false;
+        HeroDao heroDao = AppDatabase.getInstance(appContext).heroDao();
 
         selectedHeroesList.forEach(heroEntity -> {
             heroes.remove(heroEntity);
-            AppDatabase.getInstance(appContext).heroDao().deleteHero(heroEntity);
+            heroDao.deleteHero(heroEntity);
         });
         selectedHeroesList.clear();
 
-        notifyDataSetChanged();
+        notifyDataChanged();
     }
 
     @Override
@@ -240,5 +245,15 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
+    }
+
+    @Override
+    public int getViewType(int position) {
+        return position;
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 }

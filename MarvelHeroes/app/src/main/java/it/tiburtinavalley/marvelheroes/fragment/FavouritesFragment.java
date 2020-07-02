@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,9 +56,8 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
             favoriteAdapter.setOnItemClickListener(this);
             favoriteAdapter.setGridLayoutManager(glm);
             rvHeroes.setAdapter(favoriteAdapter);
-        } else {
-            return v;
         }
+
         return v;
     }
 
@@ -90,10 +90,10 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
             if (mActionMode != null) {
                 if (size == 0) {
                     mActionMode.finish();
+                    mActionMode = null;
                 }
-                return;
-            }
-            mActionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(hActionModeCallback);
+            } else
+                mActionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(hActionModeCallback);
         }
     }
 
@@ -114,7 +114,8 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
             switch (menuItem.getItemId()) {
                 case R.id.itemDelete:
                     favoriteAdapter.removeSelected();
-                    actionMode.finish();
+                    mActionMode.finish();
+                    mActionMode = null;
                     return true;
                 default:
                     return false;
@@ -123,15 +124,15 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
 
         @Override
         public void onDestroyActionMode(ActionMode actionMode) {
-            actionMode = null;
-            Log.w("ww", "destroy");
-            //mActionMode.finish();
-            FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.setCustomAnimations(R.anim.anim_fade_in, R.anim.anim_fade_out);
-            FavouritesFragment favorite = new FavouritesFragment();
-            fragmentTransaction.replace(R.id.fragment_container, favorite);
-            //fragmentTransaction.addToBackStack(null);   cosi da poter poi chiudere l'app direttamente se premuto back nella home
-            fragmentTransaction.commit();
+            return;
         }
+
     };
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mActionMode != null)
+            mActionMode.finish();
+    }
 }
