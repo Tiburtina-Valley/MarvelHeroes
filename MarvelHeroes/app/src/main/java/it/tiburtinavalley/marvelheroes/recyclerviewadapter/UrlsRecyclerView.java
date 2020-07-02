@@ -44,16 +44,24 @@ public class UrlsRecyclerView extends RecyclerView.Adapter<UrlsRecyclerView.Hold
     @Override
     public void onBindViewHolder(@NonNull Holder holder, final int position) {
         String type = urls.get(position).getType();
-
-        holder.btnType.setText(type.substring(0, 1).toUpperCase() + type.substring(1));
-        holder.btnType.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Urls url = urls.get(position);
-                Uri uri = Uri.parse(url.getUrl());
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                appContext.startActivity(intent);
-            }
+        if (type.equals(appContext.getString(R.string.btn_check_resource))) {
+            type = appContext.getString(R.string.btn_resource);
+        }
+        else if (type.equals(appContext.getString(R.string.btn_check_purchase))) {
+            type = appContext.getString(R.string.btn_purchase);
+        }
+        else if (type.equals(appContext.getString(R.string.btn_check_wiki))) {
+            type = appContext.getString(R.string.btn_wiki);
+        }
+        else if (type.equals(appContext.getString(R.string.btn_check_reader))) {
+            type = appContext.getString(R.string.btn_reader);
+        }
+        holder.btnType.setText(type);
+        holder.btnType.setOnClickListener((View v) -> {
+            Urls url = urls.get(position);
+            Uri uri = Uri.parse(url.getUrl());
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            appContext.startActivity(intent);
         });
     }
 
@@ -65,6 +73,7 @@ public class UrlsRecyclerView extends RecyclerView.Adapter<UrlsRecyclerView.Hold
     @Override
     public void onClick(View v) {
         ConnectivityManager cm = (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
             int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
@@ -89,7 +98,4 @@ public class UrlsRecyclerView extends RecyclerView.Adapter<UrlsRecyclerView.Hold
             appContext = itemView.getContext();
         }
     }
-
-
-
 }

@@ -45,9 +45,12 @@
     <string name="title_favourites">I tuoi eroi</string>
     <string name="title_search">Ricerca</string>
     <string name="msg_no_results">Nessun risultato da mostrare</string>
-    <string name="title_home" translatable="false">Home</string>
     <string name="home_title">Home</string>
     <string name="label_upc">"Codice upc: "</string>
     <string name="label_pages">" pagine"</string>
     <string name="title_comic">Dettagli del fumetto</string>
+    <string name="btn_resource">dettagli</string>
+    <string name="btn_purchase">acquista</string>
+    <string name="btn_reader">leggi</string>
+    <string name="btn_home">Home</string>
 </resources>
