@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import it.tiburtinavalley.marvelheroes.BackHomeListener;
 import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.model.Creators;
 import it.tiburtinavalley.marvelheroes.model.Events;
@@ -68,6 +70,7 @@ public class SeriesActivity extends AppCompatActivity {
         private RecyclerView rvEvents;
         private ProgressBar loading;
         private ConstraintLayout layout;
+        private Button btnHomeSeries;
 
         private int loading_count = 0;
 
@@ -91,6 +94,8 @@ public class SeriesActivity extends AppCompatActivity {
             tvCreators = findViewById(R.id.tvCreators);
             loading = findViewById(R.id.progress_loader);
             layout = findViewById(R.id.layout);
+            btnHomeSeries = findViewById(R.id.btnHomeSeries);
+            btnHomeSeries.setOnClickListener(new BackHomeListener(getApplicationContext()));
 
             final Context appContext = getApplicationContext();
 

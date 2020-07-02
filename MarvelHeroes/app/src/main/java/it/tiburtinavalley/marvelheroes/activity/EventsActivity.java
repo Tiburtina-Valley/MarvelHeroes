@@ -3,6 +3,7 @@ package it.tiburtinavalley.marvelheroes.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import it.tiburtinavalley.marvelheroes.BackHomeListener;
 import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.model.Creators;
 import it.tiburtinavalley.marvelheroes.model.Events;
@@ -72,6 +74,7 @@ public class EventsActivity extends AppCompatActivity {
         private TextView tvHeroes;
         private ProgressBar loading;
         private ConstraintLayout layout;
+        private Button btnHomeEvents;
 
         private int loading_count = 0;
 
@@ -93,6 +96,8 @@ public class EventsActivity extends AppCompatActivity {
             tvHeroes = findViewById(R.id.tvHeroes);
             loading = findViewById(R.id.progress_loader);
             layout = findViewById(R.id.layout);
+            btnHomeEvents = findViewById(R.id.btnHomeEvents);
+            btnHomeEvents.setOnClickListener(new BackHomeListener(getApplicationContext()));
 
 
             //Setto le recyclers views.
