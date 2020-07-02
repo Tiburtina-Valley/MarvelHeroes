@@ -1,9 +1,11 @@
 package it.tiburtinavalley.marvelheroes.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -13,6 +15,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
+
+import it.tiburtinavalley.marvelheroes.BackHomeListener;
 import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.model.Creators;
@@ -53,6 +57,7 @@ public class ComicsActivity extends AppCompatActivity {
         private CreatorsVolley creatorsVolley;
         private ProgressBar loading;
         private ConstraintLayout layout;
+        private Button btnHomeComics;
 
         private int loading_count = 0;
 
@@ -70,6 +75,8 @@ public class ComicsActivity extends AppCompatActivity {
             rvCreatorsComics = findViewById(R.id.rvCreatorComics);
             loading = findViewById(R.id.progress_loader);
             layout = findViewById(R.id.layout);
+            btnHomeComics = findViewById(R.id.btnHomeComics);
+            btnHomeComics.setOnClickListener(new BackHomeListener(getApplicationContext()));
 
             final Context appContext = getApplicationContext();
 
