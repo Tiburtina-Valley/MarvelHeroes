@@ -135,14 +135,12 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
            HomeFragment home = new HomeFragment();
            FavouritesFragment favorite = new FavouritesFragment();
            fragmentTransaction.replace(R.id.fragment_container, favorite);
-           //fragmentTransaction.addToBackStack(null);   cosi da poter poi chiudere l'app direttamente se premuto back nella home
-            fragmentTransaction.commit();
-    };};
-
-
-
-
-
+           //fragmentTransaction.addToBackStack(null);   cosi da poter poi chiudere l'app direttamente se premuto back nella homefragmentTransaction.commit();
+            favoriteAdapter.resetSelection();
+            favoriteAdapter.notifyDataChanged();
+            mActionMode = null;
+    }
+    };
 
     @Override
     public void onDestroy() {

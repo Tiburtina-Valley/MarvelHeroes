@@ -46,6 +46,7 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
     private ArrayList<HeroEntity> selectedHeroesList;
     private HeroSelectMode smListener;
     private boolean selectedMenu = false;
+    private List<View> selectedItems;
 
     public FavoriteHeroAdapter(List<HeroEntity> all, Context appContext, HeroSelectMode listener) {
         heroes = new ArrayList<>();
@@ -53,6 +54,7 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
         selectedHeroesList = new ArrayList<>();
         this.appContext = appContext;
         smListener = listener;
+        selectedItems = new ArrayList<>();
     }
 
     static class Holder extends RecyclerView.ViewHolder {
@@ -109,10 +111,12 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
         if (view.isSelected()) {
             selectedHeroesList.remove(hero);
             view.setSelected(false);
+            selectedItems.remove(view);
 
         } else {
             view.setSelected(true);
             selectedHeroesList.add(hero);
+            selectedItems.add(view);
         }
 
         if (smListener != null) {
@@ -247,5 +251,12 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+    public void resetSelection(){
+        for (View view : selectedItems){
+            view.setSelected(false);
+        }
+        selectedItems.clear();
     }
 }
