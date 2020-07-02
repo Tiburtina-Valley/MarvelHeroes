@@ -75,6 +75,10 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
     public void onClick(View view, HeroEntity hero) {
         if (selectedHeroesList.size() == 0) {
             selectedMenu = false;
+        } else {
+            if (selectedMenu) {
+                onLongClick(view, hero);
+            }
         }
 
         if (!selectedMenu) {
@@ -93,20 +97,6 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
                 ToastClass toast = new ToastClass(appContext);
                 toast.showToast(appContext.getString(R.string.msg_internet_required));
             }
-        } else {
-            if (view.isSelected()) {
-                selectedHeroesList.remove(hero);
-                view.setSelected(false);
-            }
-            else {
-                selectedHeroesList.add(hero);
-                view.setSelected(true);
-            }
-            notifyDataChanged();
-        }
-
-        if (smListener != null) {
-            smListener.onSelect(selectedHeroesList.size()); //callback verso l'Activity
         }
     }
 
@@ -116,10 +106,15 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
     public boolean onLongClick(View view, HeroEntity hero) {
         selectedMenu = true;
 
-        if (!view.isSelected()) {
+        if (view.isSelected()) {
+            selectedHeroesList.remove(hero);
+            view.setSelected(false);
+
+        } else {
             view.setSelected(true);
             selectedHeroesList.add(hero);
         }
+
         if (smListener != null) {
             smListener.onSelect(selectedHeroesList.size()); //callback verso l'Activity
         }
