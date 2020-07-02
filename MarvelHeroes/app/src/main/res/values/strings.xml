@@ -8,7 +8,7 @@
     <string name="label_hero_detail_description">Description</string>
     <string name="label_hero_detail_stories">Stories</string>
     <string name="label_hero">Hero</string>
-    <string name="label_urls" translatable="false">Links: </string>
+    <string name="label_urls" translatable="false">Links</string>
     <string name="btn_about">About us </string>
     <string name="about_us_description">\"our team\"</string>
     <string name="FRONTEND_HOST">\"myWebsite\"</string>
@@ -43,13 +43,13 @@
     <string name="label_created_comics">Comics drawn :</string>
     <string name="label_event_s_creators" translatable="false">Event\'s creators:</string>
     <string name="tv_noDescription">No description available</string>
-    <string name="label_comics_series">Related comics :</string>
+    <string name="label_comics_series">Related comics</string>
     <string name="tv_noPageCount">No page count available</string>
     <string name="tv_noUPC">No Upc code available</string>
     <string name="label_related_series">Related series</string>
     <string name="msg_internet_required">Please check your connection</string>
     <string name="label_home_first_section_title">Hero of the day</string>
-    <string name="home_title" translatable="false">Home</string>
+    <string name="home_title">Home</string>
     <string name="ellipsis" translatable="false">...</string>
     <string name="label_home_second_section_title">Comic of the day</string>
     <string name="label_home_third_section_title">Series of the day</string>
@@ -59,13 +59,13 @@
     <string name="default_comic_id" translatable="false">47903</string>
     <string name="default_series_id" translatable="false">354</string>
     <string name="msg_request_throttled">You have exceeded your rate limit.  Please try again later.</string>
-    <string name="label_favourite_heroes">YOUR HEROES</string>
+    <string name="label_favourite_heroes">Your heroes</string>
     <string name="btn_home" translatable="false">Home</string>
     <string name="btn_favourites">Favourites</string>
-    <string name="title_search">SEARCH</string>
-    <string name="title_home" translatable="false">HOME</string>
+    <string name="title_search">Search</string>
+    <string name="title_home">Home</string>
     <string name="msg_is_pressed" translatable="false">ispressed</string>
-    <string name="title_favourites">YOUR HEROES</string>
+    <string name="title_favourites">Your heroes</string>
     <string name="msg_no_results">No results has to been showed</string>
 
 </resources>
