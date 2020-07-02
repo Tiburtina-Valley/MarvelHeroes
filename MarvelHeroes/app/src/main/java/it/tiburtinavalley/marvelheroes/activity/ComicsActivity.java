@@ -58,7 +58,7 @@ public class ComicsActivity extends AppCompatActivity {
 
         public Holder() {
 
-            getSupportActionBar().setTitle("Comic details");
+            getSupportActionBar().setTitle(R.string.title_comic);
 
             ivComicImage = findViewById(R.id.ivStoriesmg);
             tvComicName = findViewById(R.id.tvCreatorName);
@@ -147,13 +147,13 @@ public class ComicsActivity extends AppCompatActivity {
             }
             tvComicName.setText(comic.getTitle());
             if(!comic.getPageCount().equalsIgnoreCase("") && !comic.getPageCount().equalsIgnoreCase("0")){
-                tvPageCount.setText(comic.getPageCount() + " pages");
+                tvPageCount.setText(comic.getPageCount() + getString(R.string.label_pages));
             }
             else{
                 tvPageCount.setText(R.string.tv_noPageCount);
             }
             if(!comic.getUpc().equalsIgnoreCase("")) {
-                tvUpcCode.setText("Upc code : " + comic.getUpc());
+                tvUpcCode.setText(getString(R.string.label_upc) + comic.getUpc());
             }
             else{
                 tvUpcCode.setText(R.string.tv_noUPC);

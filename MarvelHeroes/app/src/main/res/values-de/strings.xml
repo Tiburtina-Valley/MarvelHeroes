@@ -17,9 +17,9 @@
     <string name="label_events">Ereignisen</string>
     <string name="label_event_end_date">Bis</string>
     <string name="label_event_start_date">Von</string>
-    <string name="label_series_end_date">Serie beendet</string>
+    <string name="label_series_end_date">Serie beendet %1$s</string>
     <string name="label_event_title">Geschehentitle</string>
-    <string name="label_series_start_date">Serie gestartet</string>
+    <string name="label_series_start_date">Serie gestartet %1$s</string>
     <string name="label_event_description">Beschreibung</string>
     <string name="label_events_comics">Ereignissen</string>
     <string name="label_related_creators">Autoren</string>
@@ -47,4 +47,7 @@
     <string name="msg_no_results">Keine Ergebnisse gefunden</string>
     <string name="title_home" translatable="false">Startseite</string>
     <string name="home_title">Startseite</string>
+    <string name="label_upc">"Upc code : "</string>
+    <string name="label_pages">" pages"</string>
+    <string name="title_comic">Cartoon Details</string>
 </resources>

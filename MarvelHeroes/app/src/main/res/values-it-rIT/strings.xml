@@ -47,4 +47,7 @@
     <string name="msg_no_results">Nessun risultato da mostrare</string>
     <string name="title_home" translatable="false">Home</string>
     <string name="home_title">Home</string>
+    <string name="label_upc">"Codice upc: "</string>
+    <string name="label_pages">" pagine"</string>
+    <string name="title_comic">Dettagli del fumetto</string>
 </resources>

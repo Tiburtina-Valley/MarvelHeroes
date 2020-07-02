@@ -67,5 +67,8 @@
     <string name="msg_is_pressed" translatable="false">ispressed</string>
     <string name="title_favourites">Your heroes</string>
     <string name="msg_no_results">No results has to been showed</string>
+    <string name="label_upc">"Upc code : "</string>
+    <string name="label_pages">" pages"</string>
+    <string name="title_comic">Comic details</string>
 
 </resources>
