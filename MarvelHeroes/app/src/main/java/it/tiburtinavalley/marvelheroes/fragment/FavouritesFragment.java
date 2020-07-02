@@ -124,15 +124,10 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
             return false;
         }
 
-
-
         @Override
         public void onDestroyActionMode(ActionMode actionMode) {
-
-
-           FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+           FragmentTransaction fragmentTransaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
            fragmentTransaction.setCustomAnimations(R.anim.anim_fade_in, R.anim.anim_fade_out);
-           HomeFragment home = new HomeFragment();
            FavouritesFragment favorite = new FavouritesFragment();
            fragmentTransaction.replace(R.id.fragment_container, favorite);
            //fragmentTransaction.addToBackStack(null);   cosi da poter poi chiudere l'app direttamente se premuto back nella homefragmentTransaction.commit();
@@ -145,8 +140,7 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mActionMode != null) {
+        if (mActionMode != null)
             mActionMode.finish();
-            }
     }
 }
