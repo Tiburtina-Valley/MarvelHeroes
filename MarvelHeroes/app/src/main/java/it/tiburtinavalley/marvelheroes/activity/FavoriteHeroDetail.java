@@ -1,5 +1,7 @@
 package it.tiburtinavalley.marvelheroes.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -60,6 +63,16 @@ public class FavoriteHeroDetail extends AppCompatActivity{
     }
 
     @Override
+    public boolean onSupportNavigateUp() {
+        Context appContext = getApplicationContext();
+        Intent i = new Intent(appContext, MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        appContext.startActivity(i);
+        return true;
+    }
+
+    @Override
     protected void onPostResume() {
         super.onPostResume();
         holder.dismissLoading();
@@ -88,6 +101,12 @@ public class FavoriteHeroDetail extends AppCompatActivity{
 
             toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
             setSupportActionBar(toolbar);
+            ActionBar actionBar = getSupportActionBar();
+            assert actionBar != null;
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_action_close);
+
+
             tvComics=findViewById(R.id.tvComics);
             tvSeries=findViewById(R.id.tvSeries);
             tvEvents=findViewById(R.id.tvEvents);
@@ -103,6 +122,10 @@ public class FavoriteHeroDetail extends AppCompatActivity{
             layout = findViewById(R.id.linearLayout);
 
             initFavoriteBtn();
+
+
+
+
 
             cVolley = new ComicsVolley(getApplicationContext()) {
                 @Override
