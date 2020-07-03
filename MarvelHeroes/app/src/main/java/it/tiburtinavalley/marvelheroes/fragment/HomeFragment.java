@@ -13,21 +13,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
-
 import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.ComicsActivity;
 import it.tiburtinavalley.marvelheroes.activity.HeroDetailActivity;
@@ -83,7 +79,7 @@ public class HomeFragment extends Fragment {
 
         holder = new Holder();
 
-        if (!sp.contains("hero") || !sp.getString("day", "").equalsIgnoreCase(String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)))) { //controlliamo se è passata la mezzanotte
+        if ((!sp.contains("hero") || !sp.contains("comic") || !sp.contains("series")) || !sp.getString("day", "").equalsIgnoreCase(String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)))) { //controlliamo se è passata la mezzanotte
 
             holder.checkConnection();
             editor.putString("day", String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)));
@@ -113,7 +109,7 @@ public class HomeFragment extends Fragment {
             apiComic.getRandomComic();
             apiSeries.getRandomSeries();
         }
-        else if (sp.contains("hero")) { //datas are saved
+        else if (sp.contains("hero") && sp.contains("comic") && sp.contains("series")) { //datas are saved
             holder.setAll();
         }
         return rootView;
@@ -255,7 +251,7 @@ public class HomeFragment extends Fragment {
                 Gson gson = new Gson();
                 String json = gson.toJson(seriesOfTheDay);
                 editor.putString("series", json);
-                editor.commit();
+                editor.apply(); // usiamo il metod di apply, in esecuzione su un thread
 
                 loading_count++;
                 dismissLoading();
@@ -295,7 +291,7 @@ public class HomeFragment extends Fragment {
                     Gson gson = new Gson();
                     String json = gson.toJson(comicOfTheDay);
                     editor.putString("comic", json);
-                    editor.commit();
+                    editor.apply();
 
                     loading_count++;
                     dismissLoading();
@@ -337,7 +333,7 @@ public class HomeFragment extends Fragment {
                     Gson gson = new Gson();
                     String json = gson.toJson(heroOfTheDay);
                     editor.putString("hero", json);
-                    editor.commit();
+                    editor.apply();
 
                     loading_count++;
                     dismissLoading();
