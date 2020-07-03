@@ -1,5 +1,7 @@
 package it.tiburtinavalley.marvelheroes.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -51,13 +54,23 @@ public class HeroDetailActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppThemeNoBar);
 
-
         setContentView(R.layout.hero_detail_layout);
+
         hm = getIntent().getParcelableExtra("hero");
         holder = new Holder();
         holder.setRecyclerViews();
         holder.setDetails(hm);
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        Context appContext = getApplicationContext();
+        Intent i = new Intent(appContext, MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        appContext.startActivity(i);
+        return true;
+    }
+
 
     @Override
     protected void onPostResume() {
@@ -88,6 +101,10 @@ public class HeroDetailActivity extends AppCompatActivity{
 
             toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
             setSupportActionBar(toolbar);
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_action_close);
+
             tvComics=findViewById(R.id.tvComics);
             tvSeries=findViewById(R.id.tvSeries);
             tvEvents=findViewById(R.id.tvEvents);

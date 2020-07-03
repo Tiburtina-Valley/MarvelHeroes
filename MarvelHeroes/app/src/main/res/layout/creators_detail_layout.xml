@@ -74,25 +74,16 @@
 
 
                     <TextView
-                        android:textColor="#FFFFFF"
                         android:id="@+id/tvCreatName"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="24dp"
+                        android:textColor="#FFFFFF"
                         android:textSize="@dimen/sectionTitleTextSize"
                         app:layout_constraintStart_toEndOf="@+id/cvCreatorImg"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <Button
-                        android:id="@+id/btnHomeCreators"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="16dp"
-                        android:layout_marginBottom="16dp"
-                        android:text="@string/btn_home"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -113,21 +104,15 @@
                     tools:spanCount="5" />
 
 
-
-
-
-
-
-
                 <TextView
                     android:id="@+id/tvDrawn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
+                    android:text="@string/label_created_comics"
                     android:textColor="#FFFFFF"
                     android:textSize="22sp"
-                    android:text="@string/label_created_comics"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
@@ -137,9 +122,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
+                    android:text="@string/label_related_series"
                     android:textColor="#FFFFFF"
                     android:textSize="22sp"
-                    android:text="@string/label_related_series"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rvCreatCom" />
 

@@ -163,7 +163,7 @@ public class HomeFragment extends Fragment {
 
 
         private void setAll() {
-            int maxStringLength = 200;
+            int maxStringLength = 150;
 
             heroOfTheDay = setHeroFromCache();
             tvHeroName.setText(heroOfTheDay.getName());

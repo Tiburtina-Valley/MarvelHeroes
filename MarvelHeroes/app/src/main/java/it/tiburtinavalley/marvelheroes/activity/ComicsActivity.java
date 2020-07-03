@@ -1,6 +1,7 @@
 package it.tiburtinavalley.marvelheroes.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,11 +9,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
+
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
 
 import it.tiburtinavalley.marvelheroes.BackHomeListener;
@@ -35,9 +40,23 @@ public class ComicsActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_action_close);
+
         setContentView(R.layout.comic_layout);
         comic = getIntent().getParcelableExtra("comic");
         new Holder();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        Context appContext = getApplicationContext();
+        Intent i = new Intent(appContext, MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        appContext.startActivity(i);
+        return true;
     }
 
     class Holder {
@@ -55,7 +74,6 @@ public class ComicsActivity extends AppCompatActivity {
         private CreatorsVolley creatorsVolley;
         private ProgressBar loading;
         private ConstraintLayout layout;
-        private Button btnHomeComics;
 
         private int loading_count = 0;
 
@@ -73,8 +91,7 @@ public class ComicsActivity extends AppCompatActivity {
             rvCreatorsComics = findViewById(R.id.rvCreatorComics);
             loading = findViewById(R.id.progress_loader);
             layout = findViewById(R.id.layout);
-            btnHomeComics = findViewById(R.id.btnHomeComics);
-            btnHomeComics.setOnClickListener(new BackHomeListener(getApplicationContext()));
+
 
             final Context appContext = getApplicationContext();
 
@@ -82,14 +99,13 @@ public class ComicsActivity extends AppCompatActivity {
                 @Override
                 public void fillList(List<HeroModel> heroes) {
                     // se la lista degli eroi è vuota, nasconde la RecyclerView degli eroi
-                    if(heroes.isEmpty()){
+                    if (heroes.isEmpty()) {
                         TextView tvHeroes = findViewById(R.id.tvHeroes); // prende la TextView da oscurare
                         tvHeroes.setTextSize(0);
                         tvHeroes.setVisibility(View.INVISIBLE);
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvHeroes.getLayoutParams();
                         marginParams.setMargins(0, 0, 0, 0); // setta i margini per non lasciare spazi in più
-                    }
-                    else {
+                    } else {
                         heroDetAdapter = new HeroDetailAdapter(heroes, appContext);
                         rvHeroesComics.setAdapter(heroDetAdapter);
                     }
@@ -101,14 +117,13 @@ public class ComicsActivity extends AppCompatActivity {
             creatorsVolley = new CreatorsVolley(getApplicationContext()) {
                 @Override
                 public void fillCreatorsInfo(List<Creators> creatorsList) {
-                    if(creatorsList.isEmpty()){
+                    if (creatorsList.isEmpty()) {
                         TextView tvCreators = findViewById(R.id.tvCreatorsComics);
                         tvCreators.setTextSize(0);
                         tvCreators.setVisibility(View.INVISIBLE);
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvCreators.getLayoutParams();
                         marginParams.setMargins(0, 0, 0, 0); // setta i margini per non lasciare spazi in più
-                    }
-                    else {
+                    } else {
                         creatorsAdapter = new CreatorsAdapter(creatorsList, appContext);
                         rvCreatorsComics.setAdapter(creatorsAdapter);
                     }
@@ -129,7 +144,7 @@ public class ComicsActivity extends AppCompatActivity {
         }
 
         // funzione che si occupa di settare i LayoutManager per le RecyclerView
-        private void setRecyclerViews(){
+        private void setRecyclerViews() {
             LinearLayoutManager layoutManagerUrls = new LinearLayoutManager(
                     ComicsActivity.this, RecyclerView.HORIZONTAL, false);
             rvUrls.setLayoutManager(layoutManagerUrls);
@@ -147,27 +162,24 @@ public class ComicsActivity extends AppCompatActivity {
         private void setData() {
             if (comic.getThumbnail() != null) {
                 String urlThumbnail = comic.getThumbnail().getPath().replaceFirst("http", "https")
-                       +"/portrait_xlarge" + "." + comic.getThumbnail().getExtension();
+                        + "/portrait_xlarge" + "." + comic.getThumbnail().getExtension();
                 Glide.with(getApplicationContext()).load(urlThumbnail).into(this.ivComicImage);
             }
             tvComicName.setText(comic.getTitle());
-            if(!comic.getPageCount().equalsIgnoreCase("") && !comic.getPageCount().equalsIgnoreCase("0")){
+            if (!comic.getPageCount().equalsIgnoreCase("") && !comic.getPageCount().equalsIgnoreCase("0")) {
                 tvPageCount.setText(comic.getPageCount() + getString(R.string.label_pages));
-            }
-            else{
+            } else {
                 tvPageCount.setText(R.string.tv_noPageCount);
             }
-            if(!comic.getUpc().equalsIgnoreCase("")) {
+            if (!comic.getUpc().equalsIgnoreCase("")) {
                 tvUpcCode.setText(getString(R.string.label_upc) + comic.getUpc());
-            }
-            else{
+            } else {
                 tvUpcCode.setText(R.string.tv_noUPC);
             }
 
-            if(comic.getDescription() != null){
+            if (comic.getDescription() != null) {
                 tvDescription.setText(comic.getDescription());
-            }
-            else{
+            } else {
                 tvDescription.setText(R.string.tv_noDescription);
             }
         }

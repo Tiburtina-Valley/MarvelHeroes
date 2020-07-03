@@ -1,6 +1,7 @@
 package it.tiburtinavalley.marvelheroes.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -41,11 +43,25 @@ public class SeriesActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_action_close);
+
         setContentView(R.layout.series_layout);
         series = getIntent().getParcelableExtra("series");
         Holder holder = new Holder();
         holder.setRecyclerViews();
         holder.setData();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        Context appContext = getApplicationContext();
+        Intent i = new Intent(appContext, MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        appContext.startActivity(i);
+        return true;
     }
 
     class Holder {
@@ -71,7 +87,6 @@ public class SeriesActivity extends AppCompatActivity {
         private RecyclerView rvEvents;
         private ProgressBar loading;
         private ConstraintLayout layout;
-        private Button btnHomeSeries;
 
         private int loading_count = 0;
 
@@ -96,8 +111,7 @@ public class SeriesActivity extends AppCompatActivity {
             tvCreators = findViewById(R.id.tvCreators);
             loading = findViewById(R.id.progress_loader);
             layout = findViewById(R.id.layout);
-            btnHomeSeries = findViewById(R.id.btnHomeSeries);
-            btnHomeSeries.setOnClickListener(new BackHomeListener(getApplicationContext()));
+
 
             final Context appContext = getApplicationContext();
 

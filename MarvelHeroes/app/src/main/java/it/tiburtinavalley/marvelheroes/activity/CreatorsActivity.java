@@ -1,5 +1,7 @@
 package it.tiburtinavalley.marvelheroes.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +9,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,8 +34,22 @@ public class CreatorsActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_action_close);
+
         setContentView(R.layout.creators_detail_layout);
         new Holder((Creators) Objects.requireNonNull(getIntent().getParcelableExtra("creator")));
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        Context appContext = getApplicationContext();
+        Intent i = new Intent(appContext, MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        appContext.startActivity(i);
+        return true;
     }
 
     class Holder {
@@ -43,7 +61,6 @@ public class CreatorsActivity extends AppCompatActivity {
         private SeriesAdapter seriesAdapter;
         private ProgressBar loading;
         private ConstraintLayout layout;
-        private Button btnHomeCreators;
 
         private int loading_count = 0;
 
@@ -56,8 +73,6 @@ public class CreatorsActivity extends AppCompatActivity {
             rvCreatorSeries = findViewById(R.id.rvCreatorSeries);
             loading = findViewById(R.id.progress_loader);
             layout = findViewById(R.id.layout);
-            btnHomeCreators = findViewById(R.id.btnHomeCreators);
-            btnHomeCreators.setOnClickListener(new BackHomeListener(getApplicationContext()));
 
             creatorName.setText(creator.getFullName());
             String urlThumbnail = creator.getThumbnail().getPath().replaceFirst("http", "https")

@@ -1,5 +1,7 @@
 package it.tiburtinavalley.marvelheroes.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -40,10 +43,25 @@ public class EventsActivity extends AppCompatActivity {
     //Creo l'activity, prelevando dal bundle i dati dell'evento selezionato,e impostando il layout.
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_action_close);
+
         setContentView(R.layout.events_layout);
         event = getIntent().getParcelableExtra("event");
         new Holder();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        Context appContext = getApplicationContext();
+        Intent i = new Intent(appContext, MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        appContext.startActivity(i);
+        return true;
     }
 
     //Definisco l'holder con tutti gli elementi della view.
@@ -73,7 +91,6 @@ public class EventsActivity extends AppCompatActivity {
         private TextView tvHeroes;
         private ProgressBar loading;
         private ConstraintLayout layout;
-        private Button btnHomeEvents;
 
         private int loading_count = 0;
 
@@ -98,9 +115,6 @@ public class EventsActivity extends AppCompatActivity {
             tvHeroes = findViewById(R.id.tvHeroes);
             loading = findViewById(R.id.progress_loader);
             layout = findViewById(R.id.layout);
-            btnHomeEvents = findViewById(R.id.btnHomeEvents);
-            btnHomeEvents.setOnClickListener(new BackHomeListener(getApplicationContext()));
-
 
             //Setto le recyclers views.
             setRecyclerViews();
@@ -201,7 +215,6 @@ public class EventsActivity extends AppCompatActivity {
                     EventsActivity.this, RecyclerView.HORIZONTAL, false);
             rvSeries.setLayoutManager(layoutManagerSeries);
         }
-
 
 
         //Definisco la funzione che setta tutti gli elementi della view.
