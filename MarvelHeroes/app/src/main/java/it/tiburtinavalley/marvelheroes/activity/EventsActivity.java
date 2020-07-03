@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -19,8 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
+import java.util.Objects;
 
-import it.tiburtinavalley.marvelheroes.BackHomeListener;
 import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.model.Creators;
 import it.tiburtinavalley.marvelheroes.model.Events;
@@ -47,6 +46,7 @@ public class EventsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_action_close);
 
@@ -60,6 +60,7 @@ public class EventsActivity extends AppCompatActivity {
         Context appContext = getApplicationContext();
         Intent i = new Intent(appContext, MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         appContext.startActivity(i);
         return true;
     }
@@ -96,7 +97,7 @@ public class EventsActivity extends AppCompatActivity {
 
         //Inizializzo l'holder collegando gli attributi java all'xml.
         public Holder() {
-            getSupportActionBar().setTitle(getString(R.string.label_event_detail));
+            Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.label_event_detail));
 
 
             ivEventImage = findViewById(R.id.ivEventImg);

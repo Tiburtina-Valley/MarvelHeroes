@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -19,7 +18,6 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 import java.util.Objects;
 
-import it.tiburtinavalley.marvelheroes.BackHomeListener;
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.model.Comics;
 import it.tiburtinavalley.marvelheroes.model.Creators;
@@ -36,6 +34,7 @@ public class CreatorsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_action_close);
 
@@ -48,6 +47,7 @@ public class CreatorsActivity extends AppCompatActivity {
         Context appContext = getApplicationContext();
         Intent i = new Intent(appContext, MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         appContext.startActivity(i);
         return true;
     }
@@ -65,7 +65,7 @@ public class CreatorsActivity extends AppCompatActivity {
         private int loading_count = 0;
 
         public Holder(Creators creator){
-            getSupportActionBar().setTitle(getString(R.string.label_creator_detail));
+            Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.label_creator_detail));
 
             creatorName = findViewById(R.id.tvCreatName);
             creatorImg = findViewById(R.id.ivCreatorPic);

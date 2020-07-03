@@ -1,6 +1,5 @@
 package it.tiburtinavalley.marvelheroes.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -88,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         if (view == null) {
             view = new View(activity);
         }
+        assert imm != null;
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 

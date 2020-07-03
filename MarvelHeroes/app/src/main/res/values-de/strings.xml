@@ -57,4 +57,6 @@
     <string name="title_series">Seriendetail</string>
     <string name="label_event_detail">Ereignisdetail</string>
     <string name="label_creator_detail">Autorendetail</string>
+    <string name="msg_hero_removed">" Held entfernt"</string>
+    <string name="msg_hero_saved">" Held gerettet"</string>
 </resources>

@@ -81,5 +81,6 @@
     <string name="title_series">Series detail</string>
     <string name="label_event_detail">Event detail</string>
     <string name="label_creator_detail">Creator detail</string>
-
+    <string name="msg_hero_removed">hero removed</string>
+    <string name="msg_hero_saved">hero saved</string>
 </resources>

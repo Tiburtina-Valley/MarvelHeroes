@@ -33,7 +33,6 @@ import it.tiburtinavalley.marvelheroes.model.Series;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.ComicsAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.EventsAdapter;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.SeriesAdapter;
-import it.tiburtinavalley.marvelheroes.recyclerviewadapter.StoriesAdapter;
 import it.tiburtinavalley.marvelheroes.volley.ComicsVolley;
 import it.tiburtinavalley.marvelheroes.volley.EventsVolley;
 import it.tiburtinavalley.marvelheroes.volley.SeriesVolley;
@@ -67,6 +66,7 @@ public class HeroDetailActivity extends AppCompatActivity{
         Context appContext = getApplicationContext();
         Intent i = new Intent(appContext, MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         appContext.startActivity(i);
         return true;
     }
@@ -102,6 +102,7 @@ public class HeroDetailActivity extends AppCompatActivity{
             toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
             setSupportActionBar(toolbar);
             ActionBar actionBar = getSupportActionBar();
+            assert actionBar != null;
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.ic_action_close);
 
@@ -224,13 +225,13 @@ public class HeroDetailActivity extends AppCompatActivity{
                     AppDatabase.getInstance(getApplicationContext()).heroDao().insertHero(hero);
 
 
-                    Toast toast = Toast.makeText(getApplicationContext(), "hero saved", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(getApplicationContext(), R.string.msg_hero_saved, Toast.LENGTH_LONG);
                     toast.show();
 
                 } else {
                     AppDatabase.getInstance(getApplicationContext()).heroDao().deleteHeroFromId(Integer.parseInt(hm.getId()));
 
-                    Toast toast = Toast.makeText(getApplicationContext(), "hero removed", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(getApplicationContext(), R.string.msg_hero_removed, Toast.LENGTH_LONG);
                     toast.show();
                 }
 
