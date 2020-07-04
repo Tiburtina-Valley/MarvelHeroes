@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -178,7 +179,7 @@ public class ComicsActivity extends AppCompatActivity {
             if (comic.getThumbnail() != null) {
                 String urlThumbnail = comic.getThumbnail().getPath().replaceFirst("http", "https")
                         + "/portrait_xlarge" + "." + comic.getThumbnail().getExtension();
-                Glide.with(getApplicationContext()).load(urlThumbnail).into(this.ivComicImage);
+                Glide.with(getApplicationContext()).load(urlThumbnail).diskCacheStrategy(DiskCacheStrategy.ALL).into(this.ivComicImage);
             }
             tvComicName.setText(comic.getTitle());
 

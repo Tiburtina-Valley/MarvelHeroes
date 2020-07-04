@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.zhukic.sectionedrecyclerview.SectionedRecyclerViewAdapter;
 
 import java.util.ArrayList;
@@ -173,7 +174,7 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
                 && !hero.getPicturePath().equalsIgnoreCase("")) {
             String urlThumbnail = hero.getPicturePath().replaceFirst("http", "https")
                     + ".jpg";
-            Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivHeroPic);
+            Glide.with(holder.itemView).load(urlThumbnail).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.ivHeroPic);
         }
         if (holder.cl.isSelected()) {
 
@@ -253,8 +254,8 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
         return position;
     }
 
-    public void resetSelection(){
-        for (View view : selectedItems){
+    public void resetSelection() {
+        for (View view : selectedItems) {
             view.setSelected(false);
         }
         selectedHeroesList.clear();

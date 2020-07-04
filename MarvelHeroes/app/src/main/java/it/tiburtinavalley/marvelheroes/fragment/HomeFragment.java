@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import java.util.Calendar;
@@ -173,7 +174,7 @@ public class HomeFragment extends Fragment {
 
             String urlHero = heroOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
                     +"/portrait_xlarge" + "." + heroOfTheDay.getThumbnail().getExtension();
-            Glide.with(Objects.requireNonNull(getActivity())).setDefaultRequestOptions(requestOptions).load(urlHero).into(ivHero);
+            Glide.with(Objects.requireNonNull(getActivity())).setDefaultRequestOptions(requestOptions).load(urlHero).diskCacheStrategy(DiskCacheStrategy.ALL).into(ivHero);
 
             comicOfTheDay = setComicFromCache();
             tvComicTitle.setText(comicOfTheDay.getTitle());
@@ -186,7 +187,7 @@ public class HomeFragment extends Fragment {
 
             String urlComics = comicOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
                     +"/portrait_xlarge" + "." + comicOfTheDay.getThumbnail().getExtension();
-            Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlComics).into(ivComic);
+            Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlComics).diskCacheStrategy(DiskCacheStrategy.ALL).into(ivComic);
 
             seriesOfTheDay = setSeriesFromCache();
             tvSeriesTitle.setText(seriesOfTheDay.getTitle());
@@ -199,7 +200,7 @@ public class HomeFragment extends Fragment {
 
             String urlSeries = seriesOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
                     +"/portrait_xlarge" + "." + seriesOfTheDay.getThumbnail().getExtension();
-            Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlSeries).into(ivSeries);
+            Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlSeries).diskCacheStrategy(DiskCacheStrategy.ALL).into(ivSeries);
 
             loading_count = 3;
             dismissLoading();
@@ -251,7 +252,7 @@ public class HomeFragment extends Fragment {
                         && !seriesOfTheDay.getThumbnail().getExtension().equalsIgnoreCase("")) {
                     String urlThumbnail = seriesOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
                             + "." + seriesOfTheDay.getThumbnail().getExtension();
-                    Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivSeries);
+                    Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).diskCacheStrategy(DiskCacheStrategy.ALL).into(ivSeries);
                 }
                 Gson gson = new Gson();
                 String json = gson.toJson(seriesOfTheDay);
@@ -295,7 +296,7 @@ public class HomeFragment extends Fragment {
                             && !comicOfTheDay.getThumbnail().getExtension().equalsIgnoreCase("")) {
                         String urlThumbnail = comicOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
                                 + "." + comicOfTheDay.getThumbnail().getExtension();
-                        Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivComic);
+                        Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).diskCacheStrategy(DiskCacheStrategy.ALL).into(ivComic);
                     }
                     Gson gson = new Gson();
                     String json = gson.toJson(comicOfTheDay);
@@ -340,7 +341,7 @@ public class HomeFragment extends Fragment {
                             && !heroOfTheDay.getThumbnail().getExtension().equalsIgnoreCase("")) {
                         String urlThumbnail = heroOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
                                 + "." + heroOfTheDay.getThumbnail().getExtension();
-                        Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).into(ivHero);
+                        Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).diskCacheStrategy(DiskCacheStrategy.ALL).into(ivHero);
                     }
 
                     Gson gson = new Gson();

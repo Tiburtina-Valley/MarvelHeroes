@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import java.util.List;
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.CreatorsActivity;
@@ -74,7 +76,7 @@ public class CreatorsAdapter extends RecyclerView.Adapter<CreatorsAdapter.Creato
         if(creators.get(position).getThumbnail() != null) {
             String urlThumbnail = creators.get(position).getThumbnail().getPath().replaceFirst("http", "https")
                     + "." + creators.get(position).getThumbnail().getExtension();
-            Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivComic);
+            Glide.with(holder.itemView).load(urlThumbnail).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.ivComic);
         }
         holder.tvComicName.setText(creators.get(position).getFullName());
     }

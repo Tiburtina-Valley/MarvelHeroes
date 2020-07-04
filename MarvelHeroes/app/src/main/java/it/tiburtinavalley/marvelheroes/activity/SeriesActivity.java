@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -222,7 +223,7 @@ public class SeriesActivity extends AppCompatActivity {
             if (series.getThumbnail() != null) {
                 String urlThumbnail = series.getThumbnail().getPath().replaceFirst("http", "https")
                         + "." + series.getThumbnail().getExtension();
-                Glide.with(getApplicationContext()).load(urlThumbnail).into(this.ivSeriesImage);
+                Glide.with(getApplicationContext()).load(urlThumbnail).diskCacheStrategy(DiskCacheStrategy.ALL).into(this.ivSeriesImage);
             }
 
             tvSeriesName.setText(series.getTitle());

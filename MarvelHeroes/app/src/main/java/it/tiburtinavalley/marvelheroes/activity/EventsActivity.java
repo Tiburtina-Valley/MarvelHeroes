@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
 import java.util.Objects;
@@ -233,7 +234,7 @@ public class EventsActivity extends AppCompatActivity {
             //Setto l'immagine dell'evento.
             String urlThumbnail = event.getThumbnail().getPath().replaceFirst("http", "https")
                     + "." + event.getThumbnail().getExtension();
-            Glide.with(getApplicationContext()).load(urlThumbnail).into(ivEventImage);
+            Glide.with(getApplicationContext()).load(urlThumbnail).diskCacheStrategy(DiskCacheStrategy.ALL).into(ivEventImage);
 
             //Inizializzo le query per settare gli eroi, i creators, le serie e i comics.
             String id = event.getId();

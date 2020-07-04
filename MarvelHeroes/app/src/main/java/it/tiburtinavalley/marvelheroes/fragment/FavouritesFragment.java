@@ -68,7 +68,6 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
         fragmentTransaction.setCustomAnimations(R.anim.anim_fade_in, R.anim.anim_fade_out);
         HomeFragment home = new HomeFragment();
         fragmentTransaction.replace(R.id.fragment_container, home);
-        //fragmentTransaction.addToBackStack(null);   cosi da poter poi chiudere l'app direttamente se premuto back nella home
         fragmentTransaction.commit();
         return true;
     }
@@ -117,7 +116,6 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
                 fragmentTransaction.setCustomAnimations(R.anim.anim_fade_in, R.anim.anim_fade_out);
                 FavouritesFragment favorite = new FavouritesFragment();
                 fragmentTransaction.replace(R.id.fragment_container, favorite);
-                //fragmentTransaction.addToBackStack(null);   cosi da poter poi chiudere l'app direttamente se premuto back nella home
                 fragmentTransaction.commit();
                 return true;
             }

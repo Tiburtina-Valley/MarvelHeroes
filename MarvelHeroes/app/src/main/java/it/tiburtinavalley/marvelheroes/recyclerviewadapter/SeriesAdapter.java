@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,7 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
         if(series.get(position).getThumbnail() != null) {
             String urlThumbnail = series.get(position).getThumbnail().getPath().replaceFirst("http", "https")
                     + "." + series.get(position).getThumbnail().getExtension();
-            Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivSeries);
+            Glide.with(holder.itemView).load(urlThumbnail).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.ivSeries);
         }
         holder.tvSeriesName.setText(series.get(position).getTitle());
     }

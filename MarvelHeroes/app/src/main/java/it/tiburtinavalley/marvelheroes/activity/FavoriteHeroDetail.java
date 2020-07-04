@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -210,7 +211,7 @@ public class FavoriteHeroDetail extends AppCompatActivity{
                 Log.w("1","resource");
                 String urlThumbnail = hero.getResourceURI().replaceFirst("http", "https")
                         + ".jpg";
-                Glide.with(getApplicationContext()).load(urlThumbnail).into(this.ivHeroPhoto);
+                Glide.with(getApplicationContext()).load(urlThumbnail).diskCacheStrategy(DiskCacheStrategy.ALL).into(this.ivHeroPhoto);
             }
             // TODO: fill comics, series and stories
 

@@ -15,6 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class HeroDetailAdapter extends RecyclerView.Adapter<HeroDetailAdapter.Ho
         if (hero.getThumbnail()!=null) {
             String urlThumbnail = hero.getThumbnail().getPath().replaceFirst("http", "https")
                     + "." + hero.getThumbnail().getExtension();
-            Glide.with(holder.itemView).load(urlThumbnail).into(holder.ivHeroPic);
+            Glide.with(holder.itemView).load(urlThumbnail).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.ivHeroPic);
         }
     }
     

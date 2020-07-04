@@ -15,6 +15,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -82,7 +84,7 @@ public class CreatorsActivity extends AppCompatActivity {
             // Query per ottenere la foto del Creator
             String urlThumbnail = creator.getThumbnail().getPath().replaceFirst("http", "https")
                     + "." + creator.getThumbnail().getExtension();
-            Glide.with(creatorImg).load(urlThumbnail).into(creatorImg);
+            Glide.with(creatorImg).load(urlThumbnail).diskCacheStrategy(DiskCacheStrategy.ALL).into(creatorImg);
 
             // Crea i LayoutManager per le RecyclerView, con scorrimento orizzontale
             LinearLayoutManager layoutManagerCreatorComics = new LinearLayoutManager(
