@@ -16,6 +16,9 @@ import java.lang.reflect.Type;
 import java.util.List;
 import it.tiburtinavalley.marvelheroes.model.Creators;
 
+/* in questa classe , vengono gestite le ricerche in Internet per cercare le informazioni
+   relative a Creatori*/
+
 public abstract class CreatorsVolley implements Response.ErrorListener, Response.Listener<String>{
     private String urlBase = "https://gateway.marvel.com/v1/public/comics/%s";
 
@@ -46,19 +49,21 @@ public abstract class CreatorsVolley implements Response.ErrorListener, Response
         String creator = serieId + "/creators?";
         creatorsApiCall(creator);
     }
-
+    /** Crea la StringRequest e la inserisce in coda*/
     private void creatorsApiCall(String creatorUrl){
         String url = urlBase + apiKey; // usiamo una stringa di appoggio così da poter ripetere la chiamata
         url = String.format(url, creatorUrl);
         StringRequest sr = new StringRequest(Request.Method.GET, url, this, this);
         requestQueue.add(sr);
     }
-
+    /** In caso ci sia un errore nella query*/
     @Override
     public void onErrorResponse(VolleyError error) {
         Log.w("QueryFail", error.getMessage());
     }
 
+    /** Caso in cui la query ha successo : l'oggetto viene spacchettato tramite l'api Gson e passato all'Activity
+     tramite il metodo di fillCreatorsInfo*/
     @Override
     public void onResponse(String response) {
         Gson gson = new Gson();
@@ -71,7 +76,6 @@ public abstract class CreatorsVolley implements Response.ErrorListener, Response
             List<Creators> creatorsList = gson.fromJson(creators, listType);
             if (creatorsList != null) { //controllo solo se la lista non è vuota, ci penserà il metodo definito nell'Activity a settare o meno la RecyclerView
                 Log.w("CA", "" + creatorsList.size());
-                //db.cocktailDAO().insertAll(cnt);    // NON OBBLIGATORIO
                 fillCreatorsInfo(creatorsList);
             }
         } catch (JSONException e) {

@@ -27,6 +27,8 @@ import it.tiburtinavalley.marvelheroes.recyclerviewadapter.SeriesAdapter;
 import it.tiburtinavalley.marvelheroes.volley.ComicsVolley;
 import it.tiburtinavalley.marvelheroes.volley.SeriesVolley;
 
+/* Activity di dettaglio di un Creator : vengono mostrati il nome, la foto, i fumetti e le serie a cui ha lavorato*/
+
 public class CreatorsActivity extends AppCompatActivity {
 
     @Override
@@ -67,6 +69,7 @@ public class CreatorsActivity extends AppCompatActivity {
         public Holder(Creators creator){
             Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.label_creator_detail));
 
+            // Lega le View all'xml del layout
             creatorName = findViewById(R.id.tvCreatName);
             creatorImg = findViewById(R.id.ivCreatorPic);
             rvCreatorsComics = findViewById(R.id.rvCreatCom);
@@ -75,10 +78,13 @@ public class CreatorsActivity extends AppCompatActivity {
             layout = findViewById(R.id.layout);
 
             creatorName.setText(creator.getFullName());
+
+            // Query per ottenere la foto del Creator
             String urlThumbnail = creator.getThumbnail().getPath().replaceFirst("http", "https")
                     + "." + creator.getThumbnail().getExtension();
             Glide.with(creatorImg).load(urlThumbnail).into(creatorImg);
 
+            // Crea i LayoutManager per le RecyclerView, con scorrimento orizzontale
             LinearLayoutManager layoutManagerCreatorComics = new LinearLayoutManager(
                     CreatorsActivity.this, RecyclerView.HORIZONTAL, false);
             rvCreatorsComics.setLayoutManager(layoutManagerCreatorComics);
@@ -90,6 +96,8 @@ public class CreatorsActivity extends AppCompatActivity {
             ComicsVolley cv = new ComicsVolley(getApplicationContext()) {
                 @Override
                 public void fillComics(List<Comics> comicsList) {
+                    /* non è stato inserito un controllo su possibili liste vuote : questo perché si accede all'activity partendo dai dettagli di un fumetto,
+                       quindi sicuramente sarà caricato almeno quel fumetto*/
                     comAdapter = new ComicsAdapter(comicsList, getApplicationContext());
                     rvCreatorsComics.setAdapter(comAdapter);
                     loading_count++;
@@ -100,6 +108,7 @@ public class CreatorsActivity extends AppCompatActivity {
             SeriesVolley sv = new SeriesVolley(getApplicationContext()) {
                 @Override
                 public void fillSeries(List<Series> seriesList) {
+                    //se la lista è vuota, toglie la RecyclerView con relativa Label dal Layout
                     if(seriesList.isEmpty()){
                         TextView tvCreatorSeries = findViewById(R.id.tvCreatorSeries); // prende la TextView da oscurare
                         tvCreatorSeries.setTextSize(0);
@@ -114,10 +123,13 @@ public class CreatorsActivity extends AppCompatActivity {
                 }
             };
 
+            // query a Volley basate sull'id del Creator
             cv.getComicsByCreators(creator.getId());
             sv.getSeriesByCreator(creator.getId());
         }
 
+        /* Metodo che verifica che tutte le RecyclerView siano state riempite con i dati
+          (o siano state oscurate se non ci sono dati da mostrare) per poter togliere la ProgressBar */
         private void dismissLoading() {
             if (loading_count >= 2) {
                 loading.setVisibility(View.GONE);

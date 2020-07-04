@@ -17,13 +17,12 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Random;
-
 import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.Comics;
 
 /* in questa classe , vengono gestite le ricerche in Internet per cercare le informazioni
-   relative a Storie, Fumetti e Serie collegate agli eroi*/
+   relative ai Fumetti */
 
 public abstract class ComicsVolley implements Response.ErrorListener, Response.Listener<String>{
 
@@ -38,7 +37,7 @@ public abstract class ComicsVolley implements Response.ErrorListener, Response.L
         this.context = context;
         requestQueue = Volley.newRequestQueue(context);
     }
-
+    /** Ottiene un comics random basato sull'inziale del titolo.*/
     public void getRandomComic(){
         Random r = new Random();
         char randomLetter = (char) (r.nextInt(26) + 'a');
@@ -46,21 +45,25 @@ public abstract class ComicsVolley implements Response.ErrorListener, Response.L
         comicApiCall(param);
     }
 
+    /** Ottiene i dati di un comics a partire dall'id.*/
     public void getComicFromId(String comicId){
         String param = "comics/" + comicId + "?";
         comicApiCall(param);
     }
 
+    /** Ottiene tutti i comics relativi ad un eroe.*/
     public void getComicsRelatedToHero(String heroId){
         String comic = "characters/"+ heroId + "/comics?";
         comicApiCall(comic);
     }
 
+    /** Ottiene tutti i comics relativi ad un creator.*/
     public void getComicsByCreators(String creatorId){
         String creator = "creators/" + creatorId + "/comics?";
         comicApiCall(creator);
     }
 
+    /** Ottiene tutti i comics relativi ad un evento.*/
     public void getComicsByEvent(String eventId){
         String comics = "events/" + eventId + "/comics?";
         comicApiCall(comics);
@@ -77,6 +80,7 @@ public abstract class ComicsVolley implements Response.ErrorListener, Response.L
         comicApiCall(story);
     }
 
+    /** Crea la StringRequest e la inserisce in coda*/
     private void comicApiCall(String comicUrl){
         String url = urlBase + apiKey; // usiamo una stringa di appoggio così da poter ripetere la chiamata
         url = String.format(url, comicUrl);
@@ -87,6 +91,7 @@ public abstract class ComicsVolley implements Response.ErrorListener, Response.L
         requestQueue.add(sr);
     }
 
+    /** In caso ci sia un errore nella query*/
     @Override
     public void onErrorResponse(VolleyError error) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -99,6 +104,8 @@ public abstract class ComicsVolley implements Response.ErrorListener, Response.L
         Log.w("QueryFail", error.getCause());
     }
 
+    /** Caso in cui la query ha successo : l'oggetto viene spacchettato tramite l'api Gson e passato all'Activity
+        tramite il metodo di fillComics*/
     @Override
     public void onResponse(String response) {
         Gson gson = new Gson();
@@ -111,7 +118,6 @@ public abstract class ComicsVolley implements Response.ErrorListener, Response.L
             List<Comics> comicsList = gson.fromJson(comics, listType);
             if (comicsList != null) {
                 Log.w("CA", "" + comicsList.size());
-                //db.cocktailDAO().insertAll(cnt);    // NON OBBLIGATORIO
                 fillComics(comicsList);
             }
         } catch (JSONException e) {

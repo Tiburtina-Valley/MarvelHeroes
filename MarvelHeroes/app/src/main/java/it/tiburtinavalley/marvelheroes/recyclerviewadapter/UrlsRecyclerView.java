@@ -22,7 +22,7 @@ import it.tiburtinavalley.marvelheroes.model.Urls;
 /* RecyclerView che mostra gli url legati ad un elemento, che può essere un fumetto, una serie o un evento*/
 
 public class UrlsRecyclerView extends RecyclerView.Adapter<UrlsRecyclerView.Holder> implements View.OnClickListener {
-    private List<Urls> urls;
+    private List<Urls> urls; // Lista degli eroi che vanno mostrati nella RecyclerView
     private Context appContext;
 
 
@@ -31,6 +31,7 @@ public class UrlsRecyclerView extends RecyclerView.Adapter<UrlsRecyclerView.Hold
         urls = urlsList;
     }
 
+    // Metodo chiamato ogni volta che serve una nuova riga per la RecyclerView
     @NonNull
     @Override
     public UrlsRecyclerView.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,9 +42,11 @@ public class UrlsRecyclerView extends RecyclerView.Adapter<UrlsRecyclerView.Hold
         return new Holder(cl);
     }
 
+    // Chiamato quando avviene un cambiamento in una View
     @Override
     public void onBindViewHolder(@NonNull Holder holder, final int position) {
         String type = urls.get(position).getType();
+        // Controlla il tipo di url
         if (type.equals(appContext.getString(R.string.btn_check_resource))) {
             type = appContext.getString(R.string.btn_resource);
         }
@@ -65,30 +68,38 @@ public class UrlsRecyclerView extends RecyclerView.Adapter<UrlsRecyclerView.Hold
         });
     }
 
+    // Ritorna il numero di elementi nella lista di creators
     @Override
     public int getItemCount() {
         return urls.size();
     }
 
+    // Reagisce al click di un elemento nella RecyclerView
     @Override
     public void onClick(View v) {
+        // Controlla se la connessone ad Internet è presente
         ConnectivityManager cm = (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+            // Acquisisce la posizione dell'elemento selezionato
             int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
+            // Prende il comics dalla lista in base alla posizione
             Urls url = urls.get(position);
+
+            // Apre l'url nel browser
             Uri uri = Uri.parse(url.getUrl());
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             appContext.startActivity(intent);
         }
+        //Mostra un Toast qualora la connessione ad Internet sia assente
         else {
             ToastClass toast = new ToastClass(appContext);
             toast.showToast(appContext.getString(R.string.msg_internet_required));
         }
     }
 
-
+    // Holder che estende la ViewHolder e gestisce una specifica View
     class Holder extends RecyclerView.ViewHolder {
         private Button btnType;
 
