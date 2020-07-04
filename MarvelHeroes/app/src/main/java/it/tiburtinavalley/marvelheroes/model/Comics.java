@@ -9,15 +9,17 @@ import java.util.List;
 /* Model per mantenere i dati relativi ai fumetti legati agli eroi */
 
 public class Comics extends Element {
-    private List<Items> variants; //other comics related to the main one
-    private List<Images> images;
-    private String upc;
+    private List<Items> variants; // Varianti del fumetto
+    private List<Images> images; // Altre immagini del fumetto
+    private String upc; // Codice UPC del fumetto
     private String diamondCode;
-    private String isbn;
-    private String pageCount;
+    private String isbn; //ISBN del fumetto
+    private String pageCount; // Numero di pagine del fumetto
 
+    // Costruttore di default necessario per caricare il dettaglio di un elemento dal Fragment dei preferiti dell'utente
     public Comics(){}
 
+    // Costruttore chiamato quando viene estratto il Parcelable in un'Activity
     protected Comics(Parcel in) {
         variants = in.createTypedArrayList(Items.CREATOR);
         urls = in.createTypedArrayList(Urls.CREATOR);
@@ -32,6 +34,7 @@ public class Comics extends Element {
         thumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
     }
 
+    //Metodo per inserire il Parcel cone Extra nell'Intent
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(variants);
@@ -47,6 +50,7 @@ public class Comics extends Element {
         dest.writeParcelable(thumbnail, flags);
     }
 
+    // Descrive il tipo di possibili oggetti speciali contenuti nel Parcelable
     @Override
     public int describeContents() {
         return 0;
@@ -63,6 +67,8 @@ public class Comics extends Element {
             return new Comics[size];
         }
     };
+
+    // Getter per ottene il valore degli attributi
 
     public List<Items> getItems() {
         return variants;
@@ -87,6 +93,5 @@ public class Comics extends Element {
     public String getPageCount() {
         return pageCount;
     }
-
 
 }

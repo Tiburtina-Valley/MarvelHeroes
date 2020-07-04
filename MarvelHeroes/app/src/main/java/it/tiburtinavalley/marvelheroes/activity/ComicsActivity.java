@@ -40,22 +40,23 @@ public class ComicsActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ActionBar actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar(); // Settiamo nell'ActionBar l'opzione per tornare alla Home
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_action_close);
 
         setContentView(R.layout.comic_layout);
-        comic = getIntent().getParcelableExtra("comic");
+        comic = getIntent().getParcelableExtra("comic"); // Estraiamo il Comic di cui vogliamo mostrare i dettagli
         new Holder();
     }
 
+    // Metodo per tornare alla Home Page dopo la pressione dlel'icona "X"
     @Override
     public boolean onSupportNavigateUp() {
         Context appContext = getApplicationContext();
         Intent i = new Intent(appContext, MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Flag per far si che le activity precedentemente aperte vengano chiuse dopo che parta la MainActivity
         appContext.startActivity(i);
         return true;
     }
@@ -76,12 +77,13 @@ public class ComicsActivity extends AppCompatActivity {
         private ProgressBar loading;
         private ConstraintLayout layout;
 
-        private int loading_count = 0;
+        private int loading_count = 0; // Counter per far sparire la ProgessBar
 
         public Holder() {
 
             Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.title_comic);
 
+            // Leghiamo gli elementi di View all'xml mediante l'id
             ivComicImage = findViewById(R.id.ivStoriesmg);
             tvComicName = findViewById(R.id.tvCreatorName);
             tvPageCount = findViewById(R.id.tvPageCount);
@@ -99,17 +101,20 @@ public class ComicsActivity extends AppCompatActivity {
             heroVolley = new MarvelApiVolley(appContext) {
                 @Override
                 public void fillList(List<HeroModel> heroes) {
-                    // se la lista degli eroi è vuota, nasconde la RecyclerView degli eroi
+                    // Se la lista degli eroi è vuota, nasconde la RecyclerView degli eroi
                     if (heroes.isEmpty()) {
-                        TextView tvHeroes = findViewById(R.id.tvHeroes); // prende la TextView da oscurare
+                        TextView tvHeroes = findViewById(R.id.tvHeroes); // Prende la TextView da oscurare
                         tvHeroes.setTextSize(0);
                         tvHeroes.setVisibility(View.INVISIBLE);
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvHeroes.getLayoutParams();
-                        marginParams.setMargins(0, 0, 0, 0); // setta i margini per non lasciare spazi in più
-                    } else {
+                        marginParams.setMargins(0, 0, 0, 0); // Setta i margini per non lasciare spazi in più
+                    }
+                    else {
+                        // Crea un nuovo adapter e lo assegna alla RecyclerView
                         heroDetAdapter = new HeroDetailAdapter(heroes, appContext);
                         rvHeroesComics.setAdapter(heroDetAdapter);
                     }
+                    // Incrementa il contatore e controlla se tutte le RecyclerView sono state riempite coi dati
                     loading_count++;
                     dismissLoading();
                 }
@@ -118,13 +123,15 @@ public class ComicsActivity extends AppCompatActivity {
             creatorsVolley = new CreatorsVolley(getApplicationContext()) {
                 @Override
                 public void fillCreatorsInfo(List<Creators> creatorsList) {
+                    // Se la lista degli eroi è vuota, nasconde la RecyclerView dei Creators
                     if (creatorsList.isEmpty()) {
-                        TextView tvCreators = findViewById(R.id.tvCreatorsComics);
+                        TextView tvCreators = findViewById(R.id.tvCreatorsComics); // Prende la TextView da oscurare
                         tvCreators.setTextSize(0);
                         tvCreators.setVisibility(View.INVISIBLE);
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvCreators.getLayoutParams();
-                        marginParams.setMargins(0, 0, 0, 0); // setta i margini per non lasciare spazi in più
-                    } else {
+                        marginParams.setMargins(0, 0, 0, 0); // Setta i margini per non lasciare spazi in più
+                    }
+                    else {
                         creatorsAdapter = new CreatorsAdapter(creatorsList, appContext);
                         rvCreatorsComics.setAdapter(creatorsAdapter);
                     }
@@ -136,16 +143,21 @@ public class ComicsActivity extends AppCompatActivity {
             UrlsRecyclerView urlsAdapter = new UrlsRecyclerView(comic.getUrls()); // gli urls sono già stati caricati precedentemente, quando è stata caricata l'activity per i dettagli dell'eroe
             rvUrls.setAdapter(urlsAdapter);
 
+            // Effettua le query al portale Marvel basandosi sull'id del fumetto
             String id = comic.getId();
             heroVolley.getHeroesFromComics(id);
             creatorsVolley.getCreatorsByComics(id);
 
+            // Assegna i LayoutManager alle RecyclerView e setta i dati nelle View dell'Holder
             setRecyclerViews();
             setData();
         }
 
-        // funzione che si occupa di settare i LayoutManager per le RecyclerView
+        // Funzione che si occupa di settare i LayoutManager per le RecyclerView
         private void setRecyclerViews() {
+
+            // Ogni RecyclerView avrà gli elementi che scorrono in orizzontale
+
             LinearLayoutManager layoutManagerUrls = new LinearLayoutManager(
                     ComicsActivity.this, RecyclerView.HORIZONTAL, false);
             rvUrls.setLayoutManager(layoutManagerUrls);
@@ -159,14 +171,18 @@ public class ComicsActivity extends AppCompatActivity {
             rvCreatorsComics.setLayoutManager(layoutManagerCreators);
         }
 
-        //Vengono settati tutti i valori degli elementi del fumetto, controllando che non siano null. In tal caso, viene inserita una stringa apposita.
+        // Vengono settati tutti i valori degli elementi del fumetto, controllando che non siano null. In tal caso, viene inserita una stringa apposita.
         private void setData() {
+
+            // Se il path dell'immagine è presente, la carica usando l'API Glide
             if (comic.getThumbnail() != null) {
                 String urlThumbnail = comic.getThumbnail().getPath().replaceFirst("http", "https")
                         + "/portrait_xlarge" + "." + comic.getThumbnail().getExtension();
                 Glide.with(getApplicationContext()).load(urlThumbnail).into(this.ivComicImage);
             }
             tvComicName.setText(comic.getTitle());
+
+            // Controllo se i dati sono presenti, se non lo sono viene caricata una stringa di defualt dal file strings.xml
             if (!comic.getPageCount().equalsIgnoreCase("") && !comic.getPageCount().equalsIgnoreCase("0")) {
                 tvPageCount.setText(comic.getPageCount() + getString(R.string.label_pages));
             } else {
@@ -185,6 +201,8 @@ public class ComicsActivity extends AppCompatActivity {
             }
         }
 
+        /* Metodo che verifica che tutte le RecyclerView siano state riempite con i dati
+           (o siano state oscurate se non ci sono dati da mostrare) per poter togliere la ProgressBar */
         private void dismissLoading() {
             if (loading_count >= 2) {
                 loading.setVisibility(View.GONE);

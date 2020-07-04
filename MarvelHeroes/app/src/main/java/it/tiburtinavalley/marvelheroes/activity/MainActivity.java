@@ -19,6 +19,7 @@ import it.tiburtinavalley.marvelheroes.fragment.HomeFragment;
 import it.tiburtinavalley.marvelheroes.fragment.SearchFragment;
 import it.tiburtinavalley.marvelheroes.R;
 
+/* MainActivity,  la prima Activity che viene mostrata quando l'utente accede all'applicazione*/
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,14 +28,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Aggiunge la NavigationBar nella parte bassa della schermata
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
-        setFragment(new HomeFragment());
+        setFragment(new HomeFragment()); // carica per default il Fragment di HomePage
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = item -> {
 
+        // switch-case per decidere quale Fragment mostrare in base all'elemento della navbar clickato
         switch(item.getItemId()) {
             case R.id.action_home:
                 setFragment(new HomeFragment());
@@ -53,10 +56,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     };
 
+    // Crea il menù
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true; }
 
+    // Metodo che reagisce al click di un opzione del menù
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.AboutBtn) {
             Context appContext=getApplicationContext();
@@ -81,9 +86,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static void hideKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        //Find the currently focused view, so we can grab the correct window token from it.
+        // Cerca la View su cui c'è attualmente il focus, così da poter prendere il corretto window token
         View view = activity.getCurrentFocus();
-        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        // Se nessuna View ha il focus, ne crea una così da poter estrarvi il window token
         if (view == null) {
             view = new View(activity);
         }
