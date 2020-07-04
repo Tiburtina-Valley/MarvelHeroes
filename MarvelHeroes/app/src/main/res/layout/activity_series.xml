@@ -175,7 +175,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvCharacters"
                     tools:itemCount="5"
                     tools:layoutManager="GridLayoutManager"
-                    tools:listitem="@layout/recycler_view_item"
+                    tools:listitem="@layout/item_recyclerview"
                     tools:spanCount="5" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -214,7 +214,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvCreators"
                     tools:itemCount="5"
                     tools:layoutManager="GridLayoutManager"
-                    tools:listitem="@layout/recycler_view_item"
+                    tools:listitem="@layout/item_recyclerview"
                     tools:spanCount="5" />
 
 
@@ -244,7 +244,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvComics"
                     tools:itemCount="5"
                     tools:layoutManager="GridLayoutManager"
-                    tools:listitem="@layout/recycler_view_item"
+                    tools:listitem="@layout/item_recyclerview"
                     tools:spanCount="5" />
 
                 <TextView
@@ -272,7 +272,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvEvents"
                     tools:itemCount="5"
                     tools:layoutManager="GridLayoutManager"
-                    tools:listitem="@layout/recycler_view_item"
+                    tools:listitem="@layout/item_recyclerview"
                     tools:spanCount="5" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

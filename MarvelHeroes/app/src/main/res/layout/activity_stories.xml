@@ -51,7 +51,7 @@
         tools:itemCount="5"
         tools:layoutManager="GridLayoutManager"
         tools:layout_constraintHorizontal_bias="1.0"
-        tools:listitem="@layout/recycler_view_item"
+        tools:listitem="@layout/item_recyclerview"
         tools:spanCount="5" />
 
     <TextView
@@ -79,6 +79,6 @@
         app:layout_constraintVertical_bias="0.0"
         tools:itemCount="5"
         tools:layoutManager="GridLayoutManager"
-        tools:listitem="@layout/recycler_view_item"
+        tools:listitem="@layout/item_recyclerview"
         tools:spanCount="5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

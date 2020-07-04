@@ -53,7 +53,7 @@ public class HeroDetailActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppThemeNoBar);
 
-        setContentView(R.layout.hero_detail_layout);
+        setContentView(R.layout.activity_hero_detail);
 
         hm = getIntent().getParcelableExtra("hero");
         holder = new Holder();

@@ -63,7 +63,7 @@ public class CreatorsAdapter extends RecyclerView.Adapter<CreatorsAdapter.Creato
         ConstraintLayout cl;
         cl = (ConstraintLayout) LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.creator_layout, parent, false);
+                .inflate(R.layout.item_creator, parent, false);
         cl.setOnClickListener(this);
         return new CreatorsHolder(cl);
     }

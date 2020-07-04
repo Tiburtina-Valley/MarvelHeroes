@@ -48,7 +48,7 @@ public class SeriesActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_action_close);
 
-        setContentView(R.layout.series_layout);
+        setContentView(R.layout.activity_series);
         series = getIntent().getParcelableExtra("series");
         Holder holder = new Holder();
         holder.setRecyclerViews();

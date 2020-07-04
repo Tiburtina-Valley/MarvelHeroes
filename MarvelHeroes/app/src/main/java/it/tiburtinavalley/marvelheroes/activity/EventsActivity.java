@@ -50,7 +50,7 @@ public class EventsActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_action_close);
 
-        setContentView(R.layout.events_layout);
+        setContentView(R.layout.activity_events);
         event = getIntent().getParcelableExtra("event");
         new Holder();
     }

@@ -100,7 +100,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvDrawn"
                     tools:itemCount="5"
                     tools:layoutManager="GridLayoutManager"
-                    tools:listitem="@layout/recycler_view_item"
+                    tools:listitem="@layout/item_recyclerview"
                     tools:spanCount="5" />
 
 
@@ -142,7 +142,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvCreatorSeries"
                     tools:itemCount="5"
                     tools:layoutManager="GridLayoutManager"
-                    tools:listitem="@layout/recycler_view_item"
+                    tools:listitem="@layout/item_recyclerview"
                     tools:spanCount="5" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 

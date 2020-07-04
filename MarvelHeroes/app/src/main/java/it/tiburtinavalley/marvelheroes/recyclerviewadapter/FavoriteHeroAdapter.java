@@ -69,7 +69,7 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
             ivHeroPic = itemView.findViewById(R.id.ivHeroPhoto);
             cl = itemView.findViewById(R.id.heroConstraintLayout);
             borderLayout = itemView.findViewById(R.id.borderLayout);
-            cl.setBackground(ContextCompat.getDrawable(itemView.getContext(), R.drawable.hero_selector));
+            cl.setBackground(ContextCompat.getDrawable(itemView.getContext(), R.drawable.selector_hero));
         }
     }
 
@@ -145,13 +145,13 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
         ConstraintLayout cl;
         cl = (ConstraintLayout) LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.favourite_hero_layout, parent, false);
+                .inflate(R.layout.item_favourite_hero, parent, false);
         return new Holder(cl);
     }
 
     @Override
     public SubheaderHolder onCreateSubheaderViewHolder(ViewGroup parent, int viewType) {
-        return new SubheaderHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.favourites_item_header, parent, false));
+        return new SubheaderHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_favourites_item_header, parent, false));
     }
 
     @Override

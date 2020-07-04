@@ -45,7 +45,7 @@ public class ComicsActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_action_close);
 
-        setContentView(R.layout.comic_layout);
+        setContentView(R.layout.activity_comic);
         comic = getIntent().getParcelableExtra("comic"); // Estraiamo il Comic di cui vogliamo mostrare i dettagli
         new Holder();
     }

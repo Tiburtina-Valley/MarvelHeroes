@@ -38,7 +38,7 @@ public class UrlsRecyclerView extends RecyclerView.Adapter<UrlsRecyclerView.Hold
         ConstraintLayout cl;
         cl = (ConstraintLayout) LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.url_layout, parent, false);
+                .inflate(R.layout.item_url, parent, false);
         return new Holder(cl);
     }
 

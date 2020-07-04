@@ -43,7 +43,7 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.Holder> implem
         ConstraintLayout cl;
         cl = (ConstraintLayout) LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.hero_layout, parent, false);
+                .inflate(R.layout.item_search_result, parent, false);
         cl.setOnClickListener(this);
         return new Holder(cl);
     }

@@ -39,6 +39,7 @@ import it.tiburtinavalley.marvelheroes.volley.SeriesVolley;
 
 public class HomeFragment extends Fragment {
     final int MAX_ATTEMPTS = 2;
+    final int MAX_STRING_LENGTH = 150;
     MarvelApiVolley apiHero;
     ComicsVolley apiComic;
     SeriesVolley apiSeries;
@@ -159,13 +160,13 @@ public class HomeFragment extends Fragment {
 
 
         private void setAll() {
-            int maxStringLength = 150;
+
 
             heroOfTheDay = setHeroFromCache();
             tvHeroName.setText(heroOfTheDay.getName());
 
-            if ((heroOfTheDay.getDescription().length() + heroOfTheDay.getName().length()) > maxStringLength) {
-                tvHeroDescription.setText(heroOfTheDay.getDescription().substring(0,maxStringLength-heroOfTheDay.getName().length()) + "...");
+            if ((heroOfTheDay.getDescription().length() + heroOfTheDay.getName().length()) > MAX_STRING_LENGTH) {
+                tvHeroDescription.setText(heroOfTheDay.getDescription().substring(0, MAX_STRING_LENGTH -heroOfTheDay.getName().length()) + "...");
             } else {
                 tvHeroDescription.setText(heroOfTheDay.getDescription());
             }
@@ -177,8 +178,8 @@ public class HomeFragment extends Fragment {
             comicOfTheDay = setComicFromCache();
             tvComicTitle.setText(comicOfTheDay.getTitle());
 
-            if ((comicOfTheDay.getDescription().length() + comicOfTheDay.getTitle().length() ) > maxStringLength) {
-                tvComicDescription.setText(comicOfTheDay.getDescription().substring(0,maxStringLength-comicOfTheDay.getTitle().length()) + "...");
+            if ((comicOfTheDay.getDescription().length() + comicOfTheDay.getTitle().length() ) > MAX_STRING_LENGTH) {
+                tvComicDescription.setText(comicOfTheDay.getDescription().substring(0, MAX_STRING_LENGTH -comicOfTheDay.getTitle().length()) + "...");
             } else {
                 tvComicDescription.setText(comicOfTheDay.getDescription());
             }
@@ -189,8 +190,8 @@ public class HomeFragment extends Fragment {
 
             seriesOfTheDay = setSeriesFromCache();
             tvSeriesTitle.setText(seriesOfTheDay.getTitle());
-            if ((seriesOfTheDay.getDescription().length() + seriesOfTheDay.getTitle().length() )> maxStringLength) {
-                tvSeriesDescription.setText(seriesOfTheDay.getDescription().substring(0,maxStringLength-seriesOfTheDay.getTitle().length()) + "...");
+            if ((seriesOfTheDay.getDescription().length() + seriesOfTheDay.getTitle().length() )> MAX_STRING_LENGTH) {
+                tvSeriesDescription.setText(seriesOfTheDay.getDescription().substring(0, MAX_STRING_LENGTH -seriesOfTheDay.getTitle().length()) + "...");
             } else {
                 tvSeriesDescription.setText(seriesOfTheDay.getDescription());
             }
@@ -240,7 +241,11 @@ public class HomeFragment extends Fragment {
                 tvSeriesTitle.setText(title);
                 String description = seriesOfTheDay.getDescription() != null ? seriesOfTheDay.getDescription() : "";
                 if (!description.isEmpty()) {
-                    tvSeriesDescription.setText(description);
+                    if ((seriesOfTheDay.getDescription().length() + seriesOfTheDay.getTitle().length() )> MAX_STRING_LENGTH) {
+                        tvSeriesDescription.setText(seriesOfTheDay.getDescription().substring(0, MAX_STRING_LENGTH -seriesOfTheDay.getTitle().length()) + "...");
+                    } else {
+                        tvSeriesDescription.setText(seriesOfTheDay.getDescription());
+                    }
                 }
                 if (!seriesOfTheDay.getThumbnail().getPath().equalsIgnoreCase("")
                         && !seriesOfTheDay.getThumbnail().getExtension().equalsIgnoreCase("")) {
@@ -279,7 +284,11 @@ public class HomeFragment extends Fragment {
                     comicAttempts = 0;
                     tvComicTitle.setText(comicOfTheDay.getTitle());
                     if (comicOfTheDay.getDescription() != null && !comicOfTheDay.getDescription().isEmpty()) {
-                        tvComicDescription.setText(comicOfTheDay.getDescription());
+                        if ((comicOfTheDay.getDescription().length() + comicOfTheDay.getTitle().length() ) > MAX_STRING_LENGTH) {
+                            tvComicDescription.setText(comicOfTheDay.getDescription().substring(0, MAX_STRING_LENGTH -comicOfTheDay.getTitle().length()) + "...");
+                        } else {
+                            tvComicDescription.setText(comicOfTheDay.getDescription());
+                        }
                     }
 
                     if (!comicOfTheDay.getThumbnail().getPath().equalsIgnoreCase("")
@@ -320,7 +329,11 @@ public class HomeFragment extends Fragment {
 
                     tvHeroName.setText(heroOfTheDay.getName());
                     if (heroOfTheDay.getDescription() != null && !heroOfTheDay.getDescription().isEmpty()) {
-                        tvHeroDescription.setText(heroOfTheDay.getDescription());
+                        if ((heroOfTheDay.getDescription().length() + heroOfTheDay.getName().length()) > MAX_STRING_LENGTH) {
+                            tvHeroDescription.setText(heroOfTheDay.getDescription().substring(0, MAX_STRING_LENGTH -heroOfTheDay.getName().length()) + "...");
+                        } else {
+                            tvHeroDescription.setText(heroOfTheDay.getDescription());
+                        }
                     }
 
                     if (!heroOfTheDay.getThumbnail().getPath().equalsIgnoreCase("")

@@ -91,7 +91,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/ivSeries"
                         tools:itemCount="5"
                         tools:layoutManager="GridLayoutManager"
-                        tools:listitem="@layout/recycler_view_item"
+                        tools:listitem="@layout/item_recyclerview"
                         tools:spanCount="5" />
 
                     <TextView
@@ -121,7 +121,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/ivComics"
                         tools:itemCount="5"
                         tools:layoutManager="GridLayoutManager"
-                        tools:listitem="@layout/recycler_view_item"
+                        tools:listitem="@layout/item_recyclerview"
                         tools:spanCount="5" />
 
 
@@ -137,7 +137,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/tvCreators"
                         tools:itemCount="5"
                         tools:layoutManager="GridLayoutManager"
-                        tools:listitem="@layout/recycler_view_item"
+                        tools:listitem="@layout/item_recyclerview"
                         tools:spanCount="5" />
 
                     <TextView
@@ -166,7 +166,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/ivHeroes"
                         tools:itemCount="5"
                         tools:layoutManager="GridLayoutManager"
-                        tools:listitem="@layout/recycler_view_item"
+                        tools:listitem="@layout/item_recyclerview"
                         tools:spanCount="5" />
 
                     <TextView

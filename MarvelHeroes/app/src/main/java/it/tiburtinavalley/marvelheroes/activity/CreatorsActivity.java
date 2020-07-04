@@ -40,7 +40,7 @@ public class CreatorsActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_action_close);
 
-        setContentView(R.layout.creators_detail_layout);
+        setContentView(R.layout.activity_creator);
         new Holder((Creators) Objects.requireNonNull(getIntent().getParcelableExtra("creator")));
     }
 
