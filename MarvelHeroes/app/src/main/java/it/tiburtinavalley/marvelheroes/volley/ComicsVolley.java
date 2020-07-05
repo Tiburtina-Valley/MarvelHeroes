@@ -101,7 +101,9 @@ public abstract class ComicsVolley implements Response.ErrorListener, Response.L
             ToastClass toast = new ToastClass(context);
             toast.showToast(context.getString(R.string.msg_request_throttled));
         }
-        Log.w("QueryFail", error.getCause());
+        if (error != null && error.getMessage() != null) {
+            Log.w("QueryFail", error.getCause());
+        }
     }
 
     /** Caso in cui la query ha successo : l'oggetto viene spacchettato tramite l'api Gson e passato all'Activity

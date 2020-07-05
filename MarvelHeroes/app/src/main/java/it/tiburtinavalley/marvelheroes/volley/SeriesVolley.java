@@ -95,7 +95,9 @@ public abstract class SeriesVolley implements Response.ErrorListener, Response.L
             ToastClass toast = new ToastClass(context);
             toast.showToast(context.getString(R.string.msg_request_throttled));
         }
-        Log.w("QueryFail", error.getCause());
+        if (error != null && error.getMessage() != null) {
+            Log.w("QueryFail", error.getCause());
+        }
     }
 
     @Override
