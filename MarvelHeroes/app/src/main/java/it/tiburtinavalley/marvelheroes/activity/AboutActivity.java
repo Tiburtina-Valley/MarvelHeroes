@@ -10,12 +10,14 @@ import mehdi.sakout.aboutpage.AboutPage;
 import mehdi.sakout.aboutpage.Element;
 
 public class AboutActivity extends AppCompatActivity {
+    //Istanziazione e fill della pagina di about us
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setUpPage();
     }
 
+    //Set di tutti gli elementi della pagina
     private void setUpPage(){
         Element legalElement = new Element();
         legalElement.setTitle(getString(R.string.label_legal));
@@ -29,7 +31,7 @@ public class AboutActivity extends AppCompatActivity {
         Element thirdPartyLicenses = new Element();
         thirdPartyLicenses.setTitle(getString(R.string.third_party_licenses));
 
-
+        //Set di immagine,descrzione,contatti e bottoni
         View aboutPage = new AboutPage(this)
                 .setDescription(getString(R.string.team_description))
                 .isRTL(false)
