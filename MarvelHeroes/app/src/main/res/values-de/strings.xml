@@ -59,4 +59,5 @@
     <string name="label_creator_detail">Autorendetail</string>
     <string name="msg_hero_removed">" Held entfernt"</string>
     <string name="msg_hero_saved">" Held gerettet"</string>
+    <string name="team_description">Unser Entwicklungsteam wurde 2019 geboren, als fünf Studenten, die an der Universität Rom Tor vergata eingeschrieben waren, nach einem Kurs über mobile Programmierung beschlossen, ein Start-up zu gründen und sich mit der Entwicklung von Android-Anwendungen zu befassen. Das Team nahm den Namen Tiburtina-Tal an, um sich daran zu erinnern, was das römische Silizium-Tal werden könnte.</string>
 </resources>

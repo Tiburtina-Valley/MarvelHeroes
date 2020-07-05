@@ -31,6 +31,7 @@ public class AboutActivity extends AppCompatActivity {
 
 
         View aboutPage = new AboutPage(this)
+                .setDescription(getString(R.string.team_description))
                 .isRTL(false)
                 .setImage(R.drawable.s)
                 .addItem(new Element().setTitle(getString(R.string.version)))

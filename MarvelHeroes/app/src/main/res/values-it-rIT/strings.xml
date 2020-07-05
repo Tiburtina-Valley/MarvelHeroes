@@ -59,4 +59,5 @@
     <string name="label_creator_detail">Autore</string>
     <string name="msg_hero_saved">Eroe salvato</string>
     <string name="msg_hero_removed">Eroe rimosso</string>
+    <string name="team_description">Il nostro team di sviluppo nasce nel 2019, quando cinque studenti iscritti presso l\'università di Roma Tor vergata, dopo aver seguito un corso di programmazione mobile, hanno deciso di fondare una start up e lanciarsi nell\'ambito dello sviluppo di applicazioni android. Il team ha preso il nome di tiburtina valley, allo scopo di richiamare quella che potrebbe diventare la silicon valley romana.</string>
 </resources>
