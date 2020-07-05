@@ -13,6 +13,7 @@ import it.tiburtinavalley.marvelheroes.entity.HeroEntity;
 @Dao
 public interface HeroDao {
 
+    // Query personalizzate
     @Query("Select * from hero ORDER BY name")
     List<HeroEntity> getHeroList();
 
@@ -22,11 +23,9 @@ public interface HeroDao {
     @Query("DELETE FROM hero WHERE heroId = :heroId")
     void deleteHeroFromId(int heroId);
 
+    // Query predefinite
     @Insert
     void insertHero(HeroEntity hero);
-
-    @Update
-    void updateHero(HeroEntity hero);
 
     @Delete
     void deleteHero(HeroEntity hero);

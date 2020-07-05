@@ -226,13 +226,16 @@ public class HeroDetailActivity extends AppCompatActivity{
             if (v.getId() == R.id.btnAddFavorite) {
 
                 if (!isFavorite) {
+                    // Creazione entità Hero per DB
                     HeroEntity hero = new HeroEntity(Integer.parseInt(hm.getId()), hm.getName(),hm.getThumbnail().getPath(), hm.getDescription());
+                    // Salvataggio nel DB utilizzando l'istanza gestita da Room
                     AppDatabase.getInstance(getApplicationContext()).heroDao().insertHero(hero);
 
                     Toast toast = Toast.makeText(getApplicationContext(), R.string.msg_hero_saved, Toast.LENGTH_LONG);
                     toast.show();
 
                 } else {
+                    // Cancellazione dell'Hero del DB mediante identificatore
                     AppDatabase.getInstance(getApplicationContext()).heroDao().deleteHeroFromId(Integer.parseInt(hm.getId()));
 
                     Toast toast = Toast.makeText(getApplicationContext(), R.string.msg_hero_removed, Toast.LENGTH_LONG);

@@ -8,17 +8,18 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import it.tiburtinavalley.marvelheroes.entity.HeroEntity;
-import it.tiburtinavalley.marvelheroes.entity.RelatedEntity;
 
-@Database(entities = {HeroEntity.class, RelatedEntity.class}, version = 1)
+@Database(entities = {HeroEntity.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String DB_NAME = "hero_db";
 
     private static AppDatabase instance;
 
+    // Per ottenere l'istanza del singleton
     public static synchronized AppDatabase getInstance(Context context) {
         if (instance == null) {
+            // Inizializzazione dell'istanza quando il database ancora non è istanziato
             instance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DB_NAME)
                     .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
@@ -29,5 +30,4 @@ public abstract class AppDatabase extends RoomDatabase {
     }
 
     public abstract HeroDao heroDao();
-    public abstract RelatedDao relatedDao();
 }
