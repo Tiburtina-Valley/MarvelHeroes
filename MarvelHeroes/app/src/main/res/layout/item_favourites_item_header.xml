@@ -19,8 +19,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:textColor="@color/dividerColor"
-        android:textSize="14sp"
-        tools:text="TEXT" />
+        android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/arrow"
