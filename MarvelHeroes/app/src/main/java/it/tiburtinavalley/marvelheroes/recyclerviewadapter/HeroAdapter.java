@@ -71,6 +71,7 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.Holder> implem
 
     @Override
     public void onClick(View v) {
+        //controllo della connessione
         ConnectivityManager cm = (ConnectivityManager)appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
@@ -82,7 +83,7 @@ public class HeroAdapter extends RecyclerView.Adapter<HeroAdapter.Holder> implem
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             i.putExtra("hero", hero);
             ActivityOptionsCompat options = ActivityOptionsCompat.
-                makeSceneTransitionAnimation((Activity) appContext, (View) v, "profile");
+                makeSceneTransitionAnimation((Activity) appContext, v, "profile");
             appContext.startActivity(i, options.toBundle());
         }
         else {

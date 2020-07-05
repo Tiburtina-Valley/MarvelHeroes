@@ -33,16 +33,8 @@ public class RelatedEntity {
         return relatedId;
     }
 
-    public void setRelatedId(int relatedId) {
-        this.relatedId = relatedId;
-    }
-
     public int getHeroId() {
         return heroId;
-    }
-
-    public void setHeroId(int heroId) {
-        this.heroId = heroId;
     }
 
     public String getName() {
@@ -55,10 +47,6 @@ public class RelatedEntity {
 
     public String getPicturePath() {
         return picturePath;
-    }
-
-    public void setPicturePath(String picturePath) {
-        this.picturePath = picturePath;
     }
 
     public String getType() {

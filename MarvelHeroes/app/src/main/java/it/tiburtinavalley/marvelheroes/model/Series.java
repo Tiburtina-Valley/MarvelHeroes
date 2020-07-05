@@ -53,18 +53,6 @@ public class Series extends Element {
         return type;
     }
 
-    public void setRating(String rating) {
-        this.rating = rating;
-    }
-
-    public void setStartYear(String startYear) {
-        this.startYear = startYear;
-    }
-
-    public void setEndYear(String endYear) {
-        this.endYear = endYear;
-    }
-
     public void setType(String type) {
         this.type = type;
     }

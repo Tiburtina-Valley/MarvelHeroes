@@ -7,10 +7,6 @@ public class Thumbnail implements Parcelable {
     private String path;
     private String extension;
 
-    public Thumbnail(){
-
-    }
-
     protected Thumbnail(Parcel in) {
         path = in.readString();
         extension = in.readString();
@@ -38,10 +34,6 @@ public class Thumbnail implements Parcelable {
 
     public void setPath(String path) {
         this.path = path;
-    }
-
-    public void setExtension(String extension) {
-        this.extension = extension;
     }
 
     @Override

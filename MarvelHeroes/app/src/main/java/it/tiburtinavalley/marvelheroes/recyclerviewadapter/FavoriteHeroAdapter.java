@@ -46,7 +46,7 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
     private Context appContext;
     private ArrayList<HeroEntity> selectedHeroesList;
     private HeroSelectMode smListener;
-    private boolean selectedMenu = false;
+    private boolean selectedMenu = false;  // booleano per definire quando associare il click normale per selezionare/deselezionare eroi
     private List<View> selectedItems;
 
     public FavoriteHeroAdapter(List<HeroEntity> all, Context appContext, HeroSelectMode listener) {
@@ -78,12 +78,14 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
         if (selectedHeroesList.size() == 0) {
             selectedMenu = false;
         } else {
+            // per far sembrare il click normale come fosse un longClick
             if (selectedMenu) {
                 onLongClick(view, hero);
             }
         }
 
         if (!selectedMenu) {
+            // controllo della connessione
             ConnectivityManager cm = (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
             assert cm != null;
             NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
@@ -107,7 +109,7 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
     //Attiva un menù che permette di togliere dai preferiti più di un eroe
 
     public void onLongClick(View view, HeroEntity hero) {
-        selectedMenu = true;
+        selectedMenu = true;    //per far si che i successivi click chiamino comunque questo metodo
 
         if (view.isSelected()) {
             selectedHeroesList.remove(hero);

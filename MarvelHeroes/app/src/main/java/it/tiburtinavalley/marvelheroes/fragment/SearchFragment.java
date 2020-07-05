@@ -58,8 +58,6 @@ public class SearchFragment extends Fragment {
         }
     }
 
-
-
     class Holder {
         final RecyclerView rvHeroes;
         final EditText etHeroSearch;
@@ -99,6 +97,8 @@ public class SearchFragment extends Fragment {
                     return true;
                 }
                 hideSoftKeyboard(Objects.requireNonNull(getActivity()));
+
+                // per verificare la disponibilità della connessione ad interet
                 ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
                 assert cm != null;
                 NetworkInfo activeNetwork = cm.getActiveNetworkInfo();

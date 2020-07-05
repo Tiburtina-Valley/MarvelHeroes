@@ -3,7 +3,6 @@ package it.tiburtinavalley.marvelheroes.model;
 /* Questa Model mantiene informazioni sui creators di un fumetto*/
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
 import java.util.List;
 
@@ -48,11 +47,6 @@ public class Creators extends BasicElement {
     };
 
     // Getter per ottene il valore degli attributi
-
-    public List<Items> getItems() {
-        return items;
-    }
-
     public String getFullName() {
         return fullName;
     }

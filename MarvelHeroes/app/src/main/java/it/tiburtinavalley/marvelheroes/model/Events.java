@@ -2,11 +2,6 @@ package it.tiburtinavalley.marvelheroes.model;
 
 
 import android.os.Parcel;
-import android.os.Parcelable;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 /*Definisco una classe evento,che ha come attributi un titolo,una data d'inizio/fine,una descrizione,
   un id,un immagine thumbnails,e una lista di urls(questi ultimi attributi presenti nelle classi

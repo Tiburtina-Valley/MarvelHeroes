@@ -119,9 +119,6 @@ public class HomeFragment extends Fragment {
 
 
     class Holder implements View.OnClickListener {
-        private CardView cvHero;
-        private CardView cvComic;
-        private CardView cvSeries;
         private TextView tvHeroName;
         private TextView tvComicTitle;
         private TextView tvSeriesTitle;
@@ -138,9 +135,9 @@ public class HomeFragment extends Fragment {
         private int loading_count = 0;
 
         public Holder() {
-            cvHero = rootView.findViewById(R.id.cvHero);
-            cvComic = rootView.findViewById(R.id.cvComic);
-            cvSeries = rootView.findViewById(R.id.cvSeries);
+            CardView cvHero = rootView.findViewById(R.id.cvHero);
+            CardView cvComic = rootView.findViewById(R.id.cvComic);
+            CardView cvSeries = rootView.findViewById(R.id.cvSeries);
 
             tvHeroName = rootView.findViewById(R.id.tvHeroName);
             tvComicTitle = rootView.findViewById(R.id.tvComicTitle);

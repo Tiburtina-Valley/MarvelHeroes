@@ -86,7 +86,6 @@ public class EventsActivity extends AppCompatActivity {
         private ComicsAdapter comicsAdapter;
         private SeriesAdapter seriesAdapter;
         private CreatorsAdapter creatorsAdapter;
-        private UrlsRecyclerView urlsAdapter;
         private TextView tvSeries;
         private TextView tvCreators;
         private TextView tvComics;
@@ -94,7 +93,7 @@ public class EventsActivity extends AppCompatActivity {
         private ProgressBar loading;
         private ConstraintLayout layout;
 
-        private int loading_count = 0;
+        private int loading_count = 0; //contatore per capire quando nascondere la progress bar e mostrare la schermata
 
         //Inizializzo l'holder collegando gli attributi java all'xml.
         public Holder() {
@@ -244,11 +243,12 @@ public class EventsActivity extends AppCompatActivity {
             comicsVolley.getComicsByEvent(id);
 
             //Setto i link dell'evento.
-            urlsAdapter = new UrlsRecyclerView(event.getUrls());
+            UrlsRecyclerView urlsAdapter = new UrlsRecyclerView(event.getUrls());
             rvUrls.setAdapter(urlsAdapter);
 
         }
-
+        /* Metodo che verifica che tutte le RecyclerView siano state riempite con i dati
+           (o siano state oscurate se non ci sono dati da mostrare) per poter togliere la ProgressBar */
         private void dismissLoading() {
             if (loading_count >= 4) {
                 loading.setVisibility(View.GONE);

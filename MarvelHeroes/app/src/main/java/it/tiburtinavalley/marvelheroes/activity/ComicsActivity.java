@@ -73,8 +73,6 @@ public class ComicsActivity extends AppCompatActivity {
         private RecyclerView rvCreatorsComics;
         private HeroDetailAdapter heroDetAdapter;
         private CreatorsAdapter creatorsAdapter;
-        private MarvelApiVolley heroVolley;
-        private CreatorsVolley creatorsVolley;
         private ProgressBar loading;
         private ConstraintLayout layout;
 
@@ -99,7 +97,12 @@ public class ComicsActivity extends AppCompatActivity {
 
             final Context appContext = getApplicationContext();
 
-            heroVolley = new MarvelApiVolley(appContext) {
+            // Se la lista degli eroi è vuota, nasconde la RecyclerView degli eroi
+            // Prende la TextView da oscurare
+            // Setta i margini per non lasciare spazi in più
+            // Crea un nuovo adapter e lo assegna alla RecyclerView
+            // Incrementa il contatore e controlla se tutte le RecyclerView sono state riempite coi dati
+            MarvelApiVolley heroVolley = new MarvelApiVolley(appContext) {
                 @Override
                 public void fillList(List<HeroModel> heroes) {
                     // Se la lista degli eroi è vuota, nasconde la RecyclerView degli eroi
@@ -109,8 +112,7 @@ public class ComicsActivity extends AppCompatActivity {
                         tvHeroes.setVisibility(View.INVISIBLE);
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvHeroes.getLayoutParams();
                         marginParams.setMargins(0, 0, 0, 0); // Setta i margini per non lasciare spazi in più
-                    }
-                    else {
+                    } else {
                         // Crea un nuovo adapter e lo assegna alla RecyclerView
                         heroDetAdapter = new HeroDetailAdapter(heroes, appContext);
                         rvHeroesComics.setAdapter(heroDetAdapter);
@@ -121,7 +123,10 @@ public class ComicsActivity extends AppCompatActivity {
                 }
             };
 
-            creatorsVolley = new CreatorsVolley(getApplicationContext()) {
+            // Se la lista degli eroi è vuota, nasconde la RecyclerView dei Creators
+            // Prende la TextView da oscurare
+            // Setta i margini per non lasciare spazi in più
+            CreatorsVolley creatorsVolley = new CreatorsVolley(getApplicationContext()) {
                 @Override
                 public void fillCreatorsInfo(List<Creators> creatorsList) {
                     // Se la lista degli eroi è vuota, nasconde la RecyclerView dei Creators
@@ -131,8 +136,7 @@ public class ComicsActivity extends AppCompatActivity {
                         tvCreators.setVisibility(View.INVISIBLE);
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvCreators.getLayoutParams();
                         marginParams.setMargins(0, 0, 0, 0); // Setta i margini per non lasciare spazi in più
-                    }
-                    else {
+                    } else {
                         creatorsAdapter = new CreatorsAdapter(creatorsList, appContext);
                         rvCreatorsComics.setAdapter(creatorsAdapter);
                     }
@@ -185,12 +189,12 @@ public class ComicsActivity extends AppCompatActivity {
 
             // Controllo se i dati sono presenti, se non lo sono viene caricata una stringa di defualt dal file strings.xml
             if (!comic.getPageCount().equalsIgnoreCase("") && !comic.getPageCount().equalsIgnoreCase("0")) {
-                tvPageCount.setText(comic.getPageCount() + getString(R.string.label_pages));
+                tvPageCount.setText(getString(R.string.label_pages, comic.getPageCount()));
             } else {
                 tvPageCount.setText(R.string.tv_noPageCount);
             }
             if (!comic.getUpc().equalsIgnoreCase("")) {
-                tvUpcCode.setText(getString(R.string.label_upc) + comic.getUpc());
+                tvUpcCode.setText(getString(R.string.label_upc, comic.getUpc()));
             } else {
                 tvUpcCode.setText(R.string.tv_noUPC);
             }

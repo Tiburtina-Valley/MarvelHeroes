@@ -68,10 +68,12 @@ public class HeroDetailAdapter extends RecyclerView.Adapter<HeroDetailAdapter.Ho
 
     @Override
     public void onClick(View v) {
+        //controllo della connessione
         ConnectivityManager cm = (ConnectivityManager)appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+            //far partire una nuova activity di dettaglio dell'eroe selezionato
             int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
             HeroModel hero = heroes.get(position);
             Intent i = new Intent(appContext, HeroDetailActivity.class);

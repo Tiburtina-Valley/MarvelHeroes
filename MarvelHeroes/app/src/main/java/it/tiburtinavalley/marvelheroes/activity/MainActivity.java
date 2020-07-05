@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Aggiunge la NavigationBar nella parte bassa della schermata
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
         setFragment(new HomeFragment()); // carica per default il Fragment di HomePage
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = item -> {
 
-        // switch-case per decidere quale Fragment mostrare in base all'elemento della navbar clickato
+        // switch-case per decidere quale Fragment mostrare in base all'elemento della navbar cliccato
         switch(item.getItemId()) {
             case R.id.action_home:
                 setFragment(new HomeFragment());
@@ -56,12 +56,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     };
 
-    // Crea il menù
+    // Crea il menu
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_about, menu);
         return true; }
 
-    // Metodo che reagisce al click di un opzione del menù
+    // Metodo che reagisce al click di un opzione del menu
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.AboutBtn) {
             Context appContext=getApplicationContext();

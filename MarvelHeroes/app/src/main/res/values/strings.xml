@@ -67,8 +67,8 @@
     <string name="msg_is_pressed" translatable="false">ispressed</string>
     <string name="title_favourites">Your heroes</string>
     <string name="msg_no_results">No results has to been showed</string>
-    <string name="label_upc">"Upc code : "</string>
-    <string name="label_pages">" pages"</string>
+    <string name="label_upc">Upc code : %1$s</string>
+    <string name="label_pages">"%1$s pages"</string>
     <string name="title_comic">Comic details</string>
     <string name="btn_resource">detail</string>
     <string name="btn_purchase">purchase</string>
@@ -83,4 +83,5 @@
     <string name="label_creator_detail">Creator detail</string>
     <string name="msg_hero_removed">hero removed</string>
     <string name="msg_hero_saved">hero saved</string>
+    <string name="label_legal" translatable="false">Legal</string>
 </resources>

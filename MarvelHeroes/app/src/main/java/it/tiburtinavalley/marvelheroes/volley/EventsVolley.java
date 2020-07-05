@@ -73,6 +73,7 @@ public abstract class EventsVolley implements Response.ErrorListener, Response.L
     //Comportamento in caso di fallimento della query
     @Override
     public void onErrorResponse(VolleyError error) {
+        //controllo della connessione e, in tal caso, errore attribuito alla chiave è esaurita
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();

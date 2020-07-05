@@ -28,8 +28,6 @@ import it.tiburtinavalley.marvelheroes.model.Series;
 /** Classe che gestisce le query legate alle series. */
 public abstract class SeriesVolley implements Response.ErrorListener, Response.Listener<String>{
 
-    private String urlBase = "https://gateway.marvel.com/v1/public/%s";
-    private String apiKey = "ts=1&apikey=a5f7b1501c40d87b927d3176fe38f22f&hash=dad24154bc30827c2290b5bd86f088fa&limit=50";//"ts=1&apikey=d65eda0ccbbbcc626c35e7de5fdd506b&hash=9c0f64d5214cf16ca91f945f8cfbd5dc&limit=100";//"ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea&limit=100";//"ts=1&apikey=68bdde3ebf9ba45c6c11839bd1f51cc3&hash=6433747692d0e40eaf799ef75ccc78ea";
     private Context context;
     private RequestQueue requestQueue;
 
@@ -57,12 +55,6 @@ public abstract class SeriesVolley implements Response.ErrorListener, Response.L
         seriesApiCall(param);
     }
 
-    /** metodo per cercare le series filtrando mediante l'id di una storia */
-    public void getSeriesByStories(String storyId){
-        String param = "stories/"+storyId+"/series?";
-        seriesApiCall(param);
-    }
-
     /** metodo per cercare le series filtrando mediante l'id di un creator */
     public void getSeriesByCreator(String creatorId){
         String creator = "creators/"+ creatorId+ "/series?";
@@ -77,6 +69,9 @@ public abstract class SeriesVolley implements Response.ErrorListener, Response.L
 
     /** Inserisco la specifica richiesta nella coda. */
     private void seriesApiCall(String storyUrl){
+        String urlBase = "https://gateway.marvel.com/v1/public/%s";
+        //"ts=1&apikey=d65eda0ccbbbcc626c35e7de5fdd506b&hash=9c0f64d5214cf16ca91f945f8cfbd5dc&limit=100";//"ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea&limit=100";//"ts=1&apikey=68bdde3ebf9ba45c6c11839bd1f51cc3&hash=6433747692d0e40eaf799ef75ccc78ea";
+        String apiKey = "ts=1&apikey=a5f7b1501c40d87b927d3176fe38f22f&hash=dad24154bc30827c2290b5bd86f088fa&limit=50";
         String url = urlBase + apiKey;
         url = String.format(url, storyUrl);
         StringRequest sr = new StringRequest(Request.Method.GET,

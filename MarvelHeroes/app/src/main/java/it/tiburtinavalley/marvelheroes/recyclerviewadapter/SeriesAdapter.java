@@ -67,10 +67,12 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
     /** Metodo che gestisce il click su una determinata series nella recycler view, facendo partire l'activity di dettaglio */
     @Override
     public void onClick(View v) {
+        //controllo della connessione
         ConnectivityManager cm = (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+            //far partire una nuova activity di dettaglio per la serie selezionat
             int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
             Series serie = series.get(position);
 

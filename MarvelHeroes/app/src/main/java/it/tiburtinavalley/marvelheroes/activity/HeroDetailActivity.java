@@ -67,12 +67,15 @@ public class HeroDetailActivity extends AppCompatActivity{
         Context appContext = getApplicationContext();
         Intent i = new Intent(appContext, MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);     // per permettere all'utente di uscire con il tasto back senza dover ripercorrere tutto lo stack
+                                                            // delle activity precedentemente aperte
         appContext.startActivity(i);
         return true;
     }
 
 
+    /* necessario per far sparire la lodaing bar nel momento in cui si torna alla schermata dopo
+    aver premuto il tasto back */
     @Override
     protected void onPostResume() {
         super.onPostResume();
@@ -92,7 +95,6 @@ public class HeroDetailActivity extends AppCompatActivity{
         private SeriesAdapter sAdapter;
         private EventsAdapter eAdapter;
         private FloatingActionButton btnAddFavorite;
-        private Toolbar toolbar;
         private ProgressBar loading;
         private ConstraintLayout layout;
 
@@ -100,7 +102,7 @@ public class HeroDetailActivity extends AppCompatActivity{
 
         public Holder() {
 
-            toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
+            Toolbar toolbar = findViewById(R.id.anim_toolbar);
             setSupportActionBar(toolbar);
             ActionBar actionBar = getSupportActionBar();
             assert actionBar != null;
@@ -140,7 +142,8 @@ public class HeroDetailActivity extends AppCompatActivity{
                         tvComics.setTextSize(0);
                         tvComics.setVisibility(View.INVISIBLE);
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvComics.getLayoutParams();
-                        marginParams.setMargins(0, 0, 0, 0);}
+                        marginParams.setMargins(0, 0, 0, 0);
+                    }
                     loading_count++;
                     dismissLoading();
                 }
@@ -155,7 +158,8 @@ public class HeroDetailActivity extends AppCompatActivity{
                         tvSeries.setTextSize(0);
                         tvSeries.setVisibility(View.INVISIBLE);
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvSeries.getLayoutParams();
-                        marginParams.setMargins(0, 0, 0, 0);}
+                        marginParams.setMargins(0, 0, 0, 0);
+                    }
                     loading_count++;
                     dismissLoading();
                 }
@@ -170,7 +174,8 @@ public class HeroDetailActivity extends AppCompatActivity{
                         tvEvents.setTextSize(0);
                         tvEvents.setVisibility(View.INVISIBLE);
                         ViewGroup.MarginLayoutParams marginParams = (ViewGroup.MarginLayoutParams) tvEvents.getLayoutParams();
-                        marginParams.setMargins(0, 0, 0, 0);}
+                        marginParams.setMargins(0, 0, 0, 0);
+                    }
                     loading_count++;
                     dismissLoading();
 
@@ -208,9 +213,8 @@ public class HeroDetailActivity extends AppCompatActivity{
                         + "." + hero.getThumbnail().getExtension();
                 Glide.with(getApplicationContext()).load(urlThumbnail).diskCacheStrategy(DiskCacheStrategy.ALL).into(this.ivHeroPhoto);
             }
-            // TODO: fill comics, series and stories
 
-
+            // chiama i metodi per riempire le RecyclerView di fumetti, serie e eventi
             cVolley.getComicsRelatedToHero(hm.getId());
             seVolley.getSeriesRelatedToHero(hm.getId());
             eVolley.getEventInfo(hm.getId());
@@ -224,7 +228,6 @@ public class HeroDetailActivity extends AppCompatActivity{
                 if (!isFavorite) {
                     HeroEntity hero = new HeroEntity(Integer.parseInt(hm.getId()), hm.getName(),hm.getThumbnail().getPath(), hm.getDescription());
                     AppDatabase.getInstance(getApplicationContext()).heroDao().insertHero(hero);
-
 
                     Toast toast = Toast.makeText(getApplicationContext(), R.string.msg_hero_saved, Toast.LENGTH_LONG);
                     toast.show();
@@ -252,6 +255,8 @@ public class HeroDetailActivity extends AppCompatActivity{
             }
         }
 
+        /* Metodo che verifica che tutte le RecyclerView siano state riempite con i dati
+           (o siano state oscurate se non ci sono dati da mostrare) per poter togliere la ProgressBar */
         private void dismissLoading() {
             if (loading_count >= 3) {
                 loading.setVisibility(View.GONE);

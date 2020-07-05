@@ -1,7 +1,6 @@
 package it.tiburtinavalley.marvelheroes.model;
 
 import android.os.Parcel;
-import android.os.Parcelable;
 
 import it.tiburtinavalley.marvelheroes.entity.HeroEntity;
 
@@ -21,9 +20,6 @@ public class HeroModel extends BasicElement {
         resourceURI = in.readString();
         thumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
     }
-
-
-
 
     public static final Creator<HeroModel> CREATOR = new Creator<HeroModel>() {
         @Override

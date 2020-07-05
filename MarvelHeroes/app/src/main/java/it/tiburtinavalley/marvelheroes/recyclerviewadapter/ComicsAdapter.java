@@ -81,6 +81,7 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsHold
             i.putExtra("comic", comic);
             appContext.startActivity(i);
         }
+
         //Mostra un Toast qualora la connessione ad Internet sia assente
         else {
             ToastClass toast = new ToastClass(appContext);

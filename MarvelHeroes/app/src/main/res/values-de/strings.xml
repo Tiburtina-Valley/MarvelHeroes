@@ -46,8 +46,8 @@
     <string name="msg_request_throttled">Sie haben Ihr Anforderungslimit überschritten. Bitte versuchen Sie es später noch einmal.</string>
     <string name="msg_no_results">Keine Ergebnisse gefunden</string>
     <string name="home_title">Startseite</string>
-    <string name="label_upc">"Upc code : "</string>
-    <string name="label_pages">" pages"</string>
+    <string name="label_upc">Upc code : %1$s</string>
+    <string name="label_pages">%1$s pages</string>
     <string name="title_comic">Cartoon Details</string>
     <string name="btn_purchase">" kauf"</string>
     <string name="btn_resource">detail</string>

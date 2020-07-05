@@ -43,7 +43,7 @@ public class CreatorsActivity extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.ic_action_close);
 
         setContentView(R.layout.activity_creator);
-        new Holder((Creators) Objects.requireNonNull(getIntent().getParcelableExtra("creator")));
+        new Holder(Objects.requireNonNull(getIntent().getParcelableExtra("creator")));
     }
 
     @Override
@@ -57,8 +57,6 @@ public class CreatorsActivity extends AppCompatActivity {
     }
 
     class Holder {
-        private TextView creatorName;
-        private ImageView creatorImg;
         private RecyclerView rvCreatorsComics;
         private RecyclerView rvCreatorSeries;
         private ComicsAdapter comAdapter;
@@ -66,14 +64,14 @@ public class CreatorsActivity extends AppCompatActivity {
         private ProgressBar loading;
         private ConstraintLayout layout;
 
-        private int loading_count = 0;
+        private int loading_count = 0; //contatore per capire quando nascondere la progress bar e mostrare la schermata
 
         public Holder(Creators creator){
             Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.label_creator_detail));
 
             // Lega le View all'xml del layout
-            creatorName = findViewById(R.id.tvCreatName);
-            creatorImg = findViewById(R.id.ivCreatorPic);
+            TextView creatorName = findViewById(R.id.tvCreatName);
+            ImageView creatorImg = findViewById(R.id.ivCreatorPic);
             rvCreatorsComics = findViewById(R.id.rvCreatCom);
             rvCreatorSeries = findViewById(R.id.rvCreatorSeries);
             loading = findViewById(R.id.progress_loader);

@@ -92,21 +92,19 @@ public class FavoriteHeroDetail extends AppCompatActivity{
         private SeriesAdapter sAdapter;
         private EventsAdapter eAdapter;
         private FloatingActionButton btnAddFavorite;
-        private Toolbar toolbar;
         private ProgressBar loading;
         private ConstraintLayout layout;
 
-        private int loading_count = 0;
+        private int loading_count = 0;  //contatore per capire quando nascondere la progress bar e mostrare la schermata
 
         public Holder() {
 
-            toolbar = (Toolbar) findViewById(R.id.anim_toolbar);
+            Toolbar toolbar = findViewById(R.id.anim_toolbar);
             setSupportActionBar(toolbar);
             ActionBar actionBar = getSupportActionBar();
             assert actionBar != null;
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.ic_action_close);
-
 
             tvComics=findViewById(R.id.tvComics);
             tvSeries=findViewById(R.id.tvSeries);
@@ -123,10 +121,6 @@ public class FavoriteHeroDetail extends AppCompatActivity{
             layout = findViewById(R.id.linearLayout);
 
             initFavoriteBtn();
-
-
-
-
 
             cVolley = new ComicsVolley(getApplicationContext()) {
                 @Override
@@ -213,8 +207,8 @@ public class FavoriteHeroDetail extends AppCompatActivity{
                         + ".jpg";
                 Glide.with(getApplicationContext()).load(urlThumbnail).diskCacheStrategy(DiskCacheStrategy.ALL).into(this.ivHeroPhoto);
             }
-            // TODO: fill comics, series and stories
 
+            // chiama i metodi per riempire le RecyclerView di fumetti, serie e eventi
             cVolley.getComicsRelatedToHero(hm.getId());
             seVolley.getSeriesRelatedToHero(hm.getId());
             eVolley.getEventInfo(hm.getId());
@@ -256,6 +250,8 @@ public class FavoriteHeroDetail extends AppCompatActivity{
             }
         }
 
+        /* Metodo che verifica che tutte le RecyclerView siano state riempite con i dati
+           (o siano state oscurate se non ci sono dati da mostrare) per poter togliere la ProgressBar */
         private void dismissLoading() {
             if (loading_count >= 3) {
                 loading.setVisibility(View.GONE);

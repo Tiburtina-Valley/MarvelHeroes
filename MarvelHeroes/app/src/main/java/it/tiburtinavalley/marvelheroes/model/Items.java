@@ -32,10 +32,6 @@ public class Items implements Parcelable {
         return this.name;
     }
 
-    public String getResourceURI(){
-        return this.resourceURI;
-    }
-
     public String getType() {
         return type;
     }

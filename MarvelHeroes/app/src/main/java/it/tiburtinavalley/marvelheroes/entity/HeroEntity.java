@@ -29,10 +29,6 @@ public class HeroEntity {
         return heroId;
     }
 
-    public void setHeroId(int heroId) {
-        this.heroId = heroId;
-    }
-
     public String getName() {
         return name;
     }
@@ -43,10 +39,6 @@ public class HeroEntity {
 
     public String getPicturePath() {
         return picturePath;
-    }
-
-    public void setPicturePath(String picturePath) {
-        this.picturePath = picturePath;
     }
 
     public String getDescription() {

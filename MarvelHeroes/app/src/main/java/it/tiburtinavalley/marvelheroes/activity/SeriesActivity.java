@@ -90,7 +90,7 @@ public class SeriesActivity extends AppCompatActivity {
         private ProgressBar loading;
         private ConstraintLayout layout;
 
-        private int loading_count = 0;
+        private int loading_count = 0; //contatore per capire quando nascondere la progress bar e mostrare la schermata
 
         public Holder() {
             Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.title_series);
@@ -246,6 +246,8 @@ public class SeriesActivity extends AppCompatActivity {
             rvUrls.setAdapter(urlsAdapter);
         }
 
+        /* Metodo che verifica che tutte le RecyclerView siano state riempite con i dati
+           (o siano state oscurate se non ci sono dati da mostrare) per poter togliere la ProgressBar */
         private void dismissLoading() {
             if (loading_count >= 4) {
                 loading.setVisibility(View.GONE);

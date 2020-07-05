@@ -1,7 +1,5 @@
 package it.tiburtinavalley.marvelheroes.model;
 
-import java.util.Collection;
-
 //Classe Wlement che estende basic element e cosituisce la base degli oggetti Events,Series,Comics e Stories
 public abstract class Element extends BasicElement {
     protected String description; // Descrizione dell'oggetto

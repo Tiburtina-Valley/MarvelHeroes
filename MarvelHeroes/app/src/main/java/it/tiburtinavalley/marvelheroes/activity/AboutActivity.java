@@ -18,7 +18,7 @@ public class AboutActivity extends AppCompatActivity {
 
     private void setUpPage(){
         Element legalElement = new Element();
-        legalElement.setTitle("Legal");
+        legalElement.setTitle(getString(R.string.label_legal));
 
         Element developersElement = new Element();
         developersElement.setTitle(getString(R.string.developers));
@@ -46,8 +46,6 @@ public class AboutActivity extends AppCompatActivity {
 
         setContentView(aboutPage);
     }
-
-
-    }
+}
 
 
