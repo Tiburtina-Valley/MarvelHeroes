@@ -21,9 +21,8 @@ import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.Creators;
 
-/* in questa classe , vengono gestite le ricerche in Internet per cercare le informazioni
+/** in questa classe , vengono gestite le ricerche in Internet per cercare le informazioni
    relative a Creatori*/
-
 public abstract class CreatorsVolley implements Response.ErrorListener, Response.Listener<String>{
 
     private RequestQueue requestQueue;
@@ -66,13 +65,16 @@ public abstract class CreatorsVolley implements Response.ErrorListener, Response
     /** In caso ci sia un errore nella query*/
     @Override
     public void onErrorResponse(VolleyError error) {
+        //controllo che l'errore non sia dovuto ad una mancanza della connessione ad internet
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
             ToastClass toast = new ToastClass(context);
+            //mostra un toast che avverte di aver superato il numero di query giornaliere disponibili
             toast.showToast(context.getString(R.string.msg_request_throttled));
         }
+        //log del messaggio di errore
         if (error != null && error.getMessage() != null) {
             Log.w("QueryFail", error.getMessage());
         }

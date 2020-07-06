@@ -40,6 +40,7 @@ import it.tiburtinavalley.marvelheroes.volley.MarvelApiVolley;
 /** Activity che mostra i dettagli di una serie: il titolo, una descrizione se presente, l'inzio e la fine della serie,
  * gli eroi che vi compaiono, i fumetti e gli eventi collegati*/
 public class SeriesActivity extends AppCompatActivity {
+
     private Series series;
 
     @Override
