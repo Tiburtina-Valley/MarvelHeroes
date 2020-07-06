@@ -5,12 +5,14 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -61,7 +63,7 @@ public class SearchFragment extends Fragment {
         }
     }
 
-    class Holder {
+    class Holder implements TextView.OnEditorActionListener {
         final RecyclerView rvHeroes;
         final EditText etHeroSearch;
         private ProgressBar loading;
@@ -87,35 +89,7 @@ public class SearchFragment extends Fragment {
             };
 
             this.etHeroSearch = rootView.findViewById(R.id.etHeroSearch);
-
-            etHeroSearch.setOnEditorActionListener((v, actionId, event) -> {
-                loading.setVisibility(View.VISIBLE);
-                String nameStartsWith = etHeroSearch.getText().toString();
-                if(nameStartsWith.isEmpty()){
-                    hideSoftKeyboard(Objects.requireNonNull(getActivity()));
-                    loading.setVisibility(View.GONE);
-                    ToastClass toast = new ToastClass(context);
-                    toast.showToast(getString(R.string.msg_empty_search));
-                    return true;
-                }
-                hideSoftKeyboard(Objects.requireNonNull(getActivity()));
-
-                // per verificare la disponibilità della connessione ad interet
-                ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-                assert cm != null;
-                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-                if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-                    volleyMarvel.getCharactersInfo(nameStartsWith);
-                    return true;
-                }
-                else {
-                    loading.setVisibility(View.GONE);
-                    ToastClass toast = new ToastClass(context);
-                    toast.showToast(context.getString(R.string.msg_internet_required));
-                    return false;
-                }
-            });
-
+            etHeroSearch.setOnEditorActionListener(this);
 
             if (etHeroSearch.requestFocus()) {
                 // per aprire la tastiera quando viene richiesto il focus alla EditText
@@ -127,14 +101,40 @@ public class SearchFragment extends Fragment {
 
         }
 
-
-
         public void hideSoftKeyboard(Activity activity){
             InputMethodManager imm = (InputMethodManager)activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
             assert imm != null;
             imm.hideSoftInputFromWindow(Objects.requireNonNull(activity.getCurrentFocus()).getWindowToken(), 0);
         }
 
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            loading.setVisibility(View.VISIBLE);
+            String nameStartsWith = etHeroSearch.getText().toString();
+            if(nameStartsWith.isEmpty()){
+                hideSoftKeyboard(Objects.requireNonNull(getActivity()));
+                loading.setVisibility(View.GONE);
+                ToastClass toast = new ToastClass(context);
+                toast.showToast(getString(R.string.msg_empty_search));
+                return true;
+            }
+            hideSoftKeyboard(Objects.requireNonNull(getActivity()));
+
+            // per verificare la disponibilità della connessione ad interet
+            ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            assert cm != null;
+            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+            if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
+                volleyMarvel.getCharactersInfo(nameStartsWith);
+                return true;
+            }
+            else {
+                loading.setVisibility(View.GONE);
+                ToastClass toast = new ToastClass(context);
+                toast.showToast(context.getString(R.string.msg_internet_required));
+                return false;
+            }
+        }
     }
 
 
