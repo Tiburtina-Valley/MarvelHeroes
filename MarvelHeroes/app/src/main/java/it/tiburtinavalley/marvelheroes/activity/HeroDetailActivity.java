@@ -38,7 +38,8 @@ import it.tiburtinavalley.marvelheroes.volley.ComicsVolley;
 import it.tiburtinavalley.marvelheroes.volley.EventsVolley;
 import it.tiburtinavalley.marvelheroes.volley.SeriesVolley;
 
-
+/** Activity che mostra i dettagli di un eroe: il nome, una descrizione se presente,
+ * i fumetti, le serie e gli eventi collegati*/
 public class HeroDetailActivity extends AppCompatActivity{
 
     private HeroModel hm;
@@ -56,10 +57,10 @@ public class HeroDetailActivity extends AppCompatActivity{
 
         setContentView(R.layout.activity_hero_detail);
 
-        hm = getIntent().getParcelableExtra("hero");
+        hm = getIntent().getParcelableExtra("hero");    // Estraiamo la serie di cui vogliamo mostrare i dettagli
         holder = new Holder();
         holder.setRecyclerViews();
-        holder.setDetails(hm);
+        holder.setDetails(hm);       //incarichiamo l'holder di mostrare i dettagli sullo schemrmo
     }
 
     @Override
@@ -74,7 +75,7 @@ public class HeroDetailActivity extends AppCompatActivity{
     }
 
 
-    /* necessario per far sparire la lodaing bar nel momento in cui si torna alla schermata dopo
+    /** necessario per far sparire la lodaing bar nel momento in cui si torna alla schermata dopo
     aver premuto il tasto back */
     @Override
     protected void onPostResume() {
@@ -98,10 +99,13 @@ public class HeroDetailActivity extends AppCompatActivity{
         private ProgressBar loading;
         private ConstraintLayout layout;
 
-        private int loading_count = 0;
+        private int loading_count = 0;  //contatore per capire quando nascondere la progress bar e mostrare la schermata
 
         public Holder() {
-
+            /*
+            recupero la toolbar dichiarata nell'xml e la setto come actionbar principale,
+            la recupero di nuovo come oggetto ActionBar e ne imposto il bottone X
+            */
             Toolbar toolbar = findViewById(R.id.anim_toolbar);
             setSupportActionBar(toolbar);
             ActionBar actionBar = getSupportActionBar();
@@ -126,6 +130,7 @@ public class HeroDetailActivity extends AppCompatActivity{
             initFavoriteBtn();
 
             cVolley = new ComicsVolley(getApplicationContext()) {
+                /** inizializza una ComicsVolley per la ricerca di comics correlati all'eroe*/
                 @Override
                 public void fillComics(List<Comics> comicsList) {
                     //controlla se sono stati trovati dei fumetti legati agli eroi
@@ -150,6 +155,7 @@ public class HeroDetailActivity extends AppCompatActivity{
             };
 
             seVolley = new SeriesVolley(getApplicationContext()) {
+                /** inizializza una SeriesVolley per la ricerca di serie correlati all'eroe'*/
                 @Override
                 public void fillSeries(List<Series> seriesList) {
                     sAdapter = new SeriesAdapter(seriesList, getApplicationContext());
@@ -166,6 +172,7 @@ public class HeroDetailActivity extends AppCompatActivity{
             };
 
             eVolley= new EventsVolley(getApplicationContext()) {
+                /** inizializza una EventsVolley per la ricerca di eventi correlati all'eore*/
                 @Override
                 public void fillEvents(List<Events> eventsList) {
                     eAdapter=new EventsAdapter(eventsList,getApplicationContext());
@@ -183,6 +190,7 @@ public class HeroDetailActivity extends AppCompatActivity{
             };
         }
 
+        /** metodo per settare il Layuout delle varie recylerViews presenti nella schermata */
         private void setRecyclerViews() {
             LinearLayoutManager layoutManagerComics = new LinearLayoutManager(
                     HeroDetailActivity.this, RecyclerView.HORIZONTAL, false);
@@ -197,6 +205,7 @@ public class HeroDetailActivity extends AppCompatActivity{
             rvEvents.setLayoutManager(layoutManagerEvents);
         }
 
+        /** metodo per settare le informazioni dell'eroe selezionato */
         public void setDetails(HeroModel hero) {
             Objects.requireNonNull(getSupportActionBar()).setTitle(hm.getName());
 
@@ -207,6 +216,7 @@ public class HeroDetailActivity extends AppCompatActivity{
                 tvHeroDescription.setText(R.string.tv_noDescription);
             }
 
+            //Setta l'immagine dell'eroe, se presente, usando l'API Glide
             if (hero.getThumbnail() != null) {
 
                 String urlThumbnail = hero.getThumbnail().getPath().replaceFirst("http", "https")
@@ -246,20 +256,21 @@ public class HeroDetailActivity extends AppCompatActivity{
             }
         }
 
-
+        /** Controlla se l'hero è presente nel DB come preferito effettuando una query con Room.
+         * In base a questo, imposta nel layout l'icona corretta per il tasto preferiti*/
         private void initFavoriteBtn()
         {
             isFavorite = AppDatabase.getInstance(getApplicationContext()).heroDao().hasHero(Integer.parseInt(hm.getId()));
 
-            if (isFavorite){
+            if (isFavorite){    //se trona true vuol dire che era gia un preferito e imposto l'icona cuore pieno
                  btnAddFavorite.setImageResource(R.drawable.ic_action_favourites);
-            } else {
+            } else {    //se torna false metto il cuore vuoto
                 btnAddFavorite.setImageResource(R.drawable.ic_action_favourite_border);
             }
         }
 
-        /* Metodo che verifica che tutte le RecyclerView siano state riempite con i dati
-           (o siano state oscurate se non ci sono dati da mostrare) per poter togliere la ProgressBar */
+        /** Metodo che verifica che tutte le RecyclerView siano state riempite con i dati
+         * (o siano state oscurate se non ci sono dati da mostrare) per poter togliere la ProgressBar */
         private void dismissLoading() {
             if (loading_count >= 3) {
                 loading.setVisibility(View.GONE);

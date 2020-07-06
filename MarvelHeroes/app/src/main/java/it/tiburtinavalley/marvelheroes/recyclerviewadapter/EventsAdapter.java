@@ -24,7 +24,7 @@ import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.EventsActivity;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.Events;
-//Definisco l'adapter che gestirà le recycler view degli eventi
+/**Definisco l'adapter che gestirà le recycler view degli eventi*/
 
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHolder> implements View.OnClickListener {
     private List<Events> events;
@@ -37,7 +37,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
         this.appContext = appContext;
     }
 
-    //Funzione che crea le righe della recycler view
+    /**Funzione che crea le righe della recycler view*/
     @NonNull
     @Override
     public EventsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -49,7 +49,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
         return new EventsHolder(cl);
     }
 
-    //Funzione che popola le righe della recycler view
+    /**Funzione che popola le righe della recycler view*/
     @Override
     public void onBindViewHolder(@NonNull EventsAdapter.EventsHolder holder, int position) {
         String urlThumbnail = events.get(position).getThumbnail().getPath().replaceFirst("http", "https")
@@ -58,7 +58,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
         holder.tvEventName.setText(events.get(position).getTitle());
     }
 
-    //Funzione che restituisce la dimensione della lista degli eventi
+    /**Funzione che restituisce la dimensione della lista degli eventi*/
     @Override
     public int getItemCount() {
         return events.size();
@@ -66,7 +66,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
 
 
 
-    //Funzione che gestisce il click su un determinato evento nella recycler view, facendo partire correttamente l'activity di dettaglio
+    /**Funzione che gestisce il click su un determinato evento nella recycler view, facendo partire correttamente l'activity di dettaglio*/
     @Override
     public void onClick(View v) {
         //controllo della connessione
@@ -87,7 +87,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsHold
         }
     }
 
-    //Holder che definisce come sono fatte le singole righe della recycler view(collegando lo specifico layout)
+    /**Holder che definisce come sono fatte le singole righe della recycler view(collegando lo specifico layout)*/
     static class EventsHolder extends RecyclerView.ViewHolder {
         final ImageView ivEvent;
         final TextView tvEventName;

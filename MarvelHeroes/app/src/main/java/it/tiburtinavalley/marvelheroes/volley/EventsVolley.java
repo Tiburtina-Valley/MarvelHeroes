@@ -52,9 +52,8 @@ public abstract class EventsVolley implements Response.ErrorListener, Response.L
 
     /** Inserisce la specifica richiesta nella coda. */
     private void eventsApiCall(String eventUrl){
-        //Definisco gli url che andremo ad utilizzare per fare le query
-        String urlBase = "https://gateway.marvel.com/v1/public/%s";
-        //"ts=1&apikey=d65eda0ccbbbcc626c35e7de5fdd506b&hash=9c0f64d5214cf16ca91f945f8cfbd5dc&limit=100";//"ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea&limit=100";//"ts=1&apikey=68bdde3ebf9ba45c6c11839bd1f51cc3&hash=6433747692d0e40eaf799ef75ccc78ea";
+        //Definisco gli url e la key che andremo ad utilizzare per fare le query
+        String urlBase = "https://gateway.marvel.com/v1/public/comics/%s";
         String apiKey = "ts=1&apikey=a5f7b1501c40d87b927d3176fe38f22f&hash=dad24154bc30827c2290b5bd86f088fa&limit=50";
         String url = urlBase + apiKey; //
         url = String.format(url, eventUrl);
@@ -65,7 +64,7 @@ public abstract class EventsVolley implements Response.ErrorListener, Response.L
         requestQueue.add(sr);
     }
 
-    //Comportamento in caso di fallimento della query
+    /**Comportamento in caso di fallimento della query*/
     @Override
     public void onErrorResponse(VolleyError error) {
         //controllo della connessione e, in tal caso, errore attribuito alla chiave è esaurita
@@ -80,7 +79,7 @@ public abstract class EventsVolley implements Response.ErrorListener, Response.L
             Log.w("QueryFail", error.getMessage());
     }
 
-    //Comportamento da seguire dopo aver ricevuto una risposta ad una richiesta fatta.
+    /**Comportamento da seguire dopo aver ricevuto una risposta ad una richiesta fatta.*/
     @Override
     public void onResponse(String response) {
         Gson gson = new Gson();
@@ -94,8 +93,6 @@ public abstract class EventsVolley implements Response.ErrorListener, Response.L
             List<Events> eventsList = gson.fromJson(event, listType);
             if (eventsList != null) {
                 Log.w("Events", "" + eventsList.size());
-                //db.cocktailDAO().insertAll(cnt);    // NON OBBLIGATORIO
-                //Callback per settare la view con gli eventi.
                 fillEvents(eventsList);
             }
         } catch (JSONException e) {
