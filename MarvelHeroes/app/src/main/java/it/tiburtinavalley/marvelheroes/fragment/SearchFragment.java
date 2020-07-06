@@ -38,9 +38,11 @@ public class SearchFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        // Prende il context relativo alla activity in cui si trova il fragment
         this.context = Objects.requireNonNull(getActivity()).getApplicationContext();
 
         rootView = inflater.inflate(R.layout.fragment_search, container, false);
+        // Imposta titolo della action bar
         Objects.requireNonNull(((MainActivity) getActivity()).getSupportActionBar()).setTitle(R.string.title_search);
 
         holder = new Holder();
@@ -54,6 +56,7 @@ public class SearchFragment extends Fragment {
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             assert imm != null;
+            // Chiude la tastiera uscendo dal fragment ricerca
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
@@ -85,7 +88,6 @@ public class SearchFragment extends Fragment {
 
             this.etHeroSearch = rootView.findViewById(R.id.etHeroSearch);
 
-
             etHeroSearch.setOnEditorActionListener((v, actionId, event) -> {
                 loading.setVisibility(View.VISIBLE);
                 String nameStartsWith = etHeroSearch.getText().toString();
@@ -116,6 +118,7 @@ public class SearchFragment extends Fragment {
 
 
             if (etHeroSearch.requestFocus()) {
+                // per aprire la tastiera quando viene richiesto il focus alla EditText
                 ((InputMethodManager) Objects.requireNonNull(Objects.requireNonNull(getActivity()).getSystemService(Context.INPUT_METHOD_SERVICE))).toggleSoftInput(
                         InputMethodManager.SHOW_FORCED,
                         InputMethodManager.HIDE_IMPLICIT_ONLY

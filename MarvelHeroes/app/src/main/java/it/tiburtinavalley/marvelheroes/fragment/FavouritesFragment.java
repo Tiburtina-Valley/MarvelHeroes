@@ -36,6 +36,7 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_favourites, container, false);
+        // imposta il titolo della actionbar
         Objects.requireNonNull(((MainActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).setTitle(R.string.title_favourites);
 
         RecyclerView rvHeroes;

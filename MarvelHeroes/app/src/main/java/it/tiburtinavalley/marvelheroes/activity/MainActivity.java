@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
                 setFragment(new SearchFragment());
                 return true;
 
-
         }
         return true;
     };
@@ -75,7 +74,9 @@ public class MainActivity extends AppCompatActivity {
     private void setFragment(Fragment fragment) {
         hideKeyboard(this);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        // Imposta l'animazione da applicare al cambio di fragment
         fragmentTransaction.setCustomAnimations(R.anim.anim_fade_in, R.anim.anim_fade_out);
+        // Imposta il fragment dentro l'elemento fragment_container
         fragmentTransaction.replace(R.id.fragment_container,fragment);
         //fragmentTransaction.addToBackStack(null);   cosi da poter poi chiudere l'app direttamente se premuto back nella home
         fragmentTransaction.commit();

@@ -62,8 +62,11 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        // Prende il context relativo alla activity in cui si trova il fragment
         this.context = Objects.requireNonNull(getActivity()).getApplicationContext();
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        // Imposta titolo della action bar
         Objects.requireNonNull(((MainActivity) getActivity()).getSupportActionBar()).setTitle(R.string.title_home);
 
         defaultHeroId = getString(R.string.default_hero_id);
