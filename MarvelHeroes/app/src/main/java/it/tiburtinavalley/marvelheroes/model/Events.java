@@ -3,7 +3,7 @@ package it.tiburtinavalley.marvelheroes.model;
 
 import android.os.Parcel;
 
-/*Definisco una classe evento,che ha come attributi un titolo,una data d'inizio/fine,una descrizione,
+/**Definisco una classe evento,che ha come attributi un titolo,una data d'inizio/fine,una descrizione,
   un id,un immagine thumbnails,e una lista di urls(questi ultimi attributi presenti nelle classi
   element e basic element che i nostri eventi estendono)*/
 
@@ -12,7 +12,7 @@ public class Events extends Element {
     private String start;
     private String end;
 
-    //Definisco le operazioni necessarie per rendere l'elemento parcelable
+    /**Definisco le operazioni necessarie per rendere l'elemento parcelable*/
     protected Events(Parcel in) {
         id = in.readString();
         title = in.readString();
@@ -54,7 +54,7 @@ public class Events extends Element {
     }
 
 
-    //Getter necessari per prendere gli attributi degli events(che sono private)
+    /**Getter necessari per prendere gli attributi degli events(che sono private)*/
 
     public String getTitle() {
         return title;
