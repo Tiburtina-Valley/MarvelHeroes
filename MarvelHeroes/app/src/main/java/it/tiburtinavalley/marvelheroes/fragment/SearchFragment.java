@@ -28,7 +28,7 @@ import it.tiburtinavalley.marvelheroes.model.HeroModel;
 import it.tiburtinavalley.marvelheroes.recyclerviewadapter.HeroAdapter;
 import it.tiburtinavalley.marvelheroes.volley.MarvelApiVolley;
 
-public class  SearchFragment extends Fragment {
+public class SearchFragment extends Fragment {
 
     Holder holder;
     MarvelApiVolley volleyMarvel;

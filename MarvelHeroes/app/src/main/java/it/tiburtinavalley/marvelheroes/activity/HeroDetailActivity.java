@@ -54,7 +54,6 @@ public class HeroDetailActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppThemeNoBar);
-
         setContentView(R.layout.activity_hero_detail);
 
         hm = getIntent().getParcelableExtra("hero");    // Estraiamo la serie di cui vogliamo mostrare i dettagli
@@ -68,8 +67,7 @@ public class HeroDetailActivity extends AppCompatActivity{
         Context appContext = getApplicationContext();
         Intent i = new Intent(appContext, MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);     // per permettere all'utente di uscire con il tasto back senza dover ripercorrere tutto lo stack
-                                                            // delle activity precedentemente aperte
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);     // per rimuovere dallo stack le activity precedentemente aperte
         appContext.startActivity(i);
         return true;
     }
@@ -230,7 +228,6 @@ public class HeroDetailActivity extends AppCompatActivity{
             eVolley.getEventInfo(hm.getId());
             dismissLoading();
         }
-
 
         public void onClick(View v) {
             if (v.getId() == R.id.btnAddFavorite) {
