@@ -93,7 +93,7 @@ public class EventsActivity extends AppCompatActivity {
         private ProgressBar loading;
         private ConstraintLayout layout;
 
-        private int loading_count = 0; /**contatore per capire quando nascondere la progress bar e mostrare la schermata*/
+        private int loading_count = 0; //contatore per capire quando nascondere la progress bar e mostrare la schermata
 
         /**Inizializzo l'holder collegando gli attributi java all'xml.*/
         public Holder() {
@@ -117,10 +117,10 @@ public class EventsActivity extends AppCompatActivity {
             loading = findViewById(R.id.progress_loader);
             layout = findViewById(R.id.layout);
 
-            /**Setto le recyclers views.*/
+            //Setto le recyclers views.
             setRecyclerViews();
 
-            /**Creo una volley per gestire le query degli eroi.*/
+            //Creo una volley per gestire le query degli eroi.
             heroVolley = new MarvelApiVolley(getApplicationContext()) {
                 @Override
                 public void fillList(List<HeroModel> heroes) {
@@ -189,7 +189,7 @@ public class EventsActivity extends AppCompatActivity {
                     dismissLoading();
                 }
             };
-            /**Setto tutti gli elementi della view.*/
+            //Setto tutti gli elementi della view.
             setData();
         }
 
@@ -220,7 +220,7 @@ public class EventsActivity extends AppCompatActivity {
 
         /**Definisco la funzione che setta tutti gli elementi della view.*/
         private void setData() {
-            /**Setto titolo,descrizione,e data inizio/fine dell'evento.*/
+            //Setto titolo,descrizione,e data inizio/fine dell'evento.
             tvEventName.setText(event.getTitle());
             startDate.setText(event.getStart());
             endDate.setText(event.getEnd());
@@ -230,19 +230,19 @@ public class EventsActivity extends AppCompatActivity {
                 description.setText(R.string.tv_noDescription);
             }
 
-            /**Setto l'immagine dell'evento.*/
+            //Setto l'immagine dell'evento.
             String urlThumbnail = event.getThumbnail().getPath().replaceFirst("http", "https")
                     + "." + event.getThumbnail().getExtension();
             Glide.with(getApplicationContext()).load(urlThumbnail).diskCacheStrategy(DiskCacheStrategy.ALL).into(ivEventImage);
 
-            /**Inizializzo le query per settare gli eroi, i creators, le serie e i comics.*/
+            //Inizializzo le query per settare gli eroi, i creators, le serie e i comics.
             String id = event.getId();
             heroVolley.getHeroesFromEvents(id);
             creatorsVolley.getCreatorsByEvents(id);
             seriesVolley.getSeriesByEvent(id);
             comicsVolley.getComicsByEvent(id);
 
-            /**Setto i link dell'evento.*/
+            //Setto i link dell'evento.
             UrlsRecyclerView urlsAdapter = new UrlsRecyclerView(event.getUrls());
             rvUrls.setAdapter(urlsAdapter);
 
