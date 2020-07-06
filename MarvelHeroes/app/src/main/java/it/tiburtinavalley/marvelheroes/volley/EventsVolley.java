@@ -53,7 +53,7 @@ public abstract class EventsVolley implements Response.ErrorListener, Response.L
     /** Inserisce la specifica richiesta nella coda. */
     private void eventsApiCall(String eventUrl){
         //Definisco gli url e la key che andremo ad utilizzare per fare le query
-        String urlBase = context.getString(R.string.base_url_api);
+        String urlBase = "https://gateway.marvel.com/v1/public/comics/%s";
         String apiKey = "ts=1&apikey=a5f7b1501c40d87b927d3176fe38f22f&hash=dad24154bc30827c2290b5bd86f088fa&limit=50";
         String url = urlBase + apiKey; //
         url = String.format(url, eventUrl);
