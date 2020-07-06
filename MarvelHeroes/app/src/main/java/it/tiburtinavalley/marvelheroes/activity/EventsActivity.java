@@ -40,7 +40,7 @@ import it.tiburtinavalley.marvelheroes.volley.SeriesVolley;
 public class EventsActivity extends AppCompatActivity {
     private Events event;
 
-    //Creo l'activity, prelevando dal bundle i dati dell'evento selezionato,e impostando il layout.
+    /**Creo l'activity, prelevando dal bundle i dati dell'evento selezionato,e impostando il layout.*/
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -66,7 +66,7 @@ public class EventsActivity extends AppCompatActivity {
         return true;
     }
 
-    //Definisco l'holder con tutti gli elementi della view.
+    /**Definisco l'holder con tutti gli elementi della view.*/
     class Holder {
         private ImageView ivEventImage;
         private TextView tvEventName;
@@ -93,9 +93,9 @@ public class EventsActivity extends AppCompatActivity {
         private ProgressBar loading;
         private ConstraintLayout layout;
 
-        private int loading_count = 0; //contatore per capire quando nascondere la progress bar e mostrare la schermata
+        private int loading_count = 0; /**contatore per capire quando nascondere la progress bar e mostrare la schermata*/
 
-        //Inizializzo l'holder collegando gli attributi java all'xml.
+        /**Inizializzo l'holder collegando gli attributi java all'xml.*/
         public Holder() {
             Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.label_event_detail));
 
@@ -117,10 +117,10 @@ public class EventsActivity extends AppCompatActivity {
             loading = findViewById(R.id.progress_loader);
             layout = findViewById(R.id.layout);
 
-            //Setto le recyclers views.
+            /**Setto le recyclers views.*/
             setRecyclerViews();
 
-            //Creo una volley per gestire le query degli eroi.
+            /**Creo una volley per gestire le query degli eroi.*/
             heroVolley = new MarvelApiVolley(getApplicationContext()) {
                 @Override
                 public void fillList(List<HeroModel> heroes) {
@@ -138,7 +138,7 @@ public class EventsActivity extends AppCompatActivity {
             };
 
 
-            //Creo una volley per gestire le query dei creators.
+            /**Creo una volley per gestire le query dei creators.*/
             creatorsVolley = new CreatorsVolley(getApplicationContext()) {
                 @Override
                 public void fillCreatorsInfo(List<Creators> creatorsList) {
@@ -155,7 +155,7 @@ public class EventsActivity extends AppCompatActivity {
                 }
             };
 
-            //Creo una volley per gestire le query dei comics.
+            /**Creo una volley per gestire le query dei comics.*/
             comicsVolley = new ComicsVolley(getApplicationContext()) {
                 @Override
                 public void fillComics(List<Comics> comicsList) {
@@ -173,7 +173,7 @@ public class EventsActivity extends AppCompatActivity {
             };
 
 
-            //Creo una volley per gestire le query delle serie.
+            /**Creo una volley per gestire le query delle serie.*/
             seriesVolley = new SeriesVolley(getApplicationContext()) {
                 @Override
                 public void fillSeries(List<Series> seriesList) {
@@ -189,12 +189,12 @@ public class EventsActivity extends AppCompatActivity {
                     dismissLoading();
                 }
             };
-            //Setto tutti gli elementi della view.
+            /**Setto tutti gli elementi della view.*/
             setData();
         }
 
 
-        //Definisco tutti i layout manager delle recyclers view,collegandole anche ai rispettivi adapter.
+        /**Definisco tutti i layout manager delle recyclers view,collegandole anche ai rispettivi adapter.*/
         private void setRecyclerViews() {
             LinearLayoutManager layoutManagerHeroes = new LinearLayoutManager(
                     EventsActivity.this, RecyclerView.HORIZONTAL, false);
@@ -218,9 +218,9 @@ public class EventsActivity extends AppCompatActivity {
         }
 
 
-        //Definisco la funzione che setta tutti gli elementi della view.
+        /**Definisco la funzione che setta tutti gli elementi della view.*/
         private void setData() {
-            //Setto titolo,descrizione,e data inizio/fine dell'evento.
+            /**Setto titolo,descrizione,e data inizio/fine dell'evento.*/
             tvEventName.setText(event.getTitle());
             startDate.setText(event.getStart());
             endDate.setText(event.getEnd());
@@ -230,24 +230,24 @@ public class EventsActivity extends AppCompatActivity {
                 description.setText(R.string.tv_noDescription);
             }
 
-            //Setto l'immagine dell'evento.
+            /**Setto l'immagine dell'evento.*/
             String urlThumbnail = event.getThumbnail().getPath().replaceFirst("http", "https")
                     + "." + event.getThumbnail().getExtension();
             Glide.with(getApplicationContext()).load(urlThumbnail).diskCacheStrategy(DiskCacheStrategy.ALL).into(ivEventImage);
 
-            //Inizializzo le query per settare gli eroi, i creators, le serie e i comics.
+            /**Inizializzo le query per settare gli eroi, i creators, le serie e i comics.*/
             String id = event.getId();
             heroVolley.getHeroesFromEvents(id);
             creatorsVolley.getCreatorsByEvents(id);
             seriesVolley.getSeriesByEvent(id);
             comicsVolley.getComicsByEvent(id);
 
-            //Setto i link dell'evento.
+            /**Setto i link dell'evento.*/
             UrlsRecyclerView urlsAdapter = new UrlsRecyclerView(event.getUrls());
             rvUrls.setAdapter(urlsAdapter);
 
         }
-        /* Metodo che verifica che tutte le RecyclerView siano state riempite con i dati
+        /** Metodo che verifica che tutte le RecyclerView siano state riempite con i dati
            (o siano state oscurate se non ci sono dati da mostrare) per poter togliere la ProgressBar */
         private void dismissLoading() {
             if (loading_count >= 4) {
