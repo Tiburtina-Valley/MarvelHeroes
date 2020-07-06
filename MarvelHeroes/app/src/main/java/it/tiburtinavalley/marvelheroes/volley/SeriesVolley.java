@@ -25,7 +25,7 @@ import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.Series;
 
-/** Classe che gestisce le query legate alle series. */
+/** Classe che gestisce le query legate alle serie. */
 public abstract class SeriesVolley implements Response.ErrorListener, Response.Listener<String>{
 
     private Context context;
@@ -38,16 +38,19 @@ public abstract class SeriesVolley implements Response.ErrorListener, Response.L
         requestQueue = Volley.newRequestQueue(context);
     }
 
+    /** Ottiene i dati di una serie a partire dall'id.*/
     public void getSeriesFromId(String seriesId){
         String param = "series/" + seriesId + "?";
         seriesApiCall(param);
     }
 
+    /** Ottiene i dati di una serie relative ad un certo eroe.*/
     public void getSeriesRelatedToHero(String heroId){
         String series = "characters/" + heroId + "/series?";
         seriesApiCall(series);
     }
 
+    /** Ottiene i dati di una serie random.*/
     public void getRandomSeries(){
         Random r = new Random();
         char randomLetter = (char) (r.nextInt(26) + 'a');
@@ -72,7 +75,7 @@ public abstract class SeriesVolley implements Response.ErrorListener, Response.L
         String urlBase = "https://gateway.marvel.com/v1/public/%s";
         //"ts=1&apikey=d65eda0ccbbbcc626c35e7de5fdd506b&hash=9c0f64d5214cf16ca91f945f8cfbd5dc&limit=100";//"ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea&limit=100";//"ts=1&apikey=68bdde3ebf9ba45c6c11839bd1f51cc3&hash=6433747692d0e40eaf799ef75ccc78ea";
         String apiKey = "ts=1&apikey=a5f7b1501c40d87b927d3176fe38f22f&hash=dad24154bc30827c2290b5bd86f088fa&limit=50";
-        String url = urlBase + apiKey;
+        String url = urlBase + apiKey;  // usiamo una stringa di appoggio così da poter ripetere la chiamata
         url = String.format(url, storyUrl);
         StringRequest sr = new StringRequest(Request.Method.GET,
                 url,
@@ -81,20 +84,26 @@ public abstract class SeriesVolley implements Response.ErrorListener, Response.L
         requestQueue.add(sr);
     }
 
+    /** In caso ci sia un errore nella query*/
     @Override
     public void onErrorResponse(VolleyError error) {
+        //controllo che l'errore non sia dovuto ad una mancanza della connessione ad internet
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
             ToastClass toast = new ToastClass(context);
+            //mostra un toast che avverte di aver superato il numero di query giornaliere disponibili
             toast.showToast(context.getString(R.string.msg_request_throttled));
         }
+        //log del messaggio di errore
         if (error != null && error.getMessage() != null) {
             Log.w("QueryFail", error.getCause());
         }
     }
 
+    /** Caso in cui la query ha successo : l'oggetto viene spacchettato tramite l'api Gson e passato all'Activity
+     * tramite il metodo di fillCSeries*/
     @Override
     public void onResponse(String response) {
         Gson gson = new Gson();

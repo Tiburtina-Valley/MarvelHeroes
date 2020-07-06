@@ -35,7 +35,7 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
         this.appContext = appContext;
     }
 
-    /** Meotdo che crea le righe della recycler view, gonfiando il corrispettivo layout xml.
+    /** Metodo che crea le righe della recycler view, gonfiando il corrispettivo layout xml.
      * Associa anche un OnClickListener*/
     @NonNull
     @Override
@@ -43,9 +43,9 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
         ConstraintLayout cl;
         cl = (ConstraintLayout) LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.item_detail_layout, parent, false);
+                .inflate(R.layout.item_detail_layout, parent, false);   // Carichiamo il layout di dettaglio
         cl.setOnClickListener(this);
-        return new SeriesHolder(cl);
+        return new SeriesHolder(cl);    //Ritorna un nuovo Holder, che estende il ViewHolder
     }
 
     /** Metodo che setta il layout delle series */
@@ -72,15 +72,17 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
         assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-            //far partire una nuova activity di dettaglio per la serie selezionat
+            //far partire una nuova activity di dettaglio per la serie selezionata
             int position = ((RecyclerView) v.getParent()).getChildAdapterPosition(v);
-            Series serie = series.get(position);
+            Series serie = series.get(position);    // Prende la serie dalla lista in base alla posizione
 
+            // Crea un nuovo Intent, vi inserisce la serie e chiama l'activity di dettaglio
             Intent i = new Intent(appContext, SeriesActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             i.putExtra("series", serie);
             appContext.startActivity(i);
-        } else {                                                      //toast che avverte in caso di mancanza di connessiona ad internet
+        } else {
+            //toast che avverte in caso di mancanza di connessione ad internet
             ToastClass toast = new ToastClass(appContext);
             toast.showToast(appContext.getString(R.string.msg_internet_required));
         }

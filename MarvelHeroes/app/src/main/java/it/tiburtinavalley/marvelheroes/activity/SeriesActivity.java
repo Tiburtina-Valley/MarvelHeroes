@@ -37,6 +37,8 @@ import it.tiburtinavalley.marvelheroes.volley.CreatorsVolley;
 import it.tiburtinavalley.marvelheroes.volley.EventsVolley;
 import it.tiburtinavalley.marvelheroes.volley.MarvelApiVolley;
 
+/** Activity che mostra i dettagli di una serie: il titolo, una descrizione se presente, l'inzio e la fine della serie,
+ * gli eroi che vi compaiono, i fumetti e gli eventi collegati*/
 public class SeriesActivity extends AppCompatActivity {
     private Series series;
 
@@ -44,16 +46,16 @@ public class SeriesActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ActionBar actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();    // Settiamo nell'ActionBar l'opzione per tornare alla Home
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_action_close);
 
         setContentView(R.layout.activity_series);
-        series = getIntent().getParcelableExtra("series");
+        series = getIntent().getParcelableExtra("series");  // Estraiamo la serie di cui vogliamo mostrare i dettagli
         Holder holder = new Holder();
         holder.setRecyclerViews();
-        holder.setData();
+        holder.setData();       //incarichiamo l'holder di mostrare i dettagli sullo schemrmo
     }
 
     @Override
@@ -61,7 +63,7 @@ public class SeriesActivity extends AppCompatActivity {
         Context appContext = getApplicationContext();
         Intent i = new Intent(appContext, MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Flag per rimuovere le activity precedentemente aperte dallo stack
         appContext.startActivity(i);
         return true;
     }
@@ -114,11 +116,10 @@ public class SeriesActivity extends AppCompatActivity {
             loading = findViewById(R.id.progress_loader);
             layout = findViewById(R.id.layout);
 
-
             final Context appContext = getApplicationContext();
 
-            /* inizializza una MarvelApiVolley per la ricerca di eroi correlati alla series*/
             MarvelApiVolley heroVolley = new MarvelApiVolley(appContext) {
+                /** inizializza una MarvelApiVolley per la ricerca di eroi correlati alla series*/
                 @Override
                 public void fillList(List<HeroModel> heroes) {
                     heroAdapter = new HeroDetailAdapter(heroes, appContext);
@@ -134,10 +135,11 @@ public class SeriesActivity extends AppCompatActivity {
                 }
             };
 
-            /* inizializza una CreatorsVolley per la ricerca dei creatori della series*/
             CreatorsVolley creatorsVolley = new CreatorsVolley(getApplicationContext()) {
+                /** inizializza una CreatorsVolley per la ricerca dei creatori della series*/
                 @Override
                 public void fillCreatorsInfo(List<Creators> creatorsList) {
+                    // Crea un nuovo adapter e lo assegna alla RecyclerView
                     creatorsAdapter = new CreatorsAdapter(creatorsList, getApplicationContext());
                     rvCreators.setAdapter(creatorsAdapter);
                     if (creatorsAdapter.getItemCount() == 0) {  //nasconde recyclerView e textView nel caso in cui la ricerca non dia risultati
@@ -151,10 +153,11 @@ public class SeriesActivity extends AppCompatActivity {
                 }
             };
 
-            /* inizializza una EventsVolley per la ricerca di eventi correlati alla series*/
             EventsVolley eventsVolley = new EventsVolley(getApplicationContext()) {
+                /** inizializza una EventsVolley per la ricerca di eventi correlati alla series*/
                 @Override
                 public void fillEvents(List<Events> eventsList) {
+                    // Crea un nuovo adapter e lo assegna alla RecyclerView
                     eventsAdapter = new EventsAdapter(eventsList, getApplicationContext());
                     rvEvents.setAdapter(eventsAdapter);
                     if (eventsAdapter.getItemCount() == 0) {  //nasconde recyclerView e textView nel caso in cui la ricerca non dia risultati
@@ -168,10 +171,11 @@ public class SeriesActivity extends AppCompatActivity {
                 }
             };
 
-            /* inizializza una MarvelApiVolley per la ricerca di comics correlati alla series*/
             ComicsVolley comicsVolley = new ComicsVolley(getApplicationContext()) {
+                /** inizializza una MarvelApiVolley per la ricerca di comics correlati alla series*/
                 @Override
                 public void fillComics(List<Comics> comicsList) {
+                    // Crea un nuovo adapter e lo assegna alla RecyclerView
                     comicsAdapter = new ComicsAdapter(comicsList, getApplicationContext());
                     rvComics.setAdapter(comicsAdapter);
                     if (comicsAdapter.getItemCount() == 0) {  //nasconde recyclerView e textView nel caso in cui la ricerca non dia risultati
@@ -219,13 +223,14 @@ public class SeriesActivity extends AppCompatActivity {
         /** metodo per settare le informazioni della series selezionata */
         private void setData() {
 
-            //Setta l'immagine di copertina della serie, se presente.
+            //Setta l'immagine di copertina della serie, se presente, usando l'API Glide
             if (series.getThumbnail() != null) {
                 String urlThumbnail = series.getThumbnail().getPath().replaceFirst("http", "https")
                         + "." + series.getThumbnail().getExtension();
                 Glide.with(getApplicationContext()).load(urlThumbnail).diskCacheStrategy(DiskCacheStrategy.ALL).into(this.ivSeriesImage);
             }
 
+            // mostra tutti i dati sullo schermo, se presenti
             tvSeriesName.setText(series.getTitle());
             tvStartYear.setText(getString(R.string.label_series_start_date, series.getStartYear()));
             tvEndYear.setText(getString(R.string.label_series_end_date, series.getEndYear()));
@@ -241,13 +246,13 @@ public class SeriesActivity extends AppCompatActivity {
                 tvDescription.setText(R.string.tv_noDescription);
             }
 
-            //Setta i link associati alla serie.
+            //mostra i link associati alla serie.
             UrlsRecyclerView urlsAdapter = new UrlsRecyclerView(series.getUrls());
             rvUrls.setAdapter(urlsAdapter);
         }
 
-        /* Metodo che verifica che tutte le RecyclerView siano state riempite con i dati
-           (o siano state oscurate se non ci sono dati da mostrare) per poter togliere la ProgressBar */
+        /** Metodo che verifica che tutte le RecyclerView siano state riempite con i dati
+          * (o siano state oscurate se non ci sono dati da mostrare) per poter togliere la ProgressBar */
         private void dismissLoading() {
             if (loading_count >= 4) {
                 loading.setVisibility(View.GONE);
