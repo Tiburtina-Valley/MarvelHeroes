@@ -58,7 +58,7 @@ public class SearchFragment extends Fragment {
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             assert imm != null;
-            // Chiude la tastiera uscendo dal fragment ricerca
+            // Chiude la tastiera quando si esce dal fragment
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
@@ -101,6 +101,7 @@ public class SearchFragment extends Fragment {
 
         }
 
+        /** metodo per nascondere la tastiera una volta effettuata la ricerca */
         public void hideSoftKeyboard(Activity activity){
             InputMethodManager imm = (InputMethodManager)activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
             assert imm != null;
@@ -111,9 +112,11 @@ public class SearchFragment extends Fragment {
         public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
             loading.setVisibility(View.VISIBLE);
             String nameStartsWith = etHeroSearch.getText().toString();
+            // controllo nel momento in cui si cerca di fare una query senza aver inserito alcuna lettera
             if(nameStartsWith.isEmpty()){
                 hideSoftKeyboard(Objects.requireNonNull(getActivity()));
                 loading.setVisibility(View.GONE);
+                //toast che avverte l'utente dell'errore
                 ToastClass toast = new ToastClass(context);
                 toast.showToast(getString(R.string.msg_empty_search));
                 return true;
@@ -129,6 +132,7 @@ public class SearchFragment extends Fragment {
                 return true;
             }
             else {
+                //toast che avverte l'utente della mancanza di connessione
                 loading.setVisibility(View.GONE);
                 ToastClass toast = new ToastClass(context);
                 toast.showToast(context.getString(R.string.msg_internet_required));
