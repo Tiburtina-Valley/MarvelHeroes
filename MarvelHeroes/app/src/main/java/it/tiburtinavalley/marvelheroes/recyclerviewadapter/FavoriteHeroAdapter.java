@@ -74,6 +74,12 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
         }
     }
 
+    /**
+     * permette di selezionare un elemento, se il menù contestuale è stato attivato,
+     * oppure di passare alla schermata di dettaglio
+     * @param view
+     * @param hero: riferimento che permette di identificare l'eroe selezionato
+     */
     public void onClick(View view, HeroEntity hero) {
         if (selectedHeroesList.size() == 0) {
             selectedMenu = false;
@@ -84,6 +90,7 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
             }
         }
 
+        // se il menù contestuale non è attivo allora si carica la schermata di dettaglio
         if (!selectedMenu) {
             // controllo della connessione
             ConnectivityManager cm = (ConnectivityManager) appContext.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -99,15 +106,18 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
                         makeSceneTransitionAnimation((Activity) appContext, view, "profile");
                 appContext.startActivity(i, options.toBundle());
             } else {
+                // se non si è connessi ad internet si visualizza un messaggio di errore
                 ToastClass toast = new ToastClass(appContext);
                 toast.showToast(appContext.getString(R.string.msg_internet_required));
             }
         }
     }
 
-
-    //Attiva un menù che permette di togliere dai preferiti più di un eroe
-
+    /**
+     * attiva un menù che permette di selezionare gli eroi da eliminare dai preferiti
+     * @param view
+     * @param hero
+     */
     public void onLongClick(View view, HeroEntity hero) {
         selectedMenu = true;    //per far si che i successivi click chiamino comunque questo metodo
 
@@ -128,7 +138,9 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
         notifyDataChanged();
     }
 
-    //cancella tutti glie elementi selezionati della lista
+    /**
+     * rimuove tutti gli e elementi selezionati dai preferiti salvati nel db
+     */
     public void removeSelected() {
         selectedMenu = false;
         HeroDao heroDao = AppDatabase.getInstance(appContext).heroDao();
@@ -220,7 +232,8 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
         final char heroNameFirstCharacter = heroes.get(position).getName().charAt(0);
         final char nextHeroNameFirstCharacter = heroes.get(position + 1).getName().charAt(0);
 
-        //The subheader will be placed between two neighboring items if the first characters in movie titles are different.
+        // imposta il subheader quando la lettera iniziale
+        // dell'eroe corrente ed il successivo è diversa
         return heroNameFirstCharacter != nextHeroNameFirstCharacter;
     }
 
@@ -256,6 +269,9 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
         return position;
     }
 
+    /**
+     * reset degli elementi selezionati
+     */
     public void resetSelection() {
         for (View view : selectedItems) {
             view.setSelected(false);

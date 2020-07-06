@@ -40,16 +40,18 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
 
         RecyclerView rvHeroes;
         rvHeroes = v.findViewById(R.id.rvFavouriteHeroes);
-        GridDividerDecoration gridDividerDecoration = new GridDividerDecoration(getContext());
 
+        // imposta la griglia
         int numberOfColumns = 2;
+        GridDividerDecoration gridDividerDecoration = new GridDividerDecoration(getContext());
         rvHeroes.addItemDecoration(gridDividerDecoration);
         GridLayoutManager glm = new GridLayoutManager(getContext(), numberOfColumns);
         rvHeroes.setLayoutManager(glm);
 
+        // carica gli eroi salvati dal db
         List<HeroEntity> heroes = AppDatabase.getInstance(getActivity().getApplicationContext()).heroDao().getHeroList();
         if (heroes != null) {
-            smListener = new SelectModeListener();
+            smListener = new SelectModeListener();  // listener per le chiamate di callback quando un elemento viene selezionato
             favoriteAdapter = new FavoriteHeroAdapter(heroes, getContext(), smListener);
             favoriteAdapter.setOnItemClickListener(this);
             favoriteAdapter.setGridLayoutManager(glm);
@@ -59,6 +61,9 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
         return v;
     }
 
+    /**
+     * permette di tornare alla home quando si preme 'back'
+     */
     @Override
     public boolean onBackPressed() {
         Log.w("12", getString(R.string.msg_is_pressed));
@@ -71,6 +76,10 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
         return true;
     }
 
+    /**
+     * permette di espandere o comprimere le varie sezioni premendo sul header
+     * @param position: posizione occupata dal header nella recycler view
+     */
     @Override
     public void onSubheaderClicked(int position) {
         if (favoriteAdapter.isSectionExpanded(favoriteAdapter.getSectionIndex(position))) {
@@ -81,7 +90,10 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
     }
 
     public class SelectModeListener implements HeroSelectMode {
-
+        /**
+         * permette di attivare o disattivare il menù contestuale
+         * @param size: numero di elementi selezionati al momento
+         */
         @Override
         public void onSelect(int size) {
             if (mActionMode != null) {
@@ -106,6 +118,12 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
             return true;
         }
 
+        /**
+         * permette l'eliminazione degli eroi dai preferiti quando si preme sulla voce 'elimina'
+         * @param actionMode
+         * @param menuItem
+         * @return
+         */
         @Override
         public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
             if (menuItem.getItemId() == R.id.itemDelete) {
@@ -121,6 +139,10 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
             return false;
         }
 
+        /**
+         * permette di deselezionare tutti gli elementi quando si disattiva il menù contestuale
+         * @param actionMode
+         */
         @Override
         public void onDestroyActionMode(ActionMode actionMode) {
 
@@ -130,6 +152,10 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
         }
     };
 
+    /**
+     * permette di disattivare la barra del menù contestuale, se attivo,
+     * quando si esce dalla schermata dei preferiti
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
