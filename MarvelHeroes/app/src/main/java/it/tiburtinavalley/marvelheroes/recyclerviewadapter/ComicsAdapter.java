@@ -22,7 +22,7 @@ import it.tiburtinavalley.marvelheroes.activity.ComicsActivity;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.Comics;
 
-// Adapter per gestire RecyclerView che contengono View per mostare dei fumetti
+/** Adapter per gestire RecyclerView che contengono View per mostare dei fumetti */
 
 public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsHolder> implements View.OnClickListener {
     private List<Comics> comics; // Lista dei fumetti che vanno mostrati nella RecyclerView
@@ -34,7 +34,7 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsHold
         this.appContext = appContext;
     }
 
-    // Metodo chiamato ogni volta che serve una nuova riga per la RecyclerView
+    /** Metodo chiamato ogni volta che serve una nuova riga per la RecyclerView */
     @NonNull
     @Override
     public ComicsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -46,7 +46,7 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsHold
         return new ComicsHolder(cl); // Ritorna un nuovo Holder, che estende il ViewHolder
     }
 
-    // Chiamato quando avviene un cambiamento in una View
+    /** Chiamato quando avviene un cambiamento in una View */
     @Override
     public void onBindViewHolder(@NonNull ComicsHolder holder, int position) {
         String urlThumbnail = comics.get(position).getThumbnail().getPath().replaceFirst("http", "https")
@@ -55,13 +55,13 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsHold
         holder.tvComicName.setText(comics.get(position).getTitle());
     }
 
-    // Ritorna il numero di elementi nella lista di comics
+    /** Ritorna il numero di elementi nella lista di comics */
     @Override
     public int getItemCount() {
         return comics.size();
     }
 
-    // Reagisce al click di un elemento nella RecyclerView
+    /** Reagisce al click di un elemento nella RecyclerView */
     @Override
     public void onClick(View v) {
 
@@ -89,7 +89,7 @@ public class ComicsAdapter extends RecyclerView.Adapter<ComicsAdapter.ComicsHold
         }
     }
 
-    // Holder che estende la ViewHolder e gestisce una specifica View
+    /** Holder che estende la ViewHolder e gestisce una specifica View */
     static class ComicsHolder extends RecyclerView.ViewHolder {
         final ImageView ivComic;
         final TextView tvComicName;

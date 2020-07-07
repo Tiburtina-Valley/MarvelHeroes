@@ -19,7 +19,7 @@ import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.Urls;
 
-/* RecyclerView che mostra gli url legati ad un elemento, che può essere un fumetto, una serie o un evento*/
+/** RecyclerView che mostra gli url legati ad un elemento, che può essere un fumetto, una serie o un evento*/
 
 public class UrlsRecyclerView extends RecyclerView.Adapter<UrlsRecyclerView.Holder> implements View.OnClickListener {
     private List<Urls> urls; // Lista degli eroi che vanno mostrati nella RecyclerView
@@ -31,7 +31,7 @@ public class UrlsRecyclerView extends RecyclerView.Adapter<UrlsRecyclerView.Hold
         urls = urlsList;
     }
 
-    // Metodo chiamato ogni volta che serve una nuova riga per la RecyclerView
+    /** Metodo chiamato ogni volta che serve una nuova riga per la RecyclerView */
     @NonNull
     @Override
     public UrlsRecyclerView.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,7 +42,7 @@ public class UrlsRecyclerView extends RecyclerView.Adapter<UrlsRecyclerView.Hold
         return new Holder(cl);
     }
 
-    // Chiamato quando avviene un cambiamento in una View
+    /** Chiamato quando avviene un cambiamento in una View */
     @Override
     public void onBindViewHolder(@NonNull Holder holder, final int position) {
         String type = urls.get(position).getType();
@@ -68,13 +68,13 @@ public class UrlsRecyclerView extends RecyclerView.Adapter<UrlsRecyclerView.Hold
         });
     }
 
-    // Ritorna il numero di elementi nella lista di creators
+    /** Ritorna il numero di elementi nella lista di creators */
     @Override
     public int getItemCount() {
         return urls.size();
     }
 
-    // Reagisce al click di un elemento nella RecyclerView
+    /** Reagisce al click di un elemento nella RecyclerView */
     @Override
     public void onClick(View v) {
         // Controlla se la connessone ad Internet è presente
@@ -99,7 +99,7 @@ public class UrlsRecyclerView extends RecyclerView.Adapter<UrlsRecyclerView.Hold
         }
     }
 
-    // Holder che estende la ViewHolder e gestisce una specifica View
+    /** Holder che estende la ViewHolder e gestisce una specifica View */
     class Holder extends RecyclerView.ViewHolder {
         private Button btnType;
 

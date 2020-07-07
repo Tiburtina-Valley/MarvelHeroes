@@ -21,7 +21,7 @@ import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.Comics;
 
-/* in questa classe , vengono gestite le ricerche in Internet per cercare le informazioni
+/** In questa classe , vengono gestite le ricerche in Internet per cercare le informazioni
    relative ai Fumetti */
 
 public abstract class ComicsVolley implements Response.ErrorListener, Response.Listener<String>{

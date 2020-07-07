@@ -3,7 +3,7 @@ package it.tiburtinavalley.marvelheroes.activity;
 import android.content.Context;
 import android.widget.Toast;
 
-// Classe che viene chiamata se c'è bisogno di mostrare un Toast
+/** Classe che viene chiamata se c'è bisogno di mostrare un Toast */
 public class ToastClass {
 
     private Context context; //necessita del Context dell'Activity corrente quando viene invocata la classe

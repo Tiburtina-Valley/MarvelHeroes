@@ -31,7 +31,7 @@ import it.tiburtinavalley.marvelheroes.recyclerviewadapter.UrlsRecyclerView;
 import it.tiburtinavalley.marvelheroes.volley.CreatorsVolley;
 import it.tiburtinavalley.marvelheroes.volley.MarvelApiVolley;
 
-/* Activity che mostra i dettagli di un fumetto : gli eroi che vi compaiono, i creatori che l'hanno diseganto, il titolo, numero di pagine, il codice UPC
+/** Activity che mostra i dettagli di un fumetto : gli eroi che vi compaiono, i creatori che l'hanno diseganto, il titolo, numero di pagine, il codice UPC
    e la descrizione del fumetto*/
 
 public class ComicsActivity extends AppCompatActivity {
@@ -51,7 +51,7 @@ public class ComicsActivity extends AppCompatActivity {
         new Holder();
     }
 
-    // Metodo per tornare alla Home Page dopo la pressione dlel'icona "X"
+    /** Metodo per tornare alla Home Page dopo la pressione dlel'icona "X" */
     @Override
     public boolean onSupportNavigateUp() {
         Context appContext = getApplicationContext();
@@ -97,12 +97,12 @@ public class ComicsActivity extends AppCompatActivity {
 
             final Context appContext = getApplicationContext();
 
-            // Se la lista degli eroi è vuota, nasconde la RecyclerView degli eroi
-            // Prende la TextView da oscurare
-            // Setta i margini per non lasciare spazi in più
-            // Crea un nuovo adapter e lo assegna alla RecyclerView
-            // Incrementa il contatore e controlla se tutte le RecyclerView sono state riempite coi dati
-            MarvelApiVolley heroVolley = new MarvelApiVolley(appContext) {
+            /** Se la lista degli eroi è vuota, nasconde la RecyclerView degli eroi
+                Prende la TextView da oscurare
+                Setta i margini per non lasciare spazi in più
+                Crea un nuovo adapter e lo assegna alla RecyclerView
+                Incrementa il contatore e controlla se tutte le RecyclerView sono state riempite coi dati */
+                MarvelApiVolley heroVolley = new MarvelApiVolley(appContext) {
                 @Override
                 public void fillList(List<HeroModel> heroes) {
                     // Se la lista degli eroi è vuota, nasconde la RecyclerView degli eroi
@@ -123,9 +123,9 @@ public class ComicsActivity extends AppCompatActivity {
                 }
             };
 
-            // Se la lista degli eroi è vuota, nasconde la RecyclerView dei Creators
-            // Prende la TextView da oscurare
-            // Setta i margini per non lasciare spazi in più
+            /** Se la lista degli eroi è vuota, nasconde la RecyclerView dei Creators
+                Prende la TextView da oscurare
+                Setta i margini per non lasciare spazi in più */
             CreatorsVolley creatorsVolley = new CreatorsVolley(getApplicationContext()) {
                 @Override
                 public void fillCreatorsInfo(List<Creators> creatorsList) {
@@ -176,7 +176,7 @@ public class ComicsActivity extends AppCompatActivity {
             rvCreatorsComics.setLayoutManager(layoutManagerCreators);
         }
 
-        // Vengono settati tutti i valori degli elementi del fumetto, controllando che non siano null. In tal caso, viene inserita una stringa apposita.
+        /** Vengono settati tutti i valori degli elementi del fumetto, controllando che non siano null. In tal caso, viene inserita una stringa apposita. */
         private void setData() {
 
             // Se il path dell'immagine è presente, la carica usando l'API Glide
@@ -206,7 +206,7 @@ public class ComicsActivity extends AppCompatActivity {
             }
         }
 
-        /* Metodo che verifica che tutte le RecyclerView siano state riempite con i dati
+        /** Metodo che verifica che tutte le RecyclerView siano state riempite con i dati
            (o siano state oscurate se non ci sono dati da mostrare) per poter togliere la ProgressBar */
         private void dismissLoading() {
             if (loading_count >= 2) {
