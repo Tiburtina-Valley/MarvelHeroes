@@ -388,7 +388,7 @@ public class HomeFragment extends Fragment {
         }
 
         /**
-         * nasconde la schermata di caricamento una volta passato il tempo necessario
+         * nasconde la schermata di caricamento una volta che tutta la schermata è stata caricata
          */
         private void dismissLoading() {
             if (loading_count >= 3) {
@@ -397,12 +397,12 @@ public class HomeFragment extends Fragment {
             }
         }
 
-        @Override
         /**
          * gestisce il click delle view a cui è stato assegnato questo listener
          */
+        @Override
         public void onClick(View view) {
-            // click on Hero
+            // click su un eroe
             if (view.getId() == R.id.cvHero) {
                 // Controllo che la connessione sia presente
                 ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -424,7 +424,7 @@ public class HomeFragment extends Fragment {
                     toast.showToast(Objects.requireNonNull(getContext()).getString(R.string.msg_internet_required));
                 }
             }
-            // click on Comic
+            // click su un fumetto
             else if (view.getId() == R.id.cvComic) {
                 // Controllo che la connessione sia presente
                 ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -444,7 +444,7 @@ public class HomeFragment extends Fragment {
                     toast.showToast(context.getString(R.string.msg_internet_required));
                 }
             }
-            // click on Series
+            // click su una serie
             else if (view.getId() == R.id.cvSeries) {
                 ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
                 assert cm != null;
