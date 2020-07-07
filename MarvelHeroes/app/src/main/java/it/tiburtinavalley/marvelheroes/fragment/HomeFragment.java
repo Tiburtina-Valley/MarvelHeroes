@@ -365,9 +365,7 @@ public class HomeFragment extends Fragment {
                     // Controlla se la lunghezza totale di titolo+descrizione supera un certo limite. Se è troppo grande, tronca la descrizione ed aggiunge i puntini di sospensione
                     if ((heroOfTheDay.getDescription().length() + heroOfTheDay.getName().length()) > MAX_STRING_LENGTH) {
                         tvHeroDescription.setText(heroOfTheDay.getDescription().substring(0, MAX_STRING_LENGTH - heroOfTheDay.getName().length()) + "...");
-                    } else {
-                        tvHeroDescription.setText(heroOfTheDay.getDescription());
-                    }
+                    } else tvHeroDescription.setText(heroOfTheDay.getDescription());
                 }
 
                 if (!heroOfTheDay.getThumbnail().getPath().equalsIgnoreCase("")
@@ -397,10 +395,10 @@ public class HomeFragment extends Fragment {
             }
         }
 
-        @Override
         /**
          * gestisce il click delle view a cui è stato assegnato questo listener
          */
+        @Override
         public void onClick(View view) {
             // click on Hero
             if (view.getId() == R.id.cvHero) {
