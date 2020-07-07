@@ -115,7 +115,6 @@ public abstract class ComicsVolley implements Response.ErrorListener, Response.L
             }.getType();
             List<Comics> comicsList = gson.fromJson(comics, listType);
             if (comicsList != null) {
-                Log.w("CA", "" + comicsList.size());
                 fillComics(comicsList);
             }
         } catch (JSONException e) {

@@ -132,7 +132,6 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
             List<HeroModel> heroesList = gson.fromJson(heroes, listType);
             if (heroesList != null) { //controlla che la lista non sia null per evitare NullPointerException
                 if (heroesList.size() > 0) { //se la lista non è vuota, Log per vedere quant eroi effettivamente sono stati trovati
-                    Log.w("CA", "" + heroesList.size());
                 } else {
                     if (showToast) {
                         ToastClass toast = new ToastClass(context);

@@ -92,7 +92,6 @@ public abstract class EventsVolley implements Response.ErrorListener, Response.L
             }.getType();
             List<Events> eventsList = gson.fromJson(event, listType);
             if (eventsList != null) {
-                Log.w("Events", "" + eventsList.size());
                 fillEvents(eventsList);
             }
         } catch (JSONException e) {
