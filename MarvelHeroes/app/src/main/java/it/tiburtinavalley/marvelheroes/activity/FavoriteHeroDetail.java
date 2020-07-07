@@ -213,7 +213,6 @@ public class FavoriteHeroDetail extends AppCompatActivity{
 
             //Setta l'immagine dell'eroe, se presente, usando l'API Glide
             if (hero.getResourceURI() != null) {
-                Log.w("1","resource");
                 String urlThumbnail = hero.getResourceURI().replaceFirst("http", "https")
                         + ".jpg";
                 Glide.with(getApplicationContext()).load(urlThumbnail).diskCacheStrategy(DiskCacheStrategy.ALL).into(this.ivHeroPhoto);

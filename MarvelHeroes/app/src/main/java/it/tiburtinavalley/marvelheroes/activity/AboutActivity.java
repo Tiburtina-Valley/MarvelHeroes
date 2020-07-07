@@ -35,7 +35,7 @@ public class AboutActivity extends AppCompatActivity {
         View aboutPage = new AboutPage(this)
                 .setDescription(getString(R.string.team_description))
                 .isRTL(false)
-                .setImage(R.drawable.s)
+                .setImage(R.drawable.logo)
                 .addItem(new Element().setTitle(getString(R.string.version)))
                 .addEmail(getString(R.string.mail))
                 .addWebsite(getString(R.string.website))

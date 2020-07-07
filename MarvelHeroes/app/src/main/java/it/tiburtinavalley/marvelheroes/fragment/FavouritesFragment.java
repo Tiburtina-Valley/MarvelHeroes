@@ -67,8 +67,6 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
      */
     @Override
     public boolean onBackPressed() {
-        Log.w("12", getString(R.string.msg_is_pressed));
-
         FragmentTransaction fragmentTransaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.anim_fade_in, R.anim.anim_fade_out);
         HomeFragment home = new HomeFragment();

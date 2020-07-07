@@ -133,7 +133,6 @@ public abstract class MarvelApiVolley implements Response.ErrorListener, Respons
             if (heroesList != null) { //controlla che la lista non sia null per evitare NullPointerException
                 if (heroesList.size() > 0) { //se la lista non è vuota, Log per vedere quant eroi effettivamente sono stati trovati
                     Log.w("CA", "" + heroesList.size());
-                    //db.cocktailDAO().insertAll(cnt);    // NON OBBLIGATORIO
                 } else {
                     if (showToast) {
                         ToastClass toast = new ToastClass(context);
