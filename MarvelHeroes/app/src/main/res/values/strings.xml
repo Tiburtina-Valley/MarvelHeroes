@@ -85,5 +85,5 @@
     <string name="msg_hero_saved">hero saved</string>
     <string name="label_legal" translatable="false">Legal</string>
     <string name="team_description">Our development team was born in 2019, when five students enrolled at the university of Rome Tor vergata, after following a mobile programming course, decided to found a start up and launch themselves in the development of android applications. The team took the name of tiburtina valley, in order to recall what could become the Roman silicon valley.</string>
-    <string name="base_url_api">https://gateway.marvel.com/v1/public/%s</string>
+    <string translatable="false" name="base_url_api">https://gateway.marvel.com/v1/public/%s</string>
 </resources>

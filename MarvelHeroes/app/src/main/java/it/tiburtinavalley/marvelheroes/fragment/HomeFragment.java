@@ -178,10 +178,8 @@ public class HomeFragment extends Fragment {
 
             // Controlla se la lunghezza totale di titolo+descrizione supera un certo limite. Se è troppo grande, tronca la descrizione ed aggiunge i puntini di sospensione
             if ((heroOfTheDay.getDescription().length() + heroOfTheDay.getName().length()) > MAX_STRING_LENGTH) {
-                tvHeroDescription.setText(heroOfTheDay.getDescription().substring(0, MAX_STRING_LENGTH - heroOfTheDay.getName().length()) + "...");
-            } else {
-                tvHeroDescription.setText(heroOfTheDay.getDescription());
-            }
+                tvHeroDescription.setText(String.format("%s%s", heroOfTheDay.getDescription().substring(0, MAX_STRING_LENGTH - heroOfTheDay.getName().length()), context.getResources().getString(R.string.ellipsis)));
+            } else tvHeroDescription.setText(heroOfTheDay.getDescription());
 
             String urlHero = heroOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
                     + "/portrait_xlarge" + "." + heroOfTheDay.getThumbnail().getExtension();
@@ -192,10 +190,8 @@ public class HomeFragment extends Fragment {
 
             // Controlla se la lunghezza totale di titolo+descrizione supera un certo limite. Se è troppo grande, tronca la descrizione ed aggiunge i puntini di sospensione
             if ((comicOfTheDay.getDescription().length() + comicOfTheDay.getTitle().length()) > MAX_STRING_LENGTH) {
-                tvComicDescription.setText(comicOfTheDay.getDescription().substring(0, MAX_STRING_LENGTH - comicOfTheDay.getTitle().length()) + "...");
-            } else {
-                tvComicDescription.setText(comicOfTheDay.getDescription());
-            }
+                tvComicDescription.setText(String.format("%s%s", comicOfTheDay.getDescription().substring(0, MAX_STRING_LENGTH - comicOfTheDay.getTitle().length()), context.getResources().getString(R.string.ellipsis)));
+            } else tvComicDescription.setText(comicOfTheDay.getDescription());
 
             String urlComics = comicOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
                     + "/portrait_xlarge" + "." + comicOfTheDay.getThumbnail().getExtension();
@@ -206,10 +202,8 @@ public class HomeFragment extends Fragment {
 
             // Controlla se la lunghezza totale di titolo+descrizione supera un certo limite. Se è troppo grande, tronca la descrizione ed aggiunge i puntini di sospensione
             if ((seriesOfTheDay.getDescription().length() + seriesOfTheDay.getTitle().length()) > MAX_STRING_LENGTH) {
-                tvSeriesDescription.setText(seriesOfTheDay.getDescription().substring(0, MAX_STRING_LENGTH - seriesOfTheDay.getTitle().length()) + "...");
-            } else {
-                tvSeriesDescription.setText(seriesOfTheDay.getDescription());
-            }
+                tvSeriesDescription.setText(String.format("%s%s", seriesOfTheDay.getDescription().substring(0, MAX_STRING_LENGTH - seriesOfTheDay.getTitle().length()), context.getResources().getString(R.string.ellipsis)));
+            } else tvSeriesDescription.setText(seriesOfTheDay.getDescription());
 
             String urlSeries = seriesOfTheDay.getThumbnail().getPath().replaceFirst("http", "https")
                     + "/portrait_xlarge" + "." + seriesOfTheDay.getThumbnail().getExtension();
@@ -264,10 +258,8 @@ public class HomeFragment extends Fragment {
                 if (!description.isEmpty()) {
                     // Controlla se la lunghezza totale di titolo+descrizione supera un certo limite. Se è troppo grande, tronca la descrizione ed aggiunge i puntini di sospensione
                     if ((seriesOfTheDay.getDescription().length() + seriesOfTheDay.getTitle().length()) > MAX_STRING_LENGTH) {
-                        tvSeriesDescription.setText(seriesOfTheDay.getDescription().substring(0, MAX_STRING_LENGTH - seriesOfTheDay.getTitle().length()) + "...");
-                    } else {
-                        tvSeriesDescription.setText(seriesOfTheDay.getDescription());
-                    }
+                        tvSeriesDescription.setText(String.format("%s%s", seriesOfTheDay.getDescription().substring(0, MAX_STRING_LENGTH - seriesOfTheDay.getTitle().length()), context.getResources().getString(R.string.ellipsis)));
+                    } else tvSeriesDescription.setText(seriesOfTheDay.getDescription());
                 }
                 if (!seriesOfTheDay.getThumbnail().getPath().equalsIgnoreCase("")
                         && !seriesOfTheDay.getThumbnail().getExtension().equalsIgnoreCase("")) {
@@ -313,7 +305,7 @@ public class HomeFragment extends Fragment {
                 if (comicOfTheDay.getDescription() != null && !comicOfTheDay.getDescription().isEmpty()) {
                     // Controlla se la lunghezza totale di titolo+descrizione supera un certo limite. Se è troppo grande, tronca la descrizione ed aggiunge i puntini di sospensione
                     if ((comicOfTheDay.getDescription().length() + comicOfTheDay.getTitle().length()) > MAX_STRING_LENGTH) {
-                        tvComicDescription.setText(comicOfTheDay.getDescription().substring(0, MAX_STRING_LENGTH - comicOfTheDay.getTitle().length()) + "...");
+                        tvComicDescription.setText(String.format("%s%s", comicOfTheDay.getDescription().substring(0, MAX_STRING_LENGTH - comicOfTheDay.getTitle().length()), context.getResources().getString(R.string.ellipsis)));
                     } else {
                         tvComicDescription.setText(comicOfTheDay.getDescription());
                     }
@@ -364,7 +356,7 @@ public class HomeFragment extends Fragment {
                 if (heroOfTheDay.getDescription() != null && !heroOfTheDay.getDescription().isEmpty()) {
                     // Controlla se la lunghezza totale di titolo+descrizione supera un certo limite. Se è troppo grande, tronca la descrizione ed aggiunge i puntini di sospensione
                     if ((heroOfTheDay.getDescription().length() + heroOfTheDay.getName().length()) > MAX_STRING_LENGTH) {
-                        tvHeroDescription.setText(heroOfTheDay.getDescription().substring(0, MAX_STRING_LENGTH - heroOfTheDay.getName().length()) + "...");
+                        tvHeroDescription.setText(String.format("%s%s", heroOfTheDay.getDescription().substring(0, MAX_STRING_LENGTH - heroOfTheDay.getName().length()), context.getResources().getString(R.string.ellipsis)));
                     } else tvHeroDescription.setText(heroOfTheDay.getDescription());
                 }
 
