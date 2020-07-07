@@ -59,6 +59,7 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesAdapter.SeriesHold
         holder.tvSeriesName.setText(series.get(position).getTitle());
     }
 
+    /** Ritorna il numero di elementi della lista delle serie */
     @Override
     public int getItemCount() {
         return series.size();

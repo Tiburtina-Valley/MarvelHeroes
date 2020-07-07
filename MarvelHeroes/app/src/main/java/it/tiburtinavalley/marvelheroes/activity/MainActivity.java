@@ -19,8 +19,7 @@ import it.tiburtinavalley.marvelheroes.fragment.HomeFragment;
 import it.tiburtinavalley.marvelheroes.fragment.SearchFragment;
 import it.tiburtinavalley.marvelheroes.R;
 
-/* MainActivity,  la prima Activity che viene mostrata quando l'utente accede all'applicazione*/
-
+/** MainActivity, la prima Activity che viene mostrata quando l'utente accede all'applicazione*/
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -55,12 +54,12 @@ public class MainActivity extends AppCompatActivity {
         return true;
     };
 
-    // Crea il menu
+    /** Crea il menu */
     @Override public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_about, menu);
         return true; }
 
-    // Metodo che reagisce al click di un opzione del menu
+    /** Metodo che reagisce al click di un opzione del menu */
     @Override public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.AboutBtn) {
             Context appContext=getApplicationContext();
@@ -69,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
             appContext.startActivity(i); }
         else {
             return super.onContextItemSelected(item); }
-        return true; }
+        return true;
+    }
 
     private void setFragment(Fragment fragment) {
         hideKeyboard(this);
@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         boolean onBackPressed();
     }
 
+    /** metodo per nascondere la tastiera*/
     public static void hideKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         // Cerca la View su cui c'è attualmente il focus, così da poter prendere il corretto window token
@@ -97,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    /** metodo chiamato per catturare il click sul tasto back nei fragments*/
     @Override
     public void onBackPressed() {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);

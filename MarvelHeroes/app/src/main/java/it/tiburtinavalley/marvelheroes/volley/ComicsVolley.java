@@ -21,7 +21,7 @@ import it.tiburtinavalley.marvelheroes.R;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.Comics;
 
-/* in questa classe , vengono gestite le ricerche in Internet per cercare le informazioni
+/** In questa classe , vengono gestite le ricerche in Internet per cercare le informazioni
    relative ai Fumetti */
 
 public abstract class ComicsVolley implements Response.ErrorListener, Response.Listener<String>{
@@ -77,7 +77,7 @@ public abstract class ComicsVolley implements Response.ErrorListener, Response.L
     private void comicApiCall(String comicUrl){
         String urlBase = "https://gateway.marvel.com/v1/public/%s";
         //"ts=1&apikey=d65eda0ccbbbcc626c35e7de5fdd506b&hash=9c0f64d5214cf16ca91f945f8cfbd5dc&limit=100";//"ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea&limit=100";//"ts=1&apikey=68bdde3ebf9ba45c6c11839bd1f51cc3&hash=6433747692d0e40eaf799ef75ccc78ea";
-        String apiKey = "ts=1&apikey=467ab31077a4aa2037776afb61241da4&hash=21f601a3255711a8d8bad803d062e9ea&limit=50";
+        String apiKey = "ts=1&apikey=68bdde3ebf9ba45c6c11839bd1f51cc3&hash=6433747692d0e40eaf799ef75ccc78ea&limit=50";
         String url = urlBase + apiKey; // usiamo una stringa di appoggio così da poter ripetere la chiamata
         url = String.format(url, comicUrl);
         StringRequest sr = new StringRequest(Request.Method.GET,

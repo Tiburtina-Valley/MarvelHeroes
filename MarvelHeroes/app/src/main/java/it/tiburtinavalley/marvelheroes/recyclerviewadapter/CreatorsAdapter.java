@@ -21,7 +21,7 @@ import it.tiburtinavalley.marvelheroes.activity.CreatorsActivity;
 import it.tiburtinavalley.marvelheroes.activity.ToastClass;
 import it.tiburtinavalley.marvelheroes.model.Creators;
 
-// Adapter per gestire RecyclerView che contengono View per mostare dei creatori
+/** Adapter per gestire RecyclerView che contengono View per mostare dei creatori */
 public class CreatorsAdapter extends RecyclerView.Adapter<CreatorsAdapter.CreatorsHolder> implements View.OnClickListener{
     private List<Creators> creators; // Lista degli eroi che vanno mostrati nella RecyclerView
     private Context appContext; // Context dell'Activity corrente
@@ -31,7 +31,7 @@ public class CreatorsAdapter extends RecyclerView.Adapter<CreatorsAdapter.Creato
         this.appContext = appContext;
     }
 
-    // Reagisce al click di un elemento nella RecyclerView
+    /** Reagisce al click di un elemento nella RecyclerView */
     @Override
     public void onClick(View v) {
         // Controlla se la connessone ad Internet è presente
@@ -58,19 +58,19 @@ public class CreatorsAdapter extends RecyclerView.Adapter<CreatorsAdapter.Creato
         }
     }
 
-    // Metodo chiamato ogni volta che serve una nuova riga per la RecyclerView
+    /** Metodo chiamato ogni volta che serve una nuova riga per la RecyclerView */
     @NonNull
     @Override
     public CreatorsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ConstraintLayout cl;
         cl = (ConstraintLayout) LayoutInflater
                 .from(parent.getContext())
-                .inflate(R.layout.item_creator, parent, false);
+                .inflate(R.layout.item_creator, parent, false);     // Carichiamo il layout di dettaglio
         cl.setOnClickListener(this);
-        return new CreatorsHolder(cl);
+        return new CreatorsHolder(cl);      //Ritorna un nuovo Holder, che estende il ViewHolder
     }
 
-    // Chiamato quando avviene un cambiamento in una View
+    /** Chiamato quando avviene un cambiamento in una View */
     @Override
     public void onBindViewHolder(@NonNull CreatorsHolder holder, int position) {
         if(creators.get(position).getThumbnail() != null) {
@@ -81,13 +81,13 @@ public class CreatorsAdapter extends RecyclerView.Adapter<CreatorsAdapter.Creato
         holder.tvComicName.setText(creators.get(position).getFullName());
     }
 
-    // Ritorna il numero di elementi nella lista di creators
+    /** Ritorna il numero di elementi nella lista di creators */
     @Override
     public int getItemCount() {
         return creators.size();
     }
 
-    // Holder che estende la ViewHolder e gestisce una specifica View
+    /** Holder che estende la ViewHolder e gestisce una specifica View */
     static class CreatorsHolder extends RecyclerView.ViewHolder {
         final ImageView ivComic;
         final TextView tvComicName;

@@ -3,10 +3,13 @@ package it.tiburtinavalley.marvelheroes.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/** Classe che mantiene le informazioni legate ad una thumbnail, presente in quasi tutte le model
+    che vengono gestite */
 public class Thumbnail implements Parcelable {
-    private String path;
-    private String extension;
+    private String path; //path della thumbnail
+    private String extension; //extension della thumbnail
 
+    /** Costruttore chiamato quando viene estratto il Parcelable in un'Activity */
     protected Thumbnail(Parcel in) {
         path = in.readString();
         extension = in.readString();
@@ -23,6 +26,8 @@ public class Thumbnail implements Parcelable {
             return new Thumbnail[size];
         }
     };
+
+    // Getter per prendere il valore degli attributi
 
     public String getPath(){
         return this.path;
@@ -41,6 +46,7 @@ public class Thumbnail implements Parcelable {
         return 0;
     }
 
+    /** Metodo per inserire il Parcel cone Extra nell'Intent */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(path);

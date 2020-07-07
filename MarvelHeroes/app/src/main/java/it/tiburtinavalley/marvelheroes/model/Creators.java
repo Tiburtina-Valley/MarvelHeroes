@@ -1,6 +1,6 @@
 package it.tiburtinavalley.marvelheroes.model;
 
-/* Questa Model mantiene informazioni sui creators di un fumetto*/
+/** Questa Model mantiene informazioni sui creators di un fumetto */
 
 import android.os.Parcel;
 
@@ -10,7 +10,7 @@ public class Creators extends BasicElement {
     private List<Items> items; // Lista di item collegati
     private String fullName; // Nome dell'autore
 
-    // Costruttore chiamato quando viene estratto il Parcelable in un'Activity
+    /** Costruttore chiamato quando viene estratto il Parcelable in un'Activity */
     protected Creators(Parcel in) {
         items = in.createTypedArrayList(Items.CREATOR);
         id = in.readString();
@@ -19,7 +19,7 @@ public class Creators extends BasicElement {
         urls = in.readArrayList(Urls.class.getClassLoader());
     }
 
-    //Metodo per inserire il Parcel cone Extra nell'Intent
+    /** Metodo per inserire il Parcel cone Extra nell'Intent */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(items);
