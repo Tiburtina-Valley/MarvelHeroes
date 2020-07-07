@@ -54,7 +54,7 @@ public abstract class EventsVolley implements Response.ErrorListener, Response.L
     private void eventsApiCall(String eventUrl){
         //Definisco gli url e la key che andremo ad utilizzare per fare le query
         String urlBase = "https://gateway.marvel.com/v1/public/%s";
-        String apiKey = "ts=1&apikey=a5f7b1501c40d87b927d3176fe38f22f&hash=dad24154bc30827c2290b5bd86f088fa&limit=50";
+        String apiKey = "ts=1&apikey=d65eda0ccbbbcc626c35e7de5fdd506b&hash=9c0f64d5214cf16ca91f945f8cfbd5dc&limit=50";
         String url = urlBase + apiKey; //
         url = String.format(url, eventUrl);
         StringRequest sr = new StringRequest(Request.Method.GET,
