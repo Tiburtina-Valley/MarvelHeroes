@@ -1,7 +1,6 @@
 package it.tiburtinavalley.marvelheroes.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -119,9 +118,9 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
 
         /**
          * permette l'eliminazione degli eroi dai preferiti quando si preme sulla voce 'elimina'
-         * @param actionMode
-         * @param menuItem
-         * @return
+         * @param actionMode:
+         * @param menuItem:
+         * @return bool
          */
         @Override
         public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
@@ -140,7 +139,7 @@ public class FavouritesFragment extends Fragment implements MainActivity.IOnBack
 
         /**
          * permette di deselezionare tutti gli elementi quando si disattiva il menù contestuale
-         * @param actionMode
+         * @param actionMode:
          */
         @Override
         public void onDestroyActionMode(ActionMode actionMode) {

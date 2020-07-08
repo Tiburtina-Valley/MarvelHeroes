@@ -76,7 +76,6 @@ public class HomeFragment extends Fragment {
         defaultHeroId = getString(R.string.default_hero_id);
 
         sp = getActivity().getPreferences(Context.MODE_PRIVATE); //prende il file da scrivere
-        editor = sp.edit();
 
         defaultHeroId = getString(R.string.default_hero_id);
         defaultComicId = getString(R.string.default_comic_id);
@@ -93,7 +92,9 @@ public class HomeFragment extends Fragment {
             // Se è passata, carica nuove informazioni
 
             holder.checkConnection();
+            editor = sp.edit();
             editor.putString("day", String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)));
+            editor.apply();
 
             apiHero = new MarvelApiVolley(getContext()) {
                 @Override
@@ -267,6 +268,7 @@ public class HomeFragment extends Fragment {
                             + "." + seriesOfTheDay.getThumbnail().getExtension();
                     Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).diskCacheStrategy(DiskCacheStrategy.ALL).into(ivSeries);
                 }
+                editor = sp.edit();
                 Gson gson = new Gson();
                 String json = gson.toJson(seriesOfTheDay);
                 editor.putString("series", json);
@@ -317,6 +319,7 @@ public class HomeFragment extends Fragment {
                             + "." + comicOfTheDay.getThumbnail().getExtension();
                     Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).diskCacheStrategy(DiskCacheStrategy.ALL).into(ivComic);
                 }
+                editor = sp.edit();
                 Gson gson = new Gson();
                 String json = gson.toJson(comicOfTheDay);
                 editor.putString("comic", json);
@@ -366,7 +369,7 @@ public class HomeFragment extends Fragment {
                             + "." + heroOfTheDay.getThumbnail().getExtension();
                     Glide.with(getActivity()).setDefaultRequestOptions(requestOptions).load(urlThumbnail).diskCacheStrategy(DiskCacheStrategy.ALL).into(ivHero);
                 }
-
+                editor = sp.edit();
                 Gson gson = new Gson();
                 String json = gson.toJson(heroOfTheDay);
                 editor.putString("hero", json);

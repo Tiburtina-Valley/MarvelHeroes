@@ -93,13 +93,13 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
 
     }
 
-    /** Metodi offerti dalla Sectioned-RecyclerView --------------------------------------------- */
+    /* Metodi offerti dalla Sectioned-RecyclerView --------------------------------------------- */
 
     /**
      * creazione della view associata all'eroe
-     * @param parent
-     * @param viewType
-     * @return
+     * @param parent:
+     * @param viewType:
+     * @return null
      */
     @Override
     public Holder onCreateItemViewHolder(ViewGroup parent, int viewType) {
@@ -112,9 +112,9 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
 
     /**
      * creazione del subheader
-     * @param parent
-     * @param viewType
-     * @return
+     * @param parent:
+     * @param viewType:
+     * @return null
      */
     @Override
     public SubheaderHolder onCreateSubheaderViewHolder(ViewGroup parent, int viewType) {
@@ -123,8 +123,8 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
 
     /**
      * imposta immagine e nome dell'eroe nella view associata
-     * @param holder
-     * @param position
+     * @param holder:
+     * @param position:
      */
     @Override
     public void onBindItemViewHolder(Holder holder, int position) {
@@ -157,8 +157,8 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
 
     /**
      * imposta il testo all'interno del subheader
-     * @param subheaderHolder
-     * @param nextItemPosition
+     * @param subheaderHolder:
+     * @param nextItemPosition:
      */
     @Override
     @CallSuper
@@ -192,8 +192,8 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
 
     /**
      * decide quando inserire un subheader dopo l'elemento della posizione corrente
-     * @param position
-     * @return
+     * @param position:
+     * @return bool
      */
     @Override
     public boolean onPlaceSubheaderBetweenItems(int position) {
@@ -224,12 +224,12 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
         return position;
     }
 
-    /** ----------------------------------------------------------------------------------------- */
+    /* ----------------------------------------------------------------------------------------- */
 
     /**
      * permette di selezionare un elemento, se il menù contestuale è stato attivato,
      * oppure di passare alla schermata di dettaglio
-     * @param view
+     * @param view:
      * @param hero: riferimento che permette di identificare l'eroe selezionato
      */
     public void onClick(View view, HeroEntity hero) {
@@ -267,8 +267,8 @@ public class FavoriteHeroAdapter extends SectionedRecyclerViewAdapter<FavoriteHe
 
     /**
      * attiva un menù che permette di selezionare gli eroi da eliminare dai preferiti
-     * @param view
-     * @param hero
+     * @param view:
+     * @param hero:
      */
     public void onLongClick(View view, HeroEntity hero) {
         selectedMenu = true;    //per far si che i successivi click chiamino comunque questo metodo
